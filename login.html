@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - MaxAI</title>
+    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <body>
+    <div class="container">
+      <div class="form-box">
+        <img
+          src="img/logo.svg"
+          class="logo"
+          alt="MaxAI Logo"
+          width="100"
+          height="100"
+        />
+        <h1>Login</h1>
+        <form>
+          <div class="input-group">
+            <div class="input-field">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="email" placeholder="Email" />
+            </div>
+
+            <div class="input-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" placeholder="Password" />
+            </div>
+            <p>
+              <u><a href="#">Forgot Password?</a></u>
+            </p>
+          </div>
+          <div class="btn-field">
+            <button
+              type="button"
+              id="loginBtn"
+              onclick="swal('Login Successful!', '', 'success');"
+            >
+              Login
+            </button>
+          </div>
+          <p style="text-align: center; padding-top: 10px">
+            <u><a href="register.html">I don't have an account yet!</a></u>
+          </p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

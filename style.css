@@ -97,7 +97,10 @@ nav .navigation ul li a:hover {
 }
 
 #home h2 {
-  color: #fff;
+  background-image: linear-gradient(to bottom right, #8c52ff, #cb6ce6, #ff66c4);
+  -webkit-background-clip: text; /* For Safari/Chrome */
+  background-clip: text;
+  color: transparent;
   font-size: 60px;
   letter-spacing: 1px;
 }
