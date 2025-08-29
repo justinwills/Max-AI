@@ -19,7 +19,7 @@
           height="100"
         />
         <h1>Login</h1>
-        <form>
+        <form id="loginForm">
           <div class="input-group">
             <div class="input-field">
               <i class="fa-solid fa-envelope"></i>
@@ -35,13 +35,7 @@
             </p>
           </div>
           <div class="btn-field">
-            <button
-              type="button"
-              id="loginBtn"
-              onclick="swal('Login Successful!', '', 'success');"
-            >
-              Login
-            </button>
+            <button type="submit" id="loginBtn">Login</button>
           </div>
           <p style="text-align: center; padding-top: 10px">
             <u><a href="register.html">I don't have an account yet! </a></u>
@@ -49,5 +43,22 @@
         </form>
       </div>
     </div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          swal("Login Successful!", "", "success");
+          event.preventDefault();
+
+          const loginButton = document.getElementById("loginBtn");
+          loginButton.innerText = "Logging In...";
+          loginButton.disabled = true;
+
+          setTimeout(function () {
+            window.location.href = "home.html";
+          }, 1000);
+        });
+    </script>
   </body>
 </html>

@@ -19,7 +19,7 @@
           height="100"
         />
         <h1>Get Started</h1>
-        <form>
+        <form id="registerForm">
           <div class="input-group">
             <div class="input-field">
               <i class="fa-solid fa-envelope"></i>
@@ -38,13 +38,7 @@
               <input type="password" placeholder="Verify Password" />
             </div>
             <div class="btn-field">
-              <button
-                type="button"
-                id="loginBtn"
-                onclick="swal('Registration Successful!', '', 'success');"
-              >
-                Get Started
-              </button>
+              <button type="submit" id="registerBtn">Get Started</button>
             </div>
           </div>
           <p style="text-align: center; padding-top: 20px">
@@ -53,5 +47,21 @@
         </form>
       </div>
     </div>
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          swal("Registration Successful!", "", "success");
+          event.preventDefault();
+
+          const registerButton = document.getElementById("registerBtn");
+          registerButton.innerText = "Registering...";
+          registerButton.disabled = true;
+
+          setTimeout(function () {
+            window.location.href = "home.html";
+          }, 1000);
+        });
+    </script>
   </body>
 </html>
