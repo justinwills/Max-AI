@@ -98,7 +98,7 @@ nav .navigation ul li a:hover {
 
 #home h2 {
   background-image: linear-gradient(to bottom right, #8c52ff, #cb6ce6, #ff66c4);
-  -webkit-background-clip: text; /* For Safari/Chrome */
+  -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   font-size: 60px;
