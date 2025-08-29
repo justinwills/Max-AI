@@ -1,0 +1,390 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #1e293b;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 700;
+  color: #fff;
+}
+
+span {
+  font-size: 14px;
+}
+
+h6 {
+  font-size: 14px;
+  color: rgb(24, 24, 49);
+}
+
+/*------------- NavBar ------------*/
+nav {
+  position: fixed;
+  width: 100%;
+  background-color: #1e293b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1vw 8vw;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+
+nav .logo {
+  width: 150px;
+  cursor: pointer;
+}
+
+nav .navigation {
+  display: flex;
+}
+
+#menu-btn {
+  width: 30px;
+  height: 30px;
+  display: none;
+}
+
+#menu-close {
+  display: none;
+}
+
+nav .navigation ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+nav .navigation ul li {
+  list-style: none;
+  margin-left: 30px;
+}
+
+nav .navigation ul li a {
+  text-decoration: none;
+  color: rgb(21, 21, 100);
+  font-size: 16px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+nav .navigation ul li a.active,
+nav .navigation ul li a:hover {
+  color: #fdc93b;
+}
+/*------------- NavBar ------------*/
+
+/*------------- Home --------------*/
+#home {
+  background-image: url("img/background-img.jpg");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 40px;
+}
+
+#home h2 {
+  color: #fff;
+  font-size: 60px;
+  letter-spacing: 1px;
+}
+
+#home p {
+  width: 50%;
+  color: #fff;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+#home .btn {
+  margin-top: 30px;
+}
+
+#home a {
+  text-decoration: none;
+  font-size: 20px;
+  padding: 13px 35px;
+  background-color: #fff;
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+#home a.purple {
+  color: #fff;
+  background: #8c52ff;
+  transition: 0.3s ease;
+}
+
+#home a.purple:hover {
+  color: rgb(21, 21, 100);
+  background: #fff;
+}
+
+#home a.white {
+  color: #fff;
+  background: #fdc938;
+  transition: 0.3s ease;
+}
+
+#home a.white:hover {
+  color: rgb(21, 21, 100);
+  background: #fff;
+}
+/*------------- Home --------------*/
+
+/*------------- Features -------------*/
+#features {
+  height: 40vh;
+  text-align: center;
+}
+
+.features-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100 20vw;
+  gap: 40px; /* Add this for equal spacing */
+}
+
+.features-img img {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+}
+/*------------- Features -------------*/
+
+/*------------- Courses ------------*/
+#course {
+  background-color: #fff;
+  padding: 8vw 8vw 8vw 8vw;
+  text-align: center;
+}
+
+#course .course-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 1rem;
+  margin-top: 50px;
+}
+
+#course .courses {
+  text-align: start;
+  background: #edf1f2;
+  height: 100%;
+  position: relative;
+}
+
+#course .courses img {
+  width: 100%;
+  height: 60%;
+  background-size: cover;
+  background-position: center;
+}
+
+#course .courses .details {
+  padding: 15px 15px 0 15px;
+}
+
+#course .courses .num {
+  background-color: rgb(74, 74, 136);
+  color: #fff;
+  line-height: 70px;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  border-radius: 50%;
+  position: absolute;
+  right: 15px;
+  bottom: 100px;
+}
+/*------------- Courses  ------------*/
+
+/*------------- about-us section styling starts ----------*/
+#about-us {
+  padding: 8vw 8vw 8vw 8vw;
+  text-align: center;
+}
+
+#about-us .about-us-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 1rem;
+  margin-top: 50px;
+}
+
+#about-us .about-us-box .profile {
+  background: #fafaf1;
+  padding: 30px 10px;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+
+#about-us .about-us-box .profile:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+
+.pro-links {
+  margin-top: 10px;
+}
+
+.pro-links i {
+  padding: 10px 13px;
+  border: 1px solid rgb(21, 21, 100);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.pro-links i:hover {
+  background: rgb(21, 21, 100);
+  color: #fff;
+}
+/*------------- About Us  ----------*/
+
+/*------------- Footer  ------------*/
+footer {
+  text-align: center;
+  margin: 48px 0 16px 0;
+  color: #888;
+  font-size: 1em;
+  letter-spacing: 1px;
+}
+
+footer p {
+  text-align: center;
+  color: #fff;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 8px;
+  font-weight: bold;
+}
+footer a:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+/*------------- Footer ------------*/
+
+/*---------------------------------------------------------*/
+/*-------------------- Ipad screen styling ----------------*/
+/*---------------------------------------------------------*/
+@media screen and (max-width: 789px) {
+  nav {
+    padding: 15px 20px;
+  }
+
+  nav img {
+    width: 130px;
+  }
+
+  #menu-btn {
+    display: initial;
+  }
+
+  #menu-close {
+    display: initial;
+    font-size: 1.6rem;
+    color: #fff;
+    padding: 30px 0 20px 20px;
+  }
+
+  nav .navigation ul {
+    position: absolute;
+    top: 0;
+    right: -220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 220px;
+    height: 100vh;
+    background: rgba(17, 20, 104, 0.45);
+    backdrop-filter: blur(4.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: 0.3s ease-in;
+  }
+
+  nav .navigation ul.active {
+    right: 0;
+  }
+
+  nav .navigation ul li {
+    padding: 20px 0 20px 40px;
+    margin-left: 0;
+  }
+
+  nav .navigation ul li a {
+    color: #fff;
+  }
+
+  #home {
+    padding: 0px;
+  }
+
+  #home p {
+    width: 90%;
+  }
+
+  #features {
+    padding: 8vw 4vw 0 4vw;
+  }
+
+  #course {
+    padding: 8vw 4vw 8vw 4vw;
+  }
+
+  #registration {
+    padding: 6vw 4vw 6vw 4vw;
+    gap: 2.2rem;
+  }
+
+  #registration .reminder .time {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  #about-us {
+    padding: 8vw 4vw 6vw 4vw;
+  }
+
+  footer .copyright .pro-links {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 475px) {
+  #registration {
+    flex-direction: column;
+  }
+
+  .reminder p,
+  .reminder h1 {
+    text-align: center;
+  }
+
+  .reminder h1 {
+    font-size: 1.8rem;
+  }
+
+  #registration .reminder .time {
+    justify-content: space-evenly;
+    margin-top: 20px;
+  }
+}
