@@ -114,6 +114,8 @@ nav .navigation ul li a:hover {
 
 #home .btn {
   margin-top: 30px;
+  background-image: linear-gradient(to bottom right, #8c52ff, #cb6ce6, #ff66c4);
+  color: #1e293b;
 }
 
 #home a {
@@ -126,8 +128,8 @@ nav .navigation ul li a:hover {
 }
 
 #home a.purple {
-  color: #fff;
-  background: #8c52ff;
+  background-image: linear-gradient(to bottom right, #8c52ff, #cb6ce6, #ff66c4);
+  color: #1e293b;
   transition: 0.3s ease;
 }
 

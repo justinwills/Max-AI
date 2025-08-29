@@ -95,9 +95,6 @@ form p a {
   transition: background 1s;
 }
 
-.input-group {
-}
-
 .btn-field button.disable {
   background: #eaeaea;
   color: #555;
