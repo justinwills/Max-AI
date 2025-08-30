@@ -465,7 +465,7 @@ footer a:hover {
 #user-details {
   padding: 120px 8vw 8vw 8vw;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #1e293b;
 }
 
 .user-container {
@@ -532,17 +532,17 @@ footer a:hover {
   justify-content: center;
   width: 35px;
   height: 35px;
-  background: #fdc93b;
+  background: linear-gradient(to bottom right, #8c52ff, #cb6ce6, #ff66c4);
   border-radius: 50%;
   cursor: pointer;
-  color: #fff;
+  color: white;
   font-size: 14px;
   transition: all 0.3s ease;
 }
 
 .upload-btn:hover {
-  background: #e6b800;
   transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(140, 82, 255, 0.4);
 }
 
 .profile-info h2 {
@@ -552,7 +552,7 @@ footer a:hover {
 }
 
 .user-role {
-  background: linear-gradient(45deg, #fdc93b, #ff6b6b);
+  background: linear-gradient(to bottom right, #8c52ff, #cb6ce6, #ff66c4);
   color: #fff;
   padding: 5px 15px;
   border-radius: 20px;
@@ -566,11 +566,6 @@ footer a:hover {
   color: #666;
   font-size: 1rem;
   margin-bottom: 5px;
-}
-
-.member-since {
-  color: #999;
-  font-size: 0.9rem;
 }
 
 .details-grid {
@@ -592,7 +587,8 @@ footer a:hover {
   font-size: 1.5rem;
   margin-bottom: 25px;
   padding-bottom: 15px;
-  border-bottom: 2px solid #fdc93b;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(to bottom right, #8c52ff, #cb6ce6, #ff66c4) 1;
 }
 
 .user-form .form-group {
@@ -618,12 +614,12 @@ footer a:hover {
 
 .user-form input:focus {
   outline: none;
-  border-color: #fdc93b;
-  box-shadow: 0 0 0 3px rgba(253, 201, 59, 0.1);
+  border-color: #8c52ff;
+  box-shadow: 0 0 0 3px rgba(140, 82, 255, 0.1);
 }
 
 .save-btn {
-  background: linear-gradient(45deg, #fdc93b, #ff6b6b);
+  background: linear-gradient(to bottom right, #8c52ff, #cb6ce6, #ff66c4);
   color: #fff;
   border: none;
   padding: 12px 30px;
@@ -637,7 +633,7 @@ footer a:hover {
 
 .save-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(253, 201, 59, 0.3);
+  box-shadow: 0 10px 20px rgba(140, 82, 255, 0.3);
 }
 
 .settings-list {
@@ -691,7 +687,7 @@ footer a:hover {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 24px;
 }
 
@@ -703,7 +699,7 @@ footer a:hover {
   left: 3px;
   bottom: 3px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -713,22 +709,6 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(26px);
-}
-
-.enable-2fa {
-  background: #667eea;
-  color: #fff;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.enable-2fa:hover {
-  background: #5a6fd8;
-  transform: translateY(-1px);
 }
 
 .progress-stats {
@@ -748,7 +728,10 @@ input:checked + .slider:before {
 .stat-number {
   font-size: 2rem;
   font-weight: 700;
-  color: #fdc93b;
+  background: linear-gradient(to bottom right, #8c52ff, #cb6ce6, #ff66c4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 5px;
 }
 
@@ -783,8 +766,9 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
+  background: linear-gradient(to bottom right, #8c52ff, #cb6ce6, #ff66c4);
   border-radius: 50%;
+  color: #fff;
 }
 
 .activity-details p {
@@ -803,27 +787,27 @@ input:checked + .slider:before {
   #user-details {
     padding: 100px 4vw 4vw 4vw;
   }
-  
+
   .user-content {
     padding: 25px;
   }
-  
+
   .profile-section {
     flex-direction: column;
     text-align: center;
     gap: 20px;
   }
-  
+
   .details-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .progress-stats {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .setting-item {
     flex-direction: column;
     align-items: flex-start;
@@ -835,11 +819,11 @@ input:checked + .slider:before {
   .user-header h1 {
     font-size: 2rem;
   }
-  
+
   .user-content {
     padding: 20px;
   }
-  
+
   .detail-card {
     padding: 20px;
   }
