@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MaxAI</title>
+    <title>About Us - MaxAI</title>
 
     <!-- font Awesome CDN link -->
     <link
@@ -25,140 +25,129 @@
   <body>
     <!-- Navigation start -->
     <nav>
-      <img src="img/logo.svg" class="logo" alt="" />
+      <div class="nav-container">
+        <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        
+        <div class="nav-links">
+          <a href="home.html" class="nav-link">Home</a>
+          <a href="modules.html" class="nav-link">Modules</a>
+          <a href="flashcard.html" class="nav-link">Flashcard</a>
+          <a href="quiz.html" class="nav-link">Quiz</a>
+          <a href="about.html" class="nav-link active">About</a>
+        </div>
 
-      <div class="navigation">
-        <ul>
-          <i id="menu-close" class="fas fa-times"></i>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html" class="active">About Us</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn-primary">Login</a>
+        </div>
 
-        <img src="img/menu.png" id="menu-btn" alt="" />
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
       </div>
     </nav>
     <!-- Navigation ends -->
 
-    <!-- Hero section starts from here -->
-    <section id="about-home">
-      <h2>About MaxAI</h2>
-    </section>
-    <!-- Hero section ends from here -->
-
-    <!-- About section starts from here -->
-    <section id="about-container">
-      <div class="about-img">
-        <img src="img/a.png" alt="" />
-      </div>
-      <div class="about-text">
-        <h2>
-          Welcome to MaxAI, level up your knowledge through the best online
-          learning.
-        </h2>
-        <p>
-          Got a day? That’s all you need! Take one of these free courses and
-          finish it today. Check the list and start learning.
-        </p>
-
-        <div class="about-fe">
-          <img src="img/fe1.png" alt="" />
-          <div class="fe-text">
-            <h5>400+ Courses</h5>
-            <p>
-              You can start and finish one of these popular courses in under our
-              site
-            </p>
-          </div>
+    <!-- Team section starts from here -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="section-header">
+          <h2>Meet Our Team</h2>
+          <p>The passionate minds behind MaxAI, dedicated to making AI education accessible to everyone</p>
         </div>
-        <div class="about-fe">
-          <img src="img/fe2.png" alt="" />
-          <div class="fe-text">
-            <h5>Lifetime Access</h5>
-            <p>
-              You can start and finish one of these popular courses in under our
-              site
-            </p>
+        
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="member-image">
+              <img src="img/pro1.webp" alt="薛学刚" />
+            </div>
+            <div class="member-info">
+              <h3>薛学刚</h3>
+              <p class="member-role">CEO & Lead Developer</p>
+              <p class="member-description">Leading the technical vision and development of MaxAI platform. With extensive experience in AI and software development, 薛学刚 drives innovation and ensures our platform delivers cutting-edge AI education solutions.</p>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
-    <!-- About section ends from here -->
-
-    <!-- Features section starts from here -->
-    <section id="features">
-      <p>&nbsp;</p>
-      <h1>More About Developer</h1>
-      <p>&nbsp;</p>
-      <p>
-        MaxAI was built with passion, creativity, and endless support from the
-        people who believed in the vision. Every step forward is a reflection of
-        their dedication and trust. Without them, there would be no MaxAI.
-      </p>
-      <div class="dev-members">
-        <div class="dev-box">
-          <div class="dev-img-wrap">
-            <img src="img/max.jpg" alt="Max" />
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="img/max.jpg" alt="洪维斌" />
+            </div>
+            <div class="member-info">
+              <h3>洪维斌</h3>
+              <p class="member-role">CIO & Content Editor</p>
+              <p class="member-description">Managing content strategy and website development. 洪维斌 brings creative vision to our platform, ensuring engaging and accessible content that makes AI learning enjoyable for everyone.</p>
+            </div>
           </div>
-          <div class="dev-info">
-            <h3>Max</h3>
-            <p>
-              Lead developer and AI enthusiast. Loves building smart solutions
-              and sharing knowledge.
-            </p>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="img/pro3.webp" alt="王清香" />
+            </div>
+            <div class="member-info">
+              <h3>王清香</h3>
+              <p class="member-role">Technical Director & UI Designer</p>
+              <p class="member-description">Creating beautiful and intuitive user experiences. 王清香 combines artistic talent with technical expertise to design interfaces that make learning AI both beautiful and functional.</p>
+            </div>
           </div>
-        </div>
-        <div class="dev-box">
-          <div class="dev-img-wrap">
-            <img src="img/justin.jpg" alt="Justin" />
-          </div>
-          <div class="dev-info">
-            <h3>Justin</h3>
-            <p>
-              Front-end specialist with a passion for design and user
-              experience. Always pixel-perfect.
-            </p>
-          </div>
-        </div>
-        <div class="dev-box">
-          <div class="dev-img-wrap">
-            <img src="img/c1.jpg" alt="Member 3" />
-          </div>
-          <div class="dev-info">
-            <h3>Member 3</h3>
-            <p>
-              Back-end wizard, database expert, and automation lover. Keeps
-              everything running smoothly.
-            </p>
-          </div>
-        </div>
-        <div class="dev-box">
-          <div class="dev-img-wrap">
-            <img src="img/c2.jpg" alt="Member 4" />
-          </div>
-          <div class="dev-info">
-            <h3>Member 4</h3>
-            <p>
-              Creative thinker and problem solver. Brings fresh ideas and energy
-              to the team.
-            </p>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="img/pro4.webp" alt="马佳琪" />
+            </div>
+            <div class="member-info">
+              <h3>马佳琪</h3>
+              <p class="member-role">QA Tester & Support Specialist</p>
+              <p class="member-description">Ensuring quality and providing excellent user support. 马佳琪's attention to detail and dedication to user experience ensures our platform runs smoothly and helps learners succeed.</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="dev-copyright">© Andriana Team</div>
     </section>
-    <!-- Features section ends from here -->
+    <!-- Team section ends from here -->
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-bottom">
+        <p>&copy; 2025 MaxAI | <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a></p>
+      </div>
+  </footer>
+
     <script>
-      // Show menu links on burger click
-      $("#menu-btn").click(function () {
-        $("nav .navigation ul").addClass("active");
+      // Mobile menu toggle
+      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
       });
 
-      // Hide navbar on click function
-      $("#menu-close").click(function () {
-        $("nav .navigation ul").removeClass("active");
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      // Team member animation on page load
+      function animateTeamMembers() {
+        const teamMembers = document.querySelectorAll('.team-member');
+        teamMembers.forEach((member, index) => {
+          setTimeout(() => {
+            member.classList.add('animate-in');
+          }, index * 200); // Stagger the animation
+        });
+      }
+
+      // Run animation when page loads
+      window.addEventListener('load', animateTeamMembers);
+
+      // Team member click effect
+      document.querySelectorAll('.team-member').forEach(member => {
+        member.addEventListener('click', function() {
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 150);
+        });
       });
     </script>
   </body>

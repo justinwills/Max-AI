@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Max - Lead Developer & AI Enthusiast | MaxAI</title>
+
+    <!-- font Awesome CDN link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="member.css" />
+
+    <!-- JQuery CDN link -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- Navigation start -->
+    <nav>
+      <div class="nav-container">
+        <img src="../img/logo.svg" class="logo" alt="MaxAI Logo" />
+        
+        <div class="nav-links">
+          <a href="../index.html">Home</a>
+          <a href="../about.html">About Us</a>
+          <a href="../modules.html">Modules</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+          <a href="../login.html" class="btn-secondary">Login</a>
+          <a href="../register.html" class="btn-primary">Get Started</a>
+        </div>
+
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+    <!-- Navigation ends -->
+
+    <!-- Member Hero Section -->
+    <section id="member-hero">
+      <div class="container">
+        <div class="member-hero-content">
+          <div class="member-hero-image">
+            <img src="../img/max.jpg" alt="Max" />
+          </div>
+          <div class="member-hero-text">
+            <h1>Max</h1>
+            <p class="member-title">Lead Developer & AI Enthusiast</p>
+            <p class="member-bio">
+              Passionate about building smart solutions and sharing knowledge. 
+              Expert in machine learning and AI development with a vision to democratize AI education.
+            </p>
+            <div class="member-social">
+              <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Member Details Section -->
+    <section id="member-details">
+      <div class="container">
+        <div class="details-grid">
+          <div class="details-card">
+            <h3><i class="fas fa-code"></i> Skills & Expertise</h3>
+            <div class="skills-list">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Machine Learning</span>
+              <span class="skill-tag">Deep Learning</span>
+              <span class="skill-tag">TensorFlow</span>
+              <span class="skill-tag">PyTorch</span>
+              <span class="skill-tag">Computer Vision</span>
+              <span class="skill-tag">NLP</span>
+              <span class="skill-tag">Leadership</span>
+            </div>
+          </div>
+
+          <div class="details-card">
+            <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+            <div class="education-item">
+              <h4>Master's in Computer Science</h4>
+              <p>Specialization in Artificial Intelligence</p>
+              <span class="year">2020-2022</span>
+            </div>
+            <div class="education-item">
+              <h4>Bachelor's in Software Engineering</h4>
+              <p>Focus on Machine Learning</p>
+              <span class="year">2016-2020</span>
+            </div>
+          </div>
+
+          <div class="details-card">
+            <h3><i class="fas fa-briefcase"></i> Experience</h3>
+            <div class="experience-item">
+              <h4>Lead AI Developer</h4>
+              <p>MaxAI Platform</p>
+              <span class="year">2022-Present</span>
+            </div>
+            <div class="experience-item">
+              <h4>AI Research Engineer</h4>
+              <p>Tech Innovations Lab</p>
+              <span class="year">2020-2022</span>
+            </div>
+          </div>
+
+          <div class="details-card">
+            <h3><i class="fas fa-project-diagram"></i> Current Projects</h3>
+            <div class="project-item">
+              <h4>MaxAI Learning Platform</h4>
+              <p>AI-powered educational platform with personalized learning paths</p>
+            </div>
+            <div class="project-item">
+              <h4>Computer Vision API</h4>
+              <p>Real-time object detection and image classification service</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to Team Button -->
+    <section id="back-to-team">
+      <div class="container">
+        <a href="../about.html" class="btn-primary">
+          <i class="fas fa-arrow-left"></i>
+          Back to Team
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../about.html">About</a>
+          <a href="../modules.html">Modules</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 MaxAI. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
