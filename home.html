@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="about.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navigation start -->
+    <nav>
+      <img src="img/logo.svg" class="logo" alt="" />
+
+      <div class="navigation">
+        <ul>
+          <i id="menu-close" class="fas fa-times"></i>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <img src="img/menu.png" id="menu-btn" alt="" />
+      </div>
+    </nav>
+    <!-- Navigation ends -->
+
+    <!-- User Details section starts from here -->
+    <section id="user-details">
+      <div class="user-container">
+        <div class="user-header">
+          <h1>User Profile</h1>
+          <p>Manage your account information and preferences</p>
+        </div>
+
+        <div class="user-content">
+          <div class="profile-section">
+            <div class="profile-image">
+              <img src="img/pro1.webp" alt="Profile Picture" id="profile-pic" />
+              <div class="image-upload">
+                <label for="file-input" class="upload-btn">
+                  <i class="fas fa-camera"></i>
+                </label>
+                <input
+                  type="file"
+                  id="file-input"
+                  accept="image/*"
+                  style="display: none"
+                />
+              </div>
+            </div>
+
+            <div class="profile-info">
+              <h2>John Doe</h2>
+              <p class="user-role">Premium Member</p>
+              <p class="user-email">john.doe@example.com</p>
+              <p class="member-since">Member since: January 2024</p>
+            </div>
+          </div>
+
+          <div class="details-grid">
+            <div class="detail-card">
+              <h3>Personal Information</h3>
+              <form class="user-form">
+                <div class="form-group">
+                  <label for="first-name">First Name</label>
+                  <input type="text" id="first-name" value="John" required />
+                </div>
+                <div class="form-group">
+                  <label for="last-name">Last Name</label>
+                  <input type="text" id="last-name" value="Doe" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value="john.doe@example.com"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" value="+1 (555) 123-4567" />
+                </div>
+                <div class="form-group">
+                  <label for="date-of-birth">Date of Birth</label>
+                  <input type="date" id="date-of-birth" value="1990-05-15" />
+                </div>
+                <button type="submit" class="save-btn">Save Changes</button>
+              </form>
+            </div>
+
+            <div class="detail-card">
+              <h3>Learning Progress</h3>
+              <div class="progress-stats">
+                <div class="stat-item">
+                  <div class="stat-number">12</div>
+                  <div class="stat-label">Courses Completed</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">85%</div>
+                  <div class="stat-label">Average Score</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">156</div>
+                  <div class="stat-label">Hours Learned</div>
+                </div>
+              </div>
+
+              <div class="recent-activity">
+                <h4>Recent Activity</h4>
+                <div class="activity-item">
+                  <div class="activity-icon">📚</div>
+                  <div class="activity-details">
+                    <p>Completed "Advanced JavaScript" course</p>
+                    <span>2 days ago</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">🎯</div>
+                  <div class="activity-details">
+                    <p>Achieved "Perfect Score" badge</p>
+                    <span>1 week ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- User Details section ends from here -->
+
+    <!-- Footer section starts from here -->
+    <footer>
+      <p>
+        &copy;版权所有
+        <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
+      </p>
+    </footer>
+    <!-- Footer section ends from here -->
+
+    <script>
+      // Show menu links on burger click
+      $("#menu-btn").click(function () {
+        $("nav .navigation ul").addClass("active");
+      });
+
+      // Hide navbar on click function
+      $("#menu-close").click(function () {
+        $("nav .navigation ul").removeClass("active");
+      });
+    </script>
+  </body>
+</html>
