@@ -4,61 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - MaxAI</title>
-    <link rel="stylesheet" href="login.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="login.css" />
   </head>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <body>
-    <div class="container">
+    <nav>
+      <div class="nav-container">
+        <div class="logo-container">
+          <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        </div>
+      </div>
+    </nav>
+
+    <div class="login-container">
       <div class="form-box">
-        <img
-          src="img/logo.svg"
-          class="logo"
-          alt="MaxAI Logo"
-          width="100"
-          height="100"
-        />
-        <h1>Login</h1>
+        <h2>Welcome Back</h2>
         <form id="loginForm">
           <div class="input-group">
             <div class="input-field">
-              <i class="fa-solid fa-envelope"></i>
-              <input type="email" placeholder="Email" />
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email" required />
             </div>
-
             <div class="input-field">
-              <i class="fa-solid fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" required />
             </div>
-            <p>
-              <u><a href="#">Forgot Password?</a></u>
-            </p>
+            <div class="forgot-password">
+              <a href="#">Forgot Password?</a>
+            </div>
+            <div class="btn-field">
+              <button type="submit" id="loginBtn" class="btn-primary btn-large">
+                <i class="fas fa-sign-in-alt"></i>
+                Login
+              </button>
+            </div>
           </div>
-          <div class="btn-field">
-            <button type="submit" id="loginBtn">Login</button>
-          </div>
-          <p style="text-align: center; padding-top: 10px">
-            <u><a href="register.html">I don't have an account yet! </a></u>
+          <p class="register-link">
+            Don't have an account yet? <a href="register.html">Sign Up</a>
           </p>
         </form>
       </div>
     </div>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          swal("Login Successful!", "", "success");
-          event.preventDefault();
+      // Login form handling
+      document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        
+        const loginButton = document.getElementById("loginBtn");
+        loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging In...';
+        loginButton.disabled = true;
 
-          const loginButton = document.getElementById("loginBtn");
-          loginButton.innerText = "Logging In...";
-          loginButton.disabled = true;
-
+        // Simulate login process
+        setTimeout(function () {
+          swal("Login Successful!", "Welcome back to MaxAI!", "success");
+          
           setTimeout(function () {
             window.location.href = "home.html";
-          }, 1000);
-        });
+          }, 2000);
+        }, 1500);
+      });
     </script>
   </body>
 </html>

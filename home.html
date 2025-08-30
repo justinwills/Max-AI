@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>MaxAI - Home</title>
 
     <link rel="stylesheet" href="home.css" />
-    <link rel="stylesheet" href="about.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -15,28 +14,33 @@
   <body>
     <!-- Navigation start -->
     <nav>
-      <img src="img/logo.svg" class="logo" alt="" />
-
-      <div class="navigation">
-        <ul>
-          <i id="menu-close" class="fas fa-times"></i>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="courses.html">Modules</a></li>
-          <li><a href="blog.html">Flashcard</a></li>
-          <li><a href="courses.html">Quiz</a></li>
-          <li><a href="about.html">About Us</a></li>
-        </ul>
-
-        <img src="img/menu.png" id="menu-btn" alt="" />
+      <div class="nav-container">
+        <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        
+        <div class="nav-links">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="modules.html" class="nav-link">Modules</a>
+          <a href="flashcard.html" class="nav-link">Flashcard</a>
+          <a href="quiz.html" class="nav-link">Quiz</a>
+          <a href="about.html" class="nav-link">About</a>
+        </div>
+        
+        <div class="nav-actions">
+          <a href="login.html" class="btn-primary">Login</a>
+        </div>
+        
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
       </div>
     </nav>
     <!-- Navigation ends -->
 
     <!-- User Details section starts from here -->
-    <section id="user-details">
-      <div class="user-container">
-        <div class="user-header">
-          <h1>User Profile</h1>
+    <section id="user-details" class="user-profile">
+      <div class="container">
+        <div class="section-header">
+          <h2>User Profile</h2>
           <p>Manage your account information and preferences</p>
         </div>
 
@@ -58,7 +62,7 @@
             </div>
 
             <div class="profile-info">
-              <h2>Justin</h2>
+              <h3>Justin</h3>
               <p class="user-role">Learner</p>
               <p class="user-email">justin@example.com</p>
             </div>
@@ -81,7 +85,7 @@
                     required
                   />
                 </div>
-                <button type="submit" class="save-btn">Save Changes</button>
+                <button type="submit" class="btn-primary">Save Changes</button>
               </form>
             </div>
 
@@ -128,22 +132,35 @@
 
     <!-- Footer section starts from here -->
     <footer>
-      <p>
-        &copy;版权所有
-        <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
-      </p>
+      <div class="footer-bottom">
+        <p>&copy; 2025 MaxAI | <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a></p>
+      </div>
     </footer>
     <!-- Footer section ends from here -->
 
     <script>
-      // Show menu links on burger click
-      $("#menu-btn").click(function () {
-        $("nav .navigation ul").addClass("active");
+      // Mobile menu toggle
+      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
       });
 
-      // Hide navbar on click function
-      $("#menu-close").click(function () {
-        $("nav .navigation ul").removeClass("active");
+      // Profile image upload functionality
+      document.getElementById('file-input').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            document.getElementById('profile-pic').src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Form submission
+      document.querySelector('.user-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Add your form submission logic here
+        alert('Changes saved successfully!');
       });
     </script>
   </body>

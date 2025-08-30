@@ -1,234 +1,423 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MaxAI</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <nav>
-      <img src="img/logo.svg" class="logo" alt="" />
+      <div class="nav-container">
+        <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        
+        <div class="nav-links">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#modules" class="nav-link">Modules</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="login.html" class="nav-link">Login</a>
+        </div>
+        
+        <div class="nav-actions">
+          <a href="register.html" class="btn-primary">Get Started</a>
+        </div>
+        
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
     </nav>
 
-    <!-- Home -->
-    <section id="home">
-      <h2>MaxAI</h2>
-      <p>Learn AI the simple way, anytime, anywhere</p>
-      <div class="btn">
-        <a href="register.html" class="purple">GET STARTED</a>
-      </div>
-      <div class="btn">
-        <a href="login.html">LOGIN</a>
-      </div>
-    </section>
-    <!-- Home -->
-
-    <!-- Features -->
-    <section id="features">
-      <div class="features-row">
-        <div style="flex: 1; text-align: left; color: #fff">
-          <h1>Title</h1>
-          <p>Description</p>
-        </div>
-        <div style="flex: 1; text-align: right; color: #fff">
-          <img src="img/features.svg" alt="Features Image" />
-        </div>
-      </div>
-    </section>
-
-    <section id="features">
-      <div class="features-row">
-        <div style="flex: 1; text-align: left; color: #fff">
-          <img src="img/features.svg" alt="Features Image" />
-        </div>
-        <div style="flex: 1; text-align: right; color: #fff">
-          <h1>Title</h1>
-          <p>Description</p>
-        </div>
-      </div>
-    </section>
-    <!-- Features -->
-
-    <!-- Modules -->
-    <section id="course">
-      <h1 style="color: rgb(21, 21, 100)">Our Modules</h1>
-      <p>
-        Explore step-by-step modules designed to introduce you to the
-        foundations, applications, and future of Artificial Intelligence.
-      </p>
-
-      <div class="course-box">
-        <div class="courses">
-          <img src="img/c1.jpg" alt="" />
-          <div class="details">
-            <span>Updated 29/8/25</span>
-            <h6>AI Foundation</h6>
-
-            <div class="star">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-
-              <span>description</span>
+    <section id="home" class="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fas fa-robot"></i>
+            <span>AI Learning Platform</span>
+          </div>
+          
+          <h1 class="hero-title">
+            Learn AI the 
+            <span class="gradient-text">Simple Way</span>
+          </h1>
+          
+          <p class="hero-subtitle">
+            Master artificial intelligence with our step-by-step modules. 
+            From foundations to intermediate concepts, learn at your own pace 
+            with hands-on projects.
+          </p>
+          
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">6</div>
+              <div class="stat-label">Modules</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">10+</div>
+              <div class="stat-label">Quiz</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">100+</div>
+              <div class="stat-label">Learners</div>
             </div>
           </div>
-          <div class="num">#1</div>
-        </div>
-
-        <div class="courses">
-          <img src="img/c2.jpg" alt="" />
-          <div class="details">
-            <span>Updated 29/8/25</span>
-            <h6>Machine Learning</h6>
-
-            <div class="star">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-
-              <span>...</span>
-            </div>
+          
+          <div class="hero-actions">
+            <a href="register.html" class="btn-primary btn-large">
+              <i class="fas fa-rocket"></i>
+              Start Learning
+            </a>
+            <a href="#modules" class="btn-secondary btn-large">
+              <i class="fas fa-play"></i>
+              Explore Modules
+            </a>
           </div>
-          <div class="num">#2</div>
         </div>
-
-        <div class="courses">
-          <img src="img/c3.jpg" alt="" />
-          <div class="details">
-            <span>Updated 29/8/25</span>
-            <h6>Neural Networks</h6>
-
-            <div class="star">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-
-              <span>...</span>
-            </div>
+        
+        <div class="hero-visual">
+          <div class="floating-element element-1">
+            <i class="fas fa-brain"></i>
+            <span>ML</span>
           </div>
-          <div class="num">#3</div>
-        </div>
-
-        <div class="courses">
-          <img src="img/c4.jpg" alt="" />
-          <div class="details">
-            <span>Updated 29/8/25</span>
-            <h6>Deep Learning</h6>
-
-            <div class="star">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-
-              <span>...</span>
-            </div>
+          <div class="floating-element element-2">
+            <i class="fas fa-network-wired"></i>
+            <span>Neural</span>
           </div>
-          <div class="num">#4</div>
-        </div>
-
-        <div class="courses">
-          <img src="img/c5.jpg" alt="" />
-          <div class="details">
-            <span>Updated 29/8/25</span>
-            <h6>Natural Language Processing</h6>
-
-            <div class="star">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-
-              <span>...</span>
-            </div>
+          <div class="floating-element element-3">
+            <i class="fas fa-chart-line"></i>
+            <span>Data</span>
           </div>
-          <div class="num">#5</div>
-        </div>
-
-        <div class="courses">
-          <img src="img/c6.jpg" alt="" />
-          <div class="details">
-            <span>Updated 29/8/25</span>
-            <h6>AI Ethics and Future</h6>
-
-            <div class="star">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-
-              <span>...</span>
-            </div>
+          <div class="hero-image">
+            <img src="img/background-img.jpg" alt="AI Learning" />
           </div>
-          <div class="num">#6</div>
         </div>
       </div>
     </section>
-    <!-- Modules -->
 
-    <!-- About Us -->
-    <section id="about-us">
-      <h1>Team Members</h1>
-      <div class="about-us-box">
-        <div class="profile">
-          <img src="img/pro1.webp" alt="" />
-          <h6>薛学刚</h6>
-          <p>CEO、程序员 (组长）</p>
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>Why Choose MaxAI?</h2>
+          <p>Discover what makes our platform the perfect choice for your AI learning journey</p>
         </div>
-
-        <div class="profile">
-          <img src="img/pro2.webp" alt="" />
-          <h6>洪维斌</h6>
-          <p>CIO、网站与应用编辑</p>
-        </div>
-
-        <div class="profile">
-          <img src="img/pro3.webp" alt="" />
-          <h6>王清香</h6>
-          <p>技术总监、UI设计/美术</p>
-        </div>
-
-        <div class="profile">
-          <img src="img/pro4.webp" alt="" />
-          <h6>马佳琪</h6>
-          <p>测试员、支持专员、视频编辑</p>
-          <!-- <div class="pro-links">
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-linkedin-in"></i>
-          </div> -->
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>Structured Learning</h3>
+            <p>Follow our carefully designed curriculum that builds from fundamentals to advanced concepts</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-hands-holding"></i>
+            </div>
+            <h3>Hands-on Practice</h3>
+            <p>Apply what you learn with real-world projects and interactive exercises</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3>Learn at Your Pace</h3>
+            <p>Study whenever and wherever you want with our flexible learning platform</p>
+          </div>
         </div>
       </div>
     </section>
-    <!-- About Us -->
 
-    <!-- Footer -->
+    <section id="modules" class="modules">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Learning Modules</h2>
+          <p>Explore our comprehensive curriculum designed to take you from AI beginner to expert</p>
+        </div>
+        
+        <div class="modules-grid">
+          <div class="module-card">
+            <div class="module-image">
+              <img src="img/c1.jpg" alt="AI Foundation" />
+              <div class="module-badge">Beginner</div>
+            </div>
+            <div class="module-content">
+              <div class="module-meta">
+                <span class="module-level"><i class="fas fa-signal"></i> Beginner</span>
+                <span class="module-duration"><i class="fas fa-clock"></i> 4-6 hours</span>
+              </div>
+              <h3>AI Foundation</h3>
+              <p>Start your AI journey with fundamental concepts, machine learning basics, and practical applications.</p>
+              <div class="module-features">
+                <span><i class="fas fa-check"></i> 6 Lessons</span>
+                <span><i class="fas fa-check"></i> Hands-on Projects</span>
+              </div>
+              <a href="register.html" class="btn-module">
+                Start Learning <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="module-card">
+            <div class="module-image">
+              <img src="img/c2.jpg" alt="Machine Learning" />
+              <div class="module-badge">Beginner</div>
+            </div>
+            <div class="module-content">
+              <div class="module-meta">
+                <span class="module-level"><i class="fas fa-signal"></i> Beginner</span>
+                <span class="module-duration"><i class="fas fa-clock"></i> 6-8 hours</span>
+              </div>
+              <h3>Machine Learning</h3>
+              <p>Dive deep into algorithms, data preprocessing, and model evaluation techniques.</p>
+              <div class="module-features">
+                <span><i class="fas fa-check"></i> 8 Lessons</span>
+                <span><i class="fas fa-check"></i> Real Datasets</span>
+              </div>
+              <a href="#" class="btn-module">
+                Coming Soon <i class="fas fa-clock"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="module-card">
+            <div class="module-image">
+              <img src="img/c4.jpg" alt="Deep Learning" />
+              <div class="module-badge">Intermediate</div>
+            </div>
+            <div class="module-content">
+              <div class="module-meta">
+                <span class="module-level"><i class="fas fa-signal"></i> Intermediate</span>
+                <span class="module-duration"><i class="fas fa-clock"></i> 10-12 hours</span>
+              </div>
+              <h3>Deep Learning</h3>
+              <p>Explore advanced deep learning architectures and cutting-edge AI research.</p>
+              <div class="module-features">
+                <span><i class="fas fa-check"></i> 12 Lessons</span>
+                <span><i class="fas fa-check"></i> Research Papers</span>
+              </div>
+              <a href="#" class="btn-module">
+                Coming Soon <i class="fas fa-clock"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="module-card">
+            <div class="module-image">
+              <img src="img/c3.jpg" alt="Neural Networks" />
+              <div class="module-badge">Specialized</div>
+            </div>
+            <div class="module-content">
+              <div class="module-meta">
+                <span class="module-level"><i class="fas fa-signal"></i> Specialized</span>
+                <span class="module-duration"><i class="fas fa-clock"></i> 8-10 hours</span>
+              </div>
+              <h3>Neural Networks</h3>
+              <p>Master deep learning with neural networks, backpropagation, and optimization techniques.</p>
+              <div class="module-features">
+                <span><i class="fas fa-check"></i> 10 Lessons</span>
+                <span><i class="fas fa-check"></i> Deep Learning</span>
+              </div>
+              <a href="#" class="btn-module">
+                Coming Soon <i class="fas fa-clock"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="module-card">
+            <div class="module-image">
+              <img src="img/c5.jpg" alt="Natural Language Processing" />
+              <div class="module-badge">Specialized</div>
+            </div>
+            <div class="module-content">
+              <div class="module-meta">
+                <span class="module-level"><i class="fas fa-signal"></i> Specialized</span>
+                <span class="module-duration"><i class="fas fa-clock"></i> 8-10 hours</span>
+              </div>
+              <h3>Natural Language Processing</h3>
+              <p>Learn to process and understand human language with modern NLP techniques.</p>
+              <div class="module-features">
+                <span><i class="fas fa-check"></i> 10 Lessons</span>
+                <span><i class="fas fa-check"></i> Text Analysis</span>
+
+              </div>
+              <a href="#" class="btn-module">
+                Coming Soon <i class="fas fa-clock"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="module-card">
+            <div class="module-image">
+              <img src="img/c6.jpg" alt="AI Ethics and Future" />
+              <div class="module-badge">Specialized</div>
+            </div>
+            <div class="module-content">
+              <div class="module-meta">
+                <span class="module-level"><i class="fas fa-signal"></i> Specialized</span>
+                <span class="module-duration"><i class="fas fa-clock"></i> 6-8 hours</span>
+              </div>
+              <h3>AI Ethics and Future</h3>
+              <p>Explore the ethical implications of AI and future trends in artificial intelligence.</p>
+              <div class="module-features">
+                <span><i class="fas fa-check"></i> 8 Lessons</span>
+                <span><i class="fas fa-check"></i> Case Studies</span>
+
+              </div>
+              <a href="#" class="btn-module">
+                Coming Soon <i class="fas fa-clock"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="section-header">
+          <h2>Meet Our Team</h2>
+          <p>The passionate minds behind MaxAI, dedicated to making AI education accessible to everyone</p>
+        </div>
+        
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="member-image">
+              <img src="img/pro1.webp" alt="薛学刚" />
+            </div>
+            <div class="member-info">
+              <h3>薛学刚</h3>
+              <p class="member-role">CEO & Lead Developer</p>
+              <p class="member-description">Leading the technical vision and development of MaxAI platform</p>
+              <div class="member-skills">
+                <span class="skill-tag">Programming</span>
+                <span class="skill-tag">Leadership</span>
+                <span class="skill-tag">AI</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="img/max.jpg" alt="洪维斌" />
+            </div>
+            <div class="member-info">
+              <h3>洪维斌</h3>
+              <p class="member-role">CIO & Content Editor</p>
+              <p class="member-description">Managing content strategy and website development</p>
+              <div class="member-skills">
+                <span class="skill-tag">Content</span>
+                <span class="skill-tag">Web Development</span>
+                <span class="skill-tag">Strategy</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="img/pro3.webp" alt="王清香" />
+            </div>
+            <div class="member-info">
+              <h3>王清香</h3>
+              <p class="member-role">Technical Director & UI Designer</p>
+              <p class="member-description">Creating beautiful and intuitive user experiences</p>
+              <div class="member-skills">
+                <span class="skill-tag">UI/UX Design</span>
+                <span class="skill-tag">Art</span>
+                <span class="skill-tag">Technical</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="img/pro4.webp" alt="马佳琪" />
+            </div>
+            <div class="member-info">
+              <h3>马佳琪</h3>
+              <p class="member-role">QA Tester & Support Specialist</p>
+              <p class="member-description">Ensuring quality and providing excellent user support</p>
+              <div class="member-skills">
+                <span class="skill-tag">Testing</span>
+                <span class="skill-tag">Support</span>
+                <span class="skill-tag">Video Editing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <footer>
-      <p>
-        &copy;版权所有
-        <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
-      </p>
+        <div class="footer-bottom">
+          <p>&copy; 2025 MaxAI | <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a></p>
+        </div>
     </footer>
-    <!-- Footer  -->
 
     <script>
-      // Show menu links on burger click
-      $("#menu-btn").click(function () {
-        $("nav .navigation ul").addClass("active");
+      // Mobile menu toggle
+      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
       });
 
-      // Hide navbar on click function
-      $("#menu-close").click(function () {
-        $("nav .navigation ul").removeClass("active");
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Active navigation link highlighting
+      window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollY >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      document.querySelectorAll('.feature-card, .module-card, .team-member').forEach(el => {
+        observer.observe(el);
       });
     </script>
   </body>

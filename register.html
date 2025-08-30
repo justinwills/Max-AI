@@ -4,64 +4,79 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - MaxAI</title>
-    <link rel="stylesheet" href="register.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="register.css" />
   </head>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <body>
-    <div class="container">
+    <nav>
+      <div class="nav-container">
+        <div class="logo-container">
+          <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        </div>
+      </div>
+    </nav>
+
+    <div class="register-container">
       <div class="form-box">
-        <img
-          src="img/logo.svg"
-          class="logo"
-          alt="MaxAI Logo"
-          width="100"
-          height="100"
-        />
-        <h1>Get Started</h1>
+        <h2>Create Account</h2>
         <form id="registerForm">
           <div class="input-group">
             <div class="input-field">
-              <i class="fa-solid fa-envelope"></i>
-              <input type="text" placeholder="Username" />
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username" required />
             </div>
             <div class="input-field">
-              <i class="fa-solid fa-envelope"></i>
-              <input type="email" placeholder="Email" />
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email" required />
             </div>
             <div class="input-field">
-              <i class="fa-solid fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" required />
             </div>
             <div class="input-field">
-              <i class="fa-solid fa-lock"></i>
-              <input type="password" placeholder="Verify Password" />
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Verify Password" required />
             </div>
             <div class="btn-field">
-              <button type="submit" id="registerBtn">Get Started</button>
+              <button type="submit" id="registerBtn" class="btn-primary btn-large">
+                <i class="fas fa-rocket"></i>
+                Get Started
+              </button>
             </div>
           </div>
-          <p style="text-align: center; padding-top: 20px">
-            <u><a href="login.html">I already have an account! </a></u>
+          <p class="login-link">
+            Already have an account? <a href="login.html">Sign In</a>
           </p>
         </form>
       </div>
     </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-      document
-        .getElementById("registerForm")
-        .addEventListener("submit", function (event) {
-          swal("Registration Successful!", "", "success");
-          event.preventDefault();
+      // Mobile menu toggle
+      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
+      });
 
-          const registerButton = document.getElementById("registerBtn");
-          registerButton.innerText = "Registering...";
-          registerButton.disabled = true;
+      // Registration form handling
+      document.getElementById("registerForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        
+        const registerButton = document.getElementById("registerBtn");
+        registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+        registerButton.disabled = true;
 
+        // Simulate registration process
+        setTimeout(function () {
+          swal("Registration Successful!", "Welcome to MaxAI! Your account has been created successfully.", "success");
+          
           setTimeout(function () {
             window.location.href = "home.html";
-          }, 1000);
-        });
+          }, 2000);
+        }, 1500);
+      });
     </script>
   </body>
 </html>

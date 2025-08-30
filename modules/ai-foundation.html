@@ -1,0 +1,487 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Foundations - Course</title>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles: reuse modules theme + inner styles -->
+    <link rel="stylesheet" href="modules-inner.css" />
+
+    <!-- JQuery CDN link -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- Navigation start -->
+    <nav>
+      <img src="../img/logo.svg" class="logo" alt="MaxAI" />
+
+      <div class="navigation">
+        <ul>
+          <i id="menu-close" class="fas fa-times"></i>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../modules.html" class="active">Modules</a></li>
+          <li><a href="../blog.html">Flashcard</a></li>
+          <li><a href="../courses.html">Quiz</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+
+        <img src="../img/menu.png" id="menu-btn" alt="Menu" />
+      </div>
+    </nav>
+    <!-- Navigation ends -->
+
+    <!-- Hero section -->
+    <section id="about-home">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-robot"></i>
+          <span>Beginner Friendly</span>
+        </div>
+        <h1>AI Foundations</h1>
+        <p class="hero-subtitle">
+          Start from zero and build solid, practical intuition
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <span>4-6 hours</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-signal"></i>
+            <span>Beginner</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <span>Free</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-card card-1">
+          <i class="fas fa-brain"></i>
+          <span>ML</span>
+        </div>
+        <div class="floating-card card-2">
+          <i class="fas fa-network-wired"></i>
+          <span>Neural</span>
+        </div>
+        <div class="floating-card card-3">
+          <i class="fas fa-chart-line"></i>
+          <span>Data</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course body section starts -->
+    <section id="course-inner">
+      <div class="overview">
+        <div class="course-panel">
+          <div class="course-header">
+            <img class="course-img" src="../img/c1.jpg" alt="AI Foundations" />
+            <div class="course-overlay">
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-info">
+            <div class="course-meta">
+              <div class="meta-item">
+                <i class="fas fa-star"></i>
+                <span>4.8/5</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-graduation-cap"></i>
+                <span>2,847 students</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-calendar"></i>
+                <span>Last updated: Aug 2025</span>
+              </div>
+            </div>
+
+            <div class="callout info">
+              <i class="fas fa-lightbulb"></i>
+              <div>
+                <strong>Pro Tip:</strong> Complete one lesson per day for
+                optimal retention. Each lesson builds on the previous one.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-sections">
+          <section class="content-section" id="objectives">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <h3>Learning Objectives</h3>
+            </div>
+            <div class="objectives-grid">
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Explain the difference between AI, ML, and DL</span>
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Describe supervised vs. unsupervised learning</span>
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Understand basic data terms and workflow</span>
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Recognize common evaluation metrics</span>
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Identify ethical considerations</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="content-section" id="prerequisites">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-list-check"></i>
+              </div>
+              <h3>Prerequisites</h3>
+            </div>
+            <p>
+              Curiosity and basic computer literacy. Optional: light Python or
+              JavaScript helps, but is not required.
+            </p>
+            <div class="tags">
+              <span class="tag">No advanced math</span>
+              <span class="tag">No coding required</span>
+              <span class="tag">Beginner friendly</span>
+            </div>
+          </section>
+
+          <div class="lessons-container">
+            <h3 class="lessons-title">Course Lessons</h3>
+
+            <div class="lesson-item" data-lesson="1">
+              <div class="lesson-header">
+                <div class="lesson-number">01</div>
+                <div class="lesson-content">
+                  <h4>What Is AI?</h4>
+                  <p>
+                    Understanding artificial intelligence and its core concepts
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Artificial Intelligence is the study and creation of systems
+                    that perform tasks requiring human‑like intelligence:
+                    perception, decision‑making, language, and more.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
+                    systems, Data‑driven systems
+                  </div>
+                  <div class="exercise">
+                    <div class="exercise-title">
+                      <i class="fas fa-flask"></i> Try this
+                    </div>
+                    <p>
+                      List three tasks around you that AI could help with.
+                      Classify each as recognition, prediction, or decision.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="1">
+              <div class="lesson-header">
+                <div class="lesson-number">01</div>
+                <div class="lesson-content">
+                  <h4>AI Is Revolutionary?</h4>
+                  <p>LOL</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>YOWWW</p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
+                    systems, Data‑driven systems
+                  </div>
+                  <div class="exercise">
+                    <div class="exercise-title">
+                      <i class="fas fa-flask"></i> Try this
+                    </div>
+                    <p>
+                      List three tasks around you that AI could help with.
+                      Classify each as recognition, prediction, or decision.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="1">
+              <div class="lesson-header">
+                <div class="lesson-number">01</div>
+                <div class="lesson-content">
+                  <h4>What Is AI?</h4>
+                  <p>
+                    Understanding artificial intelligence and its core concepts
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Artificial Intelligence is the study and creation of systems
+                    that perform tasks requiring human‑like intelligence:
+                    perception, decision‑making, language, and more.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
+                    systems, Data‑driven systems
+                  </div>
+                  <div class="exercise">
+                    <div class="exercise-title">
+                      <i class="fas fa-flask"></i> Try this
+                    </div>
+                    <p>
+                      List three tasks around you that AI could help with.
+                      Classify each as recognition, prediction, or decision.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="1">
+              <div class="lesson-header">
+                <div class="lesson-number">01</div>
+                <div class="lesson-content">
+                  <h4>What Is AI?</h4>
+                  <p>
+                    Understanding artificial intelligence and its core concepts
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Artificial Intelligence is the study and creation of systems
+                    that perform tasks requiring human‑like intelligence:
+                    perception, decision‑making, language, and more.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
+                    systems, Data‑driven systems
+                  </div>
+                  <div class="exercise">
+                    <div class="exercise-title">
+                      <i class="fas fa-flask"></i> Try this
+                    </div>
+                    <p>
+                      List three tasks around you that AI could help with.
+                      Classify each as recognition, prediction, or decision.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="1">
+              <div class="lesson-header">
+                <div class="lesson-number">01</div>
+                <div class="lesson-content">
+                  <h4>What Is AI?</h4>
+                  <p>
+                    Understanding artificial intelligence and its core concepts
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Artificial Intelligence is the study and creation of systems
+                    that perform tasks requiring human‑like intelligence:
+                    perception, decision‑making, language, and more.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
+                    systems, Data‑driven systems
+                  </div>
+                  <div class="exercise">
+                    <div class="exercise-title">
+                      <i class="fas fa-flask"></i> Try this
+                    </div>
+                    <p>
+                      List three tasks around you that AI could help with.
+                      Classify each as recognition, prediction, or decision.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="6">
+              <div class="lesson-header">
+                <div class="lesson-number">06</div>
+                <div class="lesson-content">
+                  <h4>Ethics & Responsible AI</h4>
+                  <p>Building AI systems that benefit everyone</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section class="content-section" id="resources">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-book-open"></i>
+              </div>
+              <h3>Further Resources</h3>
+            </div>
+            <div class="resources-grid">
+              <div class="resource-card">
+                <div class="resource-icon">
+                  <i class="fas fa-book"></i>
+                </div>
+                <h4>AI For Everyone</h4>
+                <p>Andrew Ng's comprehensive overview course</p>
+                <a href="#" class="resource-link"
+                  >Learn More <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+              <div class="resource-card">
+                <div class="resource-icon">
+                  <i class="fas fa-code"></i>
+                </div>
+                <h4>scikit-learn</h4>
+                <p>Beginner‑friendly machine learning API</p>
+                <a href="#" class="resource-link"
+                  >Learn More <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <aside class="enroll toc">
+        <div class="toc-downloads">
+          <h4>Course Materials</h4>
+          <div class="download-item">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Summary notes (PDF)</span>
+            <button class="download-btn">Download</button>
+          </div>
+          <div class="download-item">
+            <i class="fa-solid fa-file-code"></i>
+            <span>Sample code (JS)</span>
+            <button class="download-btn">Download</button>
+          </div>
+        </div>
+
+        <div class="toc-info">
+          <div class="info-item">
+            <i class="fa-regular fa-clock"></i>
+            <span>Estimated time: ~5 hours</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+    <!-- Course body section ends -->
+
+    <!-- Footer section starts from here -->
+    <footer>
+      <p>
+        &copy;版权所有
+        <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
+      </p>
+    </footer>
+    <!-- Footer section ends from here -->
+
+    <script>
+      // Show menu links on burger click
+      $("#menu-btn").click(function () {
+        $("nav .navigation ul").addClass("active");
+      });
+
+      // Hide navbar on click function
+      $("#menu-close").click(function () {
+        $("nav .navigation ul").removeClass("active");
+      });
+
+      // Lesson interaction
+      $(".lesson-item").click(function () {
+        const lessonNum = $(this).data("lesson");
+        if (lessonNum === 1) {
+          $(this).toggleClass("expanded");
+        } else {
+          // Show locked message for other lessons
+          alert("Complete previous lessons to unlock this content!");
+        }
+      });
+    </script>
+  </body>
+</html>
