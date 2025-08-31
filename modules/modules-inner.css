@@ -11,7 +11,12 @@
   --lighter: #cbd5e1;
   --white: #fff;
   --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-  --gradient-text: linear-gradient(to bottom right, var(--primary), var(--secondary), var(--accent));
+  --gradient-text: linear-gradient(
+    to bottom right,
+    var(--primary),
+    var(--secondary),
+    var(--accent)
+  );
   --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   --shadow-light: 0 10px 25px rgba(0, 0, 0, 0.2);
   --border: 1px solid rgba(140, 82, 255, 0.15);
@@ -69,7 +74,9 @@ body {
   margin-bottom: 24px;
 }
 
-.hero-badge i { font-size: 1rem; }
+.hero-badge i {
+  font-size: 1rem;
+}
 
 #about-home h1 {
   font-size: 4rem;
@@ -142,13 +149,30 @@ body {
   font-size: 0.9rem;
 }
 
-.card-1 { top: 20%; left: 10%; animation-delay: 0s; }
-.card-2 { top: 50%; right: 20%; animation-delay: 2s; }
-.card-3 { bottom: 20%; left: 30%; animation-delay: 4s; }
+.card-1 {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+.card-2 {
+  top: 50%;
+  right: 20%;
+  animation-delay: 2s;
+}
+.card-3 {
+  bottom: 20%;
+  left: 30%;
+  animation-delay: 4s;
+}
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 /* Course Inner Layout */
@@ -162,10 +186,8 @@ body {
   min-height: 100vh;
 }
 
-/* Make main content flexible and prevent overflow issues */
 #course-inner .overview {
-  flex: 1 1 0;
-  min-width: 0;
+  width: 70%;
 }
 
 /* Course Panel */
@@ -203,8 +225,12 @@ body {
   transition: var(--transition);
 }
 
-.course-header:hover .course-overlay { opacity: 1; }
-.course-header:hover .course-img { transform: scale(1.02); }
+.course-header:hover .course-overlay {
+  opacity: 1;
+}
+.course-header:hover .course-img {
+  transform: scale(1.02);
+}
 
 .play-button {
   width: 80px;
@@ -220,7 +246,9 @@ body {
   transition: var(--transition);
 }
 
-.play-button:hover { transform: scale(1.1); }
+.play-button:hover {
+  transform: scale(1.1);
+}
 
 /* Course Info */
 .course-meta {
@@ -239,7 +267,9 @@ body {
   font-weight: 500;
 }
 
-.meta-item i { color: var(--primary); }
+.meta-item i {
+  color: var(--primary);
+}
 
 /* Callouts */
 .callout {
@@ -380,6 +410,34 @@ body {
   transform: translateY(-1px);
 }
 
+/* Prerequisite link (pill style) */
+.prereq-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(140, 82, 255, 0.15);
+  border: 1px solid rgba(140, 82, 255, 0.3);
+  color: #c4b5fd;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.prereq-link i {
+  color: var(--primary);
+  font-size: 0.95rem;
+}
+
+.prereq-link:hover {
+  background: rgba(140, 82, 255, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(140, 82, 255, 0.25);
+  color: var(--white);
+}
+
 /* Lessons Container */
 .lessons-container {
   background: rgba(51, 65, 85, 0.95);
@@ -459,14 +517,18 @@ body {
   font-size: 1.2rem;
 }
 
-.lesson-status .fa-lock { color: #94a3b8; }
+.lesson-status .fa-lock {
+  color: #94a3b8;
+}
 
 .lesson-details {
   padding: 0 24px 24px 24px;
   display: none;
 }
 
-.lesson-item.expanded .lesson-details { display: block; }
+.lesson-item.expanded .lesson-details {
+  display: block;
+}
 
 .lesson-meta {
   display: flex;
@@ -484,7 +546,9 @@ body {
   font-weight: 500;
 }
 
-.lesson-meta i { color: var(--primary); }
+.lesson-meta i {
+  color: var(--primary);
+}
 
 .lesson-preview {
   background: rgba(71, 85, 105, 0.5);
@@ -511,7 +575,9 @@ body {
   gap: 8px;
 }
 
-.exercise-title i { color: var(--primary); }
+.exercise-title i {
+  color: var(--primary);
+}
 
 /* Resources Grid */
 .resources-grid {
@@ -581,7 +647,6 @@ body {
 /* Sidebar TOC */
 .enroll.toc {
   width: 320px;
-  flex: 0 0 320px; /* fixed sidebar width, no shrink */
   padding: 0;
   border-radius: var(--radius);
   background: rgba(51, 65, 85, 0.95);
@@ -591,30 +656,19 @@ body {
   top: 100px;
 }
 
-/* Responsive: stack columns on smaller screens */
-@media (max-width: 1100px) {
-  #course-inner {
-    flex-direction: column;
-  }
-  #course-inner .overview {
-    width: 100%;
-    flex: 1 1 auto;
-  }
-  .enroll.toc {
-    position: static;
-    width: 100%;
-    flex: 0 0 auto;
-  }
-}
-
-.toc-nav, .toc-downloads, .toc-info {
+.toc-nav,
+.toc-downloads,
+.toc-info {
   padding: 20px 24px;
   border-bottom: 1px solid rgba(140, 82, 255, 0.1);
 }
 
-.toc-info { border-bottom: none; }
+.toc-info {
+  border-bottom: none;
+}
 
-.toc-nav h4, .toc-downloads h4 {
+.toc-nav h4,
+.toc-downloads h4 {
   color: var(--light);
   font-size: 1.1rem;
   font-weight: 600;
@@ -627,7 +681,9 @@ body {
   margin: 0;
 }
 
-.toc-list li { margin-bottom: 12px; }
+.toc-list li {
+  margin-bottom: 12px;
+}
 
 .toc-list a {
   color: var(--lighter);
@@ -746,7 +802,7 @@ nav {
 }
 
 .navigation ul li a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -8px;
   left: 0;

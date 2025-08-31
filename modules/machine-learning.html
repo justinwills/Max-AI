@@ -5,21 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Machine Learning - Course</title>
 
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
-
     <link rel="stylesheet" href="modules-inner.css" />
-
 
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -28,7 +24,6 @@
     ></script>
   </head>
   <body>
-
     <nav>
       <img src="../img/logo.svg" class="logo" alt="MaxAI" />
 
@@ -46,13 +41,11 @@
       </div>
     </nav>
 
-
-
     <section id="about-home">
       <div class="hero-content">
         <div class="hero-badge">
           <i class="fas fa-robot"></i>
-          <span>Beginner Friendly</span>
+          <span>Intermediate</span>
         </div>
         <h1>Machine Learning</h1>
         <p class="hero-subtitle">
@@ -61,11 +54,11 @@
         <div class="hero-stats">
           <div class="stat-item">
             <i class="fas fa-clock"></i>
-            <span>4-6 hours</span>
+            <span>6-8 hours</span>
           </div>
           <div class="stat-item">
             <i class="fas fa-signal"></i>
-            <span>Beginner</span>
+            <span>Intermediate</span>
           </div>
           <div class="stat-item">
             <i class="fas fa-users"></i>
@@ -89,12 +82,15 @@
       </div>
     </section>
 
-
     <section id="course-inner">
       <div class="overview">
         <div class="course-panel">
           <div class="course-header">
-            <img class="course-img" src="../img/c1.jpg" alt="Machine Learning" />
+            <img
+              class="course-img"
+              src="../img/machine-learning.png"
+              alt="Machine Learning"
+            />
             <div class="course-overlay">
               <div class="play-button">
                 <i class="fas fa-play"></i>
@@ -139,23 +135,23 @@
             <div class="objectives-grid">
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Explain the difference between AI, ML, and DL</span>
+                <span>Differentiate supervised, unsupervised, and reinforcement learning</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Describe supervised vs. unsupervised learning</span>
+                <span>Follow a data pipeline: dataset → preprocessing → training → prediction</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Understand basic data terms and workflow</span>
+                <span>Build simple regression/classification demos in JavaScript</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Recognize common evaluation metrics</span>
+                <span>Identify and visualize overfitting vs. underfitting</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Identify ethical considerations</span>
+                <span>Evaluate models with accuracy and MAE/MSE</span>
               </div>
             </div>
           </section>
@@ -168,13 +164,15 @@
               <h3>Prerequisites</h3>
             </div>
             <p>
-              Curiosity and basic computer literacy. Optional: light Python or
-              JavaScript helps, but is not required.
+              Recommended: complete the previous module
+              <a class="prereq-link" href="./ai-foundation.html"><i class="fas fa-book-open"></i> AI Foundations</a>
+              to ensure you're comfortable with basic AI concepts and terminology.
+              Basic computer literacy is enough; light JavaScript helps for the demos.
             </p>
             <div class="tags">
-              <span class="tag">No advanced math</span>
-              <span class="tag">No coding required</span>
-              <span class="tag">Beginner friendly</span>
+              <span class="tag">Completed AI Foundations</span>
+              <span class="tag">Basic algebra</span>
+              <span class="tag">Optional: JavaScript basics</span>
             </div>
           </section>
 
@@ -185,9 +183,13 @@
               <div class="lesson-header">
                 <div class="lesson-number">01</div>
                 <div class="lesson-content">
-                  <h4>Supervised Learning, Unsupervised Learning, and Reinforcement Learning</h4>
+                  <h4>
+                    Supervised Learning, Unsupervised Learning, and
+                    Reinforcement Learning
+                  </h4>
                   <p>
-                    What are Supervised Learning, Unsupervised Learning, and Reinforcement Learning?
+                    What are Supervised Learning, Unsupervised Learning, and
+                    Reinforcement Learning?
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -201,16 +203,22 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    In supervised learning, the model is trained using a set of labeled data, meaning that the inputs and corresponding
-                    outputs are already determined. 
-                    The model learns the mapping from input to output and applies it to new data.
-                    	Example: Regression models used to predict house prices, or classifying images of dogs and cats based on labeled data.
-                    In unsupervised learning, there are no pre-labeled outputs. The task of the model is to find patterns or structures in the data. 
-                    This is commonly used for data clustering or dimensionality reduction.
-                    Example: Clustering algorithms like K-means are used for grouping data.
-                    Reinforcement learning models learn how to make decisions through interaction with the environment, 
-                    with the goal of maximizing cumulative rewards through rewards and penalties.
-                    Example: Autonomous vehicles learning in traffic environments, or AlphaGo's application in playing Go.
+                    In supervised learning, the model is trained using a set of
+                    labeled data, meaning that the inputs and corresponding
+                    outputs are already determined. The model learns the mapping
+                    from input to output and applies it to new data. Example:
+                    Regression models used to predict house prices, or
+                    classifying images of dogs and cats based on labeled data.
+                    In unsupervised learning, there are no pre-labeled outputs.
+                    The task of the model is to find patterns or structures in
+                    the data. This is commonly used for data clustering or
+                    dimensionality reduction. Example: Clustering algorithms
+                    like K-means are used for grouping data. Reinforcement
+                    learning models learn how to make decisions through
+                    interaction with the environment, with the goal of
+                    maximizing cumulative rewards through rewards and penalties.
+                    Example: Autonomous vehicles learning in traffic
+                    environments, or AlphaGo's application in playing Go.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> Agent, Environment, Rule‑based
@@ -247,10 +255,18 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Data is the foundation of machine learning. Raw data usually comes from multiple sources, which can include text, images, or time series data.
-                    Preprocessing involves cleaning the data (removing missing values and outliers), as well as normalizing or standardizing the data to make it suitable for training machine learning models.
-                    During the training phase, the model learns the relationship between the input data's features and labels, updating its weights and parameters to optimize predictions.
-                    Once the model is trained, it can be used to make predictions on new data. The model is applied to a test dataset, generating the corresponding outputs.
+                    Data is the foundation of machine learning. Raw data usually
+                    comes from multiple sources, which can include text, images,
+                    or time series data. Preprocessing involves cleaning the
+                    data (removing missing values and outliers), as well as
+                    normalizing or standardizing the data to make it suitable
+                    for training machine learning models. During the training
+                    phase, the model learns the relationship between the input
+                    data's features and labels, updating its weights and
+                    parameters to optimize predictions. Once the model is
+                    trained, it can be used to make predictions on new data. The
+                    model is applied to a test dataset, generating the
+                    corresponding outputs.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> Agent, Environment, Rule‑based
@@ -273,10 +289,11 @@
               <div class="lesson-header">
                 <div class="lesson-number">03</div>
                 <div class="lesson-content">
-                  <h4>Small Demonstration: Linear Regression or Classification Demo</h4>
-                  <p>
-                    (Using JS)
-                  </p>
+                  <h4>
+                    Small Demonstration: Linear Regression or Classification
+                    Demo
+                  </h4>
+                  <p>(Using JS)</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -289,12 +306,25 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Firstly, is Linear Regression. This demonstration shows how a linear regression model fits the data and predicts future values.
-                    Using JavaScript, a simple linear regression demonstration shows how to understand the regression process by graphing data points and the fitted line.
-                    The user inputs data points, and the algorithm draws the linear regression line to predict the results.
-                    <img src="Linear Regression.jpg" alt="Linear Regression" class="profile-image" width="500" height="300">
-                    Secondly, is Classification Demo. This demonstration shows how to classify data points using a machine learning model.
-                    Simple classification algorithms (e.g., k-NN or decision trees) are implemented in JavaScript, displaying the classification results on a data point distribution graph.
+                    Firstly, is Linear Regression. This demonstration shows how
+                    a linear regression model fits the data and predicts future
+                    values. Using JavaScript, a simple linear regression
+                    demonstration shows how to understand the regression process
+                    by graphing data points and the fitted line. The user inputs
+                    data points, and the algorithm draws the linear regression
+                    line to predict the results.
+                    <img
+                      src="Linear Regression.jpg"
+                      alt="Linear Regression"
+                      class="profile-image"
+                      width="500"
+                      height="300"
+                    />
+                    Secondly, is Classification Demo. This demonstration shows
+                    how to classify data points using a machine learning model.
+                    Simple classification algorithms (e.g., k-NN or decision
+                    trees) are implemented in JavaScript, displaying the
+                    classification results on a data point distribution graph.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> Agent, Environment, Rule‑based
@@ -319,7 +349,8 @@
                 <div class="lesson-content">
                   <h4>Overfitting and Underfitting</h4>
                   <p>
-                    What are the Visual Explanation of Overfitting and Underfitting?
+                    What are the Visual Explanation of Overfitting and
+                    Underfitting?
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -333,10 +364,17 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Overfitting occurs when a model performs well on training data but poorly on new data. The model becomes too complex, memorizing the noise in the training data rather than generalizing the patterns.
-                    Visual Example: Show the difference between training data points and the model's predictions. Overfitted models have curves that are too bent and cannot adapt to new data.
-                    Underfitting happens when a model is too simple and cannot capture the patterns in the data, leading to poor performance on both training and test datasets.
-                    Visual Example: Show a simple linear model that cannot fit the data well, leading to poor predictions.
+                    Overfitting occurs when a model performs well on training
+                    data but poorly on new data. The model becomes too complex,
+                    memorizing the noise in the training data rather than
+                    generalizing the patterns. Visual Example: Show the
+                    difference between training data points and the model's
+                    predictions. Overfitted models have curves that are too bent
+                    and cannot adapt to new data. Underfitting happens when a
+                    model is too simple and cannot capture the patterns in the
+                    data, leading to poor performance on both training and test
+                    datasets. Visual Example: Show a simple linear model that
+                    cannot fit the data well, leading to poor predictions.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> Agent, Environment, Rule‑based
@@ -355,7 +393,126 @@
               </div>
             </div>
 
-          
+            <div class="lesson-item" data-lesson="1">
+              <div class="lesson-header">
+                <div class="lesson-number">05</div>
+                <div class="lesson-content">
+                  <h4>Introduction to Basic Logic and Search Algorithms</h4>
+                  <p>Basic Logic in AI and Search Algorithms</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Logic is an important tool for AI to make decisions and
+                    solve problems. AI uses logic to help machines think in a
+                    structured way and perform reasoning. Example: AI uses
+                    logical algorithms to solve puzzles like Sudoku or chess
+                    problems. In AI, search algorithms are used to find
+                    solutions to complex problems. Machines search for the best
+                    solution through a series of steps or decisions. Examples:
+                    Depth-First Search (DFS): Explores one branch to the end
+                    before returning to explore other branches, and
+                    Breadth-First Search (BFS): Explores all nodes at one level
+                    before moving on to the next level.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
+                    systems, Data‑driven systems
+                  </div>
+                  <div class="exercise">
+                    <div class="exercise-title">
+                      <i class="fas fa-flask"></i> Try this
+                    </div>
+                    <p>
+                      List three tasks around you that AI could help with.
+                      Classify each as recognition, prediction, or decision.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="1">
+              <div class="lesson-header">
+                <div class="lesson-number">06</div>
+                <div class="lesson-content">
+                  <h4>Using JavaScript for Small Demonstrations</h4>
+                  <p>Tic-Tac-Toe AI and Pathfinding Visualization</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Firstly, create a Tic-Tac-Toe AI using simple search
+                    algorithms to play against human players. Demonstrate how a
+                    machine decides the best next move based on the game state.
+                    An interactive demonstration is provided on a website where
+                    users can play against the AI. Secondly, visualize
+                    pathfinding using the A* algorithm to find the best path
+                    from start to end in a grid. Show how search algorithms can
+                    be used to solve practical problems, such as robot
+                    navigation. Users can see how the search algorithm finds the
+                    optimal path in the grid.
+                  </p>
+                  <img
+                    src="Tic-Tac-Toe AI.jpg"
+                    alt="Tic-Tac-Toe AI"
+                    class="profile-image"
+                    width="500"
+                    height="300"
+                  />
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
+                    systems, Data‑driven systems
+                  </div>
+                  <div class="exercise">
+                    <div class="exercise-title">
+                      <i class="fas fa-flask"></i> Try this
+                    </div>
+                    <p>
+                      List three tasks around you that AI could help with.
+                      Classify each as recognition, prediction, or decision.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="6">
+              <div class="lesson-header">
+                <div class="lesson-number">07</div>
+                <div class="lesson-content">
+                  <h4>Module Summary</h4>
+                  <p>
+                    In this module, we learned the basics of AI, from the Turing
+                    Test to the history of AI development, and the different
+                    categories of AI. We also covered basic logic and search
+                    algorithms, which are the foundation of modern AI
+                    development.
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <section class="content-section" id="resources">
             <div class="section-header">
               <div class="section-icon">
@@ -413,15 +570,12 @@
       </aside>
     </section>
 
-
-
     <footer>
       <p>
         &copy;版权所有
         <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
       </p>
     </footer>
-
 
     <script>
       // Show menu links on burger click
