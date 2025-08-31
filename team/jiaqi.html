@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Jiaqi - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .back-button-container {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: #667eea;
+        }
+        
+        .back-icon {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        /* Profile card */
+        .profile-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 40px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 25px;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            display: block;
+            aspect-ratio: 1 / 1;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title {
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-weight: 500;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            margin: 30px 0;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .bio p {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .skills {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .skills h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+        
+        .skill-tag:hover {
+            transform: translateY(-2px);
+        }
+        
+        .social-links {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .social-links h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .social-grid {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .social-link:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .back-button-container {
+                margin-bottom: 15px;
+            }
+            
+            .back-button {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .profile-card {
+                padding: 30px 20px;
+                margin-top: 10px;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .title {
+                font-size: 1rem;
+            }
+            
+            .bio p {
+                font-size: 1rem;
+            }
+            
+            .skill-tags {
+                justify-content: center;
+            }
+            
+            .social-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .profile-card {
+                padding: 20px 15px;
+            }
+            
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+            <div class="container">
+            <div class="back-button-container">
+                <a href="../about.html" class="back-button">
+                    <span class="back-icon">←</span>
+                    Back to Team
+                </a>
+            </div>
+            <div class="profile-card">
+            <img src="../img/jiaqi.png" alt="Ma Jiaqi profile photo" class="profile-img" width="200" height="200" loading="lazy" decoding="async">
+            <h1>Ma Jiaqi</h1>
+            <p class="title">Tester • Video Editor • Support Specialist</p>
+
+            <div class="bio">
+                <p>Hello! I'm Ma Jiaqi, originally from Zambia, Africa. I'm currently an international student in China, pursuing my Bachelor's degree in Computer Technology and Science. In this organization, I serve as a Tester, Video Editor, and Support Specialist.</p>
+                <p>When I'm not studying or attending classes, I enjoy taking walks, reading, creative writing, and recently developed a passion for photography. I'm eager to enhance my programming skills, understand how different technologies work, and learn from others.</p>
+            </div>
+            
+            <div class="skills">
+                <h3>Skills & Expertise</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Software Testing</span>
+                    <span class="skill-tag">Video Editing</span>
+                    <span class="skill-tag">Customer Support</span>
+                    <span class="skill-tag">Computer Science</span>
+                    <span class="skill-tag">Photography</span>
+                    <span class="skill-tag">Creative Writing</span>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <h3>Connect With Me</h3>
+                <div class="social-grid">
+                    <a href="#" class="social-link">LinkedIn</a>
+                    <a href="#" class="social-link">GitHub</a>
+                    <a href="#" class="social-link">Portfolio</a>
+                    <a href="#" class="social-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

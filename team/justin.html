@@ -1,177 +1,748 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Justin - Front-end Specialist | MaxAI</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justin 页面</title>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <!-- font Awesome CDN link -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-    />
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8fafc;
+}
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="member.css" />
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-    <!-- JQuery CDN link -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <!-- Navigation start -->
-    <nav>
-      <div class="nav-container">
-        <img src="../img/logo.svg" class="logo" alt="MaxAI Logo" />
-        
-        <div class="nav-links">
-          <a href="../index.html">Home</a>
-          <a href="../about.html">About Us</a>
-          <a href="../modules.html">Modules</a>
-          <a href="#contact">Contact</a>
+.header {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.nav-brand {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #1e293b;
+    text-decoration: none;
+    letter-spacing: -0.025em;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-brand::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-brand:hover::before {
+    width: 100%;
+}
+
+.nav-brand:hover {
+    color: #3b82f6;
+    transform: translateY(-1px);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-menu li {
+    list-style: none;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #475569;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    position: relative;
+    letter-spacing: 0.025em;
+    border: 2px solid transparent;
+}
+
+.nav-menu a:hover {
+    color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.08);
+    border-color: rgba(59, 130, 246, 0.2);
+    transform: translateY(-1px);
+}
+
+.nav-menu a.active {
+    color: #3b82f6;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    border-color: rgba(59, 130, 246, 0.3);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    border-radius: 1px;
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+    width: 60%;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 120px 0 80px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #fff, #e2e8f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Section Styles */
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: #1e293b;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 2px;
+}
+
+.about {
+    background: white;
+}
+
+.about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.profile-section {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.profile-image {
+    text-align: center;
+}
+
+.profile-photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #475569;
+    text-align: justify;
+}
+
+
+.skills {
+    background: #f8fafc;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.skill-category {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.skill-category h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+    text-align: center;
+}
+
+.skill-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #f1f5f9;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.skill-item:hover {
+    background: #e2e8f0;
+}
+
+.skill-item i {
+    color: #3b82f6;
+    font-size: 1.2rem;
+}
+
+.skill-item span {
+    font-weight: 500;
+    color: #475569;
+}
+
+
+.hobbies {
+    background: white;
+}
+
+.hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.hobby-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.hobby-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.hobby-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.hobby-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.hobby-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.hobby-card p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+
+.footer {
+    background: #1e293b;
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.footer p {
+    opacity: 0.8;
+}
+
+
+
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Animation for elements on scroll */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skill-category,
+.hobby-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.skill-category:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.hobby-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.hobby-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.hobby-card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+
+
+
+
+.nav-menu a {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-menu a:hover::before {
+    left: 100%;
+}
+
+
+.nav-menu a.active {
+    position: relative;
+}
+
+.nav-menu a.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    border-radius: 12px;
+    z-index: -1;
+}
+
+
+.profile-image {
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+}
+
+
+.nav-brand:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+
+.header {
+    transition: all 0.3s ease;
+}
+
+.nav-menu a {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+
+.nav-menu a.active::after {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">Introduction Page</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Welcome to Introduction Page</h1>
+                    <p class="hero-subtitle">Passionate about creating and learning</p>
+                    <a href="../about.html" class="cta-button">Back to Team</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="profile-section">
+                        <div class="profile-image">
+                            <img src="../img/justin.png" alt="My Profile Photo" class="profile-photo">
+                        </div>
+                        <div class="about-text">
+                            <p>
+                              I am Justin William Suseno (薛学刚), Student ID: 1820241085, a sophomore Artificial Intelligence student at the Beijing Institute of Technology. With a strong academic background in mathematics and programming, I’ve developed a deep passion for technology and education. Throughout my studies, I have focused on enhancing my problem-solving skills and refining my knowledge, achieving particularly strong results in AI-related subjects and mathematics.
+                            </p>
+                            <p>
+                              I’ve gained hands-on experience through an internship at Bangsus Food, where I helped create the website for Steak Now Restaurant. My involvement in international programs like the Outstanding Global High School Student E-Summer School at Tsinghua University has broadened my perspective and allowed me to connect with peers globally. These experiences have taught me the importance of teamwork and adaptability, skills I strive to continually develop.
+                            </p>
+                            <p>
+                              Fluent in English, Chinese, and Indonesian, I am a clear and patient communicator, always eager to share knowledge and collaborate with others. Recently, I was recruited to the BIT Indonesian Student Community, a role I am excited to take on as I contribute to the growth and development of the community. I thrive in team environments and am always seeking opportunities for self-improvement. I enjoy taking on challenges, whether academic or professional, and am committed to making a meaningful impact at BIT and beyond.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Technical Skills</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <i class="fas fa-code"></i>
+                                <span>Programming</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-database"></i>
+                                <span>Database Management</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Web Development</span>
+                            </div>
+                            <div class="skill-item">
+                              <i class="fab fa-microsoft"></i>
+                                <span>Microsoft Office</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Soft Skills</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <i class="fas fa-users"></i>
+                                <span>Team Collaboration</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-comments"></i>
+                                <span>Communication</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Problem Solving</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Time Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hobbies" class="hobbies">
+            <div class="container">
+                <h2 class="section-title">Hobbies & Interests</h2>
+                <div class="hobbies-grid">
+                  <div class="hobby-card">
+                      <div class="hobby-icon">
+                          <i class="fas fa-code"></i>
+                      </div>
+                      <h3>Programming</h3>
+                      <p>Building projects and solving problems through code</p>
+                  </div>
+                  <div class="hobby-card">
+                      <div class="hobby-icon">
+                          <i class="fas fa-laptop-code"></i>
+                      </div>
+                      <h3>AI & Technology</h3>
+                      <p>Exploring artificial intelligence and cutting-edge technology</p>
+                  </div>
+                  <div class="hobby-card">
+                      <div class="hobby-icon">
+                          <i class="fas fa-globe"></i>
+                      </div>
+                      <h3>Global Learning</h3>
+                      <p>Connecting with international peers and sharing knowledge</p>
+                  </div>
+              </div>              
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Justin William Suseno 薛学刚</p>
         </div>
-
-        <div class="nav-actions">
-          <a href="../login.html" class="btn-secondary">Login</a>
-          <a href="../register.html" class="btn-primary">Get Started</a>
-        </div>
-
-        <div class="mobile-menu-btn">
-          <i class="fas fa-bars"></i>
-        </div>
-      </div>
-    </nav>
-    <!-- Navigation ends -->
-
-    <!-- Member Hero Section -->
-    <section id="member-hero">
-      <div class="container">
-        <div class="member-hero-content">
-          <div class="member-hero-image">
-            <img src="../img/justin.jpg" alt="Justin" />
-          </div>
-          <div class="member-hero-text">
-            <h1>Justin</h1>
-            <p class="member-title">Front-end Specialist</p>
-            <p class="member-bio">
-              Front-end specialist with a passion for design and user experience. 
-              Always pixel-perfect and focused on creating intuitive, beautiful interfaces.
-            </p>
-            <div class="member-social">
-              <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-              <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-              <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Member Details Section -->
-    <section id="member-details">
-      <div class="container">
-        <div class="details-grid">
-          <div class="details-card">
-            <h3><i class="fas fa-code"></i> Skills & Expertise</h3>
-            <div class="skills-list">
-              <span class="skill-tag">React</span>
-              <span class="skill-tag">Vue.js</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">CSS3</span>
-              <span class="skill-tag">HTML5</span>
-              <span class="skill-tag">UI/UX Design</span>
-              <span class="skill-tag">Figma</span>
-              <span class="skill-tag">Responsive Design</span>
-            </div>
-          </div>
-
-          <div class="details-card">
-            <h3><i class="fas fa-graduation-cap"></i> Education</h3>
-            <div class="education-item">
-              <h4>Bachelor's in Web Design</h4>
-              <p>Specialization in User Experience</p>
-              <span class="year">2018-2022</span>
-            </div>
-            <div class="education-item">
-              <h4>UI/UX Certification</h4>
-              <p>Google UX Design Course</p>
-              <span class="year">2021</span>
-            </div>
-          </div>
-
-          <div class="details-card">
-            <h3><i class="fas fa-briefcase"></i> Experience</h3>
-            <div class="experience-item">
-              <h4>Front-end Developer</h4>
-              <p>MaxAI Platform</p>
-              <span class="year">2022-Present</span>
-            </div>
-            <div class="experience-item">
-              <h4>UI/UX Designer</h4>
-              <p>Creative Design Studio</p>
-              <span class="year">2020-2022</span>
-            </div>
-          </div>
-
-          <div class="details-card">
-            <h3><i class="fas fa-project-diagram"></i> Current Projects</h3>
-            <div class="project-item">
-              <h4>MaxAI User Interface</h4>
-              <p>Modern, responsive design system for the learning platform</p>
-            </div>
-            <div class="project-item">
-              <h4>Design System Library</h4>
-              <p>Comprehensive component library for consistent UI development</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Back to Team Button -->
-    <section id="back-to-team">
-      <div class="container">
-        <a href="../about.html" class="btn-primary">
-          <i class="fas fa-arrow-left"></i>
-          Back to Team
-        </a>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div class="footer-links">
-          <a href="../index.html">Home</a>
-          <a href="../about.html">About</a>
-          <a href="../modules.html">Modules</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2024 MaxAI. All rights reserved.</p>
-        </div>
-      </div>
     </footer>
 
-    <script>
-      // Mobile menu toggle
-      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-        document.querySelector('.nav-links').classList.toggle('active');
-      });
-
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
+    <script>document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+      
+      navLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+              e.preventDefault();
+              
+              const targetId = this.getAttribute('href');
+              const targetSection = document.querySelector(targetId);
+              
+              if (targetSection) {
+                  const headerHeight = document.querySelector('.header').offsetHeight;
+                  const targetPosition = targetSection.offsetTop - headerHeight;
+                  
+                  window.scrollTo({
+                      top: targetPosition,
+                      behavior: 'smooth'
+                  });
+              }
           });
-        });
       });
-    </script>
-  </body>
+      
+      window.addEventListener('scroll', function() {
+          const sections = document.querySelectorAll('section[id]');
+          const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+          
+          let current = '';
+          
+          sections.forEach(section => {
+              const sectionTop = section.offsetTop;
+              const sectionHeight = section.clientHeight;
+              const headerHeight = document.querySelector('.header').offsetHeight;
+              
+              if (window.pageYOffset >= (sectionTop - headerHeight - 200)) {
+                  current = section.getAttribute('id');
+              }
+          });
+          
+          navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${current}`) {
+                  link.classList.add('active');
+              }
+          });
+      });
+      
+      const observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0)';
+              }
+          });
+      }, observerOptions);
+      
+      const animatedElements = document.querySelectorAll('.skill-category, .hobby-card');
+      animatedElements.forEach(el => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(30px)';
+          el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          observer.observe(el);
+      });
+      
+      const heroTitle = document.querySelector('.hero-title');
+      if (heroTitle) {
+          const text = heroTitle.textContent;
+          heroTitle.textContent = '';
+          
+          let i = 0;
+          const typeWriter = () => {
+              if (i < text.length) {
+                  heroTitle.textContent += text.charAt(i);
+                  i++;
+                  setTimeout(typeWriter, 100);
+              }
+          };
+          
+          setTimeout(typeWriter, 500);
+      }
+      
+      const skillItems = document.querySelectorAll('.skill-item');
+      skillItems.forEach(item => {
+          item.addEventListener('mouseenter', function() {
+              this.style.transform = 'scale(1.05)';
+          });
+          
+          item.addEventListener('mouseleave', function() {
+              this.style.transform = 'scale(1)';
+          });
+      });
+      
+  
+  });
+  
+  const style = document.createElement('style');
+  style.textContent = `
+      .nav-menu a.active {
+          color: #3b82f6;
+          font-weight: 700;
+      }
+  `;
+  document.head.appendChild(style);  
+  </script>
+</body>
 </html>

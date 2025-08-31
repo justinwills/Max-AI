@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MaxAI - Quiz</title>
+
+    <link rel="stylesheet" href="flashcard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+
+    <nav>
+      <div class="nav-container">
+        <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="modules.html" class="nav-link">Modules</a>
+          <a href="flashcard.html" class="nav-link">Flashcard</a>
+          <a href="quiz.html" class="nav-link active">Quiz</a>
+          <a href="about.html" class="nav-link">About</a>
+        </div>
+        
+        <div class="nav-actions">
+          <a href="index.html" class="btn-primary">Mainpage</a>
+        </div>
+        
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+
+
+    <section id="tba-section" class="tba-content">
+      <div class="container">
+        <div class="tba-text">
+          <h1>To Be Announced</h1>
+        </div>
+      </div>
+    </section>
+
+
+    <script>
+      // Mobile menu toggle
+      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
+      });
+    </script>
+  </body>
+</html>

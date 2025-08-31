@@ -38,6 +38,19 @@
   flex-wrap: nowrap;
 }
 
+/* Team member link styling */
+.team-member-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.team-member-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 .team-member {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(140, 82, 255, 0.1);
@@ -48,12 +61,13 @@
   opacity: 1;
   transform: translateY(0);
   width: 280px;
-  height: 500px;
+  height: 580px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
 }
 
 .team-member.animate-in {
