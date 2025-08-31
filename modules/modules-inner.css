@@ -162,7 +162,11 @@ body {
   min-height: 100vh;
 }
 
-#course-inner .overview { width: 70%; }
+/* Make main content flexible and prevent overflow issues */
+#course-inner .overview {
+  flex: 1 1 0;
+  min-width: 0;
+}
 
 /* Course Panel */
 .course-panel {
@@ -577,6 +581,7 @@ body {
 /* Sidebar TOC */
 .enroll.toc {
   width: 320px;
+  flex: 0 0 320px; /* fixed sidebar width, no shrink */
   padding: 0;
   border-radius: var(--radius);
   background: rgba(51, 65, 85, 0.95);
@@ -584,6 +589,22 @@ body {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 100px;
+}
+
+/* Responsive: stack columns on smaller screens */
+@media (max-width: 1100px) {
+  #course-inner {
+    flex-direction: column;
+  }
+  #course-inner .overview {
+    width: 100%;
+    flex: 1 1 auto;
+  }
+  .enroll.toc {
+    position: static;
+    width: 100%;
+    flex: 0 0 auto;
+  }
 }
 
 .toc-nav, .toc-downloads, .toc-info {
