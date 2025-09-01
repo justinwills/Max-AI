@@ -17,11 +17,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
-
     <nav>
       <div class="nav-container">
         <img src="img/logo.svg" class="logo" alt="MaxAI" />
-        
+
         <div class="nav-links">
           <a href="index.html" class="nav-link active">Home</a>
           <a href="modules.html" class="nav-link">Modules</a>
@@ -29,18 +28,16 @@
           <a href="quiz.html" class="nav-link">Quiz</a>
           <a href="about.html" class="nav-link">About</a>
         </div>
-        
+
         <div class="nav-actions">
           <a href="index.html" class="btn-primary">Mainpage</a>
         </div>
-        
+
         <div class="mobile-menu-btn">
           <i class="fas fa-bars"></i>
         </div>
       </div>
     </nav>
-
-
 
     <section id="user-details" class="user-profile">
       <div class="container">
@@ -134,43 +131,49 @@
       </div>
     </section>
 
-
-
     <footer>
       <div class="footer-bottom">
-        <p>&copy; 2025 MaxAI | <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a></p>
+        <p>
+          &copy; 2025 MaxAI |
+          <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
+        </p>
       </div>
     </footer>
 
-
     <script>
       // Mobile menu toggle
-      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-        document.querySelector('.nav-links').classList.toggle('active');
-      });
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-links").classList.toggle("active");
+        });
 
       // Profile image upload functionality
-      document.getElementById('file-input').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            document.getElementById('profile-pic').src = e.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      });
+      document
+        .getElementById("file-input")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              document.getElementById("profile-pic").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
 
       // Form submission
-      document.querySelector('.user-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Add your form submission logic here
-        Swal.fire({
-          icon: 'success',
-          title: 'Saved',
-          text: 'Changes saved successfully!'
+      document
+        .querySelector(".user-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          // Add your form submission logic here
+          Swal.fire({
+            icon: "success",
+            title: "Saved",
+            text: "Changes saved successfully!",
+          });
         });
-      });
     </script>
   </body>
 </html>

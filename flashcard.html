@@ -12,45 +12,232 @@
     />
   </head>
   <body>
-
     <nav>
       <div class="nav-container">
         <img src="img/logo.svg" class="logo" alt="MaxAI" />
-        
+
         <div class="nav-links">
-          <a href="index.html" class="nav-link">Home</a>
+          <a href="home.html" class="nav-link">Home</a>
           <a href="modules.html" class="nav-link">Modules</a>
           <a href="flashcard.html" class="nav-link active">Flashcard</a>
           <a href="quiz.html" class="nav-link">Quiz</a>
           <a href="about.html" class="nav-link">About</a>
         </div>
-        
+
         <div class="nav-actions">
           <a href="index.html" class="btn-primary">Mainpage</a>
         </div>
-        
+
         <div class="mobile-menu-btn">
           <i class="fas fa-bars"></i>
         </div>
       </div>
     </nav>
 
-
-
-    <section id="tba-section" class="tba-content">
-      <div class="container">
-        <div class="tba-text">
-          <h1>To Be Announced</h1>
+    <header class="page-header">
+      <div class="container header-inner">
+        <div class="header-text">
+          <span class="badge"><i class="fas fa-bolt"></i> Study Mode</span>
+          <h1>Flashcards</h1>
+          <p class="subtitle">Quickly review core AI & ML concepts</p>
+          <div class="header-actions">
+            <a href="modules.html" class="btn-primary">
+              <i class="fas fa-layer-group"></i> Browse Modules
+            </a>
+            <button id="shuffleBtn" class="btn-primary" type="button">
+              <i class="fas fa-shuffle"></i> Shuffle
+            </button>
+          </div>
         </div>
+        <div class="header-visual">
+          <div class="chip"><i class="fas fa-brain"></i><span>AI</span></div>
+          <div class="chip alt"><i class="fas fa-robot"></i><span>ML</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="flashcards-section">
+      <div class="container">
+        <div class="controls">
+          <div class="control-group">
+            <label for="topicSelect"><i class="fas fa-book"></i> Topic</label>
+            <select id="topicSelect">
+              <option value="all">All Topics</option>
+              <option value="ai-foundation">AI Foundations</option>
+              <option value="machine-learning">Machine Learning</option>
+            </select>
+          </div>
+          <div class="control-group grow">
+            <label for="searchInput"><i class="fas fa-magnifying-glass"></i> Search</label>
+            <input id="searchInput" type="text" placeholder="Find a term or keyword..." />
+          </div>
+          <div class="control-group toggles">
+            <label class="toggle">
+              <input id="showHints" type="checkbox" checked />
+              <span>Show hints</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="flashcardGrid" class="flashcard-grid" aria-live="polite"></div>
       </div>
     </section>
 
-
     <script>
       // Mobile menu toggle
-      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-        document.querySelector('.nav-links').classList.toggle('active');
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-links").classList.toggle("active");
+        });
+
+      // Flashcard data
+      const FLASHCARDS = [
+        // AI Foundations
+        {
+          id: 'ai-1',
+          topic: 'ai-foundation',
+          term: 'Artificial Intelligence (AI)',
+          definition:
+            'The field of creating systems that perform tasks requiring human intelligence, like perception, reasoning, learning, and decision-making.',
+          hint: 'Broad field enabling intelligent behavior in machines.'
+        },
+        {
+          id: 'ai-2',
+          topic: 'ai-foundation',
+          term: 'Turing Test',
+          definition:
+            'A test of a machine\'s ability to exhibit intelligent behavior indistinguishable from that of a human through conversation.',
+          hint: 'Proposed by Alan Turing in 1950.'
+        },
+        {
+          id: 'ai-3',
+          topic: 'ai-foundation',
+          term: 'Search Algorithms',
+          definition:
+            'Techniques like BFS and DFS used to navigate problem spaces to find solutions or paths.',
+          hint: 'Breadth-first vs depth-first.'
+        },
+        {
+          id: 'ai-4',
+          topic: 'ai-foundation',
+          term: 'Knowledge Representation',
+          definition:
+            'Methods to model information about the world (rules, logic, graphs) so computers can reason with it.',
+          hint: 'Logic, ontologies, knowledge graphs.'
+        },
+
+        // Machine Learning
+        {
+          id: 'ml-1',
+          topic: 'machine-learning',
+          term: 'Machine Learning (ML)',
+          definition:
+            'A subset of AI where systems learn patterns from data to make predictions or decisions without explicit programming.',
+          hint: 'Learns from data.'
+        },
+        {
+          id: 'ml-2',
+          topic: 'machine-learning',
+          term: 'Supervised Learning',
+          definition:
+            'Learning from labeled examples to map inputs to outputs, e.g., classification and regression.',
+          hint: 'Trained with labeled data.'
+        },
+        {
+          id: 'ml-3',
+          topic: 'machine-learning',
+          term: 'Overfitting',
+          definition:
+            'When a model memorizes training data patterns including noise, performing poorly on new data.',
+          hint: 'High train accuracy, low test accuracy.'
+        },
+        {
+          id: 'ml-4',
+          topic: 'machine-learning',
+          term: 'Bias–Variance Tradeoff',
+          definition:
+            'Balancing underfitting (high bias) and overfitting (high variance) to achieve good generalization.',
+          hint: 'Sweet spot between simplicity and complexity.'
+        }
+      ];
+
+      const grid = document.getElementById('flashcardGrid');
+      const topicSelect = document.getElementById('topicSelect');
+      const searchInput = document.getElementById('searchInput');
+      const showHints = document.getElementById('showHints');
+      const shuffleBtn = document.getElementById('shuffleBtn');
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      function render() {
+        const topic = topicSelect.value;
+        const q = searchInput.value.trim().toLowerCase();
+        let cards = FLASHCARDS.filter(c => topic === 'all' || c.topic === topic);
+        if (q) {
+          cards = cards.filter(
+            c => c.term.toLowerCase().includes(q) || c.definition.toLowerCase().includes(q)
+          );
+        }
+        if (cards.length === 0) {
+          grid.innerHTML = `<div class="empty">No cards match your filters.</div>`;
+          return;
+        }
+        grid.innerHTML = cards
+          .map(
+            c => `
+          <article class="flashcard" tabindex="0" data-id="${c.id}">
+            <div class="card-inner">
+              <div class="card-face front">
+                <div class="tag ${c.topic}">${c.topic === 'ai-foundation' ? 'AI Foundations' : 'Machine Learning'}</div>
+                <h3>${c.term}</h3>
+                <p class="hint">${c.hint ?? ''}</p>
+                <div class="cta"><i class="fas fa-rotate"></i> Tap to flip</div>
+              </div>
+              <div class="card-face back">
+                <h4>Definition</h4>
+                <p>${c.definition}</p>
+                <div class="cta"><i class="fas fa-rotate"></i> Tap to flip</div>
+              </div>
+            </div>
+          </article>`
+          )
+          .join('');
+
+        // bind flip interactions
+        grid.querySelectorAll('.flashcard').forEach(card => {
+          const toggle = () => card.classList.toggle('flipped');
+          card.addEventListener('click', toggle);
+          card.addEventListener('keypress', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              toggle();
+            }
+          });
+        });
+
+        // hint visibility
+        grid.querySelectorAll('.hint').forEach(h => {
+          h.style.display = showHints.checked ? 'block' : 'none';
+        });
+      }
+
+      topicSelect.addEventListener('change', render);
+      searchInput.addEventListener('input', render);
+      showHints.addEventListener('change', render);
+      shuffleBtn.addEventListener('click', () => {
+        shuffle(FLASHCARDS);
+        render();
       });
+
+      // initial render
+      render();
     </script>
   </body>
 </html>

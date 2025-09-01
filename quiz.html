@@ -12,30 +12,27 @@
     />
   </head>
   <body>
-
     <nav>
       <div class="nav-container">
         <img src="img/logo.svg" class="logo" alt="MaxAI" />
-        
+
         <div class="nav-links">
-          <a href="index.html" class="nav-link">Home</a>
+          <a href="home.html" class="nav-link">Home</a>
           <a href="modules.html" class="nav-link">Modules</a>
           <a href="flashcard.html" class="nav-link">Flashcard</a>
           <a href="quiz.html" class="nav-link active">Quiz</a>
           <a href="about.html" class="nav-link">About</a>
         </div>
-        
+
         <div class="nav-actions">
           <a href="index.html" class="btn-primary">Mainpage</a>
         </div>
-        
+
         <div class="mobile-menu-btn">
           <i class="fas fa-bars"></i>
         </div>
       </div>
     </nav>
-
-
 
     <section id="tba-section" class="tba-content">
       <div class="container">
@@ -45,12 +42,13 @@
       </div>
     </section>
 
-
     <script>
       // Mobile menu toggle
-      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-        document.querySelector('.nav-links').classList.toggle('active');
-      });
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-links").classList.toggle("active");
+        });
     </script>
   </body>
 </html>
