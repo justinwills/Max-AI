@@ -10,12 +10,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-
     <link rel="stylesheet" href="modules-inner.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -566,7 +567,11 @@
           $(this).toggleClass("expanded");
         } else {
           // Show locked message for other lessons
-          alert("Complete previous lessons to unlock this content!");
+          Swal.fire({
+            icon: 'info',
+            title: 'Locked',
+            text: 'Complete previous lessons to unlock this content!'
+          });
         }
       });
     </script>

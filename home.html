@@ -10,6 +10,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
 
@@ -160,7 +165,11 @@
       document.querySelector('.user-form').addEventListener('submit', function(e) {
         e.preventDefault();
         // Add your form submission logic here
-        alert('Changes saved successfully!');
+        Swal.fire({
+          icon: 'success',
+          title: 'Saved',
+          text: 'Changes saved successfully!'
+        });
       });
     </script>
   </body>
