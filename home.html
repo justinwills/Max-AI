@@ -24,7 +24,7 @@
         </a>
 
         <div class="nav-links">
-          <a href="index.html" class="nav-link active">Home</a>
+          <a href="home.html" class="nav-link active">Home</a>
           <a href="modules.html" class="nav-link">Modules</a>
           <a href="flashcard.html" class="nav-link">Flashcard</a>
           <a href="quiz.html" class="nav-link">Quiz</a>
@@ -32,7 +32,24 @@
         </div>
 
         <div class="nav-actions">
-          <a href="index.html" class="btn-primary">Mainpage</a>
+          <div class="profile-menu">
+            <button
+              type="button"
+              class="profile-btn"
+              aria-label="Profile"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i>
+            </button>
+            <div class="menu">
+              <a href="userprofile.html"
+                ><i class="fas fa-user-circle"></i> Profile</a
+              >
+              <a href="login.html"
+                ><i class="fas fa-right-from-bracket"></i> Logout</a
+              >
+            </div>
+          </div>
         </div>
 
         <div class="mobile-menu-btn">
@@ -40,6 +57,25 @@
         </div>
       </div>
     </nav>
+    <script>
+      (function () {
+        const menu = document.querySelector(".profile-menu");
+        if (!menu) return;
+        const btn = menu.querySelector(".profile-btn");
+        btn?.setAttribute("aria-expanded", "false");
+        btn?.addEventListener("click", function (e) {
+          e.preventDefault();
+          const open = menu.classList.toggle("open");
+          btn.setAttribute("aria-expanded", String(open));
+        });
+        document.addEventListener("click", function (e) {
+          if (!menu.contains(e.target)) {
+            menu.classList.remove("open");
+            btn?.setAttribute("aria-expanded", "false");
+          }
+        });
+      })();
+    </script>
 
     <section id="user-details" class="user-profile">
       <div class="container">
@@ -97,35 +133,21 @@
               <h3>Learning Progress</h3>
               <div class="progress-stats">
                 <div class="stat-item">
-                  <div class="stat-number">1</div>
+                  <div class="stat-number">0</div>
                   <div class="stat-label">Courses Completed</div>
                 </div>
                 <div class="stat-item">
-                  <div class="stat-number">85%</div>
+                  <div class="stat-number">0%</div>
                   <div class="stat-label">Average Score</div>
                 </div>
                 <div class="stat-item">
-                  <div class="stat-number">12</div>
+                  <div class="stat-number">0</div>
                   <div class="stat-label">Hours Learned</div>
                 </div>
               </div>
 
               <div class="recent-activity">
                 <h4>Recent Activity</h4>
-                <div class="activity-item">
-                  <div class="activity-icon">📚</div>
-                  <div class="activity-details">
-                    <p>Completed "AI Foundation"</p>
-                    <span>2 days ago</span>
-                  </div>
-                </div>
-                <div class="activity-item">
-                  <div class="activity-icon">🎯</div>
-                  <div class="activity-details">
-                    <p>Achieved "Perfect Score" badge</p>
-                    <span>1 week ago</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -176,6 +198,108 @@
             text: "Changes saved successfully!",
           });
         });
+
+      // Apply course progress bonuses from localStorage to dashboard numbers
+      (function () {
+        try {
+          // Fallback: if module set totals/done locally, derive completion here too
+          const total =
+            parseInt(
+              localStorage.getItem("ai_foundations_quiz_total_v1") || "0",
+              10
+            ) || 0;
+          const done =
+            parseInt(
+              localStorage.getItem("ai_foundations_quiz_done_v1") || "0",
+              10
+            ) || 0;
+          if (
+            total > 0 &&
+            done >= total &&
+            localStorage.getItem("ai_foundations_completed_v1") !== "true"
+          ) {
+            localStorage.setItem("ai_foundations_completed_v1", "true");
+            const courseKey = "home_courses_completed_bonus";
+            const hoursKey = "home_hours_learned_bonus";
+            const curCourses =
+              parseInt(localStorage.getItem(courseKey) || "0", 10) || 0;
+            const curHours =
+              parseInt(localStorage.getItem(hoursKey) || "0", 10) || 0;
+            localStorage.setItem(courseKey, String(curCourses + 1));
+            localStorage.setItem(hoursKey, String(curHours + 2));
+          }
+
+          const courseBonus =
+            parseInt(
+              localStorage.getItem("home_courses_completed_bonus") || "0",
+              10
+            ) || 0;
+          const hoursBonus =
+            parseInt(
+              localStorage.getItem("home_hours_learned_bonus") || "0",
+              10
+            ) || 0;
+
+          document
+            .querySelectorAll(".progress-stats .stat-item")
+            .forEach(function (item) {
+              const label = (
+                item.querySelector(".stat-label")?.textContent || ""
+              )
+                .trim()
+                .toLowerCase();
+              const numEl = item.querySelector(".stat-number");
+              if (!numEl) return;
+              const base =
+                parseInt(
+                  (numEl.textContent || "0").replace(/[^0-9]/g, ""),
+                  10
+                ) || 0;
+              if (label === "courses completed") {
+                numEl.textContent = String(base + courseBonus);
+              } else if (label === "hours learned") {
+                numEl.textContent = String(base + hoursBonus);
+              }
+            });
+        } catch (_) {}
+      })();
+
+      // Reflect AI Foundations completion in Recent Activity
+      (function () {
+        try {
+          const ra = document.querySelector(".recent-activity");
+          if (!ra) return;
+          const completed =
+            localStorage.getItem("ai_foundations_completed_v1") === "true";
+          let item = ra.querySelector(".activity-ai-foundations");
+          if (completed) {
+            if (!item) {
+              item = document.createElement("div");
+              item.className = "activity-item activity-ai-foundations";
+              const when = new Date();
+              const whenText = when.toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              });
+              item.innerHTML = `
+                <div class="activity-icon"><i class="fas fa-check-circle" style="color:#10b981"></i></div>
+                <div class="activity-details">
+                  <p>Completed "AI Foundations"</p>
+                  <span>${whenText}</span>
+                </div>`;
+              ra.appendChild(item);
+            }
+            localStorage.setItem(
+              "home_activity_logged_ai_foundations_v1",
+              "true"
+            );
+          } else {
+            if (item) item.remove();
+            localStorage.removeItem("home_activity_logged_ai_foundations_v1");
+          }
+        } catch (_) {}
+      })();
     </script>
   </body>
 </html>

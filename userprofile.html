@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MaxAI - User Profile</title>
+
+    <link rel="stylesheet" href="userprofile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      .user-content {
+        display: grid;
+        gap: 24px;
+      }
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+      .detail-card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        padding: 18px;
+      }
+      .detail-card h3 {
+        margin-bottom: 12px;
+      }
+      .user-form .form-group {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+      .user-form input {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        padding: 10px 12px;
+        border-radius: 10px;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn-ghost {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 10px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="home.html" aria-label="Go to Home">
+          <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        </a>
+
+        <div class="nav-links">
+          <a href="home.html" class="nav-link">Home</a>
+          <a href="modules.html" class="nav-link">Modules</a>
+          <a href="flashcard.html" class="nav-link">Flashcard</a>
+          <a href="quiz.html" class="nav-link">Quiz</a>
+          <a href="about.html" class="nav-link">About</a>
+        </div>
+
+        <div class="nav-actions">
+          <div class="profile-menu">
+            <button
+              type="button"
+              class="profile-btn"
+              aria-label="Profile"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i>
+            </button>
+            <div class="menu">
+              <a href="userprofile.html"
+                ><i class="fas fa-user-circle"></i> Profile</a
+              >
+              <a href="login.html"
+                ><i class="fas fa-right-from-bracket"></i> Logout</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+    <script>
+      (function () {
+        const menu = document.querySelector(".profile-menu");
+        if (!menu) return;
+        const btn = menu.querySelector(".profile-btn");
+        btn?.setAttribute("aria-expanded", "false");
+        btn?.addEventListener("click", function (e) {
+          e.preventDefault();
+          const open = menu.classList.toggle("open");
+          btn.setAttribute("aria-expanded", String(open));
+        });
+        document.addEventListener("click", function (e) {
+          if (!menu.contains(e.target)) {
+            menu.classList.remove("open");
+            btn?.setAttribute("aria-expanded", "false");
+          }
+        });
+      })();
+    </script>
+
+    <section id="user-details" class="user-profile">
+      <div class="container">
+        <div class="section-header">
+          <h2>User Profile</h2>
+          <p>Manage your account information</p>
+        </div>
+
+        <div class="user-content">
+          <div class="profile-section">
+            <div class="profile-image">
+              <img src="img/pro1.webp" alt="Profile Picture" id="profile-pic" />
+              <div class="image-upload">
+                <label for="file-input" class="upload-btn">
+                  <i class="fas fa-camera"></i>
+                </label>
+                <input
+                  type="file"
+                  id="file-input"
+                  accept="image/*"
+                  style="display: none"
+                />
+              </div>
+            </div>
+
+            <div class="profile-info">
+              <h3 id="display-name">Justin</h3>
+              <p class="user-role">Learner</p>
+              <p class="user-email" id="display-email">justin@example.com</p>
+            </div>
+          </div>
+
+          <div class="details-grid">
+            <div class="detail-card">
+              <h3>Personal Information</h3>
+              <form class="user-form" id="user-form">
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" id="username" value="Justin" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value="justin@example.com"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn-primary">Save Changes</button>
+              </form>
+            </div>
+
+            <div class="detail-card">
+              <h3>Change Password</h3>
+              <form id="password-form" class="user-form">
+                <div class="form-group">
+                  <label for="curPassword">Current Password</label>
+                  <input
+                    type="password"
+                    id="curPassword"
+                    placeholder="Leave empty if setting for first time"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="newPassword">New Password</label>
+                  <input
+                    type="password"
+                    id="newPassword"
+                    minlength="8"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm New Password</label>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    minlength="8"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn-primary">
+                  <i class="fas fa-key"></i> Update Password
+                </button>
+                <div id="pw-feedback" class="form-note"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 MaxAI |
+          <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      document
+        .querySelector(".mobile-menu-btn")
+        ?.addEventListener("click", function () {
+          document.querySelector(".nav-links")?.classList.toggle("active");
+        });
+
+      // Profile image upload preview
+      document
+        .getElementById("file-input")
+        ?.addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (ev) {
+              const img = document.getElementById("profile-pic");
+              if (img) img.src = ev.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+      // Save personal info (no persistence; update display only)
+      document
+        .getElementById("user-form")
+        ?.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const name = document.getElementById("username")?.value || "";
+          const email = document.getElementById("email")?.value || "";
+          const dn = document.getElementById("display-name");
+          if (dn) dn.textContent = name;
+          const de = document.getElementById("display-email");
+          if (de) de.textContent = email;
+          Swal.fire({
+            icon: "success",
+            title: "Saved",
+            text: "Changes saved.",
+          });
+        });
+
+      // Change password inline (local-only)
+      document
+        .getElementById("password-form")
+        ?.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const STORAGE_KEY = "profile_password_v1";
+          const saved = localStorage.getItem(STORAGE_KEY) || "";
+          const cur = document.getElementById("curPassword")?.value || "";
+          const npw = document.getElementById("newPassword")?.value || "";
+          const cfm = document.getElementById("confirmPassword")?.value || "";
+          const fb = document.getElementById("pw-feedback");
+          const setMsg = (cls, msg) => {
+            if (fb) {
+              fb.classList.remove("ok", "err");
+              fb.classList.add(cls);
+              fb.textContent = msg;
+            }
+          };
+          if (npw.length < 8) {
+            setMsg("err", "Password must be at least 8 characters.");
+            return;
+          }
+          if (npw !== cfm) {
+            setMsg("err", "New password and confirmation do not match.");
+            return;
+          }
+          if (saved && cur !== saved) {
+            setMsg("err", "Current password is incorrect.");
+            return;
+          }
+          try {
+            localStorage.setItem(STORAGE_KEY, npw);
+          } catch (_) {}
+          // Clear fields and confirm
+          const cp = document.getElementById("curPassword");
+          if (cp) cp.value = "";
+          document.getElementById("newPassword").value = "";
+          document.getElementById("confirmPassword").value = "";
+          setMsg("ok", "Password updated.");
+        });
+    </script>
+  </body>
+</html>

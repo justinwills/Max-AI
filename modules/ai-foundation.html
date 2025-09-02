@@ -252,10 +252,47 @@
           <li><a href="../quiz.html">Quiz</a></li>
           <li><a href="../about.html">About Us</a></li>
         </ul>
-
         <img src="../img/menu.png" id="menu-btn" alt="Menu" />
       </div>
+
+      <div class="profile-menu">
+        <button
+          type="button"
+          class="profile-btn"
+          aria-label="Profile"
+          aria-expanded="false"
+        >
+          <i class="fas fa-user"></i>
+        </button>
+        <div class="menu">
+          <a href="../userprofile.html"
+            ><i class="fas fa-user-circle"></i> Profile</a
+          >
+          <a href="../login.html"
+            ><i class="fas fa-right-from-bracket"></i> Logout</a
+          >
+        </div>
+      </div>
     </nav>
+    <script>
+      (function () {
+        const menu = document.querySelector(".profile-menu");
+        if (!menu) return;
+        const btn = menu.querySelector(".profile-btn");
+        btn?.setAttribute("aria-expanded", "false");
+        btn?.addEventListener("click", function (e) {
+          e.preventDefault();
+          const open = menu.classList.toggle("open");
+          btn.setAttribute("aria-expanded", String(open));
+        });
+        document.addEventListener("click", function (e) {
+          if (!menu.contains(e.target)) {
+            menu.classList.remove("open");
+            btn?.setAttribute("aria-expanded", "false");
+          }
+        });
+      })();
+    </script>
 
     <section id="about-home">
       <div class="hero-content">
@@ -270,7 +307,7 @@
         <div class="hero-stats">
           <div class="stat-item">
             <i class="fas fa-clock"></i>
-            <span>4-6 hours</span>
+            <span>2-3 hours</span>
           </div>
           <div class="stat-item">
             <i class="fas fa-signal"></i>
@@ -317,14 +354,6 @@
           <div class="course-info">
             <div class="course-meta">
               <div class="meta-item">
-                <i class="fas fa-star"></i>
-                <span>4.8/5</span>
-              </div>
-              <div class="meta-item">
-                <i class="fas fa-graduation-cap"></i>
-                <span>2,847 students</span>
-              </div>
-              <div class="meta-item">
                 <i class="fas fa-calendar"></i>
                 <span>Last updated: Aug 2025</span>
               </div>
@@ -352,7 +381,7 @@
                   style="width: 0%"
                 ></div>
                 <div id="progress-label" class="progress-label">
-                  0a% Completed
+                  0% Completed
                 </div>
               </div>
             </div>
@@ -366,6 +395,7 @@
             </button>
           </div>
 
+          <!-- Learning Objectives ---->
           <section class="content-section" id="objectives">
             <div class="section-header">
               <div class="section-icon">
@@ -376,23 +406,56 @@
             <div class="objectives-grid">
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Explain the difference between AI, ML, and DL</span>
+                <span>Define AI vs. ML vs. DL and where each applies</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Describe supervised vs. unsupervised learning</span>
+                <span>Explain the Turing Test and discuss its limitations</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Understand basic data terms and workflow</span>
+                <span
+                  >Differentiate Narrow AI (ANI), AGI, and
+                  Superintelligence</span
+                >
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Recognize common evaluation metrics</span>
+                <span
+                  >Describe data: features, labels, splits, and leakage</span
+                >
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Identify ethical considerations</span>
+                <span
+                  >Compare supervised, unsupervised, and reinforcement
+                  learning</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Compute and interpret precision, recall, F1, and
+                  ROC-AUC</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Identify overfitting and apply
+                  regularization/validation</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Apply basic search ideas (BFS/DFS, A* intuition)</span>
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Practice responsible AI: fairness, privacy,
+                  transparency</span
+                >
               </div>
             </div>
           </section>
@@ -417,7 +480,7 @@
 
           <div class="lessons-container">
             <h3 class="lessons-title">Course Lessons</h3>
-
+            <!-- Course Lessons --->
             <div class="lesson-item" data-lesson="1">
               <div class="lesson-header">
                 <div class="lesson-number">01</div>
@@ -433,7 +496,7 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-clock"></i> 8 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
@@ -443,17 +506,17 @@
                     learn, and problem-solve. AI systems can perform tasks that
                     typically require human intelligence, such as understanding
                     natural language, recognizing patterns, solving problems,
-                    and making decisions..
+                    and making decisions.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
-                    systems, Data‑driven systems
+                    <strong>Key terms:</strong> Agent, Environment, Rationality,
+                    Symbolic vs. Statistical AI
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="lesson-item" data-lesson="1">
+            <div class="lesson-item" data-lesson="2">
               <div class="lesson-header">
                 <div class="lesson-number">02</div>
                 <div class="lesson-content">
@@ -469,7 +532,7 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-clock"></i> 6 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
@@ -485,14 +548,14 @@
                     behavior exhibit intelligence.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
-                    systems, Data‑driven systems
+                    <strong>Key terms:</strong> Turing Test, Imitation Game,
+                    Indistinguishability, Natural language
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="lesson-item" data-lesson="1">
+            <div class="lesson-item" data-lesson="3">
               <div class="lesson-header">
                 <div class="lesson-number">03</div>
                 <div class="lesson-content">
@@ -511,7 +574,7 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-clock"></i> 10 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
@@ -528,14 +591,14 @@
                     vehicles.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
-                    systems, Data‑driven systems
+                    <strong>Key terms:</strong> Expert systems, AI winters,
+                    Machine learning, Deep learning
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="lesson-item" data-lesson="1">
+            <div class="lesson-item" data-lesson="4">
               <div class="lesson-header">
                 <div class="lesson-number">04</div>
                 <div class="lesson-content">
@@ -548,7 +611,7 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-clock"></i> 7 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
@@ -562,14 +625,14 @@
                     creativity, decision-making, and social abilities.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
-                    systems, Data‑driven systems
+                    <strong>Key terms:</strong> Narrow AI (ANI), General AI
+                    (AGI), Superintelligence (ASI)
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="lesson-item" data-lesson="1">
+            <div class="lesson-item" data-lesson="5">
               <div class="lesson-header">
                 <div class="lesson-number">05</div>
                 <div class="lesson-content">
@@ -582,7 +645,7 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-clock"></i> 12 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
@@ -600,14 +663,14 @@
                     before moving on to the next level.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
-                    systems, Data‑driven systems
+                    <strong>Key terms:</strong> Propositional logic, DFS, BFS,
+                    Optimality, Completeness, Path cost
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="lesson-item" data-lesson="1">
+            <div class="lesson-item" data-lesson="6">
               <div class="lesson-header">
                 <div class="lesson-number">06</div>
                 <div class="lesson-content">
@@ -620,7 +683,7 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-clock"></i> 25 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
@@ -644,24 +707,244 @@
                     height="300"
                   />
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Agent, Environment, Rule‑based
-                    systems, Data‑driven systems
+                    <strong>Key terms:</strong> Minimax, Heuristic, A* (A-star),
+                    Nodes & edges
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="lesson-item" data-lesson="6">
+            <!-- New lessons to deepen the module -->
+            <div class="lesson-item" data-lesson="7">
               <div class="lesson-header">
                 <div class="lesson-number">07</div>
                 <div class="lesson-content">
+                  <h4>Data, Features, and Labels</h4>
+                  <p>What data looks like in ML and how it flows</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 8 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Most ML problems can be described with three words:
+                    <strong>features</strong> (inputs),
+                    <strong>labels</strong> (targets), and
+                    <strong>examples</strong> (rows). A typical workflow is:
+                    collect → clean → split (train/validation/test) → train →
+                    evaluate → iterate.
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Tabular data:</strong> rows = examples, columns =
+                      features
+                    </li>
+                    <li>
+                      <strong>Images:</strong> features are pixels; labels could
+                      be classes
+                    </li>
+                    <li>
+                      <strong>Text:</strong> features are tokens/embeddings;
+                      labels could be intents
+                    </li>
+                  </ul>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Features, Labels, Train/Val/Test
+                    split, Leakage
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="8">
+              <div class="lesson-header">
+                <div class="lesson-number">08</div>
+                <div class="lesson-content">
+                  <h4>Learning Paradigms</h4>
+                  <p>Supervised, unsupervised, and reinforcement learning</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 8 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    <strong>Supervised</strong> uses labeled input→output pairs
+                    (classification/regression).
+                    <strong>Unsupervised</strong> finds structure without labels
+                    (clustering, dimensionality reduction).
+                    <strong>Reinforcement learning</strong> optimizes actions
+                    via rewards.
+                  </p>
+                  <ul>
+                    <li>Classification vs. regression</li>
+                    <li>
+                      Clustering (K-Means) and embeddings (PCA, t-SNE, UMAP)
+                    </li>
+                    <li>
+                      Agents, policies, rewards, exploration vs. exploitation
+                      (RL)
+                    </li>
+                  </ul>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Supervised, Unsupervised,
+                    Reinforcement, Clustering, Policy, Reward
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="9">
+              <div class="lesson-header">
+                <div class="lesson-number">09</div>
+                <div class="lesson-content">
+                  <h4>Model Evaluation</h4>
+                  <p>Accuracy, precision, recall, F1, and ROC-AUC</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 10 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    For imbalanced classes, accuracy can be misleading. Use
+                    <strong>precision</strong> (quality of positives),
+                    <strong>recall</strong> (coverage of true positives), their
+                    harmonic mean <strong>F1</strong>, and ranking metrics like
+                    <strong>ROC-AUC</strong> or <strong>PR-AUC</strong>.
+                  </p>
+                  <ul>
+                    <li><strong>Precision</strong> = TP / (TP + FP)</li>
+                    <li><strong>Recall</strong> = TP / (TP + FN)</li>
+                    <li>
+                      <strong>F1</strong> = 2 · (Precision · Recall) /
+                      (Precision + Recall)
+                    </li>
+                  </ul>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> confusion matrix, threshold, PR
+                    curve, ROC curve
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="10">
+              <div class="lesson-header">
+                <div class="lesson-number">10</div>
+                <div class="lesson-content">
+                  <h4>Overfitting and Generalization</h4>
+                  <p>
+                    Bias–variance, regularization, and validation strategies
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 10 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    <strong>Overfitting</strong> happens when a model memorizes
+                    training noise. Mitigate with regularization (L1/L2),
+                    dropout, early stopping, data augmentation, and strong
+                    validation (k-fold, stratified splits).
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Bias</strong>: error from simplifying assumptions
+                    </li>
+                    <li>
+                      <strong>Variance</strong>: error from sensitivity to data
+                      fluctuations
+                    </li>
+                    <li>Find balance to improve generalization</li>
+                  </ul>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Bias–variance, L1/L2 (weight
+                    decay), early stopping, cross‑validation, data augmentation
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="11">
+              <div class="lesson-header">
+                <div class="lesson-number">11</div>
+                <div class="lesson-content">
+                  <h4>Ethics and Responsible AI</h4>
+                  <p>Fairness, privacy, transparency, and safety</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 8 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Beyond performance, AI must be <strong>fair</strong>,
+                    respect <strong>privacy</strong>, be
+                    <strong>transparent</strong> about limitations, and consider
+                    <strong>social impact</strong>. Evaluate datasets for bias
+                    and design processes for oversight.
+                  </p>
+                  <ul>
+                    <li>Consent and purpose limitation for data</li>
+                    <li>Explainability and model cards</li>
+                    <li>Human-in-the-loop for sensitive decisions</li>
+                  </ul>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> Fairness, Bias, Privacy,
+                    Transparency, Accountability
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Module summary -->
+            <div class="lesson-item" data-lesson="12">
+              <div class="lesson-header">
+                <div class="lesson-number">12</div>
+                <div class="lesson-content">
                   <h4>Module Summary</h4>
                   <p>
-                    In this module, we learned the basics of AI, from the Turing
-                    Test to the history of AI development, and the different
-                    categories of AI. We also covered basic logic and search
-                    algorithms, which are the foundation of modern AI
-                    development.
+                    You can now explain what AI is, how the Turing Test relates
+                    to intelligence, and how AI evolved from expert systems to
+                    modern deep learning. You can distinguish ANI vs. AGI vs.
+                    ASI, structure data into features and labels with proper
+                    splits, pick between supervised/unsupervised/RL, evaluate
+                    models with precision/recall/F1/ROC‑AUC, mitigate
+                    overfitting, and reason about fairness, privacy and
+                    transparency.
+                  </p>
+                  <p>
+                    Next steps: explore the ML and Deep Learning modules, try a
+                    small project (e.g., a classifier on tabular data), and
+                    practice communicating model limitations responsibly.
                   </p>
                 </div>
               </div>
@@ -682,7 +965,9 @@
                 </div>
                 <h4>AI For Everyone</h4>
                 <p>Andrew Ng's comprehensive overview course</p>
-                <a href="#" class="resource-link"
+                <a
+                  href="https://www.deeplearning.ai/courses/ai-for-everyone/"
+                  class="resource-link"
                   >Learn More <i class="fas fa-arrow-right"></i
                 ></a>
               </div>
@@ -692,7 +977,9 @@
                 </div>
                 <h4>scikit-learn</h4>
                 <p>Beginner‑friendly machine learning API</p>
-                <a href="#" class="resource-link"
+                <a
+                  href="https://scikit-learn.org/stable/index.html"
+                  class="resource-link"
                   >Learn More <i class="fas fa-arrow-right"></i
                 ></a>
               </div>
@@ -707,29 +994,84 @@
           <div class="download-item">
             <i class="fa-solid fa-file-lines"></i>
             <span>Summary notes (PDF)</span>
-            <button class="download-btn">Download</button>
+            <a
+              class="download-btn download-notes"
+              href="../materials/ai-foundations-summary.pdf"
+              download
+              aria-label="Download summary notes PDF"
+              >Download</a
+            >
           </div>
           <div class="download-item">
             <i class="fa-solid fa-file-code"></i>
             <span>Sample code (JS)</span>
-            <button class="download-btn">Download</button>
+            <button
+              class="download-btn download-code"
+              aria-label="Download sample code"
+            >
+              Download
+            </button>
           </div>
         </div>
 
         <div class="toc-info">
           <div class="info-item">
             <i class="fa-regular fa-clock"></i>
-            <span>Estimated time: ~5 hours</span>
+            <span>Estimated time: ~2 hours</span>
           </div>
         </div>
       </aside>
     </section>
 
+    <script>
+      // Download helpers for notes and sample code
+      (function () {
+        function download(filename, content, mime) {
+          try {
+            const blob = new Blob([content], { type: mime || "text/plain" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename;
+            a.style.display = "none";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 400);
+          } catch (_) {
+            // Fallback: open data URL
+            const a = document.createElement("a");
+            a.href =
+              "data:" +
+              (mime || "text/plain") +
+              ";charset=utf-8," +
+              encodeURIComponent(content);
+            a.download = filename;
+            a.style.display = "none";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          }
+        }
+        const codeBtn = document.querySelector(".download-code");
+        codeBtn &&
+          codeBtn.addEventListener("click", function () {
+            const code = `/**\n * AI Foundations — Sample Code (JS)\n * A* pathfinding on a grid (toy).\n */\n\nfunction astar(grid, start, goal) {\n  const h = (a,b)=> Math.abs(a.x-b.x)+Math.abs(a.y-b.y);\n  const key = (n)=> n.x+','+n.y;\n  const open = new Map();\n  const came = new Map();\n  const g = new Map();\n  const f = new Map();\n  g.set(key(start), 0);\n  f.set(key(start), h(start, goal));\n  open.set(key(start), start);\n\n  const neighbors = (n)=>[{x:n.x+1,y:n.y},{x:n.x-1,y:n.y},{x:n.x,y:n.y+1},{x:n.x,y:n.y-1}]\n    .filter(p=> grid[p.y] && grid[p.y][p.x] === 0); // 0 = free, 1 = wall\n\n  while (open.size) {\n    // pick node with smallest f\n    let currentKey, current, best = Infinity;\n    for (const [k,node] of open) {\n      const fv = f.get(k) ?? Infinity;\n      if (fv < best) { best = fv; currentKey = k; current = node; }\n    }\n    if (!current) break;\n    if (current.x===goal.x && current.y===goal.y) {\n      // reconstruct path\n      const path=[current]; let k=currentKey;\n      while (came.has(k)) { k = came.get(k); const [x,y]=k.split(',').map(Number); path.push({x,y}); }\n      return path.reverse();\n    }\n    open.delete(currentKey);\n    for (const nb of neighbors(current)) {\n      const nk = key(nb);\n      const tentative = (g.get(currentKey) ?? Infinity) + 1;\n      if (tentative < (g.get(nk) ?? Infinity)) {\n        came.set(nk, currentKey);\n        g.set(nk, tentative);\n        f.set(nk, tentative + h(nb, goal));\n        if (!open.has(nk)) open.set(nk, nb);\n      }\n    }\n  }\n  return null;\n}\n\n// Example usage:\n// 0=free,1=wall\nconst grid = [\n  [0,0,0,0,0],\n  [1,1,0,1,0],\n  [0,0,0,1,0],\n  [0,1,0,0,0],\n  [0,1,0,0,0]\n];\nconst path = astar(grid, {x:0,y:0}, {x:4,y:4});\nconsole.log('Path:', path);\n`;
+            download(
+              "ai-foundations-sample.js",
+              code,
+              "application/javascript"
+            );
+          });
+      })();
+    </script>
     <footer>
-      <p>
-        &copy;版权所有
-        <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
-      </p>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 MaxAI |
+          <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
+        </p>
+      </div>
     </footer>
 
     <script>
@@ -761,17 +1103,43 @@
         btn.addEventListener("click", function () {
           Swal.fire({
             title: "Reset progress?",
-            text: "This will clear saved answers for this module.",
+            text: "This will clear saved answers and unlink completion.",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Yes, reset",
           }).then((res) => {
-            if (res.isConfirmed) {
-              try {
-                localStorage.removeItem("ai_foundations_quiz_v1");
-              } catch (_) {}
-              location.reload();
-            }
+            if (!res.isConfirmed) return;
+            try {
+              // Clear quiz state and auxiliary data for this module
+              localStorage.removeItem("ai_foundations_quiz_v1");
+              localStorage.removeItem("ai_foundations_quiz_total_v1");
+              localStorage.removeItem("ai_foundations_quiz_done_v1");
+              // Clear stored MCQ option order to allow reshuffle next time
+              localStorage.removeItem("ai_foundations_quiz_order_v1");
+
+              // If completion was recorded, subtract Home bonuses once
+              if (
+                localStorage.getItem("ai_foundations_completed_v1") === "true"
+              ) {
+                const courseKey = "home_courses_completed_bonus";
+                const hoursKey = "home_hours_learned_bonus";
+                const curCourses =
+                  parseInt(localStorage.getItem(courseKey) || "0", 10) || 0;
+                const curHours =
+                  parseInt(localStorage.getItem(hoursKey) || "0", 10) || 0;
+                const newCourses = Math.max(0, curCourses - 1);
+                const newHours = Math.max(0, curHours - 2);
+                localStorage.setItem(courseKey, String(newCourses));
+                localStorage.setItem(hoursKey, String(newHours));
+                // Remove recent-activity marker
+                localStorage.removeItem(
+                  "home_activity_logged_ai_foundations_v1"
+                );
+              }
+              // Unset completion flag
+              localStorage.removeItem("ai_foundations_completed_v1");
+            } catch (_) {}
+            location.reload();
           });
         });
       })();
@@ -780,11 +1148,25 @@
       (function () {
         const STORAGE_KEY = "ai_foundations_quiz_v1";
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+        // Persist per-quiz option order so the correct answer isn't always first,
+        // and the order remains stable across reloads.
+        const ORDER_KEY = "ai_foundations_quiz_order_v1";
+        let savedOrderMap = {};
+        try {
+          savedOrderMap = JSON.parse(localStorage.getItem(ORDER_KEY) || "{}");
+        } catch (_) {
+          savedOrderMap = {};
+        }
         // Build a unique MCQ spec per lesson from its title/topic (no essays)
         function specForLesson(item, lessonId, index) {
-          // Fixed, non-randomized questions by lesson order (0-based index)
-          const BANK = [
-            {
+          // Prefer mapping by lesson title so Qs match topics explicitly
+          const title = (
+            item?.querySelector(".lesson-content h4")?.textContent || ""
+          ).toLowerCase();
+
+          // Title-based specs (one per lesson topic)
+          if (title.includes("what is ai")) {
+            return {
               type: "mcq",
               prompt: "Which statement best defines Artificial Intelligence?",
               options: [
@@ -798,8 +1180,10 @@
                 ["d", "Only data compression"],
               ],
               hint: "Think perception, reasoning, learning and action.",
-            },
-            {
+            };
+          }
+          if (title.includes("turing")) {
+            return {
               type: "mcq",
               prompt: "What does the Turing Test evaluate?",
               options: [
@@ -813,8 +1197,10 @@
                 ["d", "Training dataset size"],
               ],
               hint: "Indistinguishability from a human in conversation.",
-            },
-            {
+            };
+          }
+          if (title.includes("history")) {
+            return {
               type: "mcq",
               prompt:
                 "Which classic AI approach relied on hand-crafted rules and domain expertise?",
@@ -824,9 +1210,11 @@
                 ["c", "Reinforcement learning"],
                 ["d", "Self-supervised transformers"],
               ],
-              hint: "Think 1970s–1980s rule-based systems.",
-            },
-            {
+              hint: "Think 1970s-1980s rule-based systems.",
+            };
+          }
+          if (title.includes("categories of ai")) {
+            return {
               type: "mcq",
               prompt: "Which option best describes Narrow AI?",
               options: [
@@ -843,8 +1231,13 @@
                 ["d", "A rule that prevents overfitting"],
               ],
               hint: "Task-specific vs. general vs. superhuman.",
-            },
-            {
+            };
+          }
+          if (
+            title.includes("basic logic") ||
+            title.includes("search algorithm")
+          ) {
+            return {
               type: "mcq",
               prompt: "BFS (Breadth-First Search) is guaranteed to find:",
               options: [
@@ -854,8 +1247,10 @@
                 ["d", "The most memory-efficient path"],
               ],
               hint: "Shortest number of edges.",
-            },
-            {
+            };
+          }
+          if (title.includes("javascript")) {
+            return {
               type: "mcq",
               prompt:
                 "Which algorithm is commonly used to find the shortest path on a grid?",
@@ -866,10 +1261,86 @@
                 ["d", "Backpropagation"],
               ],
               hint: "Heuristic + cost = A*.",
-            },
-            null,
-          ];
-          return BANK[index] ?? null;
+            };
+          }
+          if (
+            title.includes("data, features") ||
+            (title.includes("features") && title.includes("labels"))
+          ) {
+            return {
+              type: "mcq",
+              prompt: "In a typical ML dataset, the label refers to:",
+              options: [
+                ["a", "The target variable to predict", true],
+                ["b", "An input feature"],
+                ["c", "A unique row identifier"],
+                ["d", "A model hyperparameter"],
+              ],
+              hint: "Inputs = features; output/target = label.",
+            };
+          }
+          if (title.includes("learning paradigms")) {
+            return {
+              type: "mcq",
+              prompt: "Which is an unsupervised algorithm?",
+              options: [
+                ["a", "K-Means clustering", true],
+                ["b", "Logistic regression"],
+                ["c", "Random forest"],
+                ["d", "Q-learning"],
+              ],
+              hint: "Groups data without labels.",
+            };
+          }
+          if (title.includes("evaluation")) {
+            return {
+              type: "mcq",
+              prompt: "Precision is defined as:",
+              options: [
+                ["a", "TP / (TP + FP)", true],
+                ["b", "TP / (TP + FN)"],
+                ["c", "(TP + TN) / (All)"],
+                ["d", "FP / (FP + TN)"],
+              ],
+              hint: "Quality of positive predictions.",
+            };
+          }
+          if (
+            title.includes("overfitting") ||
+            title.includes("generalization")
+          ) {
+            return {
+              type: "mcq",
+              prompt: "Overfitting best describes a model that:",
+              options: [
+                [
+                  "a",
+                  "Performs well on training but poorly on unseen data",
+                  true,
+                ],
+                ["b", "Performs poorly on both train and test"],
+                ["c", "Is always linear"],
+                ["d", "Has too few parameters"],
+              ],
+              hint: "Memorization vs. generalization.",
+            };
+          }
+          if (title.includes("ethics") || title.includes("responsible")) {
+            return {
+              type: "mcq",
+              prompt: "Which practice best supports Responsible AI?",
+              options: [
+                ["a", "Using model cards and monitoring for bias", true],
+                ["b", "Maximizing accuracy at any cost"],
+                ["c", "Collecting more personal data without consent"],
+                ["d", "Hiding model limitations from users"],
+              ],
+              hint: "Fairness, privacy, transparency, and oversight.",
+            };
+          }
+
+          // No fallback; require explicit mapping by title
+          return null;
         }
 
         function markLessonComplete(lessonId, itemOverride) {
@@ -893,6 +1364,7 @@
             document.querySelector(`.lesson-item[data-lesson="${lessonId}"]`);
           if (!item) return;
           const spec = specForLesson(item, lessonId, index);
+          if (!spec) return; // no quiz for this lesson
           const host =
             item.querySelector(".lesson-preview") ||
             item.querySelector(".lesson-details");
@@ -906,8 +1378,28 @@
             `<div class="quiz-title"><i class="fas fa-question-circle"></i> Quick Check</div>` +
             `<p class="quiz-question">${spec.prompt}</p>`;
           if (spec.type === "mcq") {
+            // Determine presentation order for MCQ options (stable across reloads)
+            const options = Array.isArray(spec.options)
+              ? spec.options.slice()
+              : [];
+            if (savedOrderMap[group] && Array.isArray(savedOrderMap[group])) {
+              options.sort(
+                (a, b) =>
+                  savedOrderMap[group].indexOf(a[0]) -
+                  savedOrderMap[group].indexOf(b[0])
+              );
+            } else {
+              for (let i = options.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [options[i], options[j]] = [options[j], options[i]];
+              }
+              savedOrderMap[group] = options.map((o) => o[0]);
+              try {
+                localStorage.setItem(ORDER_KEY, JSON.stringify(savedOrderMap));
+              } catch (_) {}
+            }
             inner += `<div class="quiz-options" role="radiogroup" aria-label="Lesson ${lessonId} options">`;
-            spec.options.forEach(([val, label, correct]) => {
+            options.forEach(([val, label, correct]) => {
               const cls = correct ? "quiz-option correct" : "quiz-option";
               inner += `<label class="${cls}"><input type="radio" name="${group}" value="${val}"> ${label}</label>`;
             });
@@ -1031,6 +1523,30 @@
           progLabel.textContent = `${pct}% Completed`;
           progFill.style.width = pct + "%";
           progBar.setAttribute("aria-valuenow", String(pct));
+          // Persist coarse progress so other pages (e.g., home) can read it
+          try {
+            localStorage.setItem("ai_foundations_quiz_total_v1", String(total));
+            localStorage.setItem("ai_foundations_quiz_done_v1", String(done));
+          } catch (_) {}
+
+          // When the course is completed (100%), set completion in localStorage
+          // and increment home stats bonuses exactly once.
+          try {
+            if (
+              pct === 100 &&
+              localStorage.getItem("ai_foundations_completed_v1") !== "true"
+            ) {
+              localStorage.setItem("ai_foundations_completed_v1", "true");
+              const courseKey = "home_courses_completed_bonus";
+              const hoursKey = "home_hours_learned_bonus";
+              const curCourses =
+                parseInt(localStorage.getItem(courseKey) || "0", 10) || 0;
+              const curHours =
+                parseInt(localStorage.getItem(hoursKey) || "0", 10) || 0;
+              localStorage.setItem(courseKey, String(curCourses + 1));
+              localStorage.setItem(hoursKey, String(curHours + 2));
+            }
+          } catch (_) {}
         }
 
         function handleCheck(btn) {

@@ -28,7 +28,13 @@
         </div>
         
         <div class="nav-actions">
-          <a href="index.html" class="btn-primary">Mainpage</a>
+          <div class="profile-menu">
+            <button type="button" class="profile-btn" aria-label="Profile" aria-expanded="false"><i class="fas fa-user"></i></button>
+            <div class="menu">
+              <a href="userprofile.html"><i class="fas fa-user-circle"></i> Profile</a>
+              <a href="login.html"><i class="fas fa-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
         </div>
         
         <div class="mobile-menu-btn">
@@ -36,6 +42,25 @@
         </div>
       </div>
     </nav>
+    <script>
+      (function(){
+        const menu = document.querySelector('.profile-menu');
+        if (!menu) return;
+        const btn = menu.querySelector('.profile-btn');
+        btn?.setAttribute('aria-expanded','false');
+        btn?.addEventListener('click', function(e){
+          e.preventDefault();
+          const open = menu.classList.toggle('open');
+          btn.setAttribute('aria-expanded', String(open));
+        });
+        document.addEventListener('click', function(e){
+          if (!menu.contains(e.target)) {
+            menu.classList.remove('open');
+            btn?.setAttribute('aria-expanded','false');
+          }
+        });
+      })();
+    </script>
 
 
 
@@ -56,12 +81,12 @@
             <div class="module-content">
               <div class="module-meta">
                 <span class="module-level"><i class="fas fa-signal"></i> Beginner</span>
-                <span class="module-duration"><i class="fas fa-clock"></i> 4-6 hours</span>
+                <span class="module-duration"><i class="fas fa-clock"></i> 2-3 hours</span>
               </div>
               <h3>AI Foundations</h3>
               <p>Learn the basics of artificial intelligence, machine learning concepts, and the history of AI development.</p>
                              <div class="module-features">
-                 <span><i class="fas fa-check"></i> 6 Lessons</span>
+                 <span><i class="fas fa-check"></i> 12 Lessons</span>
                  <span><i class="fas fa-check"></i> Hands-on Projects</span>
                </div>
                <div class="module-actions">
