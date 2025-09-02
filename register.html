@@ -4,18 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - MaxAI</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="register.css" />
   </head>
   <body>
     <nav>
       <div class="nav-container">
-        <div class="logo-container">
-          <a href="home.html" aria-label="Go to Home">
-            <img src="img/logo.svg" class="logo" alt="MaxAI" />
-          </a>
+        <a href="home.html" aria-label="Go to Home">
+          <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        </a>
+
+        <div class="nav-links">
+          <a href="home.html" class="nav-link">Home</a>
+          <a href="modules.html" class="nav-link">Modules</a>
+          <a href="flashcard.html" class="nav-link">Flashcard</a>
+          <a href="quiz.html" class="nav-link">Quiz</a>
+          <a href="about.html" class="nav-link">About</a>
+        </div>
+
+        <div class="nav-actions">
+          <div class="profile-menu">
+            <button type="button" class="profile-btn" aria-label="Profile" aria-expanded="false">
+              <i class="fas fa-user"></i>
+            </button>
+            <div class="menu">
+              <a href="userprofile.html"><i class="fas fa-user-circle"></i> Profile</a>
+              <a href="login.html"><i class="fas fa-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
         </div>
       </div>
     </nav>
@@ -42,14 +67,18 @@
               <input type="password" placeholder="Verify Password" required />
             </div>
             <div class="btn-field">
-              <button type="submit" id="registerBtn" class="btn-primary btn-large">
+              <button
+                type="submit"
+                id="registerBtn"
+                class="btn-primary btn-large"
+              >
                 <i class="fas fa-rocket"></i>
                 Get Started
               </button>
             </div>
           </div>
           <p class="login-link">
-            Already have an account? <a href="login.html">Sign In</a>
+            Already have an account? <a href="login.html">Login</a>
           </p>
         </form>
       </div>
@@ -58,27 +87,53 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
       // Mobile menu toggle
-      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-        document.querySelector('.nav-links').classList.toggle('active');
+      document.querySelector('.mobile-menu-btn')?.addEventListener('click', function () {
+        document.querySelector('.nav-links')?.classList.toggle('active');
       });
+
+      // Profile dropdown toggle (click + outside close)
+      (function(){
+        const menu = document.querySelector('.profile-menu');
+        if (!menu) return;
+        const btn = menu.querySelector('.profile-btn');
+        btn?.setAttribute('aria-expanded','false');
+        btn?.addEventListener('click', function(e){
+          e.preventDefault();
+          const open = menu.classList.toggle('open');
+          btn.setAttribute('aria-expanded', String(open));
+        });
+        document.addEventListener('click', function(e){
+          if (!menu.contains(e.target)) {
+            menu.classList.remove('open');
+            btn?.setAttribute('aria-expanded','false');
+          }
+        });
+      })();
 
       // Registration form handling
-      document.getElementById("registerForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        
-        const registerButton = document.getElementById("registerBtn");
-        registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
-        registerButton.disabled = true;
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
 
-        // Simulate registration process
-        setTimeout(function () {
-          swal("Registration Successful!", "Welcome to MaxAI! Your account has been created successfully.", "success");
-          
+          const registerButton = document.getElementById("registerBtn");
+          registerButton.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+          registerButton.disabled = true;
+
+          // Simulate registration process
           setTimeout(function () {
-            window.location.href = "home.html";
-          }, 2000);
-        }, 1500);
-      });
+            swal(
+              "Registration Successful!",
+              "Welcome to MaxAI! Your account has been created successfully.",
+              "success"
+            );
+
+            setTimeout(function () {
+              window.location.href = "home.html";
+            }, 2000);
+          }, 1500);
+        });
     </script>
   </body>
 </html>

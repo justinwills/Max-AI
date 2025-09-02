@@ -9,12 +9,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
 
     <link rel="stylesheet" href="modules-inner.css" />
     <style>
@@ -245,14 +239,15 @@
 
       <div class="navigation">
         <ul>
-          <i id="menu-close" class="fas fa-times"></i>
           <li><a href="../home.html">Home</a></li>
           <li><a href="../modules.html" class="active">Modules</a></li>
           <li><a href="../flashcard.html">Flashcard</a></li>
           <li><a href="../quiz.html">Quiz</a></li>
           <li><a href="../about.html">About Us</a></li>
         </ul>
-        <img src="../img/menu.png" id="menu-btn" alt="Menu" />
+        <div class="mobile-menu-btn" aria-label="Open menu" role="button" tabindex="0">
+          <i class="fas fa-bars"></i>
+        </div>
       </div>
 
       <div class="profile-menu">
@@ -1005,12 +1000,14 @@
           <div class="download-item">
             <i class="fa-solid fa-file-code"></i>
             <span>Sample code (JS)</span>
-            <button
-              class="download-btn download-code"
-              aria-label="Download sample code"
+            <a
+              class="download-btn"
+              href="../materials/ai-foundations-sample.js"
+              download
+              aria-label="Download sample code JS"
             >
               Download
-            </button>
+            </a>
           </div>
         </div>
 
@@ -1056,7 +1053,7 @@
         const codeBtn = document.querySelector(".download-code");
         codeBtn &&
           codeBtn.addEventListener("click", function () {
-            const code = `/**\n * AI Foundations — Sample Code (JS)\n * A* pathfinding on a grid (toy).\n */\n\nfunction astar(grid, start, goal) {\n  const h = (a,b)=> Math.abs(a.x-b.x)+Math.abs(a.y-b.y);\n  const key = (n)=> n.x+','+n.y;\n  const open = new Map();\n  const came = new Map();\n  const g = new Map();\n  const f = new Map();\n  g.set(key(start), 0);\n  f.set(key(start), h(start, goal));\n  open.set(key(start), start);\n\n  const neighbors = (n)=>[{x:n.x+1,y:n.y},{x:n.x-1,y:n.y},{x:n.x,y:n.y+1},{x:n.x,y:n.y-1}]\n    .filter(p=> grid[p.y] && grid[p.y][p.x] === 0); // 0 = free, 1 = wall\n\n  while (open.size) {\n    // pick node with smallest f\n    let currentKey, current, best = Infinity;\n    for (const [k,node] of open) {\n      const fv = f.get(k) ?? Infinity;\n      if (fv < best) { best = fv; currentKey = k; current = node; }\n    }\n    if (!current) break;\n    if (current.x===goal.x && current.y===goal.y) {\n      // reconstruct path\n      const path=[current]; let k=currentKey;\n      while (came.has(k)) { k = came.get(k); const [x,y]=k.split(',').map(Number); path.push({x,y}); }\n      return path.reverse();\n    }\n    open.delete(currentKey);\n    for (const nb of neighbors(current)) {\n      const nk = key(nb);\n      const tentative = (g.get(currentKey) ?? Infinity) + 1;\n      if (tentative < (g.get(nk) ?? Infinity)) {\n        came.set(nk, currentKey);\n        g.set(nk, tentative);\n        f.set(nk, tentative + h(nb, goal));\n        if (!open.has(nk)) open.set(nk, nb);\n      }\n    }\n  }\n  return null;\n}\n\n// Example usage:\n// 0=free,1=wall\nconst grid = [\n  [0,0,0,0,0],\n  [1,1,0,1,0],\n  [0,0,0,1,0],\n  [0,1,0,0,0],\n  [0,1,0,0,0]\n];\nconst path = astar(grid, {x:0,y:0}, {x:4,y:4});\nconsole.log('Path:', path);\n`;
+            const code = ``;
             download(
               "ai-foundations-sample.js",
               code,
@@ -1075,14 +1072,9 @@
     </footer>
 
     <script>
-      // Show menu links on burger click
-      $("#menu-btn").click(function () {
-        $("nav .navigation ul").addClass("active");
-      });
-
-      // Hide navbar on click function
-      $("#menu-close").click(function () {
-        $("nav .navigation ul").removeClass("active");
+      // Mobile menu toggle (match home.html behavior)
+      document.querySelector('.mobile-menu-btn')?.addEventListener('click', function(){
+        document.querySelector('nav .navigation ul')?.classList.toggle('active');
       });
 
       // Lesson interaction (header-only toggling; no lock system)
