@@ -1014,9 +1014,9 @@ footer a:hover {
     left: 0;
     right: 0;
     background: rgba(30, 41, 59, 0.98);
-    padding: 24px 8vw;            /* bigger padding like home */
+    padding: 24px 8vw; /* bigger padding like home */
     flex-direction: column;
-    gap: 20px;                    /* larger spacing between items */
+    gap: 20px; /* larger spacing between items */
     border-top: 1px solid rgba(140, 82, 255, 0.1);
   }
   .navigation ul.active {
@@ -1033,7 +1033,12 @@ footer a:hover {
     height: 100px;
     margin-left: -20px;
   }
-  .profile-menu { position: absolute; right: 52px; top: 20px; z-index: 1002; }
+  .profile-menu {
+    position: absolute;
+    right: 52px;
+    top: 20px;
+    z-index: 1002;
+  }
 
   /* Course/media tighten */
   .course-img {
