@@ -1014,9 +1014,9 @@ footer a:hover {
     left: 0;
     right: 0;
     background: rgba(30, 41, 59, 0.98);
-    padding: 16px 8vw;
+    padding: 24px 8vw;            /* bigger padding like home */
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;                    /* larger spacing between items */
     border-top: 1px solid rgba(140, 82, 255, 0.1);
   }
   .navigation ul.active {
@@ -1062,6 +1062,12 @@ footer a:hover {
 
   .resources-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Increase tap target size for mobile menu links */
+  .navigation ul li a {
+    padding: 12px 0;
+    font-size: 1.05rem;
   }
 }
 

@@ -206,11 +206,17 @@ nav {
   
   .mobile-menu-btn {
     display: block;
+    position: absolute;
+    right: 16px;
+    top: 20px;
+    z-index: 1002;
   }
   
   .nav-container {
     padding: 0 16px;
+    position: relative;
   }
+  .nav-actions { position: absolute; right: 52px; top: 20px; z-index: 1002; }
   
   .tba-text h1 {
     font-size: 2.5rem;

@@ -164,6 +164,24 @@ nav {
 .profile-menu .menu a { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; color:#fff; text-decoration:none; }
 .profile-menu .menu a:hover { background: rgba(140,82,255,0.15); }
 
+/* Mobile navbar behavior */
+@media screen and (max-width: 768px) {
+  nav { position: fixed; }
+  .nav-links { display: none; }
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80px; left: 0; right: 0;
+    background: rgba(30, 41, 59, 0.98);
+    padding: 20px;
+    border-top: 1px solid rgba(140, 82, 255, 0.1);
+  }
+  .mobile-menu-btn { display: block; position: absolute; right: 16px; top: 20px; z-index: 1002; }
+  .nav-container { position: relative; padding: 0 16px; }
+  .nav-actions { position: absolute; right: 52px; top: 20px; z-index: 1002; }
+}
+
 /* Section header styles */
 .section-header {
   text-align: center;
