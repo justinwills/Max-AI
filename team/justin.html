@@ -500,13 +500,91 @@ html {
         opacity: 0.7;
     }
 }
+/* Generic responsive helpers */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    color: #1e293b;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 8px;
+}
+
+.nav-toggle:focus {
+    outline: 2px solid rgba(59,130,246,0.5);
+    outline-offset: 2px;
+}
+
+/* Mobile styles */
+@media (max-width: 1024px) {
+    .hero-title { font-size: 3rem; }
+}
+
+@media (max-width: 768px) {
+    section { padding: 60px 0; }
+    .hero { padding: 100px 0 60px; }
+    .hero-title { font-size: 2.4rem; }
+    .hero-subtitle { font-size: 1.05rem; }
+
+    .profile-section {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .profile-photo {
+        width: min(260px, 80vw);
+        aspect-ratio: 1 / 1;
+        height: auto;
+    }
+
+    .skill-items {
+        grid-template-columns: 1fr;
+    }
+
+    /* Nav: collapse into a menu */
+    .nav { position: relative; }
+    .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        right: 20px;
+        left: 20px;
+        background: #fff;
+        border: 1px solid rgba(226,232,240,0.8);
+        border-radius: 12px;
+        padding: 0.5rem;
+        display: none;
+        flex-direction: column;
+        gap: 0.25rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        z-index: 1001;
+    }
+    .nav.open .nav-menu { display: flex; }
+    .nav-menu a { display: block; width: 100%; padding: 0.75rem 0.9rem; }
+}
+
+@media (max-width: 480px) {
+    section { padding: 48px 0; }
+    .hero { padding: 90px 0 48px; }
+    .section-title { font-size: 2rem; }
+}
     </style>
 </head>
 <body>
     <header class="header">
         <nav class="nav">
             <div class="nav-brand">Introduction Page</div>
-            <ul class="nav-menu">
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-menu" aria-expanded="false">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <ul class="nav-menu" id="primary-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -637,6 +715,17 @@ html {
     </footer>
 
     <script>document.addEventListener('DOMContentLoaded', function() {
+      const headerNav = document.querySelector('.nav');
+      const navToggle = document.querySelector('.nav-toggle');
+      const navMenu = document.getElementById('primary-menu');
+
+      if (navToggle && headerNav && navMenu) {
+        navToggle.addEventListener('click', () => {
+          const isOpen = headerNav.classList.toggle('open');
+          navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+      }
+
       const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
       
       navLinks.forEach(link => {
@@ -654,6 +743,11 @@ html {
                       top: targetPosition,
                       behavior: 'smooth'
                   });
+                  // Close mobile menu after selecting a link
+                  if (headerNav && headerNav.classList.contains('open')) {
+                    headerNav.classList.remove('open');
+                    if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+                  }
               }
           });
       });
