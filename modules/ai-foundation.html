@@ -233,7 +233,6 @@
   </head>
   <body>
     <nav>
-      <a href="../home.html" aria-label="Go to Home">
         <img src="../img/logo.svg" class="logo" alt="MaxAI" />
       </a>
 
@@ -286,6 +285,22 @@
             btn?.setAttribute("aria-expanded", "false");
           }
         });
+      })();
+    </script>
+    <script>
+      // Mobile menu toggle for inner modules page
+      (function(){
+        const burger = document.querySelector('.mobile-menu-btn');
+        const menuList = document.querySelector('nav .navigation ul');
+        if (burger && menuList) {
+          burger.addEventListener('click', function(){
+            menuList.classList.toggle('active');
+          });
+          // Close menu when a link is tapped (mobile)
+          menuList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            menuList.classList.remove('active');
+          }));
+        }
       })();
     </script>
 
@@ -1072,11 +1087,6 @@
     </footer>
 
     <script>
-      // Mobile menu toggle (match home.html behavior)
-      document.querySelector('.mobile-menu-btn')?.addEventListener('click', function(){
-        document.querySelector('nav .navigation ul')?.classList.toggle('active');
-      });
-
       // Lesson interaction (header-only toggling; no lock system)
       $(document).on("click", ".lesson-item .lesson-header", function () {
         const $item = $(this).closest(".lesson-item");

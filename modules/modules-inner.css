@@ -780,7 +780,6 @@ nav {
   align-items: center;
 }
 
-<<<<<<< ours
 /* Brand text next to logo */
 nav a[aria-label="Go to Home"] {
   display: inline-flex;
@@ -799,7 +798,7 @@ nav a[aria-label="Go to Home"]::after {
   color: transparent;
 }
 
-=======>>>>>>>theirs .mobile-menu-btn {
+.mobile-menu-btn {
   display: none;
   font-size: 24px;
   cursor: pointer;
@@ -891,12 +890,6 @@ nav a[aria-label="Go to Home"]::after {
 
 .profile-menu {
   position: relative;
-}
-/* center the profile in the nav */
-.profile-menu {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
 }
 .profile-menu .menu {
   display: none;
@@ -1031,11 +1024,16 @@ footer a:hover {
   }
   .mobile-menu-btn {
     display: block;
+    position: absolute;
+    right: 16px;
+    top: 20px;
+    z-index: 1002;
   }
   .logo {
     height: 100px;
     margin-left: -20px;
   }
+  .profile-menu { position: absolute; right: 52px; top: 20px; z-index: 1002; }
 
   /* Course/media tighten */
   .course-img {
