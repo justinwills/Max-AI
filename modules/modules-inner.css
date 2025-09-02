@@ -33,7 +33,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   background-color: var(--dark);
   color: var(--white);
   line-height: 1.6;
@@ -475,11 +475,13 @@ body {
 }
 
 .lesson-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* number | content | status */
   align-items: center;
-  gap: 20px;
-  padding: 24px;
+  gap: 8px 16px;              /* row gap, column gap */
+  padding: 16px 24px;         /* balanced vertical + match details padding-x */
   background: rgba(71, 85, 105, 0.5);
+  border-bottom: 1px solid rgba(140, 82, 255, 0.15);
 }
 
 .lesson-number {
@@ -495,9 +497,7 @@ body {
   font-size: 1.1rem;
 }
 
-.lesson-content {
-  flex: 1;
-}
+.lesson-content { min-width: 240px; }
 
 .lesson-content h4 {
   color: var(--light);
@@ -515,6 +515,7 @@ body {
 .lesson-status {
   color: var(--primary);
   font-size: 1.2rem;
+  justify-self: end;
 }
 
 .lesson-status .fa-lock {
@@ -522,7 +523,7 @@ body {
 }
 
 .lesson-details {
-  padding: 0 24px 24px 24px;
+  padding: 16px 24px 24px 24px; /* add top padding to separate from header */
   display: none;
 }
 
@@ -769,15 +770,17 @@ nav {
   border-bottom: 1px solid rgba(140, 82, 255, 0.1);
   z-index: 1000;
   transition: var(--transition);
-  padding: 20px 8vw;
+  height: 80px;           /* match index nav height */
+  padding: 0 8vw;         /* horizontal padding only */
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  height: 40px;
+  height: 130px;
   cursor: pointer;
+  margin-left: -35px;
 }
 
 .navigation ul {
@@ -852,3 +855,9 @@ footer a {
 footer a:hover {
   color: var(--secondary);
 }
+
+/* Lesson header fine-tuning */
+@media (max-width: 768px) {
+  .lesson-header { padding: 12px 24px; gap: 10px 14px; }
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');

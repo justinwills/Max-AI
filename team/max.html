@@ -1,640 +1,681 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hong Weibin - Personal Portfolio</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
 
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Header Styles */
+      header {
+        text-align: center;
+        padding: 60px 0;
+        color: white;
+      }
+
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 5px solid white;
+        margin: 0 auto 20px;
+        display: block;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 5px solid white;
+        margin: 0 auto 20px;
+        display: block;
+        background: url("../img/max.png") center/cover;
+        position: relative;
+        overflow: hidden;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        margin-bottom: 20px;
+      }
+
+      /* Navigation */
+      nav {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        padding: 15px 30px;
+        margin: 20px auto;
+        display: inline-block;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      /* Section Styles */
+      section {
+        background: white;
+        margin: 40px 0;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(50px);
+        opacity: 0;
+        animation: slideUp 0.8s ease forwards;
+      }
+
+      @keyframes slideUp {
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      section:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      section:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      section:nth-child(4) {
+        animation-delay: 0.6s;
+      }
+      section:nth-child(5) {
+        animation-delay: 0.8s;
+      }
+
+      h2 {
+        color: #667eea;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border-radius: 2px;
+      }
+
+      /* About Section */
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .about-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .skill-card {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .skill-card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Projects Section */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      .project-card {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 25px;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+        border-color: #667eea;
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+      }
+
+      .project-card h3 {
+        color: #667eea;
+        margin-bottom: 15px;
+      }
+
+      /* Contact Section */
+      .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      .contact-item {
+        text-align: center;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+      }
+
+      .contact-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .contact-icon {
+        font-size: 2rem;
+        color: #667eea;
+        margin-bottom: 15px;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 40px 0;
+        color: white;
+        margin-top: 60px;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .social-link {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-3px);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+          padding: 10px;
         }
 
-        /* Header Styles */
-        header {
-            text-align: center;
-            padding: 60px 0;
-            color: white;
+        section {
+          padding: 20px;
+          margin: 20px 0;
         }
 
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid white;
-            margin: 0 auto 20px;
-            display: block;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid white;
-            margin: 0 auto 20px;
-            display: block;
-            background: url('../img/max.png') center/cover;
-            position: relative;
-            overflow: hidden;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-
-        /* Navigation */
-        nav {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 15px 30px;
-            margin: 20px auto;
-            display: inline-block;
+        .about-content {
+          grid-template-columns: 1fr;
+          gap: 20px;
         }
 
         nav ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
+          flex-direction: column;
+          gap: 15px;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+        h1 {
+          font-size: 2rem;
         }
+      }
 
-        nav a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+      /* CTA Button */
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        color: white;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        margin: 20px 0;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(135deg, #ff5252, #26a69a);
+      }
+
+      /* Scroll to top button */
+      .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .scroll-top:hover {
+        background: #764ba2;
+        transform: translateY(-3px);
+      }
+
+      /* Loading animation */
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #667eea;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }
+
+      .loading.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-top: 5px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
-
-        /* Section Styles */
-        section {
-            background: white;
-            margin: 40px 0;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transform: translateY(50px);
-            opacity: 0;
-            animation: slideUp 0.8s ease forwards;
+        100% {
+          transform: rotate(360deg);
         }
-
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.4s; }
-        section:nth-child(4) { animation-delay: 0.6s; }
-        section:nth-child(5) { animation-delay: 0.8s; }
-
-        h2 {
-            color: #667eea;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .skill-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .project-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: #667eea;
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
-        }
-
-        .project-card h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-
-        /* Contact Section */
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .contact-item {
-            text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .contact-icon {
-            font-size: 2rem;
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            color: white;
-            margin-top: 60px;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            section {
-                padding: 20px;
-                margin: 20px 0;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-
-        /* CTA Button */
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            margin: 20px 0;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            background: linear-gradient(135deg, #ff5252, #26a69a);
-        }
-
-        /* Scroll to top button */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .scroll-top:hover {
-            background: #764ba2;
-            transform: translateY(-3px);
-        }
-
-        /* Loading animation */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #667eea;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-top: 5px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="loading" id="loading">
-        <div class="spinner"></div>
+      <div class="spinner"></div>
     </div>
-
 
     <button class="scroll-top" id="scrollTop" title="回到顶部">↑</button>
 
     <div class="container">
+      <header>
+        <div class="profile-img"></div>
+        <h1>洪维斌 1820241086</h1>
+        <p class="subtitle">
+          AI Student | Machine Learning Enthusiast | Team Collaborator
+        </p>
+        <nav>
+          <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <a href="../about.html" class="cta-button">← Back to Team</a>
+      </header>
 
-        <header>
-            <div class="profile-img"></div>
-            <h1>洪维斌 1820241086</h1>
-            <p class="subtitle">AI Student | Machine Learning Enthusiast | Team Collaborator</p>
-            <nav>
-                <ul>
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            <a href="../about.html" class="cta-button">← Back to Team</a>
-        </header>
+      <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              Hello teachers and friends, I'm Hong Weibin from Indonesia. I'm
+              currently in my second year of university, majoring in Artificial
+              Intelligence. I'm deeply interested in AI and machine learning,
+              especially deep learning and natural language processing. My
+              hobbies include playing games or studying math whenever I don't
+              have homework. Since high school, I've enjoyed teaching my friends
+              school subjects, particularly calculus. Within my team, I
+              primarily handle content related to artificial intelligence (the
+              focus of our e-learning website). I enjoy creating materials not
+              only to share knowledge with others but also to deepen my own
+              understanding of AI. I firmly believe teamwork is essential for
+              project success. Therefore, I actively communicate with every team
+              member, share my ideas, and learn from each person's strengths. In
+              the future, I hope to continue advancing my studies in AI and
+              apply my knowledge to solve real-world problems.
+            </p>
+          </div>
+          <div class="about-text">
+            <h3>Personal Characteristics</h3>
+            <ul style="list-style: none; padding: 0">
+              <li style="padding: 10px 0; border-bottom: 1px solid #eee">
+                🎯 Clear goals, focused on AI field
+              </li>
+              <li style="padding: 10px 0; border-bottom: 1px solid #eee">
+                🤝 Excellent team collaboration skills
+              </li>
+              <li style="padding: 10px 0; border-bottom: 1px solid #eee">
+                📚 Passionate about learning and knowledge sharing
+              </li>
+              <li style="padding: 10px 0; border-bottom: 1px solid #eee">
+                💡 Innovative thinking, solving real problems
+              </li>
+              <li style="padding: 10px 0">
+                🌍 Cross-cultural communication skills
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
+      <section id="skills">
+        <h2>Skills & Expertise</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>Artificial Intelligence</h3>
+            <p>Deep Learning, Machine Learning, NLP</p>
+          </div>
+          <div class="skill-card">
+            <h3>Programming Languages</h3>
+            <p>Python, JavaScript, HTML/CSS</p>
+          </div>
+          <div class="skill-card">
+            <h3>Mathematics</h3>
+            <p>Calculus, Linear Algebra, Statistics</p>
+          </div>
+          <div class="skill-card">
+            <h3>Team Collaboration</h3>
+            <p>Communication, Project Management, Knowledge Sharing</p>
+          </div>
+          <div class="skill-card">
+            <h3>Languages</h3>
+            <p>Chinese, Indonesian, English</p>
+          </div>
+          <div class="skill-card">
+            <h3>Interests</h3>
+            <p>Gaming, Reading, Outdoor Sports</p>
+          </div>
+        </div>
+      </section>
 
-        <section id="about">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                    
-                      Hello teachers and friends, I'm Hong Weibin from Indonesia. I'm currently in my second year of university, majoring in Artificial Intelligence. I'm deeply interested in AI and machine learning, especially deep learning and natural language processing.
-                      My hobbies include playing games or studying math whenever I don't have homework. Since high school, I've enjoyed teaching my friends school subjects, particularly calculus.
-                                          
-                      Within my team, I primarily handle content related to artificial intelligence (the focus of our e-learning website). I enjoy creating materials not only to share knowledge with others but also to deepen my own understanding of AI.
-                      I firmly believe teamwork is essential for project success. Therefore, I actively communicate with every team member, share my ideas, and learn from each person's strengths. In the future, I hope to continue advancing my studies in AI and apply my knowledge to solve real-world problems.
-                      </p>
-                </div>
-                <div class="about-text">
-                    <h3>Personal Characteristics</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="padding: 10px 0; border-bottom: 1px solid #eee;">🎯 Clear goals, focused on AI field</li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid #eee;">🤝 Excellent team collaboration skills</li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid #eee;">📚 Passionate about learning and knowledge sharing</li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid #eee;">💡 Innovative thinking, solving real problems</li>
-                        <li style="padding: 10px 0;">🌍 Cross-cultural communication skills</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+      <section id="projects">
+        <h2>Project Experience</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3>E-Learning Website</h3>
+            <p>
+              As team leader for AI content, created educational materials to
+              help users acquire AI knowledge.
+            </p>
+            <p>
+              <strong>Tech Stack:</strong> Web Development, Content Management
+              System
+            </p>
+            <p>
+              <strong>Results:</strong> Successfully created AI learning
+              platform for beginner learners
+            </p>
+          </div>
+          <div class="project-card">
+            <h3>Mathematics Tutoring Project</h3>
+            <p>
+              Started helping friends with mathematics since high school,
+              especially calculus courses.
+            </p>
+            <p><strong>Skills:</strong> Teaching ability, Knowledge transfer</p>
+            <p>
+              <strong>Results:</strong> Helped multiple classmates improve their
+              math grades
+            </p>
+          </div>
+          <div class="project-card">
+            <h3>AI Learning Resource Library</h3>
+            <p>
+              Created learning materials related to artificial intelligence to
+              promote knowledge dissemination.
+            </p>
+            <p>
+              <strong>Content:</strong> Deep Learning, NLP, Machine Learning
+            </p>
+            <p>
+              <strong>Goal:</strong> Help more people understand AI technology
+            </p>
+          </div>
+        </div>
+      </section>
 
-
-        <section id="skills">
-            <h2>Skills & Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Artificial Intelligence</h3>
-                    <p>Deep Learning, Machine Learning, NLP</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Programming Languages</h3>
-                    <p>Python, JavaScript, HTML/CSS</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Mathematics</h3>
-                    <p>Calculus, Linear Algebra, Statistics</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Team Collaboration</h3>
-                    <p>Communication, Project Management, Knowledge Sharing</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Languages</h3>
-                    <p>Chinese, Indonesian, English</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Interests</h3>
-                    <p>Gaming, Reading, Outdoor Sports</p>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="projects">
-            <h2>Project Experience</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>E-Learning Website</h3>
-                    <p>As team leader for AI content, created educational materials to help users acquire AI knowledge.</p>
-                    <p><strong>Tech Stack:</strong> Web Development, Content Management System</p>
-                    <p><strong>Results:</strong> Successfully created AI learning platform serving multiple users</p>
-                </div>
-                <div class="project-card">
-                    <h3>Mathematics Tutoring Project</h3>
-                    <p>Started helping friends with mathematics since high school, especially calculus courses.</p>
-                    <p><strong>Skills:</strong> Teaching ability, Knowledge transfer</p>
-                    <p><strong>Results:</strong> Helped multiple classmates improve their math grades</p>
-                </div>
-                <div class="project-card">
-                    <h3>AI Learning Resource Library</h3>
-                    <p>Created learning materials related to artificial intelligence to promote knowledge dissemination.</p>
-                    <p><strong>Content:</strong> Deep Learning, NLP, Machine Learning</p>
-                    <p><strong>Goal:</strong> Help more people understand AI technology</p>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">🎓</div>
-                    <h3>Education</h3>
-                    <p>Sophomore Student</p>
-                    <p>Artificial Intelligence Major</p>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">🌏</div>
-                    <h3>Location</h3>
-                    <p>Indonesia</p>
-                    <p>International Student</p>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">💼</div>
-                    <h3>Career Goals</h3>
-                    <p>Advanced studies in AI</p>
-                    <p>Solving real-world problems</p>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">🤝</div>
-                    <h3>Collaboration</h3>
-                    <p>Team projects</p>
-                    <p>AI research collaboration</p>
-                </div>
-            </div>
-        </section>
+      <section id="contact">
+        <h2>Contact Me</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">🎓</div>
+            <h3>Education</h3>
+            <p>Sophomore Student</p>
+            <p>Artificial Intelligence Major</p>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🌏</div>
+            <h3>Location</h3>
+            <p>Indonesia</p>
+            <p>International Student</p>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💼</div>
+            <h3>Career Goals</h3>
+            <p>Advanced studies in AI</p>
+            <p>Solving real-world problems</p>
+          </div>
+        </div>
+      </section>
     </div>
 
-
     <footer>
-        <p>&copy; 2024 Hong Weibin. All rights reserved.</p>
+      <p>&copy; 2024 Hong Weibin. All rights reserved.</p>
     </footer>
 
     <script>
-        // Loading screen
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.getElementById('loading').classList.add('hidden');
-            }, 1000);
-        });
+      // Loading screen
+      window.addEventListener("load", function () {
+        setTimeout(() => {
+          document.getElementById("loading").classList.add("hidden");
+        }, 1000);
+      });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('nav a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
             });
+          }
+        });
+      });
+
+      // Scroll to top button
+      const scrollTopBtn = document.getElementById("scrollTop");
+
+      window.addEventListener("scroll", function () {
+        if (window.pageYOffset > 300) {
+          scrollTopBtn.style.display = "flex";
+        } else {
+          scrollTopBtn.style.display = "none";
+        }
+      });
+
+      scrollTopBtn.addEventListener("click", function () {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections
+      document.querySelectorAll("section").forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Add hover effects to skill cards
+      document.querySelectorAll(".skill-card").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px) scale(1.05)";
         });
 
-        // Scroll to top button
-        const scrollTopBtn = document.getElementById('scrollTop');
-        
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.style.display = 'flex';
-            } else {
-                scrollTopBtn.style.display = 'none';
-            }
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
         });
+      });
 
-        scrollTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+      // Add typing effect to title
+      function typeWriter(element, text, speed = 100) {
+        let i = 0;
+        element.innerHTML = "";
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Add hover effects to skill cards
-        document.querySelectorAll('.skill-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.05)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Add typing effect to title
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-            
-            type();
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          }
         }
 
-        // Initialize typing effect after page loads
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                const title = document.querySelector('h1');
-                const originalText = title.textContent;
-                typeWriter(title, originalText, 150);
-            }, 1500);
-        });
+        type();
+      }
 
-        // Add particle effect to header
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.position = 'absolute';
-            particle.style.width = '2px';
-            particle.style.height = '2px';
-            particle.style.background = 'rgba(255, 255, 255, 0.5)';
-            particle.style.borderRadius = '50%';
-            particle.style.pointerEvents = 'none';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = '100%';
-            particle.style.animation = 'float 6s linear infinite';
-            
-            document.querySelector('header').appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 6000);
-        }
+      // Initialize typing effect after page loads
+      window.addEventListener("load", function () {
+        setTimeout(() => {
+          const title = document.querySelector("h1");
+          const originalText = title.textContent;
+          typeWriter(title, originalText, 150);
+        }, 1500);
+      });
 
-        // Create particles periodically
-        setInterval(createParticle, 300);
+      // Add particle effect to header
+      function createParticle() {
+        const particle = document.createElement("div");
+        particle.style.position = "absolute";
+        particle.style.width = "2px";
+        particle.style.height = "2px";
+        particle.style.background = "rgba(255, 255, 255, 0.5)";
+        particle.style.borderRadius = "50%";
+        particle.style.pointerEvents = "none";
+        particle.style.left = Math.random() * 100 + "%";
+        particle.style.top = "100%";
+        particle.style.animation = "float 6s linear infinite";
 
-        // Add CSS animation for particles
-        const style = document.createElement('style');
-        style.textContent = `
+        document.querySelector("header").appendChild(particle);
+
+        setTimeout(() => {
+          particle.remove();
+        }, 6000);
+      }
+
+      // Create particles periodically
+      setInterval(createParticle, 300);
+
+      // Add CSS animation for particles
+      const style = document.createElement("style");
+      style.textContent = `
             @keyframes float {
                 0% {
                     transform: translateY(0) rotate(0deg);
@@ -646,41 +687,45 @@
                 }
             }
         `;
-        document.head.appendChild(style);
+      document.head.appendChild(style);
 
-        // Add click effect to project cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = 'translateY(-10px)';
-                }, 150);
-            });
+      // Add click effect to project cards
+      document.querySelectorAll(".project-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            this.style.transform = "translateY(-10px)";
+          }, 150);
         });
+      });
 
-        // Add progress bar for skills
-        function animateProgressBars() {
-            const skillCards = document.querySelectorAll('.skill-card');
-            skillCards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                    card.style.transform = 'translateY(-5px) scale(1.02)';
-                }, index * 200);
-            });
-        }
+      // Add progress bar for skills
+      function animateProgressBars() {
+        const skillCards = document.querySelectorAll(".skill-card");
+        skillCards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.background =
+              "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+            card.style.transform = "translateY(-5px) scale(1.02)";
+          }, index * 200);
+        });
+      }
 
-        // Trigger progress animation when skills section is visible
-        const skillsSection = document.getElementById('skills');
-        const skillsObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateProgressBars();
-                    skillsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+      // Trigger progress animation when skills section is visible
+      const skillsSection = document.getElementById("skills");
+      const skillsObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateProgressBars();
+              skillsObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
 
-        skillsObserver.observe(skillsSection);
+      skillsObserver.observe(skillsSection);
     </script>
-</body>
+  </body>
 </html>

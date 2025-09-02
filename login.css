@@ -9,7 +9,7 @@
 }
 
 .logo {
-  height: 40px;
+  height: 130px;
   cursor: pointer;
 }
 
@@ -27,16 +27,27 @@
 
 /* Background pattern overlay */
 .login-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(140, 82, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(203, 108, 230, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(255, 102, 196, 0.1) 0%, transparent 50%);
+  background-image: radial-gradient(
+      circle at 20% 80%,
+      rgba(140, 82, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(203, 108, 230, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(255, 102, 196, 0.1) 0%,
+      transparent 50%
+    );
   pointer-events: none;
 }
 
@@ -194,12 +205,12 @@
   .login-container {
     padding: 80px 20px 20px;
   }
-  
+
   .form-box {
     padding: 30px 25px;
     margin: 0 20px;
   }
-  
+
   .form-box h2 {
     font-size: 2rem;
   }
@@ -209,15 +220,15 @@
   .form-box {
     padding: 25px 20px;
   }
-  
+
   .form-box h2 {
     font-size: 1.8rem;
   }
-  
+
   .input-field {
     margin: 12px 0;
   }
-  
+
   .input-field input {
     padding: 16px 18px 16px 12px;
     font-size: 14px;

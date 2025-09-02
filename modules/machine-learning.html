@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Machine Learning - Course</title>
+    <title>Machine Learning - Module</title>
 
     <link
       rel="stylesheet"
@@ -11,6 +11,11 @@
     />
 
     <link rel="stylesheet" href="modules-inner.css" />
+    <style>
+      /* Reset progress UI */
+      .reset-bar { display:flex; justify-content:flex-end; margin: 8px 0 16px; }
+      .reset-btn { background: linear-gradient(135deg, #8c52ff, #cb6ce6); color:#fff; border:none; border-radius:10px; padding:10px 14px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:8px; }
+    </style>
 
     <link
       rel="stylesheet"
@@ -26,15 +31,17 @@
   </head>
   <body>
     <nav>
-      <img src="../img/logo.svg" class="logo" alt="MaxAI" />
+      <a href="../home.html" aria-label="Go to Home">
+        <img src="../img/logo.svg" class="logo" alt="MaxAI" />
+      </a>
 
       <div class="navigation">
         <ul>
           <i id="menu-close" class="fas fa-times"></i>
           <li><a href="../home.html">Home</a></li>
           <li><a href="../modules.html" class="active">Modules</a></li>
-          <li><a href="../blog.html">Flashcard</a></li>
-          <li><a href="../courses.html">Quiz</a></li>
+          <li><a href="../flashcard.html">Flashcard</a></li>
+          <li><a href="../quiz.html">Quiz</a></li>
           <li><a href="../about.html">About Us</a></li>
         </ul>
 
@@ -126,6 +133,9 @@
         </div>
 
         <div class="content-sections">
+          <div class="reset-bar">
+            <button id="reset-progress-ml" class="reset-btn"><i class="fa-solid fa-rotate-left"></i> Reset Progress</button>
+          </div>
           <section class="content-section" id="objectives">
             <div class="section-header">
               <div class="section-icon">
@@ -601,6 +611,26 @@
         $("nav .navigation ul").removeClass("active");
       });
 
+      // Reset progress button (Machine Learning)
+      (function(){
+        const btn = document.getElementById('reset-progress-ml');
+        if(!btn) return;
+        btn.addEventListener('click', function(){
+          Swal.fire({
+            title: 'Reset progress?',
+            text: 'This will clear saved answers for this module.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, reset',
+          }).then(res => {
+            if(res.isConfirmed){
+              try { localStorage.removeItem('machine_learning_quiz_v1'); } catch(_){}
+              location.reload();
+            }
+          });
+        });
+      })();
+
       // Lesson interaction
       $(".lesson-item").click(function () {
         const lessonNum = $(this).data("lesson");
@@ -609,9 +639,9 @@
         } else {
           // Show locked message for other lessons
           Swal.fire({
-            icon: 'info',
-            title: 'Locked',
-            text: 'Complete previous lessons to unlock this content!'
+            icon: "info",
+            title: "Locked",
+            text: "Complete previous lessons to unlock this content!",
           });
         }
       });
