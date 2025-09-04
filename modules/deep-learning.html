@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Deep Learning - Modules</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="modules-inner.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav>
+        <img src="../img/logo.svg" class="logo" alt="MaxAI" />
+      </a>
+
+      <div class="navigation">
+        <ul>
+          <li><a href="../home.html">Home</a></li>
+          <li><a href="../modules.html" class="active">Modules</a></li>
+          <li><a href="../flashcard.html">Flashcard</a></li>
+          <li><a href="../quiz.html">Quiz</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+        <div class="mobile-menu-btn" aria-label="Open menu" role="button" tabindex="0">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+
+      <div class="profile-menu">
+        <button
+          type="button"
+          class="profile-btn"
+          aria-label="Profile"
+          aria-expanded="false"
+        >
+          <i class="fas fa-user"></i>
+        </button>
+        <div class="menu">
+          <a href="../userprofile.html"
+            ><i class="fas fa-user-circle"></i> Profile</a
+          >
+          <a href="../login.html"
+            ><i class="fas fa-right-from-bracket"></i> Logout</a
+          >
+        </div>
+      </div>
+    </nav>
+    <script>
+      (function () {
+        const menu = document.querySelector(".profile-menu");
+        if (!menu) return;
+        const btn = menu.querySelector(".profile-btn");
+        btn?.setAttribute("aria-expanded", "false");
+        btn?.addEventListener("click", function (e) {
+          e.preventDefault();
+          const open = menu.classList.toggle("open");
+          btn.setAttribute("aria-expanded", String(open));
+        });
+        document.addEventListener("click", function (e) {
+          if (!menu.contains(e.target)) {
+            menu.classList.remove("open");
+            btn?.setAttribute("aria-expanded", "false");
+          }
+        });
+      })();
+    </script>
+    <script>
+      // Mobile menu toggle for inner modules page
+      (function(){
+        const burger = document.querySelector('.mobile-menu-btn');
+        const menuList = document.querySelector('nav .navigation ul');
+        if (burger && menuList) {
+          burger.addEventListener('click', function(){
+            menuList.classList.toggle('active');
+          });
+          // Close menu when a link is tapped (mobile)
+          menuList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            menuList.classList.remove('active');
+          }));
+        }
+      })();
+    </script>
+
+    <section id="about-home">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-robot"></i>
+          <span>Intermediate</span>
+        </div>
+        <h1>Deep Learning</h1>
+        <p class="hero-subtitle">
+          Explore advanced deep learning architectures and cutting-edge AI research. 
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <span>2-4 hours</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-signal"></i>
+            <span>Intermediate</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <span>Free</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-card card-1">
+          <i class="fas fa-brain"></i>
+          <span>DNN</span>
+        </div>
+        <div class="floating-card card-2">
+          <i class="fas fa-network-wired"></i>
+          <span>CNN</span>
+        </div>
+        <div class="floating-card card-3">
+          <i class="fas fa-chart-line"></i>
+          <span>Transformer</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="course-inner">
+      <div class="overview">
+        <div class="course-panel">
+          <div class="course-header">
+            <img
+              class="course-img"
+              src="../img/deep-learning.png"
+              alt="Deep Learning"
+            />
+            <div class="course-overlay">
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-info">
+            <div class="course-meta">
+              <div class="meta-item">
+                <i class="fas fa-calendar"></i>
+                <span>Last updated: Sep 2025</span>
+              </div>
+            </div>
+
+            <div class="callout info">
+              <i class="fas fa-lightbulb"></i>
+              <div>
+                <strong>Pro Tip:</strong> Complete one lesson per day for
+                optimal retention. Each lesson builds on the previous one.
+              </div>
+            </div>
+            <div class="progress-wrap">
+              <div
+                id="progress-bar"
+                class="progress-bar"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuenow="0"
+                aria-valuemax="100"
+              >
+                <div
+                  id="progress-fill"
+                  class="progress-fill"
+                  style="width: 0%"
+                ></div>
+                <div id="progress-label" class="progress-label">
+                  0% Completed
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-sections">
+          <div class="reset-bar">
+            <button id="reset-progress" class="reset-btn">
+              <i class="fa-solid fa-rotate-left"></i> Reset Progress
+            </button>
+          </div>
+
+          <!-- Learning Objectives ---->
+          <section class="content-section" id="objectives">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <h3>Learning Objectives</h3>
+            </div>
+            <div class="objectives-grid">
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Understand what deep learning is and how it extends classic ML.</span>
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Learn the structure and training of deep neural networks.</span>
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Get familiar with CNNs, RNNs, and Transformers.</span>
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>See how deep learning is applied in real-world systems.</span>
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Gain awareness of efficiency, future directions, and basic demos.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="content-section" id="prerequisites">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-list-check"></i>
+              </div>
+              <h3>Prerequisites</h3>
+            </div>
+            <p>
+              Recommended: complete the previous module
+              <a class="prereq-link" href="./machine-learning.html"
+                ><i class="fas fa-book-open"></i> Machine Learning</a
+              >
+              to ensure you’re comfortable with ML basics and terminology. 
+              Basic algebra and computer literacy are enough; 
+              light JavaScript helps for the demos.
+            </p>
+            <div class="tags">
+              <span class="tag">Completed Machine Learning</span>
+              <span class="tag">Basic algebra</span>
+              <span class="tag">Optional: JavaScript basics</span>
+            </div>
+          </section>
+
+          <div class="lessons-container">
+            <h3 class="lessons-title">Course Lessons</h3>
+            <!-- Course Lessons --->
+            <div class="lesson-item" data-lesson="1">
+              <div class="lesson-header">
+                <div class="lesson-number">01</div>
+                <div class="lesson-content">
+                  <h4>What is Deep Learning?</h4>
+                  <p>
+                    Introduces deep learning as multi-layer neural networks that automatically learn features from raw data.
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 8 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+Deep learning is a subfield of machine learning that uses multi-layer neural networks to 
+automatically learn hierarchical features from data. Unlike traditional ML that often 
+depends on handcrafted features, deep learning discovers useful representations directly 
+from raw data such as images, speech, and text. Its ability to scale with large datasets and 
+computing power makes it the foundation of modern AI breakthroughs.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> deep neural network, hierarchy, representation learning
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="2">
+              <div class="lesson-header">
+                <div class="lesson-number">02</div>
+                <div class="lesson-content">
+                  <h4>Core Concepts</h4>
+                  <p>
+                    Explains forward and backward passes, activations, and how networks are trained.
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 12 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+Deep Neural Networks (DNNs) are built from layers of neurons connected by weights. The 
+forward pass computes outputs layer by layer, while the backward pass (backpropagation) 
+adjusts weights using gradients to minimize error. Activation functions such as ReLU or 
+sigmoid provide non-linearity, enabling networks to learn complex patterns. Together, 
+these mechanisms power the learning process.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> DNN, activation, forward pass, backpropagation
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="3">
+              <div class="lesson-header">
+                <div class="lesson-number">03</div>
+                <div class="lesson-content">
+                  <h4>
+                    Training Challenges & Solutions
+                  </h4>
+                  <p>
+                    Covers common training issues (like vanishing gradients) and methods to overcome them.
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 10 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Training deep networks can be unstable. Problems like vanishing/exploding gradients, 
+overfitting, or slow convergence often arise. Solutions include weight initialization 
+strategies, batch normalization to stabilize activations, dropout to reduce overfitting, and 
+modern optimizers (SGD with momentum, Adam). These techniques make deep models 
+both trainable and more generalizable.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> vanishing gradient, batch normalization, dropout, optimizer
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="4">
+              <div class="lesson-header">
+                <div class="lesson-number">04</div>
+                <div class="lesson-content">
+                  <h4>Classification</h4>
+                  <p>Cover k-NN intuition and decision boundaries.</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 10 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Classification assigns each input to a discrete class. A simple baseline is k-nearest neighbors (k-NN): for a
+                    new point, find its k closest labeled neighbors in feature space and return the majority label; larger k usually
+                    smooths the decision boundary but may blur fine structure. Alternatives like decision trees learn simple,
+                    interpretable rules from data and can capture nonlinear patterns
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> classification, k-NN, boundary
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="5">
+              <div class="lesson-header">
+                <div class="lesson-number">05</div>
+                <div class="lesson-content">
+                  <h4>Overfitting vs Underfitting</h4>
+                  <p>Show underfit vs overfit curves and bias–variance tradeoff.</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 8 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Generalization depends on model complexity. Underfitting occurs when the model is too simple to capture
+                    patterns, leading to high errors on both training and test data. Overfitting happens when the model memorizes
+                    noise, yielding very low training error but poor test performance. The goal is a balance—often helped by
+                    regularization, simpler models, and proper validation.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> bias, variance, generalization
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="6">
+              <div class="lesson-header">
+                <div class="lesson-number">06</div>
+                <div class="lesson-content">
+                  <h4>Train/Validation/Test & Cross-Validation</h4>
+                  <p>Discuss proper splits and avoiding data leakage.</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 8 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    To estimate real-world performance, split data into train, validation, and test sets. The model learns on the
+                    train split, hyperparameters are chosen on the validation split (or via k-fold cross-validation for stability), and
+                    the held-out test set is used once at the end to report an unbiased estimate. Always fit preprocessing steps
+                    only on training data to avoid leakage.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> validation, cross-validation, holdout
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- New lessons to deepen the module -->
+            <div class="lesson-item" data-lesson="7">
+              <div class="lesson-header">
+                <div class="lesson-number">07</div>
+                <div class="lesson-content">
+                  <h4>Evaluation Metrics</h4>
+                  <p>Explain precision, recall, F1, and when accuracy fails.</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 8 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Different tasks require different metrics. For regression, common choices include MAE, MSE/RMSE, and R²
+                    to summarize error and explained variance. For classification, accuracy can be misleading with class
+                    imbalance, so we track precision, recall, and F1, and examine the confusion matrix; threshold-based curves
+                    like ROC and PR help compare classifiers.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> precision, recall, F1
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="8">
+              <div class="lesson-header">
+                <div class="lesson-number">08</div>
+                <div class="lesson-content">
+                  <h4>Feature Engineering & Preprocessing</h4>
+                  <p>Scaling, encoding, imputing, and leak-free pipelines.</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 8 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Feature engineering transforms raw inputs into informative signals. Typical steps include scaling numeric
+                    features, encoding categorical variables, and imputing missing values; for text, bag-of-words or TF-IDF
+                    create count-based representations. To prevent leakage, compute all preprocessing parameters using only
+                    the training split, then apply them consistently to validation and test.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> scaling, encoding, imputation
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="9">
+              <div class="lesson-header">
+                <div class="lesson-number">09</div>
+                <div class="lesson-content">
+                  <h4>Model Selection & Hyperparameter Tuning</h4>
+                  <p>Introduce hyperparameters, grid/random search, learning curves.</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 10 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Model selection chooses a configuration that performs best on validation data. Hyperparameters—such as k
+                    in k-NN or tree depth—are tuned via grid or random search combined with cross-validation. Learning and
+                    validation curves diagnose whether collecting more data, simplifying the model, or regularizing would likely
+                    improve generalization.
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> hyperparameters, cross-validation, search
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="10">
+              <div class="lesson-header">
+                <div class="lesson-number">10</div>
+                <div class="lesson-content">
+                  <h4>Clustering & Dimensionality Reduction</h4>
+                  <p>
+                    Demo k-means and PCA, emphasize visualization.
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 10 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  Unsupervised exploration reveals structure without labels. K-means iteratively assigns points to the nearest
+                  centroids and updates those centroids to minimize within-cluster variance; the elbow or silhouette methods
+                  help choose k. Dimensionality reduction with PCA projects data onto directions of maximal variance to
+                  visualize or simplify downstream modeling.
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> k-means, PCA, clusters
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="11">
+              <div class="lesson-header">
+                <div class="lesson-number">11</div>
+                <div class="lesson-content">
+                  <h4>JavaScript Project: Mini ML Lab</h4>
+                  <p>
+                    Try code on your own!
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 1 hour</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                    Firstly, build an interactive linear regression demo where the algorithm fits a line to user-plotted points and predicts new values. Users can click to add points and instantly see how the model updates to minimize error.
+                    Secondly, create a k-NN classification playground where users place points in different classes and adjust the value of k to observe how the decision boundary changes. This demonstrates how algorithms use nearest neighbors to make decisions.
+                    Finally, add a k-means clustering explorer where users generate random points and watch how clusters and centroids are updated step by step. This shows how unsupervised learning can discover hidden structure in data.
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> linear regression demo, k-NN, k-means clustering explorer
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Module summary -->
+            <div class="lesson-item" data-lesson="12">
+              <div class="lesson-header">
+                <div class="lesson-number">12</div>
+                <div class="lesson-content">
+                  <h4>Module Summary</h4>
+                  <p>
+                    This module covered the basics of machine learning: supervised, unsupervised, and reinforcement learning, along with the data pipeline from dataset to prediction. Learners practiced simple models—linear regression and k-NN classification—and explored concepts of overfitting vs underfitting, proper train/validation/test splits, and key evaluation metrics. We also introduced feature engineering, hyperparameter tuning, and unsupervised methods like k-means clustering and PCA. Together, these lessons provide a solid foundation for building, evaluating, and improving ML models.
+                  </p>
+                  <p>
+                    Next steps: explore the Deep Learning and Neural Networks modules, try a
+                    small project.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section class="content-section" id="resources">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-book-open"></i>
+              </div>
+              <h3>Further Resources</h3>
+            </div>
+            <div class="resources-grid">
+              <div class="resource-card">
+                <div class="resource-icon">
+                  <i class="fas fa-book"></i>
+                </div>
+                <h4>Machine Learning Specialization</h4>
+                <p>Andrew Ng's comprehensive overview course</p>
+                <a
+                  href="https://www.coursera.org/specializations/machine-learning-introduction/"
+                  class="resource-link"
+                  >Learn More <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+              <div class="resource-card">
+                <div class="resource-icon">
+                  <i class="fas fa-code"></i>
+                </div>
+                <h4>Kaggle</h4>
+                <p>Datasets and beginner notebooks.</p>
+                <a
+                  href="https://www.kaggle.com"
+                  class="resource-link"
+                  >Learn More <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <aside class="enroll toc">
+        <div class="toc-downloads">
+          <h4>Course Materials</h4>
+          <div class="download-item">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Summary notes (PDF)</span>
+            <a
+              class="download-btn download-notes"
+              href="../materials/machine-learning-summary.pdf"
+              download
+              aria-label="Download summary notes PDF"
+              >Download</a
+            >
+          </div>
+          <div class="download-item">
+            <i class="fa-solid fa-file-code"></i>
+            <span>Sample code (JS)</span>
+            <a
+              class="download-btn"
+              href="../materials/machine-learning-sample.js"
+              download
+              aria-label="Download sample code JS"
+            >
+              Download
+            </a>
+          </div>
+        </div>
+
+        <div class="toc-info">
+          <div class="info-item">
+            <i class="fa-regular fa-clock"></i>
+            <span>Estimated time: ~3 hours</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+    <footer>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 MaxAI |
+          <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="machine-learning.js"></script>
+  </body>
+</html>
