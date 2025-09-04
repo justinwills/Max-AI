@@ -264,41 +264,94 @@
       })();
 
       // Reflect AI Foundations completion in Recent Activity
-      (function () {
-        try {
-          const ra = document.querySelector(".recent-activity");
-          if (!ra) return;
-          const completed =
-            localStorage.getItem("ai_foundations_completed_v1") === "true";
-          let item = ra.querySelector(".activity-ai-foundations");
-          if (completed) {
-            if (!item) {
-              item = document.createElement("div");
-              item.className = "activity-item activity-ai-foundations";
-              const when = new Date();
-              const whenText = when.toLocaleDateString(undefined, {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              });
-              item.innerHTML = `
-                <div class="activity-icon"><i class="fas fa-check-circle" style="color:#10b981"></i></div>
-                <div class="activity-details">
-                  <p>Completed "AI Foundations"</p>
-                  <span>${whenText}</span>
-                </div>`;
-              ra.appendChild(item);
-            }
-            localStorage.setItem(
-              "home_activity_logged_ai_foundations_v1",
-              "true"
-            );
-          } else {
-            if (item) item.remove();
-            localStorage.removeItem("home_activity_logged_ai_foundations_v1");
-          }
-        } catch (_) {}
-      })();
+(function () {
+  const COURSES = [
+    {
+      id: "ai_foundations",
+      title: 'AI Foundations',
+      completedKey: 'ai_foundations_completed_v1',
+      activityKey:  'home_activity_logged_ai_foundations_v1', // "true"
+      icon: '<i class="fas fa-check-circle" style="color:#10b981"></i>'
+    },
+    {
+      id: "machine-learning",
+      title: 'Machine Learning',
+      completedKey: 'machine-learning_completed_v1',
+      activityKey:  'home_activity_logged_machine-learning_v1', // JSON: { ts, course }
+      icon: '<i class="fas fa-check-circle" style="color:#10b981"></i>'
+    }
+  ];
+
+  const ra = document.querySelector(".recent-activity");
+  if (!ra) return;
+
+  function getActivityDate(course) {
+    const raw = localStorage.getItem(course.activityKey);
+    // ML uses JSON with ts; AI Foundations stored "true"
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.ts) return new Date(parsed.ts);
+    } catch (_) {}
+    // fallback: now
+    return new Date();
+  }
+
+  function formatDate(d) {
+    return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+  }
+
+  function upsertActivity(course) {
+    const completed = localStorage.getItem(course.completedKey) === "true";
+    let item = ra.querySelector(`.activity-item[data-course="${course.id}"]`);
+
+    if (completed) {
+      const when = getActivityDate(course);
+      const whenText = formatDate(when);
+      if (!item) {
+        item = document.createElement("div");
+        item.className = "activity-item";
+        item.setAttribute("data-course", course.id);
+        item.innerHTML = `
+          <div class="activity-icon">${course.icon}</div>
+          <div class="activity-details">
+            <p>Completed "${course.title}"</p>
+            <span class="activity-time">${whenText}</span>
+          </div>`;
+        ra.appendChild(item);
+      } else {
+        const timeEl = item.querySelector(".activity-time");
+        if (timeEl) timeEl.textContent = whenText;
+      }
+    } else {
+      if (item) item.remove();
+    }
+  }
+
+  function renderAll() {
+    COURSES.forEach(upsertActivity);
+  }
+
+  // initial render
+  renderAll();
+
+  // live updates when course page changes localStorage in another tab
+  window.addEventListener("storage", (e) => {
+    if (!e.key) return;
+    if (COURSES.some(c =>
+      e.key === c.completedKey || e.key === c.activityKey
+    )) {
+      renderAll();
+    }
+  });
+
+  // refresh on return/visibility changes
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") renderAll();
+  });
+  window.addEventListener("pageshow", renderAll);
+})();
+</script>
+
     </script>
   </body>
 </html>

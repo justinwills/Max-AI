@@ -208,7 +208,6 @@ function kmeans(X, k, { maxIter = 100, seed = 42 } = {}) {
   }
   return { centers, assign };
 }
-
 // ------------------------
 // Simple k-fold indices (not stratified)
 // ------------------------

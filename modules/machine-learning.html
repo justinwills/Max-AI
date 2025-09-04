@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Machine Learnin - Modules</title>
+    <title>Machine Learning - Modules</title>
 
     <link
       rel="stylesheet"
@@ -101,20 +101,20 @@
       <div class="hero-content">
         <div class="hero-badge">
           <i class="fas fa-robot"></i>
-          <span>Beginner Friendly</span>
+          <span>Intermediate</span>
         </div>
-        <h1>AI Foundations</h1>
+        <h1>Machine Learning</h1>
         <p class="hero-subtitle">
-          Start from zero and build solid, practical intuition
+          Dive deep into algorithms, data preprocessing, and model evaluation techniques. 
         </p>
         <div class="hero-stats">
           <div class="stat-item">
             <i class="fas fa-clock"></i>
-            <span>2-3 hours</span>
+            <span>2-4 hours</span>
           </div>
           <div class="stat-item">
             <i class="fas fa-signal"></i>
-            <span>Beginner</span>
+            <span>Intermediate</span>
           </div>
           <div class="stat-item">
             <i class="fas fa-users"></i>
@@ -129,11 +129,11 @@
         </div>
         <div class="floating-card card-2">
           <i class="fas fa-network-wired"></i>
-          <span>Neural</span>
+          <span>Supervised</span>
         </div>
         <div class="floating-card card-3">
           <i class="fas fa-chart-line"></i>
-          <span>Data</span>
+          <span>Unsupervised</span>
         </div>
       </div>
     </section>
@@ -144,8 +144,8 @@
           <div class="course-header">
             <img
               class="course-img"
-              src="../img/ai-foundation.png"
-              alt="AI Foundations"
+              src="../img/machine-learning.png"
+              alt="Machine Learning"
             />
             <div class="course-overlay">
               <div class="play-button">
@@ -158,7 +158,7 @@
             <div class="course-meta">
               <div class="meta-item">
                 <i class="fas fa-calendar"></i>
-                <span>Last updated: Aug 2025</span>
+                <span>Last updated: Sep 2025</span>
               </div>
             </div>
 
@@ -209,56 +209,23 @@
             <div class="objectives-grid">
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Define AI vs. ML vs. DL and where each applies</span>
+                <span>Distinguish core ML paradigms and pick an appropriate approach for a given problem.</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Explain the Turing Test and discuss its limitations</span>
+                <span>Prepare data end-to-end (clean → encode/scale → split) without leakage.</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span
-                  >Differentiate Narrow AI (ANI), AGI, and
-                  Superintelligence</span
-                >
+                <span>Train simple models (regression/classification), evaluate properly, and improve generalization.</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span
-                  >Describe data: features, labels, splits, and leakage</span
-                >
+                <span>Explore unlabeled data with clustering and dimensionality reduction.</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span
-                  >Compare supervised, unsupervised, and reinforcement
-                  learning</span
-                >
-              </div>
-              <div class="objective-item">
-                <i class="fas fa-check-circle"></i>
-                <span
-                  >Compute and interpret precision, recall, F1, and
-                  ROC-AUC</span
-                >
-              </div>
-              <div class="objective-item">
-                <i class="fas fa-check-circle"></i>
-                <span
-                  >Identify overfitting and apply
-                  regularization/validation</span
-                >
-              </div>
-              <div class="objective-item">
-                <i class="fas fa-check-circle"></i>
-                <span>Apply basic search ideas (BFS/DFS, A* intuition)</span>
-              </div>
-              <div class="objective-item">
-                <i class="fas fa-check-circle"></i>
-                <span
-                  >Practice responsible AI: fairness, privacy,
-                  transparency</span
-                >
+                <span>Communicate results using clear metrics and visualizations.</span>
               </div>
             </div>
           </section>
@@ -271,13 +238,18 @@
               <h3>Prerequisites</h3>
             </div>
             <p>
-              Curiosity and basic computer literacy. Optional: light Python or
-              JavaScript helps, but is not required.
+              Recommended: complete the previous module
+              <a class="prereq-link" href="./ai-foundation.html"
+                ><i class="fas fa-book-open"></i> AI Foundations</a
+              >
+              to ensure you're comfortable with basic AI concepts and
+              terminology. Basic computer literacy is enough; light JavaScript
+              helps for the demos.
             </p>
             <div class="tags">
-              <span class="tag">No advanced math</span>
-              <span class="tag">No coding required</span>
-              <span class="tag">Beginner friendly</span>
+              <span class="tag">Completed AI Foundations</span>
+              <span class="tag">Basic algebra</span>
+              <span class="tag">Optional: JavaScript basics</span>
             </div>
           </section>
 
@@ -288,9 +260,53 @@
               <div class="lesson-header">
                 <div class="lesson-number">01</div>
                 <div class="lesson-content">
-                  <h4>What Is AI?</h4>
+                  <h4>Types of Learning</h4>
                   <p>
-                    Understanding artificial intelligence and its core concepts
+                    Introduce supervised, unsupervised, and reinforcement learning with examples.
+                  </p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 10 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    In supervised learning, the model is trained using a set of
+                    labeled data, meaning that the inputs and corresponding
+                    outputs are already determined. The model learns the mapping
+                    from input to output and applies it to new data. <b>Example:</b>
+                    Regression models used to predict house prices, or
+                    classifying images of dogs and cats based on labeled data.
+                    In unsupervised learning, there are no pre-labeled outputs.
+                    The task of the model is to find patterns or structures in
+                    the data. This is commonly used for data clustering or
+                    dimensionality reduction. <b>Example:</b> Clustering algorithms
+                    like K-means are used for grouping data. Reinforcement
+                    learning models learn how to make decisions through
+                    interaction with the environment, with the goal of
+                    maximizing cumulative rewards through rewards and penalties.
+                    <b>Example:</b> Autonomous vehicles learning in traffic
+                    environments, or AlphaGo's application in playing Go.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> supervised, unsupervised, reinforcement
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="2">
+              <div class="lesson-header">
+                <div class="lesson-number">02</div>
+                <div class="lesson-content">
+                  <h4>The ML Data Pipeline</h4>
+                  <p>
+                    Walk through dataset → preprocessing → training → prediction.
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -304,55 +320,13 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Artificial Intelligence (AI) refers to the simulation of
-                    human intelligence in machines that are programmed to think,
-                    learn, and problem-solve. AI systems can perform tasks that
-                    typically require human intelligence, such as understanding
-                    natural language, recognizing patterns, solving problems,
-                    and making decisions.
+                    The standard workflow turns raw information into reliable predictions: first assemble a dataset; then
+                    preprocess it by cleaning missing or extreme values, encoding categories, and scaling numerics; next train a
+                    model by minimizing a loss on the training split; and finally run prediction (inference) on unseen data to
+                    evaluate and deploy.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Agent, Environment, Rationality,
-                    Symbolic vs. Statistical AI
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="lesson-item" data-lesson="2">
-              <div class="lesson-header">
-                <div class="lesson-number">02</div>
-                <div class="lesson-content">
-                  <h4>Turing Test: Testing Artificial Intelligence</h4>
-                  <p>
-                    What is the Turing Test? And what is the Importance of the
-                    Turing Test in AI Development
-                  </p>
-                </div>
-                <div class="lesson-status">
-                  <i class="fas fa-lock-open"></i>
-                </div>
-              </div>
-              <div class="lesson-details">
-                <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 6 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
-                </div>
-                <div class="lesson-preview">
-                  <p>
-                    Proposed by Alan Turing in 1950, the purpose of this test is
-                    to evaluate whether a machine can exhibit intelligent
-                    behavior indistinguishable from that of a human. Example: If
-                    a machine can interact with a human through conversation,
-                    and the human cannot distinguish whether it is a machine or
-                    a human, then the machine has passed the Turing Test. This
-                    test has become a benchmark in the development of artificial
-                    intelligence to evaluate whether a machine's thinking and
-                    behavior exhibit intelligence.
-                  </p>
-                  <div class="callout neutral">
-                    <strong>Key terms:</strong> Turing Test, Imitation Game,
-                    Indistinguishability, Natural language
+                    <strong>Key terms:</strong> dataset, preprocessing, inference
                   </div>
                 </div>
               </div>
@@ -363,12 +337,10 @@
                 <div class="lesson-number">03</div>
                 <div class="lesson-content">
                   <h4>
-                    History of Artificial Intelligence: From Expert Systems to
-                    Deep Learning
+                    Linear Regression
                   </h4>
                   <p>
-                    Early AI: Expert Systems and Evolution from Machine Learning
-                    to Deep Learning
+                    Explain slope, intercept, MSE, and show a quick demo.
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -382,20 +354,13 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    From the 1950s to the 1980s, AI began to develop, and expert
-                    systems were used to solve problems that typically required
-                    human knowledge and skills. Example: Some systems that can
-                    diagnose diseases based on symptoms. From the 1990s to the
-                    present, AI has experienced rapid development, with the
-                    advent of machine learning, allowing machines to learn from
-                    data, and deep learning, which processes information through
-                    complex neural networks to make decisions. Example: Deep
-                    learning is widely used in facial recognition and autonomous
-                    vehicles.
+                    Linear regression models the relationship between a numeric target and one or more features using a straight
+                    line. Training selects parameters—slope and intercept—that minimize the mean squared error between true
+                    and predicted values; solutions can use least squares or iterative gradient descent. Once fitted, the line
+                    generalizes to forecast values for new inputs.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Expert systems, AI winters,
-                    Machine learning, Deep learning
+                    <strong>Key terms:</strong> slope, intercept, MSE
                   </div>
                 </div>
               </div>
@@ -405,8 +370,8 @@
               <div class="lesson-header">
                 <div class="lesson-number">04</div>
                 <div class="lesson-content">
-                  <h4>Categories of AI</h4>
-                  <p>Narrow AI, General AI, and Superintelligence</p>
+                  <h4>Classification</h4>
+                  <p>Cover k-NN intuition and decision boundaries.</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -414,22 +379,18 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 7 min</span>
+                  <span><i class="fas fa-clock"></i> 10 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    AI designed to perform specific tasks with limited
-                    capabilities. Example: Siri, Google Assistant, or Netflix's
-                    recommendation system. It capable of performing a wide range
-                    of tasks and possessing human-like learning abilities. AI
-                    that surpasses human intelligence and is capable of
-                    exceeding human performance in almost all areas, including
-                    creativity, decision-making, and social abilities.
+                    Classification assigns each input to a discrete class. A simple baseline is k-nearest neighbors (k-NN): for a
+                    new point, find its k closest labeled neighbors in feature space and return the majority label; larger k usually
+                    smooths the decision boundary but may blur fine structure. Alternatives like decision trees learn simple,
+                    interpretable rules from data and can capture nonlinear patterns
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Narrow AI (ANI), General AI
-                    (AGI), Superintelligence (ASI)
+                    <strong>Key terms:</strong> classification, k-NN, boundary
                   </div>
                 </div>
               </div>
@@ -439,8 +400,8 @@
               <div class="lesson-header">
                 <div class="lesson-number">05</div>
                 <div class="lesson-content">
-                  <h4>Introduction to Basic Logic and Search Algorithms</h4>
-                  <p>Basic Logic in AI and Search Algorithms</p>
+                  <h4>Overfitting vs Underfitting</h4>
+                  <p>Show underfit vs overfit curves and bias–variance tradeoff.</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -448,26 +409,18 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 12 min</span>
+                  <span><i class="fas fa-clock"></i> 8 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Logic is an important tool for AI to make decisions and
-                    solve problems. AI uses logic to help machines think in a
-                    structured way and perform reasoning. Example: AI uses
-                    logical algorithms to solve puzzles like Sudoku or chess
-                    problems. In AI, search algorithms are used to find
-                    solutions to complex problems. Machines search for the best
-                    solution through a series of steps or decisions. Examples:
-                    Depth-First Search (DFS): Explores one branch to the end
-                    before returning to explore other branches, and
-                    Breadth-First Search (BFS): Explores all nodes at one level
-                    before moving on to the next level.
+                    Generalization depends on model complexity. Underfitting occurs when the model is too simple to capture
+                    patterns, leading to high errors on both training and test data. Overfitting happens when the model memorizes
+                    noise, yielding very low training error but poor test performance. The goal is a balance—often helped by
+                    regularization, simpler models, and proper validation.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Propositional logic, DFS, BFS,
-                    Optimality, Completeness, Path cost
+                    <strong>Key terms:</strong> bias, variance, generalization
                   </div>
                 </div>
               </div>
@@ -477,8 +430,8 @@
               <div class="lesson-header">
                 <div class="lesson-number">06</div>
                 <div class="lesson-content">
-                  <h4>Using JavaScript for Small Demonstrations</h4>
-                  <p>Tic-Tac-Toe AI and Pathfinding Visualization</p>
+                  <h4>Train/Validation/Test & Cross-Validation</h4>
+                  <p>Discuss proper splits and avoiding data leakage.</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -486,32 +439,18 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 25 min</span>
+                  <span><i class="fas fa-clock"></i> 8 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Firstly, create a Tic-Tac-Toe AI using simple search
-                    algorithms to play against human players. Demonstrate how a
-                    machine decides the best next move based on the game state.
-                    An interactive demonstration is provided on a website where
-                    users can play against the AI. Secondly, visualize
-                    pathfinding using the A* algorithm to find the best path
-                    from start to end in a grid. Show how search algorithms can
-                    be used to solve practical problems, such as robot
-                    navigation. Users can see how the search algorithm finds the
-                    optimal path in the grid.
+                    To estimate real-world performance, split data into train, validation, and test sets. The model learns on the
+                    train split, hyperparameters are chosen on the validation split (or via k-fold cross-validation for stability), and
+                    the held-out test set is used once at the end to report an unbiased estimate. Always fit preprocessing steps
+                    only on training data to avoid leakage.
                   </p>
-                  <img
-                    src="Tic-Tac-Toe AI.jpg"
-                    alt="Tic-Tac-Toe AI"
-                    class="profile-image"
-                    width="500"
-                    height="300"
-                  />
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Minimax, Heuristic, A* (A-star),
-                    Nodes & edges
+                    <strong>Key terms:</strong> validation, cross-validation, holdout
                   </div>
                 </div>
               </div>
@@ -522,8 +461,8 @@
               <div class="lesson-header">
                 <div class="lesson-number">07</div>
                 <div class="lesson-content">
-                  <h4>Data, Features, and Labels</h4>
-                  <p>What data looks like in ML and how it flows</p>
+                  <h4>Evaluation Metrics</h4>
+                  <p>Explain precision, recall, F1, and when accuracy fails.</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -536,30 +475,13 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Most ML problems can be described with three words:
-                    <strong>features</strong> (inputs),
-                    <strong>labels</strong> (targets), and
-                    <strong>examples</strong> (rows). A typical workflow is:
-                    collect → clean → split (train/validation/test) → train →
-                    evaluate → iterate.
+                    Different tasks require different metrics. For regression, common choices include MAE, MSE/RMSE, and R²
+                    to summarize error and explained variance. For classification, accuracy can be misleading with class
+                    imbalance, so we track precision, recall, and F1, and examine the confusion matrix; threshold-based curves
+                    like ROC and PR help compare classifiers.
                   </p>
-                  <ul>
-                    <li>
-                      <strong>Tabular data:</strong> rows = examples, columns =
-                      features
-                    </li>
-                    <li>
-                      <strong>Images:</strong> features are pixels; labels could
-                      be classes
-                    </li>
-                    <li>
-                      <strong>Text:</strong> features are tokens/embeddings;
-                      labels could be intents
-                    </li>
-                  </ul>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Features, Labels, Train/Val/Test
-                    split, Leakage
+                    <strong>Key terms:</strong> precision, recall, F1
                   </div>
                 </div>
               </div>
@@ -569,8 +491,8 @@
               <div class="lesson-header">
                 <div class="lesson-number">08</div>
                 <div class="lesson-content">
-                  <h4>Learning Paradigms</h4>
-                  <p>Supervised, unsupervised, and reinforcement learning</p>
+                  <h4>Feature Engineering & Preprocessing</h4>
+                  <p>Scaling, encoding, imputing, and leak-free pipelines.</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -583,26 +505,13 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    <strong>Supervised</strong> uses labeled input→output pairs
-                    (classification/regression).
-                    <strong>Unsupervised</strong> finds structure without labels
-                    (clustering, dimensionality reduction).
-                    <strong>Reinforcement learning</strong> optimizes actions
-                    via rewards.
+                    Feature engineering transforms raw inputs into informative signals. Typical steps include scaling numeric
+                    features, encoding categorical variables, and imputing missing values; for text, bag-of-words or TF-IDF
+                    create count-based representations. To prevent leakage, compute all preprocessing parameters using only
+                    the training split, then apply them consistently to validation and test.
                   </p>
-                  <ul>
-                    <li>Classification vs. regression</li>
-                    <li>
-                      Clustering (K-Means) and embeddings (PCA, t-SNE, UMAP)
-                    </li>
-                    <li>
-                      Agents, policies, rewards, exploration vs. exploitation
-                      (RL)
-                    </li>
-                  </ul>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Supervised, Unsupervised,
-                    Reinforcement, Clustering, Policy, Reward
+                    <strong>Key terms:</strong> scaling, encoding, imputation
                   </div>
                 </div>
               </div>
@@ -612,8 +521,8 @@
               <div class="lesson-header">
                 <div class="lesson-number">09</div>
                 <div class="lesson-content">
-                  <h4>Model Evaluation</h4>
-                  <p>Accuracy, precision, recall, F1, and ROC-AUC</p>
+                  <h4>Model Selection & Hyperparameter Tuning</h4>
+                  <p>Introduce hyperparameters, grid/random search, learning curves.</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -626,23 +535,12 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    For imbalanced classes, accuracy can be misleading. Use
-                    <strong>precision</strong> (quality of positives),
-                    <strong>recall</strong> (coverage of true positives), their
-                    harmonic mean <strong>F1</strong>, and ranking metrics like
-                    <strong>ROC-AUC</strong> or <strong>PR-AUC</strong>.
-                  </p>
-                  <ul>
-                    <li><strong>Precision</strong> = TP / (TP + FP)</li>
-                    <li><strong>Recall</strong> = TP / (TP + FN)</li>
-                    <li>
-                      <strong>F1</strong> = 2 · (Precision · Recall) /
-                      (Precision + Recall)
-                    </li>
-                  </ul>
+                    Model selection chooses a configuration that performs best on validation data. Hyperparameters—such as k
+                    in k-NN or tree depth—are tuned via grid or random search combined with cross-validation. Learning and
+                    validation curves diagnose whether collecting more data, simplifying the model, or regularizing would likely
+                    improve generalization.
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> confusion matrix, threshold, PR
-                    curve, ROC curve
+                    <strong>Key terms:</strong> hyperparameters, cross-validation, search
                   </div>
                 </div>
               </div>
@@ -652,9 +550,9 @@
               <div class="lesson-header">
                 <div class="lesson-number">10</div>
                 <div class="lesson-content">
-                  <h4>Overfitting and Generalization</h4>
+                  <h4>Clustering & Dimensionality Reduction</h4>
                   <p>
-                    Bias–variance, regularization, and validation strategies
+                    Demo k-means and PCA, emphasize visualization.
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -667,25 +565,12 @@
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
-                  <p>
-                    <strong>Overfitting</strong> happens when a model memorizes
-                    training noise. Mitigate with regularization (L1/L2),
-                    dropout, early stopping, data augmentation, and strong
-                    validation (k-fold, stratified splits).
-                  </p>
-                  <ul>
-                    <li>
-                      <strong>Bias</strong>: error from simplifying assumptions
-                    </li>
-                    <li>
-                      <strong>Variance</strong>: error from sensitivity to data
-                      fluctuations
-                    </li>
-                    <li>Find balance to improve generalization</li>
-                  </ul>
+                  Unsupervised exploration reveals structure without labels. K-means iteratively assigns points to the nearest
+                  centroids and updates those centroids to minimize within-cluster variance; the elbow or silhouette methods
+                  help choose k. Dimensionality reduction with PCA projects data onto directions of maximal variance to
+                  visualize or simplify downstream modeling.
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Bias–variance, L1/L2 (weight
-                    decay), early stopping, cross‑validation, data augmentation
+                    <strong>Key terms:</strong> k-means, PCA, clusters
                   </div>
                 </div>
               </div>
@@ -695,8 +580,10 @@
               <div class="lesson-header">
                 <div class="lesson-number">11</div>
                 <div class="lesson-content">
-                  <h4>Ethics and Responsible AI</h4>
-                  <p>Fairness, privacy, transparency, and safety</p>
+                  <h4>JavaScript Project: Mini ML Lab</h4>
+                  <p>
+                    Try code on your own!
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -704,25 +591,15 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 8 min</span>
+                  <span><i class="fas fa-clock"></i> 1 hour</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
-                  <p>
-                    Beyond performance, AI must be <strong>fair</strong>,
-                    respect <strong>privacy</strong>, be
-                    <strong>transparent</strong> about limitations, and consider
-                    <strong>social impact</strong>. Evaluate datasets for bias
-                    and design processes for oversight.
-                  </p>
-                  <ul>
-                    <li>Consent and purpose limitation for data</li>
-                    <li>Explainability and model cards</li>
-                    <li>Human-in-the-loop for sensitive decisions</li>
-                  </ul>
+                    Firstly, build an interactive linear regression demo where the algorithm fits a line to user-plotted points and predicts new values. Users can click to add points and instantly see how the model updates to minimize error.
+                    Secondly, create a k-NN classification playground where users place points in different classes and adjust the value of k to observe how the decision boundary changes. This demonstrates how algorithms use nearest neighbors to make decisions.
+                    Finally, add a k-means clustering explorer where users generate random points and watch how clusters and centroids are updated step by step. This shows how unsupervised learning can discover hidden structure in data.
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Fairness, Bias, Privacy,
-                    Transparency, Accountability
+                    <strong>Key terms:</strong> linear regression demo, k-NN, k-means clustering explorer
                   </div>
                 </div>
               </div>
@@ -735,19 +612,11 @@
                 <div class="lesson-content">
                   <h4>Module Summary</h4>
                   <p>
-                    You can now explain what AI is, how the Turing Test relates
-                    to intelligence, and how AI evolved from expert systems to
-                    modern deep learning. You can distinguish ANI vs. AGI vs.
-                    ASI, structure data into features and labels with proper
-                    splits, pick between supervised/unsupervised/RL, evaluate
-                    models with precision/recall/F1/ROC‑AUC, mitigate
-                    overfitting, and reason about fairness, privacy and
-                    transparency.
+                    This module covered the basics of machine learning: supervised, unsupervised, and reinforcement learning, along with the data pipeline from dataset to prediction. Learners practiced simple models—linear regression and k-NN classification—and explored concepts of overfitting vs underfitting, proper train/validation/test splits, and key evaluation metrics. We also introduced feature engineering, hyperparameter tuning, and unsupervised methods like k-means clustering and PCA. Together, these lessons provide a solid foundation for building, evaluating, and improving ML models.
                   </p>
                   <p>
-                    Next steps: explore the ML and Deep Learning modules, try a
-                    small project (e.g., a classifier on tabular data), and
-                    practice communicating model limitations responsibly.
+                    Next steps: explore the Deep Learning and Neural Networks modules, try a
+                    small project.
                   </p>
                 </div>
               </div>
@@ -766,10 +635,10 @@
                 <div class="resource-icon">
                   <i class="fas fa-book"></i>
                 </div>
-                <h4>AI For Everyone</h4>
+                <h4>Machine Learning Specialization</h4>
                 <p>Andrew Ng's comprehensive overview course</p>
                 <a
-                  href="https://www.deeplearning.ai/courses/ai-for-everyone/"
+                  href="https://www.coursera.org/specializations/machine-learning-introduction/"
                   class="resource-link"
                   >Learn More <i class="fas fa-arrow-right"></i
                 ></a>
@@ -778,10 +647,10 @@
                 <div class="resource-icon">
                   <i class="fas fa-code"></i>
                 </div>
-                <h4>scikit-learn</h4>
-                <p>Beginner‑friendly machine learning API</p>
+                <h4>Kaggle</h4>
+                <p>Datasets and beginner notebooks.</p>
                 <a
-                  href="https://scikit-learn.org/stable/index.html"
+                  href="https://www.kaggle.com"
                   class="resource-link"
                   >Learn More <i class="fas fa-arrow-right"></i
                 ></a>
@@ -799,7 +668,7 @@
             <span>Summary notes (PDF)</span>
             <a
               class="download-btn download-notes"
-              href="../materials/ai-foundations-summary.pdf"
+              href="../materials/machine-learning-summary.pdf"
               download
               aria-label="Download summary notes PDF"
               >Download</a
@@ -810,7 +679,7 @@
             <span>Sample code (JS)</span>
             <a
               class="download-btn"
-              href="../materials/ai-foundations-sample.js"
+              href="../materials/machine-learning-sample.js"
               download
               aria-label="Download sample code JS"
             >
@@ -822,7 +691,7 @@
         <div class="toc-info">
           <div class="info-item">
             <i class="fa-regular fa-clock"></i>
-            <span>Estimated time: ~2 hours</span>
+            <span>Estimated time: ~3 hours</span>
           </div>
         </div>
       </aside>
@@ -836,6 +705,6 @@
       </div>
     </footer>
 
-    <script src="ai-foundation.js"></script>
+    <script src="machine-learning.js"></script>
   </body>
 </html>
