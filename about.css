@@ -4,7 +4,7 @@
 .about {
   padding: 100px 0;
   background: rgba(255, 255, 255, 0.02);
-  margin-top: 80px; /* Add margin to account for fixed navigation */
+  margin-top: 30px; /* Add margin to account for fixed navigation */
 }
 
 .section-header {
@@ -15,7 +15,7 @@
 .section-header h2 {
   font-size: 3rem;
   font-weight: 800;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
   background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
