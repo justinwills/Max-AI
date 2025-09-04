@@ -4,8 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - MaxAI</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="login.css" />
   </head>
@@ -13,7 +16,7 @@
     <nav>
       <div class="nav-container">
         <div class="logo-container">
-          <a href="home.html" aria-label="Go to Home">
+          <a href="index.html" aria-label="Go to Home">
             <img src="img/logo.svg" class="logo" alt="MaxAI" />
           </a>
         </div>
@@ -53,22 +56,25 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
       // Login form handling
-      document.getElementById("loginForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        
-        const loginButton = document.getElementById("loginBtn");
-        loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging In...';
-        loginButton.disabled = true;
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
 
-        // Simulate login process
-        setTimeout(function () {
-          swal("Login Successful!", "Welcome back to MaxAI!", "success");
-          
+          const loginButton = document.getElementById("loginBtn");
+          loginButton.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Logging In...';
+          loginButton.disabled = true;
+
+          // Simulate login process
           setTimeout(function () {
-            window.location.href = "home.html";
-          }, 2000);
-        }, 1500);
-      });
+            swal("Login Successful!", "Welcome back to MaxAI!", "success");
+
+            setTimeout(function () {
+              window.location.href = "home.html";
+            }, 2000);
+          }, 1500);
+        });
     </script>
   </body>
 </html>
