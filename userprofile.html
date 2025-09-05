@@ -249,6 +249,7 @@
           const user = users.find((u) => u.id === current.id) || users.find((u) => (u.email || "").toLowerCase() === String(current.email).toLowerCase());
           const username = (user && user.username) || current.username || "";
           const email = (user && user.email) || current.email || "";
+          const avatar = user && user.avatar ? user.avatar : null;
 
           const dn = document.getElementById("display-name");
           if (dn) dn.textContent = username || "";
@@ -258,25 +259,58 @@
           if (un) un.value = username || "";
           const em = document.getElementById("email");
           if (em) em.value = email || "";
+          const pic = document.getElementById("profile-pic");
+          if (pic && avatar) {
+            pic.src = avatar;
+          }
         } catch (e) {
           console.error(e);
         }
       })();
 
-      // Profile image upload preview
-      document
-        .getElementById("file-input")
-        ?.addEventListener("change", function (e) {
-          const file = e.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (ev) {
-              const img = document.getElementById("profile-pic");
-              if (img) img.src = ev.target.result;
-            };
-            reader.readAsDataURL(file);
-          }
-        });
+      // Profile image upload preview + persist to localStorage (compressed)
+      document.getElementById("file-input")?.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+          const dataUrl = ev.target.result;
+          // Downscale to max 256x256 to keep storage small
+          const imgEl = new Image();
+          imgEl.onload = function () {
+            const maxSize = 256;
+            let { width, height } = imgEl;
+            const scale = Math.min(1, maxSize / Math.max(width, height));
+            const w = Math.max(1, Math.round(width * scale));
+            const h = Math.max(1, Math.round(height * scale));
+            const canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(imgEl, 0, 0, w, h);
+            const out = canvas.toDataURL("image/jpeg", 0.85);
+
+            const img = document.getElementById("profile-pic");
+            if (img) img.src = out;
+
+            try {
+              const store = window.StorageUtil;
+              const current = store.getJSON("currentUser", null);
+              if (!current) return;
+              const users = store.getJSON("users", []);
+              const idx = users.findIndex((u) => u.id === current.id);
+              if (idx >= 0) {
+                users[idx].avatar = out;
+                store.setJSON("users", users);
+              }
+            } catch (err) {
+              console.error(err);
+            }
+          };
+          imgEl.src = dataUrl;
+        };
+        reader.readAsDataURL(file);
+      });
 
       // Save personal info and persist to localStorage
       document
