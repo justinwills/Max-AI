@@ -79,76 +79,38 @@
 
     <section id="user-details" class="user-profile">
       <div class="container">
-        <div class="section-header">
-          <h2>Home</h2>
-        </div>
-
         <div class="user-content">
-          <div class="profile-section">
-            <div class="profile-image">
-              <img src="img/pro1.webp" alt="Profile Picture" id="profile-pic" />
-              <div class="image-upload">
-                <label for="file-input" class="upload-btn">
-                  <i class="fas fa-camera"></i>
-                </label>
-                <input
-                  type="file"
-                  id="file-input"
-                  accept="image/*"
-                  style="display: none"
-                />
-              </div>
+          <div class="dashboard-grid">
+            <div class="card leaderboard-card">
+              <h3>Leaderboard</h3>
+              <div class="leaderboard-podium"></div>
+              <ol class="leaderboard-list"></ol>
             </div>
 
-            <div class="profile-info">
-              <h3>Justin</h3>
-              <p class="user-role">Learner</p>
-              <p class="user-email">justin@example.com</p>
-            </div>
-          </div>
-
-          <div class="details-grid">
-            <div class="detail-card">
-              <h3>Personal Information</h3>
-              <form class="user-form">
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" id="username" value="Justin" required />
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    value="justin@example.com"
-                    required
-                  />
-                </div>
-                <button type="submit" class="btn-primary">Save Changes</button>
-              </form>
-            </div>
-
-            <div class="detail-card">
-              <h3>Learning Progress</h3>
-              <div class="progress-stats">
-                <div class="stat-item">
-                  <div class="stat-number">0</div>
-                  <div class="stat-label">Courses Completed</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-number">0%</div>
-                  <div class="stat-label">Average Score</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-number">0</div>
-                  <div class="stat-label">Hours Learned</div>
+            <aside class="card sidebar-card">
+              <div class="sidebar-section">
+                <h3>Learning Progress</h3>
+                <div class="progress-stats">
+                  <div class="stat-item">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Courses Completed</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Average Score</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Hours Learned</div>
+                  </div>
                 </div>
               </div>
-
-              <div class="recent-activity">
-                <h4>Recent Activity</h4>
+              <hr />
+              <div class="sidebar-section">
+                <h3>Recent Activity</h3>
+                <div class="recent-activity"></div>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </div>
@@ -171,32 +133,32 @@
           document.querySelector(".nav-links").classList.toggle("active");
         });
 
-      // Profile image upload functionality
-      document
-        .getElementById("file-input")
-        .addEventListener("change", function (e) {
+      // Profile image upload functionality (guarded if absent)
+      (function () {
+        const fileInput = document.getElementById("file-input");
+        if (!fileInput) return;
+        fileInput.addEventListener("change", function (e) {
           const file = e.target.files[0];
           if (file) {
             const reader = new FileReader();
-            reader.onload = function (e) {
-              document.getElementById("profile-pic").src = e.target.result;
+            reader.onload = function (ev) {
+              const el = document.getElementById("profile-pic");
+              if (el && ev.target?.result) el.src = ev.target.result;
             };
             reader.readAsDataURL(file);
           }
         });
+      })();
 
-      // Form submission
-      document
-        .querySelector(".user-form")
-        .addEventListener("submit", function (e) {
+      // Form submission (guarded if form removed)
+      (function () {
+        const form = document.querySelector(".user-form");
+        if (!form) return;
+        form.addEventListener("submit", function (e) {
           e.preventDefault();
-          // Add your form submission logic here
-          Swal.fire({
-            icon: "success",
-            title: "Saved",
-            text: "Changes saved successfully!",
-          });
+          Swal.fire({ icon: "success", title: "Saved", text: "Changes saved successfully!" });
         });
+      })();
 
       // Apply course progress bonuses from localStorage to dashboard numbers
       (function () {
@@ -350,7 +312,179 @@
   });
   window.addEventListener("pageshow", renderAll);
 })();
-</script>
+  </script>
+
+    <script>
+      // Leaderboard: load from localStorage key 'leaderboard_v1'
+      (function () {
+        const LIST_SELECTOR = ".leaderboard-list";
+        const PODIUM_SELECTOR = ".leaderboard-podium";
+        const KEY = "leaderboard_v1";
+
+        function sanitizeName(s) {
+          return String(s || "").slice(0, 40);
+        }
+
+        function toScore(n) {
+          const x = Number(n);
+          return Number.isFinite(x) ? Math.max(0, Math.floor(x)) : 0;
+        }
+
+        function seedIfMissing() {
+          if (localStorage.getItem(KEY)) return;
+          const seed = [
+            { name: "Justin", score: 1240 },
+            { name: "Alex", score: 1120 },
+            { name: "Sam", score: 980 },
+            { name: "Taylor", score: 850 },
+            { name: "Riley", score: 790 }
+          ];
+          localStorage.setItem(KEY, JSON.stringify(seed));
+        }
+
+        function loadEntries() {
+          try {
+            const raw = localStorage.getItem(KEY);
+            if (!raw) return [];
+            const arr = JSON.parse(raw);
+            if (!Array.isArray(arr)) return [];
+            return arr
+              .map((e) => ({ name: sanitizeName(e?.name), score: toScore(e?.score) }))
+              .filter((e) => e.name);
+          } catch {
+            return [];
+          }
+        }
+
+        function saveEntries(entries) {
+          try { localStorage.setItem(KEY, JSON.stringify(entries)); } catch {}
+        }
+
+        function render() {
+          const list = document.querySelector(LIST_SELECTOR);
+          if (!list) return;
+
+          seedIfMissing();
+          let entries = loadEntries();
+          entries.sort((a, b) => b.score - a.score);
+          entries = entries.slice(0, 10);
+
+          // Render podium (top 3 as bars)
+          const podiumEl = document.querySelector(PODIUM_SELECTOR);
+          if (podiumEl) {
+            const top3 = entries.slice(0, 3);
+            const maxScore = Math.max(1, ...top3.map(e => e.score || 0));
+            // Arrange as [2nd, 1st, 3rd]
+            const arranged = [top3[1], top3[0], top3[2]].filter(Boolean);
+            const html = `
+              <div class="podium">
+                ${arranged.map((e, idx) => {
+                  const rank = idx === 0 ? 2 : (idx === 1 ? 1 : 3);
+                  const pct = Math.min(100, Math.round((e.score / maxScore) * 100));
+                  const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : '🥉';
+                  return `
+                    <div class="podium-item rank-${rank}">
+                      <div class="bar" style="--h:${pct}%">${medal}</div>
+                      <div class="name" title="${e.name} — ${e.score.toLocaleString()} xp">${e.name}</div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>`;
+            podiumEl.innerHTML = html;
+          }
+
+          list.innerHTML = "";
+          entries.forEach((e, i) => {
+            const li = document.createElement("li");
+            li.className = "leaderboard-item";
+            li.innerHTML = `
+              <span class="rank">${i + 1}</span>
+              <span class="name">${e.name}</span>
+              <span class="score">${e.score.toLocaleString()} xp</span>
+            `;
+            list.appendChild(li);
+          });
+        }
+
+        // Expose a simple API for other scripts to update
+        window.updateLeaderboard = function (entries) {
+          if (!Array.isArray(entries)) return;
+          const normalized = entries
+            .map((e) => ({ name: sanitizeName(e?.name), score: toScore(e?.score) }))
+            .filter((e) => e.name);
+          saveEntries(normalized);
+          render();
+        };
+
+        // Initial render
+        render();
+
+        // Re-render on storage events from other tabs/windows
+        window.addEventListener("storage", (e) => {
+          if (e.key === KEY) render();
+        });
+      })();
+    </script>
+
+    <script>
+      // Compute Justin's points from localStorage progress and sync to leaderboard
+      (function () {
+        const LB_KEY = 'leaderboard_v1';
+        const NAME = 'Justin';
+        const COURSES_KEY = 'home_courses_completed_bonus';
+        const HOURS_KEY = 'home_hours_learned_bonus';
+
+        function getInt(key) {
+          const v = parseInt(localStorage.getItem(key) || '0', 10);
+          return Number.isFinite(v) ? Math.max(0, v) : 0;
+        }
+
+        function computePoints() {
+          const courses = getInt(COURSES_KEY);
+          const hours = getInt(HOURS_KEY);
+          return courses * 500 + hours * 50; // points = courses*500 + hours*50
+        }
+
+        function loadEntries() {
+          try {
+            const raw = localStorage.getItem(LB_KEY);
+            const arr = raw ? JSON.parse(raw) : [];
+            return Array.isArray(arr) ? arr : [];
+          } catch { return []; }
+        }
+
+        function upsertJustin() {
+          const points = computePoints();
+          let entries = loadEntries();
+          let found = false;
+          entries = entries.map(e => {
+            if ((e?.name || '') === NAME) { found = true; return { name: NAME, score: points }; }
+            return { name: String(e?.name || ''), score: Number(e?.score) || 0 };
+          });
+          if (!found) entries.push({ name: NAME, score: points });
+
+          if (typeof window.updateLeaderboard === 'function') {
+            window.updateLeaderboard(entries);
+          } else {
+            try { localStorage.setItem(LB_KEY, JSON.stringify(entries)); } catch {}
+          }
+        }
+
+        function sync() { upsertJustin(); }
+
+        // Initial sync
+        sync();
+
+        // Re-sync when progress keys change (e.g., from other tabs)
+        window.addEventListener('storage', (e) => {
+          if (e.key === COURSES_KEY || e.key === HOURS_KEY) sync();
+        });
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') sync();
+        });
+        window.addEventListener('pageshow', sync);
+      })();
+    </script>
 
     </script>
   </body>
