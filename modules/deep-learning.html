@@ -10,7 +10,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
 
-    <link rel="stylesheet" href="modules-inner.css" />
+    <link rel="stylesheet" href="../css/modules-inner.css" />
 
     <link
       rel="stylesheet"
@@ -361,8 +361,69 @@ both trainable and more generalizable.
               <div class="lesson-header">
                 <div class="lesson-number">04</div>
                 <div class="lesson-content">
-                  <h4>Classification</h4>
-                  <p>Cover k-NN intuition and decision boundaries.</p>
+                  <h4>Popular Architectures</h4>
+                  <p>Outlines CNNs, RNNs, LSTMs, and Transformers and their key use cases.</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 12 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+                    Different tasks call for different architectures. CNNs (Convolutional Neural Networks) 
+extract local image features through filters and pooling. RNNs (Recurrent Neural Networks) 
+process sequential data but struggle with long dependencies, improved by LSTMs and GRUs. 
+Transformers, with attention mechanisms, dominate natural language processing and now 
+extend to multimodal AI.  
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> CNN, RNN, LSTM, GRU, transformer, attention
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="5">
+              <div class="lesson-header">
+                <div class="lesson-number">05</div>
+                <div class="lesson-content">
+                  <h4>Real-World Applications</h4>
+                  <p>Shows how deep learning powers vision, speech, language, and recommendation systems.</p>
+                </div>
+                <div class="lesson-status">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+              </div>
+              <div class="lesson-details">
+                <div class="lesson-meta">
+                  <span><i class="fas fa-clock"></i> 8 min</span>
+                  <span><i class="fas fa-file-text"></i> Notes</span>
+                </div>
+                <div class="lesson-preview">
+                  <p>
+Deep learning is everywhere: self-driving cars detect objects with CNNs, RNNs support 
+speech recognition and financial forecasting, and Transformers power translation, 
+summarization, and AI assistants. Recommendation systems, fraud detection, and medical 
+imaging further showcase its versatility across industries.
+                  </p>
+                  <div class="callout neutral">
+                    <strong>Key terms:</strong> vision, speech, recommendation, LLM
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lesson-item" data-lesson="6">
+              <div class="lesson-header">
+                <div class="lesson-number">06</div>
+                <div class="lesson-content">
+                  <h4>Training Efficiency & Hardware Acceleration</h4>
+                  <p>Highlights GPUs, TPUs, and scaling techniques that make deep learning practical.</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -375,73 +436,14 @@ both trainable and more generalizable.
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Classification assigns each input to a discrete class. A simple baseline is k-nearest neighbors (k-NN): for a
-                    new point, find its k closest labeled neighbors in feature space and return the majority label; larger k usually
-                    smooths the decision boundary but may blur fine structure. Alternatives like decision trees learn simple,
-                    interpretable rules from data and can capture nonlinear patterns
+Modern deep learning depends on specialized hardware and training techniques. GPUs and 
+TPUs accelerate massive matrix operations, while frameworks like TensorFlow and 
+PyTorch simplify model building. Techniques like mini-batch training, mixed precision, and 
+distributed training help scale models efficiently. Understanding the computational side is 
+critical for deploying real-world AI.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> classification, k-NN, boundary
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="lesson-item" data-lesson="5">
-              <div class="lesson-header">
-                <div class="lesson-number">05</div>
-                <div class="lesson-content">
-                  <h4>Overfitting vs Underfitting</h4>
-                  <p>Show underfit vs overfit curves and bias–variance tradeoff.</p>
-                </div>
-                <div class="lesson-status">
-                  <i class="fas fa-lock-open"></i>
-                </div>
-              </div>
-              <div class="lesson-details">
-                <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 8 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
-                </div>
-                <div class="lesson-preview">
-                  <p>
-                    Generalization depends on model complexity. Underfitting occurs when the model is too simple to capture
-                    patterns, leading to high errors on both training and test data. Overfitting happens when the model memorizes
-                    noise, yielding very low training error but poor test performance. The goal is a balance—often helped by
-                    regularization, simpler models, and proper validation.
-                  </p>
-                  <div class="callout neutral">
-                    <strong>Key terms:</strong> bias, variance, generalization
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="lesson-item" data-lesson="6">
-              <div class="lesson-header">
-                <div class="lesson-number">06</div>
-                <div class="lesson-content">
-                  <h4>Train/Validation/Test & Cross-Validation</h4>
-                  <p>Discuss proper splits and avoiding data leakage.</p>
-                </div>
-                <div class="lesson-status">
-                  <i class="fas fa-lock-open"></i>
-                </div>
-              </div>
-              <div class="lesson-details">
-                <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 8 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
-                </div>
-                <div class="lesson-preview">
-                  <p>
-                    To estimate real-world performance, split data into train, validation, and test sets. The model learns on the
-                    train split, hyperparameters are chosen on the validation split (or via k-fold cross-validation for stability), and
-                    the held-out test set is used once at the end to report an unbiased estimate. Always fit preprocessing steps
-                    only on training data to avoid leakage.
-                  </p>
-                  <div class="callout neutral">
-                    <strong>Key terms:</strong> validation, cross-validation, holdout
+                    <strong>Key terms:</strong> GPU, TPU, mini-batch, distributed training
                   </div>
                 </div>
               </div>
