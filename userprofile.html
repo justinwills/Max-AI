@@ -15,6 +15,7 @@
       href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/storage.js"></script>
     <style>
       .user-content {
         display: grid;
@@ -234,6 +235,34 @@
           document.querySelector(".nav-links")?.classList.toggle("active");
         });
 
+      // Load current user and populate profile
+      (function () {
+        try {
+          const store = window.StorageUtil;
+          const current = store.getJSON("currentUser", null);
+          if (!current || !current.email) {
+            // Not logged in; redirect to login
+            window.location.href = "login.html";
+            return;
+          }
+          const users = store.getJSON("users", []);
+          const user = users.find((u) => u.id === current.id) || users.find((u) => (u.email || "").toLowerCase() === String(current.email).toLowerCase());
+          const username = (user && user.username) || current.username || "";
+          const email = (user && user.email) || current.email || "";
+
+          const dn = document.getElementById("display-name");
+          if (dn) dn.textContent = username || "";
+          const de = document.getElementById("display-email");
+          if (de) de.textContent = email || "";
+          const un = document.getElementById("username");
+          if (un) un.value = username || "";
+          const em = document.getElementById("email");
+          if (em) em.value = email || "";
+        } catch (e) {
+          console.error(e);
+        }
+      })();
+
       // Profile image upload preview
       document
         .getElementById("file-input")
@@ -249,31 +278,65 @@
           }
         });
 
-      // Save personal info (no persistence; update display only)
+      // Save personal info and persist to localStorage
       document
         .getElementById("user-form")
         ?.addEventListener("submit", function (e) {
           e.preventDefault();
-          const name = document.getElementById("username")?.value || "";
-          const email = document.getElementById("email")?.value || "";
-          const dn = document.getElementById("display-name");
-          if (dn) dn.textContent = name;
-          const de = document.getElementById("display-email");
-          if (de) de.textContent = email;
-          Swal.fire({
-            icon: "success",
-            title: "Saved",
-            text: "Changes saved.",
-          });
+          const name = document.getElementById("username")?.value.trim() || "";
+          const email = document.getElementById("email")?.value.trim().toLowerCase() || "";
+
+          if (!name || !email) {
+            Swal.fire({ icon: "warning", title: "Missing info", text: "Please enter both name and email." });
+            return;
+          }
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            Swal.fire({ icon: "error", title: "Invalid email", text: "Please enter a valid email address." });
+            return;
+          }
+
+          try {
+            const store = window.StorageUtil;
+            const current = store.getJSON("currentUser", null);
+            if (!current) throw new Error("Not logged in");
+            const users = store.getJSON("users", []);
+            const idx = users.findIndex((u) => u.id === current.id);
+            if (idx === -1) throw new Error("User not found");
+
+            // Ensure email uniqueness (exclude current user)
+            const taken = users.some((u, i) => i !== idx && (u.email || "").toLowerCase() === email);
+            if (taken) {
+              Swal.fire({ icon: "error", title: "Email in use", text: "Another account already uses this email." });
+              return;
+            }
+
+            users[idx].username = name;
+            users[idx].email = email;
+            store.setJSON("users", users);
+            store.setJSON("currentUser", { id: users[idx].id, username: users[idx].username, email: users[idx].email });
+
+            const dn = document.getElementById("display-name");
+            if (dn) dn.textContent = name;
+            const de = document.getElementById("display-email");
+            if (de) de.textContent = email;
+
+            Swal.fire({ icon: "success", title: "Saved", text: "Profile updated." });
+          } catch (err) {
+            console.error(err);
+            Swal.fire({ icon: "error", title: "Error", text: "Could not save changes." });
+          }
         });
 
-      // Change password inline (local-only)
+      // Change password and persist to the same user record
       document
         .getElementById("password-form")
         ?.addEventListener("submit", function (e) {
           e.preventDefault();
-          const STORAGE_KEY = "profile_password_v1";
-          const saved = localStorage.getItem(STORAGE_KEY) || "";
+          const store = window.StorageUtil;
+          const users = store.getJSON("users", []);
+          const current = store.getJSON("currentUser", null);
+          const idx = users.findIndex((u) => current && u.id === current.id);
+          const saved = idx >= 0 ? (users[idx].password || "") : "";
           const cur = document.getElementById("curPassword")?.value || "";
           const npw = document.getElementById("newPassword")?.value || "";
           const cfm = document.getElementById("confirmPassword")?.value || "";
@@ -298,7 +361,10 @@
             return;
           }
           try {
-            localStorage.setItem(STORAGE_KEY, npw);
+            if (idx >= 0) {
+              users[idx].password = npw;
+              store.setJSON("users", users);
+            }
           } catch (_) {}
           // Clear fields and confirm
           const cp = document.getElementById("curPassword");
