@@ -29,8 +29,8 @@
         <form id="loginForm">
           <div class="input-group">
             <div class="input-field">
-              <i class="fas fa-envelope"></i>
-              <input id="login-email" type="email" placeholder="Email" required />
+              <i class="fas fa-user"></i>
+              <input id="login-id" type="text" placeholder="Email or Username" required />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
@@ -60,7 +60,7 @@
       (function () {
         const form = document.getElementById("loginForm");
         const btn = document.getElementById("loginBtn");
-        const emailEl = document.getElementById("login-email");
+        const idEl = document.getElementById("login-id");
         const passEl = document.getElementById("login-password");
 
         function setBusy(state) {
@@ -83,11 +83,11 @@
         form?.addEventListener("submit", function (event) {
           event.preventDefault();
 
-          const email = emailEl?.value.trim().toLowerCase() || "";
+          const identifier = idEl?.value.trim() || "";
           const password = passEl?.value || "";
 
-          if (!email || !password) {
-            swal("Missing info", "Please enter email and password.", "warning");
+          if (!identifier || !password) {
+            swal("Missing info", "Please enter email/username and password.", "warning");
             return;
           }
 
@@ -96,11 +96,18 @@
           try {
             const store = window.StorageUtil;
             const users = store.getJSON("users", []);
-            const user = users.find((u) => (u.email || "").toLowerCase() === email);
+            let user = null;
+            if (identifier.includes("@")) {
+              const email = identifier.toLowerCase();
+              user = users.find((u) => (u.email || "").toLowerCase() === email);
+            } else {
+              const uname = identifier.toLowerCase();
+              user = users.find((u) => (u.username || "").toLowerCase() === uname);
+            }
 
             if (!user || user.password !== password) {
               setBusy(false);
-              swal("Invalid credentials", "Email or password is incorrect.", "error");
+              swal("Invalid credentials", "Email/username or password is incorrect.", "error");
               return;
             }
 
