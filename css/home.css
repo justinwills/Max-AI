@@ -310,7 +310,7 @@ footer {
 /* Dashboard layout */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 1fr 0.75fr;
+  grid-template-columns: 1fr 0.7fr;
   gap: 30px;
 }
 
@@ -384,7 +384,9 @@ footer {
 }
 
 /* Leaderboard podium */
-.leaderboard-podium { margin-bottom: 12px; }
+.leaderboard-podium {
+  margin-bottom: 12px;
+}
 .podium {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -392,7 +394,13 @@ footer {
   gap: 10px;
   height: 160px;
 }
-.podium-item { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.podium-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
 .podium-item .bar {
   width: 75%;
   min-width: 40px;
@@ -407,11 +415,25 @@ footer {
   font-weight: 700;
   font-size: 0.9rem;
 }
-.podium-item .name { margin-top: 6px; font-size: 0.9rem; text-align: center; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.podium-item .name {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-.podium-item.rank-1 .bar { background: linear-gradient(135deg, #8c52ff, #cb6ce6); }
-.podium-item.rank-2 .bar { background: linear-gradient(135deg, #cb6ce6, #ff66c4); }
-.podium-item.rank-3 .bar { background: linear-gradient(135deg, #8c52ff, #ff66c4); }
+.podium-item.rank-1 .bar {
+  background: linear-gradient(135deg, #8c52ff, #cb6ce6);
+}
+.podium-item.rank-2 .bar {
+  background: linear-gradient(135deg, #cb6ce6, #ff66c4);
+}
+.podium-item.rank-3 .bar {
+  background: linear-gradient(135deg, #8c52ff, #ff66c4);
+}
 
 .user-profile .progress-stats {
   display: grid;

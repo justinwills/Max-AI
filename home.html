@@ -15,6 +15,7 @@
       href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/storage.js"></script>
   </head>
   <body>
     <nav>
@@ -163,7 +164,6 @@
       // Apply course progress bonuses from localStorage to dashboard numbers
       (function () {
         try {
-          // Fallback: if module set totals/done locally, derive completion here too
           const total =
             parseInt(
               localStorage.getItem("ai_foundations_quiz_total_v1") || "0",
@@ -320,6 +320,7 @@
         const LIST_SELECTOR = ".leaderboard-list";
         const PODIUM_SELECTOR = ".leaderboard-podium";
         const KEY = "leaderboard_v1";
+        const S = window.StorageUtil;
 
         function sanitizeName(s) {
           return String(s || "").slice(0, 40);
@@ -331,7 +332,7 @@
         }
 
         function seedIfMissing() {
-          if (localStorage.getItem(KEY)) return;
+          if ((S && S.get(KEY)) || (!S && localStorage.getItem(KEY))) return;
           const seed = [
             { name: "Justin", score: 1240 },
             { name: "Alex", score: 1120 },
@@ -339,25 +340,21 @@
             { name: "Taylor", score: 850 },
             { name: "Riley", score: 790 }
           ];
-          localStorage.setItem(KEY, JSON.stringify(seed));
+          if (S) S.setJSON(KEY, seed);
+          else localStorage.setItem(KEY, JSON.stringify(seed));
         }
 
         function loadEntries() {
-          try {
-            const raw = localStorage.getItem(KEY);
-            if (!raw) return [];
-            const arr = JSON.parse(raw);
-            if (!Array.isArray(arr)) return [];
-            return arr
-              .map((e) => ({ name: sanitizeName(e?.name), score: toScore(e?.score) }))
-              .filter((e) => e.name);
-          } catch {
-            return [];
-          }
+          const arr = (S && S.getJSON(KEY, [])) || [];
+          if (!Array.isArray(arr)) return [];
+          return arr
+            .map((e) => ({ name: sanitizeName(e?.name), score: toScore(e?.score) }))
+            .filter((e) => e.name);
         }
 
         function saveEntries(entries) {
-          try { localStorage.setItem(KEY, JSON.stringify(entries)); } catch {}
+          if (S) S.setJSON(KEY, entries);
+          else try { localStorage.setItem(KEY, JSON.stringify(entries)); } catch {}
         }
 
         function render() {
@@ -434,10 +431,8 @@
         const COURSES_KEY = 'home_courses_completed_bonus';
         const HOURS_KEY = 'home_hours_learned_bonus';
 
-        function getInt(key) {
-          const v = parseInt(localStorage.getItem(key) || '0', 10);
-          return Number.isFinite(v) ? Math.max(0, v) : 0;
-        }
+        const S = window.StorageUtil;
+        function getInt(key) { return (S && S.getInt(key, 0)) || 0; }
 
         function computePoints() {
           const courses = getInt(COURSES_KEY);
@@ -445,13 +440,7 @@
           return courses * 500 + hours * 50; // points = courses*500 + hours*50
         }
 
-        function loadEntries() {
-          try {
-            const raw = localStorage.getItem(LB_KEY);
-            const arr = raw ? JSON.parse(raw) : [];
-            return Array.isArray(arr) ? arr : [];
-          } catch { return []; }
-        }
+        function loadEntries() { return (S && S.getJSON(LB_KEY, [])) || []; }
 
         function upsertJustin() {
           const points = computePoints();
@@ -466,7 +455,8 @@
           if (typeof window.updateLeaderboard === 'function') {
             window.updateLeaderboard(entries);
           } else {
-            try { localStorage.setItem(LB_KEY, JSON.stringify(entries)); } catch {}
+            if (S) S.setJSON(LB_KEY, entries);
+            else try { localStorage.setItem(LB_KEY, JSON.stringify(entries)); } catch {}
           }
         }
 
