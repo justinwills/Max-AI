@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MaxAI - Quiz</title>
 
-<link rel="stylesheet" href="css/flashcard.css" />
+    <link rel="stylesheet" href="css/quiz.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -28,10 +28,21 @@
 
         <div class="nav-actions">
           <div class="profile-menu">
-            <button type="button" class="profile-btn" aria-label="Profile" aria-expanded="false"><i class="fas fa-user"></i></button>
+            <button
+              type="button"
+              class="profile-btn"
+              aria-label="Profile"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i>
+            </button>
             <div class="menu">
-              <a href="userprofile.html"><i class="fas fa-user-circle"></i> Profile</a>
-              <a href="login.html"><i class="fas fa-right-from-bracket"></i> Logout</a>
+              <a href="userprofile.html"
+                ><i class="fas fa-user-circle"></i> Profile</a
+              >
+              <a href="login.html"
+                ><i class="fas fa-right-from-bracket"></i> Logout</a
+              >
             </div>
           </div>
         </div>
@@ -42,29 +53,129 @@
       </div>
     </nav>
     <script>
-      (function(){
-        const menu = document.querySelector('.profile-menu');
+      (function () {
+        const menu = document.querySelector(".profile-menu");
         if (!menu) return;
-        const btn = menu.querySelector('.profile-btn');
-        btn?.setAttribute('aria-expanded','false');
-        btn?.addEventListener('click', function(e){
+        const btn = menu.querySelector(".profile-btn");
+        btn?.setAttribute("aria-expanded", "false");
+        btn?.addEventListener("click", function (e) {
           e.preventDefault();
-          const open = menu.classList.toggle('open');
-          btn.setAttribute('aria-expanded', String(open));
+          const open = menu.classList.toggle("open");
+          btn.setAttribute("aria-expanded", String(open));
         });
-        document.addEventListener('click', function(e){
+        document.addEventListener("click", function (e) {
           if (!menu.contains(e.target)) {
-            menu.classList.remove('open');
-            btn?.setAttribute('aria-expanded','false');
+            menu.classList.remove("open");
+            btn?.setAttribute("aria-expanded", "false");
           }
         });
       })();
     </script>
 
-    <section id="tba-section" class="tba-content">
+    <header class="page-header">
+      <div class="container header-inner">
+        <div class="header-text">
+          <span class="badge"
+            ><i class="fas fa-clipboard-check"></i> Quiz Mode</span
+          >
+          <h1>Quiz</h1>
+          <p class="subtitle">Test your understanding</p>
+        </div>
+        <div class="header-visual">
+          <!-- <div class="chip"><i class="fas fa-brain"></i><span>AI</span></div>
+          <div class="chip alt">
+            <i class="fas fa-robot"></i><span>ML</span>
+          </div> -->
+        </div>
+      </div>
+    </header>
+
+    <section class="quiz-section">
       <div class="container">
-        <div class="tba-text">
-          <h1>To Be Announced</h1>
+        <div class="controls">
+          <div class="control-group">
+            <label for="topicSelect"><i class="fas fa-book"></i> Topic</label>
+            <select id="topicSelect">
+              <option value="mixed">Mixed</option>
+              <option value="ai-foundation">AI Foundations</option>
+              <option value="machine-learning">Machine Learning</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="countSelect"
+              ><i class="fas fa-list-ol"></i> Questions</label
+            >
+            <select id="countSelect">
+              <option value="5">5</option>
+              <option value="8">8</option>
+              <option value="10" selected>10</option>
+              <option value="15">15</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label>&nbsp;</label>
+            <button id="startBtn" class="btn-primary" type="button">
+              <i class="fas fa-play"></i> Start Quiz
+            </button>
+          </div>
+        </div>
+
+        <div id="quizCard" class="quiz-card" aria-live="polite" hidden>
+          <div class="quiz-header-row">
+            <div class="progress">
+              <div id="progressBar" class="bar" style="width: 0%"></div>
+            </div>
+            <div class="meta">
+              <span id="questionCounter">Question 1/10</span>
+              <span id="scoreCounter" class="score-pill"
+                ><i class="fas fa-star"></i>
+                <span id="scoreValue">0</span></span
+              >
+            </div>
+          </div>
+
+          <div class="question-block">
+            <div class="question-tag" id="questionTag">Mixed</div>
+            <h2 id="questionText" class="question-text"></h2>
+          </div>
+
+          <div id="options" class="options" role="list"></div>
+
+          <div class="actions">
+            <button id="nextBtn" class="btn-primary" type="button" disabled>
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="resultCard" class="result-card" hidden>
+          <div class="result-header">
+            <h2><i class="fas fa-trophy"></i> Quiz Results</h2>
+            <p id="resultSummary"></p>
+          </div>
+          <div class="result-stats">
+            <div class="stat">
+              <div class="big" id="statScore">0</div>
+              <div class="label">Correct</div>
+            </div>
+            <div class="stat">
+              <div class="big" id="statTotal">0</div>
+              <div class="label">Total</div>
+            </div>
+            <div class="stat">
+              <div class="big" id="statPercent">0%</div>
+              <div class="label">Accuracy</div>
+            </div>
+          </div>
+          <div class="result-actions">
+            <button id="reviewBtn" class="btn-primary" type="button">
+              <i class="fas fa-eye"></i> Review Answers
+            </button>
+            <button id="retakeBtn" class="btn-primary" type="button">
+              <i class="fas fa-rotate"></i> Retake
+            </button>
+          </div>
+          <div id="reviewList" class="review-list" hidden></div>
         </div>
       </div>
     </section>
@@ -76,6 +187,338 @@
         .addEventListener("click", function () {
           document.querySelector(".nav-links").classList.toggle("active");
         });
+
+      // Simple shuffle
+      function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // Quiz data
+      const QUESTIONS = [
+        // AI Foundations
+        {
+          id: "ai-1",
+          topic: "ai-foundation",
+          question: "What is the primary goal of Artificial Intelligence (AI)?",
+          options: [
+            "To create systems that exhibit intelligent behavior",
+            "To build faster computers only",
+            "To replace all human jobs",
+            "To store large amounts of data",
+          ],
+          answer: 0,
+          explain:
+            "AI aims to perform tasks requiring human-like intelligence: perception, reasoning, learning, decision-making.",
+        },
+        {
+          id: "ai-2",
+          topic: "ai-foundation",
+          question: "The Turing Test evaluates a machine's ability to…",
+          options: [
+            "Learn from unlabeled data",
+            "Exhibit human-like conversation",
+            "Recognize images accurately",
+            "Prove mathematical theorems",
+          ],
+          answer: 1,
+          explain:
+            "Proposed by Alan Turing, it measures if a machine can converse indistinguishably from a human.",
+        },
+        {
+          id: "ai-3",
+          topic: "ai-foundation",
+          question: "Which is a common search algorithm in AI?",
+          options: [
+            "Breadth-First Search (BFS)",
+            "Gradient Descent",
+            "Convolution",
+            "Backpropagation",
+          ],
+          answer: 0,
+          explain:
+            "BFS (and DFS) are classic search strategies used to traverse state spaces.",
+        },
+        {
+          id: "ai-4",
+          topic: "ai-foundation",
+          question: "Knowledge representation helps machines to…",
+          options: [
+            "Display graphics",
+            "Store and reason about information",
+            "Sort numbers faster",
+            "Compress data only",
+          ],
+          answer: 1,
+          explain:
+            "KR models information (logic, rules, graphs) so computers can reason on it.",
+        },
+
+        // Machine Learning
+        {
+          id: "ml-1",
+          topic: "machine-learning",
+          question: "Machine Learning systems primarily…",
+          options: [
+            "Follow only explicit rules",
+            "Learn patterns from data",
+            "Generate random outputs",
+            "Do not require evaluation",
+          ],
+          answer: 1,
+          explain:
+            "ML learns from data to make predictions/decisions without explicit hard‑coding.",
+        },
+        {
+          id: "ml-2",
+          topic: "machine-learning",
+          question: "Supervised learning uses…",
+          options: [
+            "Unlabeled data only",
+            "Labeled input–output pairs",
+            "Reinforcement signals only",
+            "No data at all",
+          ],
+          answer: 1,
+          explain:
+            "Supervised learning trains on labeled examples mapping inputs to outputs.",
+        },
+        {
+          id: "ml-3",
+          topic: "machine-learning",
+          question: "Overfitting occurs when a model…",
+          options: [
+            "Generalizes well to new data",
+            "Is too simple for the task",
+            "Memorizes training data including noise",
+            "Has no training error",
+          ],
+          answer: 2,
+          explain:
+            "Overfit models capture noise; they perform poorly on unseen data.",
+        },
+        {
+          id: "ml-4",
+          topic: "machine-learning",
+          question: "The bias–variance tradeoff balances…",
+          options: [
+            "Training speed vs. memory",
+            "Underfitting and overfitting",
+            "Accuracy and precision",
+            "Recall and F1-score",
+          ],
+          answer: 1,
+          explain:
+            "It balances high bias (underfit) and high variance (overfit) for best generalization.",
+        },
+        {
+          id: "ml-5",
+          topic: "machine-learning",
+          question: "Which metric is suitable for classification accuracy?",
+          options: [
+            "Mean Squared Error",
+            "Accuracy or F1-score",
+            "R-squared",
+            "Mean Absolute Error",
+          ],
+          answer: 1,
+          explain:
+            "Accuracy/F1 are common for classification; MSE/MAE are typical for regression.",
+        },
+        {
+          id: "ai-5",
+          topic: "ai-foundation",
+          question: "Which best describes heuristics in search?",
+          options: [
+            "Random guessing",
+            "Guidance approximating distance to goal",
+            "Exact optimal cost",
+            "Guaranteed shortest path only",
+          ],
+          answer: 1,
+          explain:
+            "Heuristics estimate how close a state is to the goal to guide search.",
+        },
+      ];
+
+      const topicSelect = document.getElementById("topicSelect");
+      const countSelect = document.getElementById("countSelect");
+      const startBtn = document.getElementById("startBtn");
+      const quizCard = document.getElementById("quizCard");
+      const resultCard = document.getElementById("resultCard");
+      const reviewList = document.getElementById("reviewList");
+
+      const questionText = document.getElementById("questionText");
+      const questionTag = document.getElementById("questionTag");
+      const optionsEl = document.getElementById("options");
+      const nextBtn = document.getElementById("nextBtn");
+      const qCounter = document.getElementById("questionCounter");
+      const scoreCounter = document.getElementById("scoreValue");
+      const progressBar = document.getElementById("progressBar");
+
+      const statScore = document.getElementById("statScore");
+      const statTotal = document.getElementById("statTotal");
+      const statPercent = document.getElementById("statPercent");
+      const resultSummary = document.getElementById("resultSummary");
+      const reviewBtn = document.getElementById("reviewBtn");
+      const retakeBtn = document.getElementById("retakeBtn");
+
+      let queue = [];
+      let index = 0;
+      let score = 0;
+      let answers = [];
+
+      function prepareQuiz() {
+        const topic = topicSelect.value;
+        const count = parseInt(countSelect.value, 10);
+        let pool = QUESTIONS.slice();
+        if (topic !== "mixed") pool = pool.filter((q) => q.topic === topic);
+        shuffle(pool);
+        queue = pool.slice(0, Math.min(count, pool.length));
+        index = 0;
+        score = 0;
+        answers = [];
+        scoreCounter.textContent = "0";
+        updateProgress();
+      }
+
+      function updateProgress() {
+        const total = queue.length || parseInt(countSelect.value, 10);
+        qCounter.textContent = `Question ${Math.min(
+          index + 1,
+          total
+        )}/${total}`;
+        const pct = Math.min(100, Math.round((index / total) * 100));
+        progressBar.style.width = pct + "%";
+      }
+
+      function renderQuestion() {
+        const q = queue[index];
+        if (!q) return;
+        questionText.textContent = q.question;
+        questionTag.textContent =
+          q.topic === "ai-foundation" ? "AI Foundations" : "Machine Learning";
+        optionsEl.innerHTML = "";
+        nextBtn.disabled = true;
+
+        q.options.forEach((opt, i) => {
+          const btn = document.createElement("button");
+          btn.className = "option-btn";
+          btn.setAttribute("role", "listitem");
+          btn.setAttribute("aria-pressed", "false");
+          btn.textContent = opt;
+          btn.addEventListener("click", () => handleAnswer(i));
+          optionsEl.appendChild(btn);
+        });
+      }
+
+      function handleAnswer(choice) {
+        const q = queue[index];
+        const correct = q.answer;
+        const children = Array.from(optionsEl.children);
+        children.forEach((el, i) => {
+          el.disabled = true;
+          if (i === correct) el.classList.add("correct");
+          if (i === choice && i !== correct) el.classList.add("wrong");
+        });
+        const isCorrect = choice === correct;
+        if (isCorrect) {
+          score += 1;
+          scoreCounter.textContent = String(score);
+        }
+        answers.push({
+          id: q.id,
+          question: q.question,
+          topic: q.topic,
+          choice,
+          correct,
+          options: q.options,
+          explain: q.explain,
+          isCorrect,
+        });
+        nextBtn.disabled = false;
+        nextBtn.innerHTML =
+          index === queue.length - 1
+            ? 'Finish <i class="fas fa-flag-checkered"></i>'
+            : 'Next <i class="fas fa-arrow-right"></i>';
+      }
+
+      function showResults() {
+        quizCard.hidden = true;
+        resultCard.hidden = false;
+        const total = queue.length;
+        const percent = Math.round((score / total) * 100);
+        statScore.textContent = String(score);
+        statTotal.textContent = String(total);
+        statPercent.textContent = percent + "%";
+        let msg = "Nice work! Keep practicing to master the concepts.";
+        if (percent === 100) msg = "Perfect score! You're a star!";
+        else if (percent >= 80) msg = "Great job! Strong understanding.";
+        else if (percent < 50) msg = "Good start—review and try again!";
+        resultSummary.textContent = msg;
+        reviewList.hidden = true;
+      }
+
+      function renderReview() {
+        reviewList.innerHTML = answers
+          .map((a, idx) => {
+            const topic =
+              a.topic === "ai-foundation"
+                ? "AI Foundations"
+                : "Machine Learning";
+            return `
+              <div class="review-item ${a.isCorrect ? "ok" : "bad"}">
+                <div class="review-top">
+                  <span class="num">${idx + 1}.</span>
+                  <span class="tag">${topic}</span>
+                </div>
+                <div class="q">${a.question}</div>
+                <div class="a">Your answer: <strong>${
+                  a.options[a.choice] ?? "—"
+                }</strong></div>
+                <div class="c">Correct answer: <strong>${
+                  a.options[a.correct]
+                }</strong></div>
+                <div class="explain">${a.explain || ""}</div>
+              </div>`;
+          })
+          .join("");
+      }
+
+      startBtn.addEventListener("click", () => {
+        prepareQuiz();
+        document.getElementById("resultCard").hidden = true;
+        quizCard.hidden = false;
+        renderQuestion();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (index < queue.length - 1) {
+          index += 1;
+          updateProgress();
+          renderQuestion();
+        } else {
+          updateProgress();
+          showResults();
+        }
+      });
+
+      reviewBtn.addEventListener("click", () => {
+        const hidden = reviewList.hidden;
+        if (hidden) {
+          renderReview();
+        }
+        reviewList.hidden = !hidden;
+      });
+
+      retakeBtn.addEventListener("click", () => {
+        // Reset to landing
+        resultCard.hidden = true;
+        quizCard.hidden = true;
+      });
     </script>
   </body>
 </html>
