@@ -30,11 +30,11 @@
           <div class="input-group">
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" required />
+              <input id="login-email" type="email" placeholder="Email" required />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" required />
+              <input id="login-password" type="password" placeholder="Password" required />
             </div>
             <div class="forgot-password">
               <a href="#">Forgot Password?</a>
@@ -54,27 +54,69 @@
     </div>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/storage.js"></script>
     <script>
-      // Login form handling
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
+      // Login form handling using localStorage
+      (function () {
+        const form = document.getElementById("loginForm");
+        const btn = document.getElementById("loginBtn");
+        const emailEl = document.getElementById("login-email");
+        const passEl = document.getElementById("login-password");
+
+        function setBusy(state) {
+          if (!btn) return;
+          btn.disabled = !!state;
+          btn.innerHTML = state
+            ? '<i class="fas fa-spinner fa-spin"></i> Logging In...'
+            : '<i class="fas fa-sign-in-alt"></i> Login';
+        }
+
+        // Treat visiting this page as logout by default
+        try {
+          const url = new URL(window.location.href);
+          const shouldLogout = url.searchParams.has("logout") || window.location.hash === "#logout" || true;
+          if (shouldLogout) {
+            try { window.localStorage.removeItem("currentUser"); } catch {}
+          }
+        } catch {}
+
+        form?.addEventListener("submit", function (event) {
           event.preventDefault();
 
-          const loginButton = document.getElementById("loginBtn");
-          loginButton.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i> Logging In...';
-          loginButton.disabled = true;
+          const email = emailEl?.value.trim().toLowerCase() || "";
+          const password = passEl?.value || "";
 
-          // Simulate login process
-          setTimeout(function () {
+          if (!email || !password) {
+            swal("Missing info", "Please enter email and password.", "warning");
+            return;
+          }
+
+          setBusy(true);
+
+          try {
+            const store = window.StorageUtil;
+            const users = store.getJSON("users", []);
+            const user = users.find((u) => (u.email || "").toLowerCase() === email);
+
+            if (!user || user.password !== password) {
+              setBusy(false);
+              swal("Invalid credentials", "Email or password is incorrect.", "error");
+              return;
+            }
+
+            store.setJSON("currentUser", { id: user.id, username: user.username, email: user.email });
             swal("Login Successful!", "Welcome back to MaxAI!", "success");
 
             setTimeout(function () {
               window.location.href = "home.html";
-            }, 2000);
-          }, 1500);
+            }, 1000);
+          } catch (e) {
+            console.error(e);
+            setBusy(false);
+            swal("Error", "Could not log in. Please try again.", "error");
+          }
         });
+      })();
     </script>
   </body>
 </html>
