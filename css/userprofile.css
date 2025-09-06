@@ -217,6 +217,58 @@ footer {
   text-decoration: underline;
 }
 
+/* Actions row for buttons */
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Ghost button (neutral) */
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Destructive action button */
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.25);
+}
+.btn-danger:hover { transform: translateY(-1px); }
+
+/* Password visibility field wrapper */
+.pw-field { position: relative; }
+.pw-field input { width: 100%; padding-right: 42px; }
+.pw-field .toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  padding: 4px;
+}
+.pw-field .toggle-password:hover { color: #ffffff; }
+
 /* Mobile responsive navigation */
 @media screen and (max-width: 768px) {
   .nav-links {
