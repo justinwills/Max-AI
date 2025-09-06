@@ -291,16 +291,33 @@
           try {
             const store = window.StorageUtil;
             const users = store.getJSON("users", []);
-            const exists = users.some(
+            const existsEmail = users.some(
               (u) => (u.email || "").toLowerCase() === email
             );
-            if (exists) {
+            const existsUsername = users.some(
+              (u) => (u.username || "").toLowerCase() === (username || "").toLowerCase()
+            );
+            if (existsEmail || existsUsername) {
               setBusy(false, "", "Get Started");
-              swal(
-                "Email in use",
-                "An account with this email already exists.",
-                "error"
-              );
+              if (existsEmail && existsUsername) {
+                swal(
+                  "Already in use",
+                  "Both the email and username are already registered.",
+                  "error"
+                );
+              } else if (existsEmail) {
+                swal(
+                  "Email in use",
+                  "An account with this email already exists.",
+                  "error"
+                );
+              } else {
+                swal(
+                  "Username in use",
+                  "Please choose a different username.",
+                  "error"
+                );
+              }
               return;
             }
 
