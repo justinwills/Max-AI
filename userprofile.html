@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MaxAI - User Profile</title>
 
-<link rel="stylesheet" href="css/userprofile.css" />
+    <link rel="stylesheet" href="css/userprofile.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -136,7 +136,11 @@
         <div class="user-content">
           <div class="profile-section">
             <div class="profile-image">
-              <img src="img/pro1.webp" alt="Profile Picture" id="profile-pic" />
+              <img
+                src="img/profile-pic.png"
+                alt="Profile Picture"
+                id="profile-pic"
+              />
               <div class="image-upload">
                 <label for="file-input" class="upload-btn">
                   <i class="fas fa-camera"></i>
@@ -144,7 +148,7 @@
                 <input
                   type="file"
                   id="file-input"
-                  accept="image/*"
+                  accept="image/png, image/jpg, image/jpeg, image/svg"
                   style="display: none"
                 />
               </div>
@@ -246,7 +250,13 @@
             return;
           }
           const users = store.getJSON("users", []);
-          const user = users.find((u) => u.id === current.id) || users.find((u) => (u.email || "").toLowerCase() === String(current.email).toLowerCase());
+          const user =
+            users.find((u) => u.id === current.id) ||
+            users.find(
+              (u) =>
+                (u.email || "").toLowerCase() ===
+                String(current.email).toLowerCase()
+            );
           const username = (user && user.username) || current.username || "";
           const email = (user && user.email) || current.email || "";
           const avatar = user && user.avatar ? user.avatar : null;
@@ -269,48 +279,50 @@
       })();
 
       // Profile image upload preview + persist to localStorage (compressed)
-      document.getElementById("file-input")?.addEventListener("change", function (e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function (ev) {
-          const dataUrl = ev.target.result;
-          // Downscale to max 256x256 to keep storage small
-          const imgEl = new Image();
-          imgEl.onload = function () {
-            const maxSize = 256;
-            let { width, height } = imgEl;
-            const scale = Math.min(1, maxSize / Math.max(width, height));
-            const w = Math.max(1, Math.round(width * scale));
-            const h = Math.max(1, Math.round(height * scale));
-            const canvas = document.createElement("canvas");
-            canvas.width = w;
-            canvas.height = h;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(imgEl, 0, 0, w, h);
-            const out = canvas.toDataURL("image/jpeg", 0.85);
+      document
+        .getElementById("file-input")
+        ?.addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = function (ev) {
+            const dataUrl = ev.target.result;
+            // Downscale to max 256x256 to keep storage small
+            const imgEl = new Image();
+            imgEl.onload = function () {
+              const maxSize = 256;
+              let { width, height } = imgEl;
+              const scale = Math.min(1, maxSize / Math.max(width, height));
+              const w = Math.max(1, Math.round(width * scale));
+              const h = Math.max(1, Math.round(height * scale));
+              const canvas = document.createElement("canvas");
+              canvas.width = w;
+              canvas.height = h;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(imgEl, 0, 0, w, h);
+              const out = canvas.toDataURL("image/jpeg", 0.85);
 
-            const img = document.getElementById("profile-pic");
-            if (img) img.src = out;
+              const img = document.getElementById("profile-pic");
+              if (img) img.src = out;
 
-            try {
-              const store = window.StorageUtil;
-              const current = store.getJSON("currentUser", null);
-              if (!current) return;
-              const users = store.getJSON("users", []);
-              const idx = users.findIndex((u) => u.id === current.id);
-              if (idx >= 0) {
-                users[idx].avatar = out;
-                store.setJSON("users", users);
+              try {
+                const store = window.StorageUtil;
+                const current = store.getJSON("currentUser", null);
+                if (!current) return;
+                const users = store.getJSON("users", []);
+                const idx = users.findIndex((u) => u.id === current.id);
+                if (idx >= 0) {
+                  users[idx].avatar = out;
+                  store.setJSON("users", users);
+                }
+              } catch (err) {
+                console.error(err);
               }
-            } catch (err) {
-              console.error(err);
-            }
+            };
+            imgEl.src = dataUrl;
           };
-          imgEl.src = dataUrl;
-        };
-        reader.readAsDataURL(file);
-      });
+          reader.readAsDataURL(file);
+        });
 
       // Save personal info and persist to localStorage
       document
@@ -318,14 +330,23 @@
         ?.addEventListener("submit", function (e) {
           e.preventDefault();
           const name = document.getElementById("username")?.value.trim() || "";
-          const email = document.getElementById("email")?.value.trim().toLowerCase() || "";
+          const email =
+            document.getElementById("email")?.value.trim().toLowerCase() || "";
 
           if (!name || !email) {
-            Swal.fire({ icon: "warning", title: "Missing info", text: "Please enter both name and email." });
+            Swal.fire({
+              icon: "warning",
+              title: "Missing info",
+              text: "Please enter both name and email.",
+            });
             return;
           }
           if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            Swal.fire({ icon: "error", title: "Invalid email", text: "Please enter a valid email address." });
+            Swal.fire({
+              icon: "error",
+              title: "Invalid email",
+              text: "Please enter a valid email address.",
+            });
             return;
           }
 
@@ -338,26 +359,44 @@
             if (idx === -1) throw new Error("User not found");
 
             // Ensure email uniqueness (exclude current user)
-            const taken = users.some((u, i) => i !== idx && (u.email || "").toLowerCase() === email);
+            const taken = users.some(
+              (u, i) => i !== idx && (u.email || "").toLowerCase() === email
+            );
             if (taken) {
-              Swal.fire({ icon: "error", title: "Email in use", text: "Another account already uses this email." });
+              Swal.fire({
+                icon: "error",
+                title: "Email in use",
+                text: "Another account already uses this email.",
+              });
               return;
             }
 
             users[idx].username = name;
             users[idx].email = email;
             store.setJSON("users", users);
-            store.setJSON("currentUser", { id: users[idx].id, username: users[idx].username, email: users[idx].email });
+            store.setJSON("currentUser", {
+              id: users[idx].id,
+              username: users[idx].username,
+              email: users[idx].email,
+            });
 
             const dn = document.getElementById("display-name");
             if (dn) dn.textContent = name;
             const de = document.getElementById("display-email");
             if (de) de.textContent = email;
 
-            Swal.fire({ icon: "success", title: "Saved", text: "Profile updated." });
+            Swal.fire({
+              icon: "success",
+              title: "Saved",
+              text: "Profile updated.",
+            });
           } catch (err) {
             console.error(err);
-            Swal.fire({ icon: "error", title: "Error", text: "Could not save changes." });
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Could not save changes.",
+            });
           }
         });
 
@@ -370,7 +409,7 @@
           const users = store.getJSON("users", []);
           const current = store.getJSON("currentUser", null);
           const idx = users.findIndex((u) => current && u.id === current.id);
-          const saved = idx >= 0 ? (users[idx].password || "") : "";
+          const saved = idx >= 0 ? users[idx].password || "" : "";
           const cur = document.getElementById("curPassword")?.value || "";
           const npw = document.getElementById("newPassword")?.value || "";
           const cfm = document.getElementById("confirmPassword")?.value || "";
