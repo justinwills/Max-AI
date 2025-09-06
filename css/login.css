@@ -223,6 +223,26 @@
   text-decoration: underline;
 }
 
+/* Back to login link on forgot page */
+.login-link {
+  text-align: center;
+  margin-top: 25px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #8c52ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+  color: #cb6ce6;
+  text-decoration: underline;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .login-container {
