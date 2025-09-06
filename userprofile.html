@@ -64,6 +64,21 @@
         align-items: center;
         gap: 8px;
       }
+      .btn-danger {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: #fff;
+        border: 1px solid rgba(239, 68, 68, 0.5);
+        padding: 10px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 10px 25px rgba(239, 68, 68, 0.25);
+      }
+      .btn-danger:hover {
+        transform: translateY(-1px);
+      }
     </style>
   </head>
   <body>
@@ -216,6 +231,19 @@
                 </button>
                 <div id="pw-feedback" class="form-note"></div>
               </form>
+            </div>
+            <div class="detail-card">
+              <h3>Danger Zone</h3>
+              <p class="form-note">
+                Deleting your account will remove your profile and learning
+                progress on this device.
+              </p>
+              <br />
+              <div class="actions">
+                <button id="delete-account" class="btn-danger">
+                  <i class="fas fa-trash"></i> Delete Account
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -445,6 +473,80 @@
           document.getElementById("newPassword").value = "";
           document.getElementById("confirmPassword").value = "";
           setMsg("ok", "Password updated.");
+        });
+
+      // Delete account: remove user + all per-user progress keys, then sign out
+      document
+        .getElementById("delete-account")
+        ?.addEventListener("click", function () {
+          Swal.fire({
+            title: "Delete account?",
+            text: "This will permanently remove your profile and learning progress on this device.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+            confirmButtonColor: "#dc2626",
+          }).then(function (res) {
+            if (!res.isConfirmed) return;
+            try {
+              const S = window.StorageUtil;
+              const current = S.getJSON("currentUser", null);
+              if (!current) {
+                window.location.href = "login.html";
+                return;
+              }
+              // Remove from users list
+              const users = S.getJSON("users", []);
+              const filtered = Array.isArray(users)
+                ? users.filter((u) => u && u.id !== current.id)
+                : [];
+              S.setJSON("users", filtered);
+
+              // Remove all keys scoped to this user (suffix ::scope)
+              const scope = (function () {
+                try {
+                  return String(
+                    current.id || current.email || current.username || "guest"
+                  );
+                } catch (_) {
+                  return "guest";
+                }
+              })();
+              const suffix = "::" + scope;
+              try {
+                const keys = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                  const k = localStorage.key(i);
+                  if (k) keys.push(k);
+                }
+                keys.forEach((k) => {
+                  if (k.endsWith(suffix)) localStorage.removeItem(k);
+                });
+              } catch (_) {}
+
+              // Clear session
+              try {
+                localStorage.removeItem("currentUser");
+              } catch (_) {}
+              S.setJSON("currentUser", null);
+
+              Swal.fire({
+                icon: "success",
+                title: "Account deleted",
+                text: "Your account was removed.",
+              });
+              setTimeout(function () {
+                window.location.href = "login.html";
+              }, 800);
+            } catch (e) {
+              console.error(e);
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Could not delete account.",
+              });
+            }
+          });
         });
     </script>
   </body>
