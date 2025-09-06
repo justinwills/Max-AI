@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Natural Language Processing - Modules</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../css/modules-inner.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav>
+        <img src="../img/logo.svg" class="logo" alt="MaxAI" />
+      </a>
+
+      <div class="navigation">
+        <ul>
+          <li><a href="../home.html">Home</a></li>
+          <li><a href="../modules.html" class="active">Modules</a></li>
+          <li><a href="../flashcard.html">Flashcard</a></li>
+          <li><a href="../quiz.html">Quiz</a></li>
+          <li><a href="../about.html">About Us</a></li>
+        </ul>
+        <div class="mobile-menu-btn" aria-label="Open menu" role="button" tabindex="0">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+
+      <div class="profile-menu">
+        <button
+          type="button"
+          class="profile-btn"
+          aria-label="Profile"
+          aria-expanded="false"
+        >
+          <i class="fas fa-user"></i>
+        </button>
+        <div class="menu">
+          <a href="../userprofile.html"
+            ><i class="fas fa-user-circle"></i> Profile</a
+          >
+          <a href="../login.html"
+            ><i class="fas fa-right-from-bracket"></i> Logout</a
+          >
+        </div>
+      </div>
+    </nav>
+    <script src="../js/nav.js"></script>
+    <script>
+      // Mobile menu toggle for inner modules page
+      (function(){
+        const burger = document.querySelector('.mobile-menu-btn');
+        const menuList = document.querySelector('nav .navigation ul');
+        if (burger && menuList) {
+          burger.addEventListener('click', function(){
+            menuList.classList.toggle('active');
+          });
+          // Close menu when a link is tapped (mobile)
+          menuList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            menuList.classList.remove('active');
+          }));
+        }
+      })();
+    </script>
+
+    <section id="about-home">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-robot"></i>
+          <span>Specialized</span>
+        </div>
+        <h1>Natural Language Processing</h1>
+        <p class="hero-subtitle">
+          Discover the world of NLP, from text processing and sentiment analysis to language models and chatbots.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <span>2-3 hours</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-signal"></i>
+            <span>Specialized</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <span>Free</span>
+          </div>
+        </div>
+      </div>
+            <div class="hero-visual">
+        <div class="floating-card card-1">
+          <i class="fas fa-language"></i>
+          <span>NLP</span>
+        </div>
+        <div class="floating-card card-2">
+          <i class="fas fa-comment-dots"></i>
+          <span>Text</span>
+        </div>
+        <div class="floating-card card-3">
+          <i class="fas fa-robot"></i>
+          <span>Chatbot</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="course-inner">
+      <div class="overview">
+        <div class="course-panel">
+          <div class="course-header">
+            <img
+              class="course-img"
+              src="../img/nlp.png"
+              alt="Natural Language Processing"
+            />
+            <div class="course-overlay">
+              <div class="play-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-info">
+            <div class="course-meta">
+              <div class="meta-item">
+                <i class="fas fa-calendar"></i>
+                <span>Last updated: Sep 2025</span>
+              </div>
+            </div>
+
+            <div class="callout info">
+              <i class="fas fa-lightbulb"></i>
+              <div>
+                <strong>Pro Tip:</strong> Complete one lesson per day for
+                optimal retention. Each lesson builds on the previous one.
+              </div>
+            </div>
+            <div class="progress-wrap">
+              <div
+                id="progress-bar"
+                class="progress-bar"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuenow="0"
+                aria-valuemax="100"
+              >
+                <div
+                  id="progress-fill"
+                  class="progress-fill"
+                  style="width: 0%"
+                ></div>
+                <div id="progress-label" class="progress-label">
+                  0% Completed
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-sections">
+          <div class="reset-bar">
+            <button id="reset-progress" class="reset-btn">
+              <i class="fa-solid fa-rotate-left"></i> Reset Progress
+            </button>
+          </div>
+
+<!-- Learning Objectives ---->
+          <section class="content-section" id="objectives">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <h3>Learning Objectives</h3>
+            </div>
+            <div class="objectives-grid">
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Understand the basics of text processing and
+                  tokenization.</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Apply sentiment analysis and text classification
+                  techniques.</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Explore language models and embeddings.</span>
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Build simple chatbots and question-answering systems.</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Understand ethical considerations in NLP applications.</span
+                >
+              </div>
+            </div>
+          </section>
+
+          <section class="content-section" id="prerequisites">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-list-check"></i>
+              </div>
+              <h3>Prerequisites</h3>
+            </div>
+            <p>
+              Recommended: complete the previous modules
+              <a class="prereq-link" href="./ai-foundation.html"
+                ><i class="fas fa-book-open"></i> AI Foundations</a
+              >,
+              <a class="prereq-link" href="./machine-learning.html"
+                ><i class="fas fa-book-open"></i> Machine Learning</a
+              >,
+              <a class="prereq-link" href="./neural-networks.html"
+                ><i class="fas fa-book-open"></i> Neural Networks</a
+              >, and
+              <a class="prereq-link" href="./deep-learning.html"
+                ><i class="fas fa-book-open"></i> Deep Learning</a
+              >
+              to ensure you're comfortable with basic AI, ML, and deep learning
+              concepts. Basic algebra and programming are helpful.
+            </p>
+            <div class="tags">
+              <span class="tag">Completed AI Foundations</span>
+              <span class="tag">Completed Machine Learning</span>
+              <span class="tag">Completed Neural Networks</span>
+              <span class="tag">Completed Deep Learning</span>
+              <span class="tag">Basic algebra</span>
+              <span class="tag">Optional: JavaScript basics</span>
+            </div>
+          </section>
+
+          <div class="lessons-container">
+            <h3 class="lessons-title">Course Lessons</h3>
+            <div class="lesson-item" data-lesson="1">
+            <div class="lesson-header">
+              <div class="lesson-number">01</div>
+              <div class="lesson-content">
+                <h4>Why NLP Matters Today</h4>
+                <p>
+                  Natural Language Processing (NLP) is no longer just a research
+                  topic; it’s the backbone of modern technology.
+                </p>
+              </div>
+              <div class="lesson-status">
+                <i class="fas fa-lock-open"></i>
+              </div>
+            </div>
+            <div class="lesson-details">
+              <div class="lesson-meta">
+                <span><i class="fas fa-clock"></i> 8 min</span>
+                <span><i class="fas fa-file-text"></i> Notes</span>
+              </div>
+              <div class="lesson-preview">
+                <p>
+                  Every time you use voice assistants, search engines, chatbots,
+                  or real-time translation, NLP is at work. Think of NLP as
+                  teaching computers to become “language partners.” It allows
+                  machines not only to process words but also to grasp context,
+                  intent, and meaning — enabling smoother interaction between
+                  humans and technology.
+                </p>
+                <div class="callout neutral">
+                  <strong>Key terms:</strong> NLP, context, communication
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-item" data-lesson="2">
+            <div class="lesson-header">
+              <div class="lesson-number">02</div>
+              <div class="lesson-content">
+                <h4>Text as Data</h4>
+                <p>
+                  Unlike numbers in spreadsheets, language is messy and full of
+                  ambiguity. NLP transforms raw words into structured formats
+                  that machines can analyze.
+                </p>
+              </div>
+              <div class="lesson-status">
+                <i class="fas fa-lock-open"></i>
+              </div>
+            </div>
+            <div class="lesson-details">
+              <div class="lesson-meta">
+                <span><i class="fas fa-clock"></i> 8 min</span>
+                <span><i class="fas fa-file-text"></i> Notes</span>
+              </div>
+              <div class="lesson-preview">
+                <p>
+                  • Text Cleaning: removing noise like punctuation, extra
+                  spaces, or emojis.<br />
+                  • Tokenization: splitting text into smaller units (words,
+                  sentences, or even characters).<br />
+                  • Vectorization: turning words into numbers using methods like
+                  embeddings.<br />
+                  Imagine trying to teach a robot to cook. Before it can follow
+                  the recipe, you must first clean the handwriting, break down
+                  steps into smaller instructions, and then encode each step
+                  into signals it can understand. That’s what NLP does with
+                  text.
+                </p>
+                <div class="callout neutral">
+                  <strong>Key terms:</strong> cleaning, tokenization,
+                  vectorization
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-item" data-lesson="3">
+            <div class="lesson-header">
+              <div class="lesson-number">03</div>
+              <div class="lesson-content">
+                <h4>Sentiment and Intent Detection</h4>
+                <p>
+                  One of the most practical uses of NLP is understanding how
+                  people feel or what they want.
+                </p>
+              </div>
+              <div class="lesson-status">
+                <i class="fas fa-lock-open"></i>
+              </div>
+            </div>
+            <div class="lesson-details">
+              <div class="lesson-meta">
+                <span><i class="fas fa-clock"></i> 8 min</span>
+                <span><i class="fas fa-file-text"></i> Notes</span>
+              </div>
+              <div class="lesson-preview">
+                <p>
+                  • Sentiment Analysis: determines if a review, tweet, or
+                  message is positive, negative, or neutral.<br />
+                  • Intent Recognition: figures out what a user is trying to
+                  achieve (e.g., “book a flight” vs. “check flight status”).<br />
+                  These tools are crucial in customer service, politics, and
+                  social media monitoring. For example, companies use sentiment
+                  analysis to detect unhappy customers early and act before
+                  problems escalate.
+                </p>
+                <div class="callout neutral">
+                  <strong>Key terms:</strong> sentiment, intent, classification
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-item" data-lesson="4">
+            <div class="lesson-header">
+              <div class="lesson-number">04</div>
+              <div class="lesson-content">
+                <h4>NLP in Action — Chatbots and Virtual Assistants</h4>
+                <p>
+                  Chatbots and assistants like Siri or Alexa combine multiple
+                  NLP tasks: speech recognition, intent detection, and dialogue
+                  management. They don’t just answer questions — they maintain
+                  context across conversations.
+                </p>
+              </div>
+              <div class="lesson-status">
+                <i class="fas fa-lock-open"></i>
+              </div>
+            </div>
+            <div class="lesson-details">
+              <div class="lesson-meta">
+                <span><i class="fas fa-clock"></i> 8 min</span>
+                <span><i class="fas fa-file-text"></i> Notes</span>
+              </div>
+              <div class="lesson-preview">
+                <p>
+                  Think of them like personal secretaries: they remember your
+                  preferences, schedule tasks, and respond naturally to your
+                  requests. Good chatbots rely on both rule-based logic and
+                  advanced models like transformers.
+                </p>
+                <div class="callout neutral">
+                  <strong>Key terms:</strong> chatbot, virtual assistant,
+                  dialogue
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-item" data-lesson="5">
+            <div class="lesson-header">
+              <div class="lesson-number">05</div>
+              <div class="lesson-content">
+                <h4>Machine Translation and Multilingual NLP</h4>
+                <p>
+                  NLP also powers translation tools that break language
+                  barriers. Modern systems use deep learning architectures like
+                  Transformers to produce fluent, context-aware translations.
+                </p>
+              </div>
+              <div class="lesson-status">
+                <i class="fas fa-lock-open"></i>
+              </div>
+            </div>
+            <div class="lesson-details">
+              <div class="lesson-meta">
+                <span><i class="fas fa-clock"></i> 8 min</span>
+                <span><i class="fas fa-file-text"></i> Notes</span>
+              </div>
+              <div class="lesson-preview">
+                <p>
+                  Imagine having a friend who can instantly translate not just
+                  words but also tone and cultural context. That’s what modern
+                  machine translation strives for, making global communication
+                  seamless.
+                </p>
+                <div class="callout neutral">
+                  <strong>Key terms:</strong> multilingual, translation,
+                  transformer
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-item" data-lesson="6">
+            <div class="lesson-header">
+              <div class="lesson-number">06</div>
+              <div class="lesson-content">
+                <h4>Summarization and Information Extraction</h4>
+                <p>
+                  Another key task is helping humans digest information faster.
+                </p>
+              </div>
+              <div class="lesson-status">
+                <i class="fas fa-lock-open"></i>
+              </div>
+            </div>
+            <div class="lesson-details">
+              <div class="lesson-meta">
+                <span><i class="fas fa-clock"></i> 8 min</span>
+                <span><i class="fas fa-file-text"></i> Notes</span>
+              </div>
+              <div class="lesson-preview">
+                <p>
+                  • Summarization condenses long reports into key points.<br />
+                  • Information Extraction pulls out names, dates, or facts from
+                  documents.<br />
+                  Picture it as having an assistant who reads a 50-page report
+                  and hands you a 1-page summary with all the critical details.
+                  That’s the practical power of NLP in business and research.
+                </p>
+                <div class="callout neutral">
+                  <strong>Key terms:</strong> summarization, extraction,
+                  knowledge
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-item" data-lesson="7">
+            <div class="lesson-header">
+              <div class="lesson-number">07</div>
+              <div class="lesson-content">
+                <h4>NLP and Ethic</h4>
+                <p>
+                  As NLP gets stronger, ethical concerns grow. Issues like
+                  biased datasets, harmful outputs, and misuse of chatbots for
+                  scams remind us that technology is not neutral.
+                </p>
+              </div>
+              <div class="lesson-status">
+                <i class="fas fa-lock-open"></i>
+              </div>
+            </div>
+            <div class="lesson-details">
+              <div class="lesson-meta">
+                <span><i class="fas fa-clock"></i> 8 min</span>
+                <span><i class="fas fa-file-text"></i> Notes</span>
+              </div>
+              <div class="lesson-preview">
+                <p>
+                  Developers must design systems with fairness, transparency,
+                  and responsibility in mind. Understanding ethics is just as
+                  important as building better models.
+                </p>
+                <div class="callout neutral">
+                  <strong>Key terms:</strong> bias, fairness, responsibility
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lesson-item" data-lesson="8">
+            <div class="lesson-header">
+              <div class="lesson-number">08</div>
+              <div class="lesson-content">
+                <h4>Key Takeaways</h4>
+                <p>
+                  NLP is about transforming unstructured human language into
+                  structured knowledge. From cleaning text to detecting intent,
+                  translating languages, and summarizing reports, it touches
+                  nearly every digital interaction today.
+                </p>
+              </div>
+              <div class="lesson-status">
+                <i class="fas fa-lock-open"></i>
+              </div>
+            </div>
+            <div class="lesson-details">
+              <div class="lesson-meta">
+                <span><i class="fas fa-clock"></i> 8 min</span>
+                <span><i class="fas fa-file-text"></i> Notes</span>
+              </div>
+              <div class="lesson-preview">
+                <p>
+                  The future of NLP lies in balancing innovation with ethics,
+                  making systems that are powerful, trustworthy, and accessible
+                  to everyone.
+                </p>
+                <div class="callout neutral">
+                  <strong>Key terms:</strong> structure, innovation, ethics
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <!-- Module summary -->
+            <div class="lesson-item" data-lesson="9">
+              <div class="lesson-header">
+                <div class="lesson-number">09</div>
+                <div class="lesson-content">
+                  <h4>Module Summary</h4>
+                  <p>
+                    Nonlinearity is what gives neural networks their expressive power, while depth allows them to build hierarchical feature representations. At the core of training, backpropagation together with SGD-family optimizers serves as the workhorse, with stability depending heavily on proper initialization, normalization, and learning rate choices. To ensure real-world performance, networks must generalize beyond the training data, which requires regularization techniques and disciplined evaluation. In practice, CNNs remain the dominant choice for image-based tasks, whereas sequence modeling is increasingly driven by attention-based architectures such as Transformers.
+                  </p>
+                  <p>
+                    Next steps: explore the Natural Language Processing and AI Ethics modules, try a
+                    small project.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<section class="content-section" id="resources">
+  <div class="section-header">
+    <div class="section-icon">
+      <i class="fas fa-brain"></i>
+    </div>
+    <h3>Further Resources</h3>
+  </div>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <div class="resource-icon">
+        <i class="fas fa-book"></i>
+      </div>
+      <h4>Neural Networks and Deep Learning</h4>
+      <p>Michael Nielsen’s classic free online book for beginners.</p>
+      <a
+        href="http://neuralnetworksanddeeplearning.com/"
+        class="resource-link"
+      >
+        Learn More <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-icon">
+        <i class="fas fa-laptop-code"></i>
+      </div>
+      <h4>Deep Learning Specialization</h4>
+      <p>Andrew Ng’s Coursera program focusing on neural networks and deep learning.</p>
+      <a
+        href="https://www.coursera.org/specializations/deep-learning"
+        class="resource-link"
+      >
+        Learn More <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-icon">
+        <i class="fas fa-database"></i>
+      </div>
+      <h4>TensorFlow Playground</h4>
+      <p>Interactive tool to visualize and experiment with neural networks in the browser.</p>
+      <a
+        href="https://playground.tensorflow.org/"
+        class="resource-link"
+      >
+        Try It <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+        </div>
+      </div>
+
+      <aside class="enroll toc">
+        <div class="toc-downloads">
+          <h4>Course Materials</h4>
+          <div class="download-item">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Summary notes (PDF)</span>
+            <a
+              class="download-btn download-notes"
+              href="../materials/neural-networks-summary.pdf"
+              download
+              aria-label="Download summary notes PDF"
+              >Download</a
+            >
+          </div>
+          <div class="download-item">
+            <i class="fa-solid fa-file-code"></i>
+            <span>Sample code (HTML)</span>
+            <a
+              class="download-btn"
+              href="../materials/neural-networks-sample.html"
+              download
+              aria-label="Download sample code (HTML)"
+            >
+              Download
+            </a>
+          </div>
+        </div>
+
+        <div class="toc-info">
+          <div class="info-item">
+            <i class="fa-regular fa-clock"></i>
+            <span>Estimated time: ~4 hours</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+    <footer>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 MaxAI |
+          <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="natural-language-processing.js"></script>
+  </body>
+</html>

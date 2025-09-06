@@ -226,7 +226,7 @@
               <div class="lesson-header">
                 <div class="lesson-number">01</div>
                 <div class="lesson-content">
-                  <h4>What is Deep Learning?</h4>
+                  <h4>Foundations of Deep Learning</h4>
                   <p>
                     Introduces deep learning as multi-layer neural networks that automatically learn features from raw data.
                   </p>
@@ -242,11 +242,9 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-Deep learning is a subfield of machine learning that uses multi-layer neural networks to 
-automatically learn hierarchical features from data. Unlike traditional ML that often 
-depends on handcrafted features, deep learning discovers useful representations directly 
-from raw data such as images, speech, and text. Its ability to scale with large datasets and 
-computing power makes it the foundation of modern AI breakthroughs.
+When we interact with modern technology—whether it is recognizing a face in photos, translating languages instantly, or recommending a movie—we are often seeing deep learning at work. Deep learning is a branch of machine learning that uses networks of layers, known as neural networks, to recognize patterns in data.
+Think of deep learning like teaching a student. At first, the student learns simple facts such as letters or numbers. Later, they combine this knowledge into sentences, and eventually, into complete essays. Similarly, in deep learning, the first layers of a network learn simple patterns, while deeper layers combine these into more complex ideas.
+Deep learning matters because it has dramatically changed what computers can do. It powers self-driving cars, medical diagnosis from images, voice assistants, and many other applications that once seemed impossible.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> deep neural network, hierarchy, representation learning
@@ -259,9 +257,9 @@ computing power makes it the foundation of modern AI breakthroughs.
               <div class="lesson-header">
                 <div class="lesson-number">02</div>
                 <div class="lesson-content">
-                  <h4>Core Concepts</h4>
+                  <h4>Deep Learning Workflow</h4>
                   <p>
-                    Explains forward and backward passes, activations, and how networks are trained.
+                    Deep learning projects don’t succeed by just throwing data into a model — they follow a clear workflow.
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -270,16 +268,17 @@ computing power makes it the foundation of modern AI breakthroughs.
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 12 min</span>
+                  <span><i class="fas fa-clock"></i> 8 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
                   <p>
-Deep Neural Networks (DNNs) are built from layers of neurons connected by weights. The 
-forward pass computes outputs layer by layer, while the backward pass (backpropagation) 
-adjusts weights using gradients to minimize error. Activation functions such as ReLU or 
-sigmoid provide non-linearity, enabling networks to learn complex patterns. Together, 
-these mechanisms power the learning process.
+1.	Data Preparation: Most of the effort goes here. Raw data is noisy, inconsistent, and incomplete. A well-prepared dataset often matters more than a fancy model. For example, in medical imaging, removing blurry scans and labeling them carefully is critical for accuracy.
+2.	Model Design: Choosing the right architecture is like choosing the right tool for the job. CNNs shine in vision, Transformers dominate in language, while hybrid models tackle multimodal tasks.
+3.	Training: This stage is about more than running code. It’s about setting learning rates, managing memory, and monitoring metrics in real time. Mistuned training can waste hours on GPUs without progress.
+4.	Evaluation: A model that works in the lab may fail in the real world. Proper evaluation uses test data, cross-validation, and fairness checks to ensure robust performance.
+5.	Deployment: Integration is often the hardest part. A model that works on a server may need to be compressed for a smartphone or edge device.
+This workflow isn’t rigid but iterative. Teams circle back when issues arise — data may need relabeling, or deployment might demand lighter architectures.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> DNN, activation, forward pass, backpropagation
@@ -293,28 +292,29 @@ these mechanisms power the learning process.
                 <div class="lesson-number">03</div>
                 <div class="lesson-content">
                   <h4>
-                    Training Challenges & Solutions
+                    Convolutional Models for Vision
                   </h4>
                   <p>
-                    Covers common training issues (like vanishing gradients) and methods to overcome them.
+                   Convolutional models (CNNs) changed the way machines see the world. Unlike traditional methods that relied on handcrafted filters, CNNs learn features directly from data.
                   </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
-                </div>
+                </div>  
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 10 min</span>
+                  <span><i class="fas fa-clock"></i> 8 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Training deep networks can be unstable. Problems like vanishing/exploding gradients, 
-overfitting, or slow convergence often arise. Solutions include weight initialization 
-strategies, batch normalization to stabilize activations, dropout to reduce overfitting, and 
-modern optimizers (SGD with momentum, Adam). These techniques make deep models 
-both trainable and more generalizable.
+                    The magic lies in their efficiency: instead of analyzing every pixel separately, CNNs slide filters across an image to detect edges, textures, and shapes. These small building blocks combine into recognition of complex objects like faces or traffic signs.
+Real-world impact is everywhere:
+•	Healthcare: Detecting tumors from X-rays more reliably than some specialists.
+•	Transportation: Enabling cars to detect pedestrians, lanes, and obstacles.
+•	Security: Powering facial recognition in airports and smartphones.
+CNNs made image recognition scalable, turning computer vision from theory into daily reality.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> vanishing gradient, batch normalization, dropout, optimizer
@@ -322,13 +322,14 @@ both trainable and more generalizable.
                 </div>
               </div>
             </div>
-
             <div class="lesson-item" data-lesson="4">
               <div class="lesson-header">
                 <div class="lesson-number">04</div>
                 <div class="lesson-content">
-                  <h4>Popular Architectures</h4>
-                  <p>Outlines CNNs, RNNs, LSTMs, and Transformers and their key use cases.</p>
+                  <h4> Sequence and Language Models</h4>
+                  <p>
+                    Data doesn’t always come as static images — language, speech, and financial trends are sequential. Early sequence models like RNNs captured short-term patterns but struggled with long memory.
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -336,30 +337,32 @@ both trainable and more generalizable.
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 12 min</span>
+                  <span><i class="fas fa-clock"></i> 8 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Different tasks call for different architectures. CNNs (Convolutional Neural Networks) 
-extract local image features through filters and pooling. RNNs (Recurrent Neural Networks) 
-process sequential data but struggle with long dependencies, improved by LSTMs and GRUs. 
-Transformers, with attention mechanisms, dominate natural language processing and now 
-extend to multimodal AI.  
+Transformers solved this by introducing self-attention, allowing models to focus on relevant words or signals no matter how far apart they are. This leap turned machine translation, text generation, and even music composition into practical technologies.
+Examples include:
+•	Google Translate: Context-aware translations in milliseconds.
+•	ChatGPT & BERT: Understanding and generating human-like text.
+•	Stock Predictions: Identifying hidden patterns across time.
+Sequence models show that deep learning isn’t just about recognizing images — it’s about capturing context over time.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> CNN, RNN, LSTM, GRU, transformer, attention
+                    <strong>Key terms:</strong> DNN, activation, forward pass, backpropagation
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="lesson-item" data-lesson="5">
+<div class="lesson-item" data-lesson="5">
               <div class="lesson-header">
                 <div class="lesson-number">05</div>
                 <div class="lesson-content">
-                  <h4>Real-World Applications</h4>
-                  <p>Shows how deep learning powers vision, speech, language, and recommendation systems.</p>
+                  <h4>Training and Optimization</h4>
+                  <p>
+                    Training deep models is where theory meets reality, and most failures happen here. It’s not enough to pick an algorithm — you need strategies to make learning efficient and reliable.
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -372,24 +375,25 @@ extend to multimodal AI.
                 </div>
                 <div class="lesson-preview">
                   <p>
-Deep learning is everywhere: self-driving cars detect objects with CNNs, RNNs support 
-speech recognition and financial forecasting, and Transformers power translation, 
-summarization, and AI assistants. Recommendation systems, fraud detection, and medical 
-imaging further showcase its versatility across industries.
+•	Optimization: Algorithms like SGD with momentum or Adam aren’t just math tricks — they determine whether your model converges in hours or weeks.
+•	Regularization: Without methods like dropout, models memorize training data and fail in production. Imagine a student memorizing answers instead of learning concepts — that’s overfitting.
+•	Normalization: Batch norm and layer norm keep values stable across layers, preventing the network from spiraling into instability.
+•	Hardware Acceleration: GPUs and TPUs aren’t optional luxuries; they’re what make training billion-parameter models feasible.
+In practice, training is like piloting a plane: constant monitoring, mid-course corrections, and emergency responses when things go wrong. The right choices here separate toy models from production-grade AI.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> vision, speech, recommendation, LLM
+                    <strong>Key terms:</strong> DNN, activation, forward pass, backpropagation
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="lesson-item" data-lesson="6">
+<div class="lesson-item" data-lesson="6">
               <div class="lesson-header">
                 <div class="lesson-number">06</div>
                 <div class="lesson-content">
-                  <h4>Training Efficiency & Hardware Acceleration</h4>
-                  <p>Highlights GPUs, TPUs, and scaling techniques that make deep learning practical.</p>
+                  <h4>Modern Deep Learning Architectures</h4>
+                  <p>
+                   Recent advances have introduced architectures that go beyond CNNs and RNNs. Transformers, for example, use a mechanism called self-attention to weigh the importance of different parts of the input simultaneously. This makes them powerful in handling large-scale language and vision tasks.
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -397,31 +401,29 @@ imaging further showcase its versatility across industries.
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 10 min</span>
+                  <span><i class="fas fa-clock"></i> 8 min</span>
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
                   <p>
-Modern deep learning depends on specialized hardware and training techniques. GPUs and 
-TPUs accelerate massive matrix operations, while frameworks like TensorFlow and 
-PyTorch simplify model building. Techniques like mini-batch training, mixed precision, and 
-distributed training help scale models efficiently. Understanding the computational side is 
-critical for deploying real-world AI.
+You can imagine self-attention like reading a book while highlighting key phrases. Instead of reading line by line without context, you immediately notice which words or sentences carry more meaning. Transformers work in a similar way, capturing relationships across the entire input at once.
+
+These architectures are important because they drive today’s most advanced models, including those used for conversational AI, automated writing, and multimodal systems that combine text, images, and more. They represent the future direction of deep learning.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> GPU, TPU, mini-batch, distributed training
+                    <strong>Key terms:</strong> DNN, activation, forward pass, backpropagation
                   </div>
                 </div>
               </div>
             </div>
-
-            <!-- New lessons to deepen the module -->
-            <div class="lesson-item" data-lesson="7">
+<div class="lesson-item" data-lesson="7">
               <div class="lesson-header">
                 <div class="lesson-number">07</div>
                 <div class="lesson-content">
-                  <h4>Evaluation Metrics</h4>
-                  <p>Explain precision, recall, F1, and when accuracy fails.</p>
+                  <h4> Generative Models</h4>
+                  <p>
+                   Generative models learn to create new data that resembles the training data. Instead of just classifying inputs, they generate outputs—like new images, text, or music.
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -434,24 +436,24 @@ critical for deploying real-world AI.
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Different tasks require different metrics. For regression, common choices include MAE, MSE/RMSE, and R²
-                    to summarize error and explained variance. For classification, accuracy can be misleading with class
-                    imbalance, so we track precision, recall, and F1, and examine the confusion matrix; threshold-based curves
-                    like ROC and PR help compare classifiers.
+Two main types are GANs (Generative Adversarial Networks) and VAEs (Variational Autoencoders). GANs work like an artist and a critic: one creates, the other judges until the creations look real.
+
+Why it matters: Generative models power applications like AI art, realistic deepfakes, drug discovery, and data augmentation for machine learning.
+
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> precision, recall, F1
+                    <strong>Key terms:</strong> DNN, activation, forward pass, backpropagation
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="lesson-item" data-lesson="8">
+<div class="lesson-item" data-lesson="8">
               <div class="lesson-header">
                 <div class="lesson-number">08</div>
                 <div class="lesson-content">
-                  <h4>Feature Engineering & Preprocessing</h4>
-                  <p>Scaling, encoding, imputing, and leak-free pipelines.</p>
+                  <h4>Reinforcement Learning with Deep Networks</h4>
+                  <p>
+                   Reinforcement learning (RL) combines deep learning with decision-making. An agent learns by trial and error, receiving rewards or penalties for its actions.
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -464,101 +466,13 @@ critical for deploying real-world AI.
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Feature engineering transforms raw inputs into informative signals. Typical steps include scaling numeric
-                    features, encoding categorical variables, and imputing missing values; for text, bag-of-words or TF-IDF
-                    create count-based representations. To prevent leakage, compute all preprocessing parameters using only
-                    the training split, then apply them consistently to validation and test.
+Deep networks allow RL agents to handle complex environments, like playing Go or controlling robots.
+Think of teaching a dog tricks: each correct move gets a treat, guiding future behavior.
+
+Why it matters: Deep RL enables breakthroughs in gaming, robotics, recommendation systems, and adaptive control in real-world systems.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> scaling, encoding, imputation
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="lesson-item" data-lesson="9">
-              <div class="lesson-header">
-                <div class="lesson-number">09</div>
-                <div class="lesson-content">
-                  <h4>Model Selection & Hyperparameter Tuning</h4>
-                  <p>Introduce hyperparameters, grid/random search, learning curves.</p>
-                </div>
-                <div class="lesson-status">
-                  <i class="fas fa-lock-open"></i>
-                </div>
-              </div>
-              <div class="lesson-details">
-                <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 10 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
-                </div>
-                <div class="lesson-preview">
-                  <p>
-                    Model selection chooses a configuration that performs best on validation data. Hyperparameters—such as k
-                    in k-NN or tree depth—are tuned via grid or random search combined with cross-validation. Learning and
-                    validation curves diagnose whether collecting more data, simplifying the model, or regularizing would likely
-                    improve generalization.
-                  <div class="callout neutral">
-                    <strong>Key terms:</strong> hyperparameters, cross-validation, search
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="lesson-item" data-lesson="10">
-              <div class="lesson-header">
-                <div class="lesson-number">10</div>
-                <div class="lesson-content">
-                  <h4>Clustering & Dimensionality Reduction</h4>
-                  <p>
-                    Demo k-means and PCA, emphasize visualization.
-                  </p>
-                </div>
-                <div class="lesson-status">
-                  <i class="fas fa-lock-open"></i>
-                </div>
-              </div>
-              <div class="lesson-details">
-                <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 10 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
-                </div>
-                <div class="lesson-preview">
-                  Unsupervised exploration reveals structure without labels. K-means iteratively assigns points to the nearest
-                  centroids and updates those centroids to minimize within-cluster variance; the elbow or silhouette methods
-                  help choose k. Dimensionality reduction with PCA projects data onto directions of maximal variance to
-                  visualize or simplify downstream modeling.
-                  <div class="callout neutral">
-                    <strong>Key terms:</strong> k-means, PCA, clusters
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="lesson-item" data-lesson="11">
-              <div class="lesson-header">
-                <div class="lesson-number">11</div>
-                <div class="lesson-content">
-                  <h4>JavaScript Project: Mini ML Lab</h4>
-                  <p>
-                    Try code on your own!
-                  </p>
-                </div>
-                <div class="lesson-status">
-                  <i class="fas fa-lock-open"></i>
-                </div>
-              </div>
-              <div class="lesson-details">
-                <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 1 hour</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
-                </div>
-                <div class="lesson-preview">
-                    Firstly, build an interactive linear regression demo where the algorithm fits a line to user-plotted points and predicts new values. Users can click to add points and instantly see how the model updates to minimize error.
-                    Secondly, create a k-NN classification playground where users place points in different classes and adjust the value of k to observe how the decision boundary changes. This demonstrates how algorithms use nearest neighbors to make decisions.
-                    Finally, add a k-means clustering explorer where users generate random points and watch how clusters and centroids are updated step by step. This shows how unsupervised learning can discover hidden structure in data.
-                  <div class="callout neutral">
-                    <strong>Key terms:</strong> linear regression demo, k-NN, k-means clustering explorer
+                    <strong>Key terms:</strong> DNN, activation, forward pass, backpropagation
                   </div>
                 </div>
               </div>
@@ -664,6 +578,6 @@ critical for deploying real-world AI.
       </div>
     </footer>
 
-    <script src="machine-learning.js"></script>
+    <script src="deep-learning.js"></script>
   </body>
 </html>

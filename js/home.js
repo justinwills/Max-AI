@@ -49,16 +49,16 @@
     const completedAI =
       localStorage.getItem(K("ai_foundations_completed_v1")) === "true";
     const completedML =
-      localStorage.getItem(K("machine-learning_completed_v1")) === "true";
+      localStorage.getItem(K("machine_learning_completed_v1")) === "true";
     const completedDL =
-      localStorage.getItem(K("deep-learning_completed_v1")) === "true";
+      localStorage.getItem(K("deep_learning_completed_v1")) === "true";
     const completedNN =
-      localStorage.getItem(K("neural-networks_completed_v1")) === "true";
+      localStorage.getItem(K("neural_networks_completed_v1")) === "true";
     const completedNLP =
-      localStorage.getItem(K("natural-language-processing_completed_v1")) ===
+      localStorage.getItem(K("natural_language_processing_completed_v1")) ===
       "true";
     const completedAIE =
-      localStorage.getItem(K("ai-ethics_completed_v1")) === "true";
+      localStorage.getItem(K("ai_ethics_completed_v1")) === "true";
     const expectedCourses =
       (completedAI ? 1 : 0) +
       (completedML ? 1 : 0) +
@@ -178,38 +178,38 @@
       icon: '<i class="fas fa-check-circle" style="color:#10b981"></i>',
     },
     {
-      id: "machine-learning",
+      id: "machine_learning",
       title: "Machine Learning",
-      completedKey: K("machine-learning_completed_v1"),
-      activityKey: K("home_activity_logged_machine-learning_v1"),
+      completedKey: K("machine_learning_completed_v1"),
+      activityKey: K("home_activity_logged_machine_learning_v1"),
       icon: '<i class="fas fa-check-circle" style="color:#10b981"></i>',
     },
     {
-      id: "deep-learning",
+      id: "deep_learning",
       title: "Deep Learning",
-      completedKey: K("deep-learning_completed_v1"),
-      activityKey: K("home_activity_logged_deep-learning_v1"),
+      completedKey: K("deep_learning_completed_v1"),
+      activityKey: K("home_activity_logged_deep_learning_v1"),
       icon: '<i class="fas fa-check-circle" style="color:#10b981"></i>',
     },
     {
-      id: "neural-networks",
+      id: "neural_networks",
       title: "Neural Networks",
-      completedKey: K("neural-networks_completed_v1"),
-      activityKey: K("home_activity_logged_neural-networks_v1"),
+      completedKey: K("neural_networks_completed_v1"),
+      activityKey: K("home_activity_logged_neural_networks_v1"),
       icon: '<i class="fas fa-check-circle" style="color:#10b981"></i>',
     },
     {
-      id: "natural-language-processing",
+      id: "natural_language_processing",
       title: "Natural Language Processing",
-      completedKey: K("natural-language-processing_completed_v1"),
-      activityKey: K("home_activity_logged_natural-language-processing_v1"),
+      completedKey: K("natural_language_processing_completed_v1"),
+      activityKey: K("home_activity_logged_natural_language_processing_v1"),
       icon: '<i class="fas fa-check-circle" style="color:#10b981"></i>',
     },
     {
-      id: "ai-ethics",
+      id: "ai_ethics",
       title: "AI Ethics",
-      completedKey: K("ai-ethics_completed_v1"),
-      activityKey: K("home_activity_logged_ai-ethics_v1"),
+      completedKey: K("ai_ethics_completed_v1"),
+      activityKey: K("home_activity_logged_ai_ethics_v1"),
       icon: '<i class="fas fa-check-circle" style="color:#10b981"></i>',
     },
   ];
@@ -280,7 +280,18 @@
     return Number.isFinite(x) ? Math.max(0, Math.floor(x)) : 0;
   }
   function seedIfMissing() {
-    if ((S && S.get(KEY)) || (!S && localStorage.getItem(KEY))) return;
+    // Seed when key is missing, invalid, or an empty array
+    try {
+      const raw = S ? S.get(KEY) : localStorage.getItem(KEY);
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) return;
+        } catch (_) {
+          // fallthrough to seed
+        }
+      }
+    } catch (_) {}
     const seed = [
       { name: "Justin", score: 1240 },
       { name: "Alex", score: 1120 },
@@ -379,7 +390,8 @@
   }
   function buildEntries() {
     const users = (S && S.getJSON("users", [])) || [];
-    if (!Array.isArray(users) || users.length === 0) return [];
+    // If there are no users, do not override existing seeded leaderboard
+    if (!Array.isArray(users) || users.length === 0) return null;
     return users.map((u) => {
       const c = getIntRaw(KForUser("home_courses_completed_bonus", u));
       const h = getIntRaw(KForUser("home_hours_learned_bonus", u));
@@ -389,6 +401,7 @@
   }
   function sync() {
     const entries = buildEntries();
+    if (!entries || entries.length === 0) return; // keep whatever is already rendered/seeded
     if (typeof window.updateLeaderboard === "function") {
       window.updateLeaderboard(entries);
     } else {

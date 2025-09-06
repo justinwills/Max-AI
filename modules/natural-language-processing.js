@@ -31,7 +31,11 @@
   codeBtn &&
     codeBtn.addEventListener("click", function () {
       const code = ``;
-      download("machine-learning-sample.js", code, "application/javascript");
+      download(
+        "natural-language-processing-sample.js",
+        code,
+        "application/javascript"
+      );
     });
 })();
 // Lesson interaction (header-only toggling; no lock system)
@@ -72,15 +76,17 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
       if (!res.isConfirmed) return;
       try {
         // Clear quiz state and auxiliary data for this module
-        localStorage.removeItem(K("machine_learning_quiz_v1"));
-        localStorage.removeItem(K("machine_learning_quiz_total_v1"));
-        localStorage.removeItem(K("machine_learning_quiz_done_v1"));
+        localStorage.removeItem(K("natural_language_processing_quiz_v1"));
+        localStorage.removeItem(K("natural_language_processing_quiz_total_v1"));
+        localStorage.removeItem(K("natural_language_processing_quiz_done_v1"));
         // Clear stored MCQ option order to allow reshuffle next time
-        localStorage.removeItem(K("machine_learning_quiz_order_v1"));
+        localStorage.removeItem(K("natural_language_processing_quiz_order_v1"));
 
         // If completion was recorded, subtract Home bonuses once
         if (
-          localStorage.getItem(K("machine_learning_completed_v1")) === "true"
+          localStorage.getItem(
+            K("natural_language_processing_completed_v1")
+          ) === "true"
         ) {
           const courseKey = K("home_courses_completed_bonus");
           const hoursKey = K("home_hours_learned_bonus");
@@ -94,11 +100,11 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
           localStorage.setItem(hoursKey, String(newHours));
           // Remove recent-activity marker
           localStorage.removeItem(
-            K("home_activity_logged_machine_learning_v1")
+            K("home_activity_logged_natural_language_processing_v1")
           );
         }
         // Unset completion flag
-        localStorage.removeItem(K("machine_learning_completed_v1"));
+        localStorage.removeItem(K("natural_language_processing_completed_v1"));
       } catch (_) {}
       location.reload();
     });
@@ -119,11 +125,11 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
   function K(base) {
     return base + "::" + userScope();
   }
-  const STORAGE_KEY = K("machine_learning_quiz_v1");
+  const STORAGE_KEY = K("natural_language_processing_quiz_v1");
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
   // Persist per-quiz option order so the correct answer isn't always first,
   // and the order remains stable across reloads.
-  const ORDER_KEY = K("machine_learning_quiz_order_v1");
+  const ORDER_KEY = K("natural_language_processing_quiz_order_v1");
   let savedOrderMap = {};
   try {
     savedOrderMap = JSON.parse(localStorage.getItem(ORDER_KEY) || "{}");
@@ -138,173 +144,144 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     ).toLowerCase();
 
     // Title-based specs (one per lesson topic)
-    if (title.includes("types of learning")) {
+    if (title.includes("why nlp matters today")) {
       return {
         type: "mcq",
-        prompt: "Which task is most suitable for reinforcement learning?",
+        prompt: "What role does NLP play in modern technology?",
         options: [
-          ["a", "Grouping similar samples without labels"],
+          ["a", "It only processes numbers"],
           [
             "b",
-            "Training an agent to maximize long-term reward through trial and error",
+            "It enables machines to understand and respond to human language",
             true,
           ],
-          ["c", "Predicting prices from labeled examples"],
-          ["d", "Compressing features into fewer dimensions"],
+          ["c", "It is mainly used for computer graphics"],
+          ["d", "It replaces all human teachers"],
         ],
         hint: "Think about an agent interacting with an environment.",
       };
     }
 
-    if (title.includes("ml data pipeline")) {
+    if (title.includes("text as data")) {
       return {
         type: "mcq",
         prompt:
           "What is the correct order of the pipeline described in the lesson?",
         options: [
-          ["a", "Preprocessing → Dataset → Training → Prediction"],
-          ["b", "Dataset → Training → Preprocessing → Prediction"],
-          ["c", "Dataset → Preprocessing → Training → Prediction", true],
-          ["d", "Training → Dataset → Prediction → Preprocessing"],
+          ["a", "To delete all text"],
+          ["b", "To split text into manageable units", true],
+          ["c", "To translate text into another language"],
+          ["d", "To check grammar mistakes"],
         ],
         hint: "Follow the natural workflow from raw data to inference.",
       };
     }
 
-    if (title.includes("linear regression")) {
+    if (title.includes("sentiment and intent detection")) {
       return {
         type: "mcq",
-        prompt: "Which quantity is minimized during training to fit the line?",
+        prompt: "What is intent recognition used for?",
         options: [
-          ["a", "Cross-entropy"],
-          ["b", "Mean squared error", true],
-          ["c", "Hinge loss"],
-          ["d", "Kullback–Leibler divergence"],
+          ["a", "Identifying user goals behind their words", true],
+          ["b", "Translating text"],
+          ["c", "Generating new music"],
+          ["d", "Removing punctuation from text"],
         ],
         hint: "Think about squared differences between true and predicted values.",
       };
     }
 
-    if (title.includes("classification")) {
+    if (title.includes("chatbots and assistants")) {
       return {
         type: "mcq",
-        prompt:
-          "Increasing k in k-NN typically has what effect on the decision boundary?",
+        prompt: "Which of these is a function of chatbots?",
         options: [
-          ["a", "Makes it more jagged (higher variance)"],
-          ["b", "Smooths it (lower variance)", true],
-          ["c", "Always increases training accuracy without test impact"],
-          ["d", "Guarantees underfitting on every dataset"],
+          ["a", "Image recognition"],
+          ["b", "Maintaining context in conversations", true],
+          ["c", "Predicting weather patterns"],
+          ["d", "Compressing file"],
         ],
         hint: "Think about averaging across more neighbors.",
       };
     }
 
-    if (title.includes("overfitting")) {
+    if (title.includes("machine translation")) {
       return {
         type: "mcq",
-        prompt: "Which pattern indicates overfitting as defined in the lesson?",
+        prompt:
+          "Which architecture powers modern translation systems like Google Translate？",
         options: [
-          ["a", "Low training error and low test error"],
-          ["b", "High training error and high test error"],
-          ["c", "Low training error but high test error", true],
-          ["d", "High training error but low test error"],
+          ["a", "Rule-based models"],
+          ["b", "Transformers", true],
+          ["c", "Decision trees"],
+          ["d", "Linear regression"],
         ],
         hint: "Compare performance on training vs test sets.",
       };
     }
 
-    if (title.includes("train/validation/test")) {
+    if (title.includes("summarization and information extractio")) {
       return {
         type: "mcq",
-        prompt:
-          "According to the lesson, when should the held-out test set be used?",
+        prompt: "What is the goal of summarization in NLP?",
         options: [
-          ["a", "For selecting hyperparameters"],
-          ["b", "Only once at the end to estimate generalization", true],
-          ["c", "For computing scaling parameters"],
-          ["d", "To augment the training data when data is scarce"],
+          ["a", "To expand short texts into longer versions"],
+          [
+            "b",
+            "To condense long documents into shorter, informative ones",
+            true,
+          ],
+          ["c", "To translate documents"],
+          ["d", "To detect sentiment only"],
         ],
         hint: "Think final evaluation, not tuning.",
       };
     }
 
-    if (title.includes("evaluation metrics")) {
+    if (title.includes("nlp and ethics")) {
       return {
         type: "mcq",
-        prompt:
-          "Which metric combines precision and recall into a single number?",
+        prompt: "Why is ethics important in NLP?",
         options: [
-          ["a", "Accuracy"],
-          ["b", "ROC-AUC"],
-          ["c", "F1 score", true],
-          ["d", "R²"],
+          ["a", "Because NLP models can be biased or misused", true],
+          ["b", "Because NLP should replace humans"],
+          ["c", "Because NLP cannot process numbers"],
+          ["d", "Because NLP ignores human interaction"],
         ],
         hint: "It’s the harmonic mean of two values.",
       };
     }
 
-    if (title.includes("feature engineering")) {
+    if (title.includes("key takeaways")) {
       return {
         type: "mcq",
-        prompt:
-          "Which practice can cause data leakage as described in the lesson?",
+        prompt: "What is the overall goal of NLP?",
         options: [
           [
             "a",
-            "Fitting a scaler on the training set then applying to validation/test",
-          ],
-          ["b", "One-hot encoding categorical variables"],
-          ["c", "Imputing missing values using training-set statistics only"],
-          [
-            "d",
-            "Fitting a scaler on the entire dataset before splitting",
+            "To make computers capable of understanding and interacting with human language",
             true,
           ],
+          ["b", "To train models without any data"],
+          ["c", "To replace all human teachers"],
+          ["d", "To only process structured datasets"],
         ],
         hint: "Leakage occurs when information from validation/test influences training.",
       };
     }
 
-    if (title.includes("model selection")) {
+    if (title.includes("quick check")) {
       return {
         type: "mcq",
-        prompt: "Which is a hyperparameter according to the lesson?",
+        prompt:
+          "Which type of summarization generates new sentences based on the original text?",
         options: [
-          ["a", "The learned weight w in linear regression"],
-          ["b", "The number of neighbors k in k-NN", true],
-          ["c", "The predicted probability for a test sample"],
-          ["d", "The residual error for a training point"],
+          ["a", "Extractive Summarization"],
+          ["b", "Abstractive Summarization", true],
+          ["c", "Keyword extraction"],
+          ["d", "Text deduplication"],
         ],
         hint: "Hyperparameters are set before training, not learned during.",
-      };
-    }
-
-    if (title.includes("clustering")) {
-      return {
-        type: "mcq",
-        prompt: "What is the primary function of PCA as defined in the lesson?",
-        options: [
-          ["a", "Assign points to nearest centroids iteratively"],
-          ["b", "Project data onto directions of maximum variance", true],
-          ["c", "Train a deep neural network"],
-          ["d", "Guarantee higher classification accuracy"],
-        ],
-        hint: "Think dimensionality reduction and variance.",
-      };
-    }
-
-    if (title.includes("mini ml lab")) {
-      return {
-        type: "mcq",
-        prompt: "Which algorithms are demonstrated in the Mini ML Lab project?",
-        options: [
-          ["a", "Decision trees, SVM, Naive Bayes"],
-          ["b", "Linear regression, k-NN, k-means", true],
-          ["c", "Logistic regression, Random Forest, PCA"],
-          ["d", "Q-learning, Monte Carlo search, CNNs"],
-        ],
-        hint: "They are simple algorithms for regression, classification, and clustering.",
       };
     }
 
@@ -486,8 +463,14 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     progBar.setAttribute("aria-valuenow", String(pct));
     // Persist coarse progress so other pages (e.g., home) can read it
     try {
-      localStorage.setItem(K("machine_learning_quiz_total_v1"), String(total));
-      localStorage.setItem(K("machine_learning_quiz_done_v1"), String(done));
+      localStorage.setItem(
+        K("natural_language_processing_quiz_total_v1"),
+        String(total)
+      );
+      localStorage.setItem(
+        K("natural_language_processing_quiz_done_v1"),
+        String(done)
+      );
     } catch (_) {}
 
     // When the course is completed (100%), set completion in localStorage
@@ -495,9 +478,13 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     try {
       if (
         pct === 100 &&
-        localStorage.getItem(K("machine_learning_completed_v1")) !== "true"
+        localStorage.getItem(K("natural_language_processing_completed_v1")) !==
+          "true"
       ) {
-        localStorage.setItem(K("machine_learning_completed_v1"), "true");
+        localStorage.setItem(
+          K("natural_language_processing_completed_v1"),
+          "true"
+        );
         const courseKey = K("home_courses_completed_bonus");
         const hoursKey = K("home_hours_learned_bonus");
         const curCourses =

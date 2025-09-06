@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Neural Network Mini Lab (JS)</title>
+<style>
+  :root{
+    --bg:#0b1020; --card:#121a33; --ink:#eaf0ff; --sub:#9fb0ff;
+    --accent:#7c5cff; --accent2:#30c48d; --warn:#ffb454;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter;
+    color:var(--ink); background:radial-gradient(1200px 800px at 15% -10%, #1c2648 0%, #0b1020 55%), #0b1020;
+  }
+  .wrap{max-width:1100px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:360px 1fr;gap:16px}
+  h1{font-size:22px;margin:0 0 12px;letter-spacing:.3px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+        border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  label{display:block;font-size:13px;color:var(--sub);margin:10px 0 6px}
+  select, input[type="number"], input[type="text"]{
+    width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.12);
+    background:#0f1730; color:var(--ink); outline:none;
+  }
+  input[type="range"]{width:100%}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .btn{
+    display:inline-block; border:none; background:var(--accent); color:white; padding:10px 14px; border-radius:12px;
+    font-weight:600; cursor:pointer; margin:6px 6px 0 0; transition:transform .05s ease;
+  }
+  .btn.secondary{background:#253155;color:#d6e0ff}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.2)}
+  .btn:active{transform:translateY(1px)}
+  canvas{width:100%; height:auto; border-radius:12px; background:#0c1329; display:block}
+  .small{font-size:12px;color:var(--sub)}
+  .stat{display:flex; gap:14px; flex-wrap:wrap; margin-top:8px}
+  .pill{background:#0e1838;border:1px solid rgba(255,255,255,.1); padding:6px 10px; border-radius:999px}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  code.k{background:#10183a;border:1px solid rgba(255,255,255,.12); padding:2px 6px; border-radius:6px}
+  .footer{color:#89a2ff;font-size:12px;margin-top:8px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Controls -->
+    <div class="card">
+      <h1>Neural Network Mini Lab</h1>
+
+      <label>Dataset</label>
+      <div class="row">
+        <select id="dataset">
+          <option value="linear">Linear (two blobs)</option>
+          <option value="xor">XOR (four blobs)</option>
+          <option value="circles">Concentric Circles</option>
+        </select>
+        <div>
+          <label class="small">Points per class</label>
+          <input type="number" id="npoints" min="20" max="2000" step="20" value="300" />
+        </div>
+      </div>
+
+      <label>Noise / Spread</label>
+      <input type="range" id="noise" min="0" max="100" value="22" />
+      <div class="small">Use higher noise to make the boundary harder.</div>
+
+      <div class="row" style="margin-top:8px">
+        <div>
+          <label>Hidden units</label>
+          <input type="number" id="hidden" min="1" max="64" step="1" value="8" />
+        </div>
+        <div>
+          <label>Activation</label>
+          <select id="act">
+            <option value="tanh">tanh</option>
+            <option value="relu">ReLU</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:8px">
+        <div>
+          <label>Learning rate</label>
+          <input type="number" id="lr" step="0.0001" value="0.03" />
+        </div>
+        <div>
+          <label>Epochs per step</label>
+          <input type="number" id="perstep" min="1" max="2000" value="25" />
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:8px">
+        <div>
+          <label>Seed</label>
+          <input type="number" id="seed" value="42" />
+        </div>
+        <div>
+          <label>L2 (weight decay)</label>
+          <input type="number" id="l2" step="0.0001" value="0.0000" />
+        </div>
+      </div>
+
+      <div style="margin-top:10px">
+        <button class="btn" id="regen">Generate Data</button>
+        <button class="btn" id="step">Train Step</button>
+        <button class="btn" id="train1000">Train 1000</button>
+        <button class="btn secondary" id="reset">Reset Model</button>
+      </div>
+
+      <div style="margin-top:10px">
+        <button class="btn ghost" id="save">Save State</button>
+        <button class="btn ghost" id="load">Load State</button>
+        <button class="btn ghost" id="export">Export Model</button>
+        <label class="small" style="margin-top:8px">Import model JSON</label>
+        <input type="text" id="importText" placeholder='paste JSON then press Enter' />
+      </div>
+
+      <div class="stat">
+        <div class="pill">Epoch: <span id="epoch">0</span></div>
+        <div class="pill">Loss: <span id="loss">—</span></div>
+        <div class="pill">Accuracy: <span id="acc">—</span></div>
+      </div>
+
+      <div class="footer">
+        Tasks: try <code class="k">XOR</code> with 4–12 hidden units (tanh), then try circles with ReLU.
+        Tune <code class="k">lr</code> and <code class="k">per-step</code> to stabilize training.
+      </div>
+    </div>
+
+    <!-- Visuals -->
+    <div class="card">
+      <canvas id="plot" width="700" height="520"></canvas>
+      <div class="small" style="margin-top:8px">
+        Decision boundary is the color field (blue→class 0, pink→class 1). Points show the dataset; hollow = misclassified.
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ========= Utilities ========= */
+function mulberry32(a){return function(){var t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296}}
+function randn(rng){ // Box-Muller
+  let u=0,v=0; while(u===0)u=rng(); while(v===0)v=rng();
+  return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
+}
+function shuffleInPlace(a, rng){
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()* (i+1)); [a[i],a[j]]=[a[j],a[i]];}
+}
+/* ========= Data ========= */
+function makeData(kind, nPerClass, noise, seed){
+  const rng = mulberry32(seed|0);
+  const X=[], y=[];
+  const push=(x0,x1,label)=>{X.push([x0,x1]); y.push(label)}
+  const s = noise/100; // spread
+  if(kind==='linear'){
+    for(let i=0;i<nPerClass;i++){
+      push(randn(rng)*s-0.8 + 0.5, randn(rng)*s-0.2 + 0.6, 0);
+      push(randn(rng)*s+0.8 - 0.5, randn(rng)*s+0.2 - 0.6, 1);
+    }
+  } else if(kind==='xor'){
+    const c=0.9;
+    for(let i=0;i<nPerClass;i++){
+      push(c+randn(rng)*s,  c+randn(rng)*s, 0);
+      push(-c+randn(rng)*s, -c+randn(rng)*s, 0);
+      push(-c+randn(rng)*s,  c+randn(rng)*s, 1);
+      push( c+randn(rng)*s, -c+randn(rng)*s, 1);
+    }
+  } else if(kind==='circles'){
+    for(let i=0;i<nPerClass;i++){
+      const a1=rng()*Math.PI*2, a2=rng()*Math.PI*2;
+      const r1=0.5 + randn(rng)*s*0.3, r2=1.3 + randn(rng)*s*0.3;
+      push(r1*Math.cos(a1), r1*Math.sin(a1), 0);
+      push(r2*Math.cos(a2), r2*Math.sin(a2), 1);
+    }
+  }
+  // normalize to ~[-1.5,1.5] square
+  let maxAbs=0; for(const [x0,x1] of X){maxAbs=Math.max(maxAbs, Math.abs(x0), Math.abs(x1))}
+  if(maxAbs>0){ for(let i=0;i<X.length;i++){X[i][0]/= (maxAbs*0.9); X[i][1]/=(maxAbs*0.9);} }
+  const idx=[...X.keys()]; shuffleInPlace(idx, mulberry32(seed+1337));
+  return {X: idx.map(i=>X[i]), y: idx.map(i=>y[i])};
+}
+
+/* ========= Tiny MLP (1 hidden layer) ========= */
+function initMLP(input=2, hidden=8, seed=123){
+  const rng=mulberry32(seed);
+  const W1=Array.from({length:hidden},()=>[ (rng()*2-1)*0.7, (rng()*2-1)*0.7 ]);
+  const b1=Array.from({length:hidden},()=> (rng()*2-1)*0.1 );
+  const W2=Array.from({length:hidden},()=> (rng()*2-1)*0.7 );
+  const b2=(rng()*2-1)*0.1;
+  return {W1,b1,W2,b2,epoch:0};
+}
+function actForward(z, kind){
+  if(kind==='relu'){ const a=z.map(v=>v>0?v:0); return [a, z.map(v=>v>0?1:0)] }
+  // tanh
+  const a=z.map(v=>Math.tanh(v)); return [a, a.map(v=>1-v*v)];
+}
+function sigmoid(x){ return 1/(1+Math.exp(-x)); }
+
+function forward(model, x, actKind){
+  const {W1,b1,W2,b2}=model;
+  const z1 = model.W1.map((w,i)=> w[0]*x[0]+w[1]*x[1]+b1[i]);
+  const [a1, actPrime] = actForward(z1, actKind);
+  const z2 = a1.reduce((s,v,i)=> s+v*W2[i], b2);
+  const yhat = sigmoid(z2);
+  return {z1,a1,actPrime,z2,yhat};
+}
+
+function trainEpoch(model, data, params){
+  const {X,y}=data; const N=X.length;
+  const {lr, l2, act} = params;
+  const gW1 = model.W1.map(()=>[0,0]); const gb1 = model.b1.map(()=>0);
+  const gW2 = model.W2.map(()=>0); let gb2=0;
+  let loss=0, correct=0;
+
+  for(let i=0;i<N;i++){
+    const xi=X[i], yi=y[i];
+    const {a1, actPrime, yhat} = forward(model, xi, act);
+    // BCE loss
+    const eps=1e-7;
+    loss += -(yi*Math.log(yhat+eps) + (1-yi)*Math.log(1-yhat+eps));
+    if( (yhat>0.5 ? 1:0) === yi) correct++;
+
+    // Backprop: dL/dz2 = yhat - yi
+    const dz2 = (yhat - yi);
+    for(let h=0; h<model.W2.length; h++){
+      gW2[h] += a1[h]*dz2;
+    }
+    gb2 += dz2;
+
+    // Backprop to hidden
+    for(let h=0; h<model.W1.length; h++){
+      const dh = (model.W2[h]*dz2) * actPrime[h];
+      gW1[h][0] += dh * xi[0];
+      gW1[h][1] += dh * xi[1];
+      gb1[h]    += dh;
+    }
+  }
+
+  // Averages + L2
+  const invN = 1.0 / N;
+  loss = loss*invN + l2*( sumSq(model.W1)+sumSq1(model.W2) );
+  const acc = correct/N;
+
+  // Update
+  for(let h=0; h<model.W2.length; h++){
+    model.W2[h] -= lr*( gW2[h]*invN + 2*l2*model.W2[h] );
+  }
+  model.b2 -= lr*( gb2*invN );
+  for(let h=0; h<model.W1.length; h++){
+    model.W1[h][0] -= lr*( gW1[h][0]*invN + 2*l2*model.W1[h][0] );
+    model.W1[h][1] -= lr*( gW1[h][1]*invN + 2*l2*model.W1[h][1] );
+    model.b1[h]    -= lr*( gb1[h]*invN );
+  }
+  model.epoch++;
+  return {loss, acc};
+}
+function sumSq(W1){ let s=0; for(const [a,b] of W1){s+=a*a+b*b} return s }
+function sumSq1(W2){ let s=0; for(const w of W2){s+=w*w} return s }
+
+/* ========= Drawing ========= */
+const canvas = document.getElementById('plot');
+const ctx = canvas.getContext('2d');
+
+function toCanvas(xy){
+  // data space ~ [-1.5,1.5] → canvas padding
+  const pad=24;
+  const W=canvas.width, H=canvas.height;
+  const nx = (xy[0]+1.5)/3; const ny = (xy[1]+1.5)/3;
+  return [ pad + nx*(W-2*pad), H - ( pad + ny*(H-2*pad) ) ];
+}
+
+function drawBoundary(model, params){
+  const W=canvas.width, H=canvas.height;
+  const img = ctx.createImageData(W,H);
+  const data=img.data;
+
+  const toData = (px,py)=>[ (px/(W))*3-1.5, ((H-py)/(H))*3-1.5 ];
+  // coarse sampling for speed
+  const stride=2; // px step
+  for(let y=0;y<H;y+=stride){
+    for(let x=0;x<W;x+=stride){
+      const p = ((y*W)+x)*4;
+      const pt = toData(x,y);
+      const {yhat} = forward(current.model, pt, params.act);
+      // blue→class0, pink→class1
+      const c0 = (1-yhat)*255;
+      const c1 = yhat*255;
+      data[p]=c1; data[p+1]=0; data[p+2]=c0; data[p+3]=200;
+      // fill small block
+      for(let yy=0; yy<stride; yy++){
+        for(let xx=0; xx<stride; xx++){
+          const q = (((y+yy)*W)+(x+xx))*4;
+          if(q>=0 && q<data.length){ data[q]=data[p]; data[q+1]=data[p+1]; data[q+2]=data[p+2]; data[q+3]=data[p+3]; }
+        }
+      }
+    }
+  }
+  ctx.putImageData(img,0,0);
+}
+
+function drawPoints(data, model, params){
+  const {X,y}=data;
+  for(let i=0;i<X.length;i++){
+    const [cx,cy]=toCanvas(X[i]);
+    const {yhat} = forward(model, X[i], params.act);
+    const pred = yhat>0.5?1:0;
+    const correct = (pred===y[i]);
+    ctx.beginPath();
+    ctx.arc(cx,cy,4,0,Math.PI*2);
+    ctx.lineWidth=1.5;
+    if(y[i]===1){ ctx.fillStyle='rgba(255,180,230,1)'; ctx.strokeStyle='rgba(255,180,230,1)'; }
+    else{ ctx.fillStyle='rgba(130,180,255,1)'; ctx.strokeStyle='rgba(130,180,255,1)'; }
+    if(correct){ ctx.fill(); }
+    else{ ctx.stroke(); }
+  }
+}
+
+function renderAll(){
+  const params = getParams();
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawBoundary(current.model, params);
+  drawPoints(current.data, current.model, params);
+}
+
+/* ========= State & UI ========= */
+const els = {
+  dataset: document.getElementById('dataset'),
+  npoints: document.getElementById('npoints'),
+  noise: document.getElementById('noise'),
+  hidden: document.getElementById('hidden'),
+  act: document.getElementById('act'),
+  lr: document.getElementById('lr'),
+  perstep: document.getElementById('perstep'),
+  seed: document.getElementById('seed'),
+  l2: document.getElementById('l2'),
+  epoch: document.getElementById('epoch'),
+  loss: document.getElementById('loss'),
+  acc: document.getElementById('acc'),
+  regen: document.getElementById('regen'),
+  step: document.getElementById('step'),
+  train1000: document.getElementById('train1000'),
+  reset: document.getElementById('reset'),
+  save: document.getElementById('save'),
+  load: document.getElementById('load'),
+  export: document.getElementById('export'),
+  importText: document.getElementById('importText'),
+};
+
+const current = {
+  data: null,
+  model: null,
+};
+
+function getParams(){
+  return {
+    act: els.act.value,
+    lr: parseFloat(els.lr.value),
+    perstep: Math.max(1, parseInt(els.perstep.value||1)),
+    l2: parseFloat(els.l2.value),
+  };
+}
+
+function regenData(){
+  const kind = els.dataset.value;
+  const n = Math.max(20, parseInt(els.npoints.value||200));
+  const noise = parseInt(els.noise.value||22);
+  const seed = parseInt(els.seed.value||42);
+  current.data = makeData(kind, n, noise, seed);
+  renderAll();
+}
+
+function resetModel(){
+  current.model = initMLP(2, Math.max(1,parseInt(els.hidden.value||8)), (parseInt(els.seed.value||42)+999));
+  els.epoch.textContent = current.model.epoch;
+  els.loss.textContent = '—';
+  els.acc.textContent = '—';
+  renderAll();
+}
+
+function stepTrain(times){
+  const t = times ?? Math.max(1, parseInt(els.perstep.value||1));
+  let last={loss:NaN, acc:NaN};
+  for(let i=0;i<t;i++){
+    last = trainEpoch(current.model, current.data, getParams());
+  }
+  els.epoch.textContent = current.model.epoch;
+  els.loss.textContent = last.loss.toFixed(4);
+  els.acc.textContent = (last.acc*100).toFixed(1)+'%';
+  renderAll();
+}
+
+/* ========= Save / Load ========= */
+const LS_KEY='nn_mini_lab_state_v1';
+function saveState(){
+  const state = {
+    ui:{
+      dataset: els.dataset.value,
+      npoints: els.npoints.value,
+      noise: els.noise.value,
+      hidden: els.hidden.value,
+      act: els.act.value,
+      lr: els.lr.value,
+      perstep: els.perstep.value,
+      seed: els.seed.value,
+      l2: els.l2.value,
+    },
+    model: current.model,
+    // Data is reproducible from ui; skip to keep storage small
+  };
+  localStorage.setItem(LS_KEY, JSON.stringify(state));
+  alert('Saved!');
+}
+function loadState(){
+  const raw = localStorage.getItem(LS_KEY);
+  if(!raw){ alert('No saved state found'); return; }
+  try{
+    const state = JSON.parse(raw);
+    Object.entries(state.ui).forEach(([k,v])=>{ if(els[k]) els[k].value=v; });
+    regenData();
+    // Recreate model with exact weights if present & shape matches
+    if(state.model){
+      const hNow = parseInt(els.hidden.value);
+      if(state.model.W1 && state.model.W1.length===hNow){
+        current.model = state.model;
+      }else{
+        current.model = initMLP(2, hNow, parseInt(els.seed.value)+999);
+      }
+    }
+    els.epoch.textContent = current.model.epoch||0;
+    renderAll();
+  }catch(e){ console.error(e); alert('Failed to load state'); }
+}
+
+function exportModel(){
+  const blob = {
+    model: current.model,
+    meta: {
+      act: els.act.value, hidden: parseInt(els.hidden.value),
+      createdAt: new Date().toISOString()
+    }
+  };
+  const json = JSON.stringify(blob);
+  navigator.clipboard?.writeText(json).catch(()=>{});
+  alert('Model JSON copied to clipboard.\nPaste it into the input to import elsewhere.');
+}
+
+/* ========= Wiring ========= */
+els.regen.addEventListener('click', ()=>{ regenData(); renderAll(); });
+els.reset.addEventListener('click', ()=> resetModel());
+els.step.addEventListener('click', ()=> stepTrain());
+els.train1000.addEventListener('click', ()=> stepTrain(1000));
+els.save.addEventListener('click', saveState);
+els.load.addEventListener('click', loadState);
+els.export.addEventListener('click', exportModel);
+els.importText.addEventListener('keydown', (e)=>{
+  if(e.key==='Enter'){
+    try{
+      const obj = JSON.parse(els.importText.value);
+      if(obj && obj.model){ current.model = obj.model; }
+      renderAll();
+      alert('Imported model. (Using current UI activation.)');
+    }catch(err){ alert('Invalid JSON'); }
+  }
+});
+
+['dataset','npoints','noise','hidden','act','seed'].forEach(id=>{
+  document.getElementById(id).addEventListener('change', ()=>{
+    if(id==='hidden'){ resetModel(); } // shape change requires re-init
+    regenData();
+  });
+});
+
+function init(){
+  regenData();
+  resetModel();
+}
+init();
+
+</script>
+</body>
+</html>

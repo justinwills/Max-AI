@@ -138,173 +138,94 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     ).toLowerCase();
 
     // Title-based specs (one per lesson topic)
-    if (title.includes("types of learning")) {
+    if (title.includes("fairness from data to decisions")) {
       return {
         type: "mcq",
-        prompt: "Which task is most suitable for reinforcement learning?",
+        prompt:
+          "Which statement best distinguishes demographic parity from equalized odds?",
         options: [
-          ["a", "Grouping similar samples without labels"],
+          [
+            "a",
+            "Demographic parity equalizes error rates; equalized odds equalizes selection rates",
+          ],
           [
             "b",
-            "Training an agent to maximize long-term reward through trial and error",
+            "Demographic parity equalizes selection rates; equalized odds equalizes error rates",
             true,
           ],
-          ["c", "Predicting prices from labeled examples"],
-          ["d", "Compressing features into fewer dimensions"],
+          ["c", "Both require identical ROC curves across groups"],
+          ["d", "Both guarantee optimal accuracy"],
         ],
         hint: "Think about an agent interacting with an environment.",
       };
     }
 
-    if (title.includes("ml data pipeline")) {
+    if (title.includes("privacy & data governance by design")) {
       return {
         type: "mcq",
-        prompt:
-          "What is the correct order of the pipeline described in the lesson?",
+        prompt: "What does differential privacy aim to guarantee?",
         options: [
-          ["a", "Preprocessing → Dataset → Training → Prediction"],
-          ["b", "Dataset → Training → Preprocessing → Prediction"],
-          ["c", "Dataset → Preprocessing → Training → Prediction", true],
-          ["d", "Training → Dataset → Prediction → Preprocessing"],
+          ["a", "Encrypted storage at rest"],
+          [
+            "b",
+            "Individual records have limited influence on outputs, even if attacked",
+            true,
+          ],
+          ["c", "Models never overfit"],
+          ["d", "Data cannot be shared across organizations"],
         ],
         hint: "Follow the natural workflow from raw data to inference.",
       };
     }
 
-    if (title.includes("linear regression")) {
+    if (title.includes("transparency, explainability & accountability")) {
       return {
         type: "mcq",
-        prompt: "Which quantity is minimized during training to fit the line?",
+        prompt: "Which item is most appropriate to include in a Model Card?",
         options: [
-          ["a", "Cross-entropy"],
-          ["b", "Mean squared error", true],
-          ["c", "Hinge loss"],
-          ["d", "Kullback–Leibler divergence"],
+          ["a", "The SHA of your Git repository only"],
+          ["b", "Intended use, subgroup metrics, and known limitations", true],
+          ["c", "Raw training data dumps"],
+          ["d", "Proprietary feature weights"],
         ],
         hint: "Think about squared differences between true and predicted values.",
       };
     }
 
-    if (title.includes("classification")) {
+    if (title.includes("safety, alignment & misuse prevention")) {
       return {
         type: "mcq",
-        prompt:
-          "Increasing k in k-NN typically has what effect on the decision boundary?",
+        prompt: "What is the primary purpose of red-teaming an AI system?",
         options: [
-          ["a", "Makes it more jagged (higher variance)"],
-          ["b", "Smooths it (lower variance)", true],
-          ["c", "Always increases training accuracy without test impact"],
-          ["d", "Guarantees underfitting on every dataset"],
+          ["a", "Speeding up inference"],
+          [
+            "b",
+            "Stress-testing for unsafe behaviors and vulnerabilities before deployment",
+            true,
+          ],
+          ["c", "Reducing compute cost"],
+          ["d", "Increasing dataset size"],
         ],
         hint: "Think about averaging across more neighbors.",
       };
     }
 
-    if (title.includes("overfitting")) {
-      return {
-        type: "mcq",
-        prompt: "Which pattern indicates overfitting as defined in the lesson?",
-        options: [
-          ["a", "Low training error and low test error"],
-          ["b", "High training error and high test error"],
-          ["c", "Low training error but high test error", true],
-          ["d", "High training error but low test error"],
-        ],
-        hint: "Compare performance on training vs test sets.",
-      };
-    }
-
-    if (title.includes("train/validation/test")) {
+    if (title.includes("the near future of ai—trends you can use")) {
       return {
         type: "mcq",
         prompt:
-          "According to the lesson, when should the held-out test set be used?",
+          "What is the main goal of Retrieval-Augmented Generation (RAG)?",
         options: [
-          ["a", "For selecting hyperparameters"],
-          ["b", "Only once at the end to estimate generalization", true],
-          ["c", "For computing scaling parameters"],
-          ["d", "To augment the training data when data is scarce"],
-        ],
-        hint: "Think final evaluation, not tuning.",
-      };
-    }
-
-    if (title.includes("evaluation metrics")) {
-      return {
-        type: "mcq",
-        prompt:
-          "Which metric combines precision and recall into a single number?",
-        options: [
-          ["a", "Accuracy"],
-          ["b", "ROC-AUC"],
-          ["c", "F1 score", true],
-          ["d", "R²"],
-        ],
-        hint: "It’s the harmonic mean of two values.",
-      };
-    }
-
-    if (title.includes("feature engineering")) {
-      return {
-        type: "mcq",
-        prompt:
-          "Which practice can cause data leakage as described in the lesson?",
-        options: [
+          ["a", "Speed up training by pruning layers"],
           [
-            "a",
-            "Fitting a scaler on the training set then applying to validation/test",
-          ],
-          ["b", "One-hot encoding categorical variables"],
-          ["c", "Imputing missing values using training-set statistics only"],
-          [
-            "d",
-            "Fitting a scaler on the entire dataset before splitting",
+            "b",
+            "Ground model outputs in external, trusted sources at query time",
             true,
           ],
+          ["c", "Replace the need for vector databases"],
+          ["d", "Guarantee identical outputs every run"],
         ],
-        hint: "Leakage occurs when information from validation/test influences training.",
-      };
-    }
-
-    if (title.includes("model selection")) {
-      return {
-        type: "mcq",
-        prompt: "Which is a hyperparameter according to the lesson?",
-        options: [
-          ["a", "The learned weight w in linear regression"],
-          ["b", "The number of neighbors k in k-NN", true],
-          ["c", "The predicted probability for a test sample"],
-          ["d", "The residual error for a training point"],
-        ],
-        hint: "Hyperparameters are set before training, not learned during.",
-      };
-    }
-
-    if (title.includes("clustering")) {
-      return {
-        type: "mcq",
-        prompt: "What is the primary function of PCA as defined in the lesson?",
-        options: [
-          ["a", "Assign points to nearest centroids iteratively"],
-          ["b", "Project data onto directions of maximum variance", true],
-          ["c", "Train a deep neural network"],
-          ["d", "Guarantee higher classification accuracy"],
-        ],
-        hint: "Think dimensionality reduction and variance.",
-      };
-    }
-
-    if (title.includes("mini ml lab")) {
-      return {
-        type: "mcq",
-        prompt: "Which algorithms are demonstrated in the Mini ML Lab project?",
-        options: [
-          ["a", "Decision trees, SVM, Naive Bayes"],
-          ["b", "Linear regression, k-NN, k-means", true],
-          ["c", "Logistic regression, Random Forest, PCA"],
-          ["d", "Q-learning, Monte Carlo search, CNNs"],
-        ],
-        hint: "They are simple algorithms for regression, classification, and clustering.",
+        hint: "Compare performance on training vs test sets.",
       };
     }
 

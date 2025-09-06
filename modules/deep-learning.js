@@ -31,7 +31,7 @@
   codeBtn &&
     codeBtn.addEventListener("click", function () {
       const code = ``;
-      download("machine-learning-sample.js", code, "application/javascript");
+      download("deep-learning-sample.js", code, "application/javascript");
     });
 })();
 // Lesson interaction (header-only toggling; no lock system)
@@ -47,6 +47,7 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
 
 // Reset progress button (AI Foundations)
 (function () {
+  // Scope all localStorage keys to current user so progress is per-user
   function userScope() {
     try {
       const u = JSON.parse(localStorage.getItem("currentUser") || "null");
@@ -72,16 +73,14 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
       if (!res.isConfirmed) return;
       try {
         // Clear quiz state and auxiliary data for this module
-        localStorage.removeItem(K("machine_learning_quiz_v1"));
-        localStorage.removeItem(K("machine_learning_quiz_total_v1"));
-        localStorage.removeItem(K("machine_learning_quiz_done_v1"));
+        localStorage.removeItem(K("deep_learning_quiz_v1"));
+        localStorage.removeItem(K("deep_learning_quiz_total_v1"));
+        localStorage.removeItem(K("deep_learning_quiz_done_v1"));
         // Clear stored MCQ option order to allow reshuffle next time
-        localStorage.removeItem(K("machine_learning_quiz_order_v1"));
+        localStorage.removeItem(K("deep_learning_quiz_order_v1"));
 
         // If completion was recorded, subtract Home bonuses once
-        if (
-          localStorage.getItem(K("machine_learning_completed_v1")) === "true"
-        ) {
+        if (localStorage.getItem(K("deep_learning_completed_v1")) === "true") {
           const courseKey = K("home_courses_completed_bonus");
           const hoursKey = K("home_hours_learned_bonus");
           const curCourses =
@@ -93,12 +92,10 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
           localStorage.setItem(courseKey, String(newCourses));
           localStorage.setItem(hoursKey, String(newHours));
           // Remove recent-activity marker
-          localStorage.removeItem(
-            K("home_activity_logged_machine_learning_v1")
-          );
+          localStorage.removeItem(K("home_activity_logged_deep_learning_v1"));
         }
         // Unset completion flag
-        localStorage.removeItem(K("machine_learning_completed_v1"));
+        localStorage.removeItem(K("deep_learning_completed_v1"));
       } catch (_) {}
       location.reload();
     });
@@ -107,6 +104,7 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
 
 // Quiz rendering + logic with localStorage progress
 (function () {
+  // Per-user storage keys
   function userScope() {
     try {
       const u = JSON.parse(localStorage.getItem("currentUser") || "null");
@@ -119,11 +117,11 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
   function K(base) {
     return base + "::" + userScope();
   }
-  const STORAGE_KEY = K("machine_learning_quiz_v1");
+  const STORAGE_KEY = K("deep_learning_quiz_v1");
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
   // Persist per-quiz option order so the correct answer isn't always first,
   // and the order remains stable across reloads.
-  const ORDER_KEY = K("machine_learning_quiz_order_v1");
+  const ORDER_KEY = K("deep_learning_quiz_order_v1");
   let savedOrderMap = {};
   try {
     savedOrderMap = JSON.parse(localStorage.getItem(ORDER_KEY) || "{}");
@@ -138,173 +136,120 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     ).toLowerCase();
 
     // Title-based specs (one per lesson topic)
-    if (title.includes("types of learning")) {
+    // title is lowercased above; compare with lowercase string
+    if (title.includes("foundations of deep learning")) {
       return {
         type: "mcq",
-        prompt: "Which task is most suitable for reinforcement learning?",
+        prompt:
+          "What makes deep learning different from traditional machine learning?",
         options: [
-          ["a", "Grouping similar samples without labels"],
+          ["a", "It doesn’t require training data"],
+          ["b", "It memorizes patterns without processing"],
+          [
+            "c",
+            "It uses layered neural networks to learn progressively complex patterns",
+            true,
+          ],
+          ["d", "It only works for numbers"],
+        ],
+        hint: "Think perception, reasoning, learning and action.",
+      };
+    }
+    if (title.includes("deep learning workflow")) {
+      return {
+        type: "mcq",
+        prompt: "Which step most often determines real-world model quality?",
+        options: [
+          ["a", "Picking the latest architecture"],
+          ["b", "Increasing batch size"],
+          ["c", "Careful data preparation and labeling", true],
+          ["d", "Adding more GPUs"],
+        ],
+        hint: "Garbage in, garbage out.",
+      };
+    }
+    if (title.includes("convolutional models for vision")) {
+      return {
+        type: "mcq",
+        prompt: "What core idea makes CNNs efficient for images?",
+        options: [
+          ["a", "Fully connecting every pixel to every neuron"],
+          ["b", "Sliding shared filters to capture local patterns", true],
+          ["c", "Sorting pixels before inference"],
+          ["d", "Averaging all pixels first"],
+        ],
+        hint: "“Weight sharing” + “local receptive fields.”",
+      };
+    }
+    if (title.includes("sequence and language models")) {
+      return {
+        type: "mcq",
+        prompt: "Why do Transformers outperform basic RNNs on long sequences?",
+        options: [
+          ["a", "They ignore context to run faster"],
+          ["b", "They store the entire dataset in memory"],
+          ["c", "Self-attention models long-range dependencies directly", true],
+          ["d", "They train only on short sentences"],
+        ],
+        hint: "Think “all-to-all” relationships in one pass.",
+      };
+    }
+    if (title.includes("training and optimization")) {
+      return {
+        type: "mcq",
+        prompt: "Which choice best prevents overfitting in practice?",
+        options: [
+          ["a", "Training longer without monitoring"],
+          ["b", "Using dropout and proper regularization techniques", true],
+          ["c", "Disabling validation checks"],
+          ["d", "Setting learning rate to zero"],
+        ],
+        hint: "Hint: Regularization ≠ luck; it’s a deliberate design",
+      };
+    }
+    if (title.includes("modern deep learning architectures")) {
+      return {
+        type: "mcq",
+        prompt:
+          "What is the main advantage of Transformers over traditional RNNs?",
+        options: [
+          ["a", "They process input step by step in strict sequence"],
           [
             "b",
-            "Training an agent to maximize long-term reward through trial and error",
+            "They use self-attention to capture relationships across the entire input at once",
             true,
           ],
-          ["c", "Predicting prices from labeled examples"],
-          ["d", "Compressing features into fewer dimensions"],
+          ["c", "They are limited to small datasets"],
+          ["d", "They only work for image recognition"],
         ],
-        hint: "Think about an agent interacting with an environment.",
+        hint: "Heuristic + cost = A*.",
       };
     }
-
-    if (title.includes("ml data pipeline")) {
+    if (title.includes("generative models")) {
       return {
         type: "mcq",
         prompt:
-          "What is the correct order of the pipeline described in the lesson?",
+          "What is the main goal of generative models like GANs and VAEs?",
         options: [
-          ["a", "Preprocessing → Dataset → Training → Prediction"],
-          ["b", "Dataset → Training → Preprocessing → Prediction"],
-          ["c", "Dataset → Preprocessing → Training → Prediction", true],
-          ["d", "Training → Dataset → Prediction → Preprocessing"],
+          ["a", "To classify data into categories"],
+          ["b", " To generate new data that resembles the training data", true],
+          ["c", "To compress images without loss"],
+          ["d", "To eliminate the need for training"],
         ],
-        hint: "Follow the natural workflow from raw data to inference.",
+        hint: "Inputs = features; output/target = label.",
       };
     }
-
-    if (title.includes("linear regression")) {
+    if (title.includes("reinforcement learning + deep networks")) {
       return {
         type: "mcq",
-        prompt: "Which quantity is minimized during training to fit the line?",
+        prompt: "How does reinforcement learning primarily train an agent?",
         options: [
-          ["a", "Cross-entropy"],
-          ["b", "Mean squared error", true],
-          ["c", "Hinge loss"],
-          ["d", "Kullback–Leibler divergence"],
+          ["a", "By memorizing past examples"],
+          ["b", "By receiving rewards or penalties from its actions", true],
+          ["c", "By scanning images with filters"],
+          ["d", "By copying a teacher’s answers directly"],
         ],
-        hint: "Think about squared differences between true and predicted values.",
-      };
-    }
-
-    if (title.includes("classification")) {
-      return {
-        type: "mcq",
-        prompt:
-          "Increasing k in k-NN typically has what effect on the decision boundary?",
-        options: [
-          ["a", "Makes it more jagged (higher variance)"],
-          ["b", "Smooths it (lower variance)", true],
-          ["c", "Always increases training accuracy without test impact"],
-          ["d", "Guarantees underfitting on every dataset"],
-        ],
-        hint: "Think about averaging across more neighbors.",
-      };
-    }
-
-    if (title.includes("overfitting")) {
-      return {
-        type: "mcq",
-        prompt: "Which pattern indicates overfitting as defined in the lesson?",
-        options: [
-          ["a", "Low training error and low test error"],
-          ["b", "High training error and high test error"],
-          ["c", "Low training error but high test error", true],
-          ["d", "High training error but low test error"],
-        ],
-        hint: "Compare performance on training vs test sets.",
-      };
-    }
-
-    if (title.includes("train/validation/test")) {
-      return {
-        type: "mcq",
-        prompt:
-          "According to the lesson, when should the held-out test set be used?",
-        options: [
-          ["a", "For selecting hyperparameters"],
-          ["b", "Only once at the end to estimate generalization", true],
-          ["c", "For computing scaling parameters"],
-          ["d", "To augment the training data when data is scarce"],
-        ],
-        hint: "Think final evaluation, not tuning.",
-      };
-    }
-
-    if (title.includes("evaluation metrics")) {
-      return {
-        type: "mcq",
-        prompt:
-          "Which metric combines precision and recall into a single number?",
-        options: [
-          ["a", "Accuracy"],
-          ["b", "ROC-AUC"],
-          ["c", "F1 score", true],
-          ["d", "R²"],
-        ],
-        hint: "It’s the harmonic mean of two values.",
-      };
-    }
-
-    if (title.includes("feature engineering")) {
-      return {
-        type: "mcq",
-        prompt:
-          "Which practice can cause data leakage as described in the lesson?",
-        options: [
-          [
-            "a",
-            "Fitting a scaler on the training set then applying to validation/test",
-          ],
-          ["b", "One-hot encoding categorical variables"],
-          ["c", "Imputing missing values using training-set statistics only"],
-          [
-            "d",
-            "Fitting a scaler on the entire dataset before splitting",
-            true,
-          ],
-        ],
-        hint: "Leakage occurs when information from validation/test influences training.",
-      };
-    }
-
-    if (title.includes("model selection")) {
-      return {
-        type: "mcq",
-        prompt: "Which is a hyperparameter according to the lesson?",
-        options: [
-          ["a", "The learned weight w in linear regression"],
-          ["b", "The number of neighbors k in k-NN", true],
-          ["c", "The predicted probability for a test sample"],
-          ["d", "The residual error for a training point"],
-        ],
-        hint: "Hyperparameters are set before training, not learned during.",
-      };
-    }
-
-    if (title.includes("clustering")) {
-      return {
-        type: "mcq",
-        prompt: "What is the primary function of PCA as defined in the lesson?",
-        options: [
-          ["a", "Assign points to nearest centroids iteratively"],
-          ["b", "Project data onto directions of maximum variance", true],
-          ["c", "Train a deep neural network"],
-          ["d", "Guarantee higher classification accuracy"],
-        ],
-        hint: "Think dimensionality reduction and variance.",
-      };
-    }
-
-    if (title.includes("mini ml lab")) {
-      return {
-        type: "mcq",
-        prompt: "Which algorithms are demonstrated in the Mini ML Lab project?",
-        options: [
-          ["a", "Decision trees, SVM, Naive Bayes"],
-          ["b", "Linear regression, k-NN, k-means", true],
-          ["c", "Logistic regression, Random Forest, PCA"],
-          ["d", "Q-learning, Monte Carlo search, CNNs"],
-        ],
-        hint: "They are simple algorithms for regression, classification, and clustering.",
+        hint: "Groups data without labels.",
       };
     }
 
@@ -486,8 +431,8 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     progBar.setAttribute("aria-valuenow", String(pct));
     // Persist coarse progress so other pages (e.g., home) can read it
     try {
-      localStorage.setItem(K("machine_learning_quiz_total_v1"), String(total));
-      localStorage.setItem(K("machine_learning_quiz_done_v1"), String(done));
+      localStorage.setItem(K("deep_learning_quiz_total_v1"), String(total));
+      localStorage.setItem(K("deep_learning_quiz_done_v1"), String(done));
     } catch (_) {}
 
     // When the course is completed (100%), set completion in localStorage
@@ -495,9 +440,9 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     try {
       if (
         pct === 100 &&
-        localStorage.getItem(K("machine_learning_completed_v1")) !== "true"
+        localStorage.getItem(K("deep_learning_completed_v1")) !== "true"
       ) {
-        localStorage.setItem(K("machine_learning_completed_v1"), "true");
+        localStorage.setItem(K("deep_learning_completed_v1"), "true");
         const courseKey = K("home_courses_completed_bonus");
         const hoursKey = K("home_hours_learned_bonus");
         const curCourses =
@@ -505,7 +450,7 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
         const curHours =
           parseInt(localStorage.getItem(hoursKey) || "0", 10) || 0;
         localStorage.setItem(courseKey, String(curCourses + 1));
-        localStorage.setItem(hoursKey, String(curHours + 3));
+        localStorage.setItem(hoursKey, String(curHours + 2));
       }
     } catch (_) {}
   }

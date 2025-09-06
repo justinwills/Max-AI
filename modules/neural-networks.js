@@ -31,7 +31,7 @@
   codeBtn &&
     codeBtn.addEventListener("click", function () {
       const code = ``;
-      download("machine-learning-sample.js", code, "application/javascript");
+      download("neural-networks-sample.html", code, "text/html");
     });
 })();
 // Lesson interaction (header-only toggling; no lock system)
@@ -72,15 +72,15 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
       if (!res.isConfirmed) return;
       try {
         // Clear quiz state and auxiliary data for this module
-        localStorage.removeItem(K("machine_learning_quiz_v1"));
-        localStorage.removeItem(K("machine_learning_quiz_total_v1"));
-        localStorage.removeItem(K("machine_learning_quiz_done_v1"));
+        localStorage.removeItem(K("neural_networks_quiz_v1"));
+        localStorage.removeItem(K("neural_networks_quiz_total_v1"));
+        localStorage.removeItem(K("neural_networks_quiz_done_v1"));
         // Clear stored MCQ option order to allow reshuffle next time
-        localStorage.removeItem(K("machine_learning_quiz_order_v1"));
+        localStorage.removeItem(K("neural_networks_quiz_order_v1"));
 
         // If completion was recorded, subtract Home bonuses once
         if (
-          localStorage.getItem(K("machine_learning_completed_v1")) === "true"
+          localStorage.getItem(K("neural_networks_completed_v1")) === "true"
         ) {
           const courseKey = K("home_courses_completed_bonus");
           const hoursKey = K("home_hours_learned_bonus");
@@ -93,12 +93,10 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
           localStorage.setItem(courseKey, String(newCourses));
           localStorage.setItem(hoursKey, String(newHours));
           // Remove recent-activity marker
-          localStorage.removeItem(
-            K("home_activity_logged_machine_learning_v1")
-          );
+          localStorage.removeItem(K("home_activity_logged_neural_networks_v1"));
         }
         // Unset completion flag
-        localStorage.removeItem(K("machine_learning_completed_v1"));
+        localStorage.removeItem(K("neural_networks_completed_v1"));
       } catch (_) {}
       location.reload();
     });
@@ -119,11 +117,11 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
   function K(base) {
     return base + "::" + userScope();
   }
-  const STORAGE_KEY = K("machine_learning_quiz_v1");
+  const STORAGE_KEY = K("neural_networks_quiz_v1");
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
   // Persist per-quiz option order so the correct answer isn't always first,
   // and the order remains stable across reloads.
-  const ORDER_KEY = K("machine_learning_quiz_order_v1");
+  const ORDER_KEY = K("neural_networks_quiz_order_v1");
   let savedOrderMap = {};
   try {
     savedOrderMap = JSON.parse(localStorage.getItem(ORDER_KEY) || "{}");
@@ -138,173 +136,119 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     ).toLowerCase();
 
     // Title-based specs (one per lesson topic)
-    if (title.includes("types of learning")) {
+    if (title.includes("neurons & perceptron")) {
       return {
         type: "mcq",
-        prompt: "Which task is most suitable for reinforcement learning?",
+        prompt:
+          "What does a standard neuron compute before applying the activation?",
         options: [
-          ["a", "Grouping similar samples without labels"],
-          [
-            "b",
-            "Training an agent to maximize long-term reward through trial and error",
-            true,
-          ],
-          ["c", "Predicting prices from labeled examples"],
-          ["d", "Compressing features into fewer dimensions"],
+          ["a", "Product of inputs only"],
+          ["b", "Weighted sum plus bias", true],
+          ["c", "Max over inputs"],
+          ["d", "Running average"],
         ],
         hint: "Think about an agent interacting with an environment.",
       };
     }
 
-    if (title.includes("ml data pipeline")) {
+    if (title.includes("linear neural networks")) {
       return {
         type: "mcq",
         prompt:
-          "What is the correct order of the pipeline described in the lesson?",
+          "Two stacked linear layers without any activation are equivalent to:",
         options: [
-          ["a", "Preprocessing → Dataset → Training → Prediction"],
-          ["b", "Dataset → Training → Preprocessing → Prediction"],
-          ["c", "Dataset → Preprocessing → Training → Prediction", true],
-          ["d", "Training → Dataset → Prediction → Preprocessing"],
+          ["a", "A nonlinear map"],
+          ["b", "A convolution"],
+          ["c", "A single linear layer", true],
+          ["d", "A decision tree"],
         ],
         hint: "Follow the natural workflow from raw data to inference.",
       };
     }
 
-    if (title.includes("linear regression")) {
+    if (title.includes("multilayer perceptrons (mlps) & nonlinearity")) {
       return {
         type: "mcq",
-        prompt: "Which quantity is minimized during training to fit the line?",
+        prompt: "Why are nonlinear activations essential in MLPs?",
         options: [
-          ["a", "Cross-entropy"],
-          ["b", "Mean squared error", true],
-          ["c", "Hinge loss"],
-          ["d", "Kullback–Leibler divergence"],
+          ["a", "They speed up matrix multiplication"],
+          ["b", "They allow modeling non-linear decision boundaries", true],
+          ["c", "They reduce memory usage"],
+          ["d", "They eliminate the need for gradients"],
         ],
         hint: "Think about squared differences between true and predicted values.",
       };
     }
 
-    if (title.includes("classification")) {
+    if (title.includes("losses, backprop & gradient descent")) {
       return {
         type: "mcq",
         prompt:
-          "Increasing k in k-NN typically has what effect on the decision boundary?",
+          "For multi-class classification with one-hot targets, a common loss is:",
         options: [
-          ["a", "Makes it more jagged (higher variance)"],
-          ["b", "Smooths it (lower variance)", true],
-          ["c", "Always increases training accuracy without test impact"],
-          ["d", "Guarantees underfitting on every dataset"],
+          ["a", "Mean squared error"],
+          ["b", "Hinge loss"],
+          ["c", "Cross-entropy", true],
+          ["d", "L1 loss"],
         ],
         hint: "Think about averaging across more neighbors.",
       };
     }
 
-    if (title.includes("overfitting")) {
+    if (title.includes("regularization & generalization")) {
       return {
         type: "mcq",
-        prompt: "Which pattern indicates overfitting as defined in the lesson?",
+        prompt:
+          "Which technique explicitly penalizes large weights during training?",
         options: [
-          ["a", "Low training error and low test error"],
-          ["b", "High training error and high test error"],
-          ["c", "Low training error but high test error", true],
-          ["d", "High training error but low test error"],
+          ["a", "Early stopping"],
+          ["b", "Data augmentation"],
+          ["c", "Dropout"],
+          ["d", "L2 weight decay", true],
         ],
         hint: "Compare performance on training vs test sets.",
       };
     }
 
-    if (title.includes("train/validation/test")) {
+    if (title.includes("initialization, normalization & optimizers")) {
       return {
         type: "mcq",
-        prompt:
-          "According to the lesson, when should the held-out test set be used?",
+        prompt: "AdamW differs from Adam mainly by:",
         options: [
-          ["a", "For selecting hyperparameters"],
-          ["b", "Only once at the end to estimate generalization", true],
-          ["c", "For computing scaling parameters"],
-          ["d", "To augment the training data when data is scarce"],
+          ["a", "Using momentum for the first time"],
+          ["b", "Replacing bias correction"],
+          ["c", "Removing adaptive learning rates"],
+          ["d", "Decoupling weight decay from gradient updates", true],
         ],
         hint: "Think final evaluation, not tuning.",
       };
     }
 
-    if (title.includes("evaluation metrics")) {
+    if (title.includes("convolutional neural networks (cnns) for vision")) {
       return {
         type: "mcq",
-        prompt:
-          "Which metric combines precision and recall into a single number?",
+        prompt: "CNN efficiency largely comes from:",
         options: [
-          ["a", "Accuracy"],
-          ["b", "ROC-AUC"],
-          ["c", "F1 score", true],
-          ["d", "R²"],
+          ["a", "Fully connected layers on all pixels"],
+          ["b", "Random projections of the image"],
+          ["c", "Local receptive fields and shared weights", true],
+          ["d", "Sorting pixels by intensity"],
         ],
         hint: "It’s the harmonic mean of two values.",
       };
     }
 
-    if (title.includes("feature engineering")) {
+    if (title.includes("sequences: rnns vs. transformers")) {
       return {
         type: "mcq",
-        prompt:
-          "Which practice can cause data leakage as described in the lesson?",
+        prompt: "Transformers handle long-range dependencies primarily via:",
         options: [
-          [
-            "a",
-            "Fitting a scaler on the training set then applying to validation/test",
-          ],
-          ["b", "One-hot encoding categorical variables"],
-          ["c", "Imputing missing values using training-set statistics only"],
-          [
-            "d",
-            "Fitting a scaler on the entire dataset before splitting",
-            true,
-          ],
+          ["a", "Max pooling over time"],
+          ["b", "Recurrent hidden states"],
+          ["c", "Self-attention across tokens", true],
+          ["d", "Convolutions with large kernels"],
         ],
         hint: "Leakage occurs when information from validation/test influences training.",
-      };
-    }
-
-    if (title.includes("model selection")) {
-      return {
-        type: "mcq",
-        prompt: "Which is a hyperparameter according to the lesson?",
-        options: [
-          ["a", "The learned weight w in linear regression"],
-          ["b", "The number of neighbors k in k-NN", true],
-          ["c", "The predicted probability for a test sample"],
-          ["d", "The residual error for a training point"],
-        ],
-        hint: "Hyperparameters are set before training, not learned during.",
-      };
-    }
-
-    if (title.includes("clustering")) {
-      return {
-        type: "mcq",
-        prompt: "What is the primary function of PCA as defined in the lesson?",
-        options: [
-          ["a", "Assign points to nearest centroids iteratively"],
-          ["b", "Project data onto directions of maximum variance", true],
-          ["c", "Train a deep neural network"],
-          ["d", "Guarantee higher classification accuracy"],
-        ],
-        hint: "Think dimensionality reduction and variance.",
-      };
-    }
-
-    if (title.includes("mini ml lab")) {
-      return {
-        type: "mcq",
-        prompt: "Which algorithms are demonstrated in the Mini ML Lab project?",
-        options: [
-          ["a", "Decision trees, SVM, Naive Bayes"],
-          ["b", "Linear regression, k-NN, k-means", true],
-          ["c", "Logistic regression, Random Forest, PCA"],
-          ["d", "Q-learning, Monte Carlo search, CNNs"],
-        ],
-        hint: "They are simple algorithms for regression, classification, and clustering.",
       };
     }
 
@@ -486,8 +430,8 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     progBar.setAttribute("aria-valuenow", String(pct));
     // Persist coarse progress so other pages (e.g., home) can read it
     try {
-      localStorage.setItem(K("machine_learning_quiz_total_v1"), String(total));
-      localStorage.setItem(K("machine_learning_quiz_done_v1"), String(done));
+      localStorage.setItem(K("neural_networks_quiz_total_v1"), String(total));
+      localStorage.setItem(K("neural_networks_quiz_done_v1"), String(done));
     } catch (_) {}
 
     // When the course is completed (100%), set completion in localStorage
@@ -495,9 +439,9 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     try {
       if (
         pct === 100 &&
-        localStorage.getItem(K("machine_learning_completed_v1")) !== "true"
+        localStorage.getItem(K("neural_networks_completed_v1")) !== "true"
       ) {
-        localStorage.setItem(K("machine_learning_completed_v1"), "true");
+        localStorage.setItem(K("neural_networks_completed_v1"), "true");
         const courseKey = K("home_courses_completed_bonus");
         const hoursKey = K("home_hours_learned_bonus");
         const curCourses =
