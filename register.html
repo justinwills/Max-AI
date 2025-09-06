@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -91,14 +91,28 @@
                 <i class="fas fa-eye"></i>
               </button>
             </div>
-            <div class="password-hint" id="reg-password-hint" aria-live="polite">
+            <div
+              class="password-hint"
+              id="reg-password-hint"
+              aria-live="polite"
+            >
               <p class="hint-title">Password must contain:</p>
               <ul>
-                <li data-req="len"><i class="fas fa-circle"></i> At least 8 characters</li>
-                <li data-req="upper"><i class="fas fa-circle"></i> An uppercase letter (A-Z)</li>
-                <li data-req="lower"><i class="fas fa-circle"></i> A lowercase letter (a-z)</li>
-                <li data-req="number"><i class="fas fa-circle"></i> A number (0-9)</li>
-                <li data-req="symbol"><i class="fas fa-circle"></i> A symbol (e.g. ! @ #)</li>
+                <li data-req="len">
+                  <i class="fas fa-circle"></i> At least 8 characters
+                </li>
+                <li data-req="upper">
+                  <i class="fas fa-circle"></i> An uppercase letter (A-Z)
+                </li>
+                <li data-req="lower">
+                  <i class="fas fa-circle"></i> A lowercase letter (a-z)
+                </li>
+                <li data-req="number">
+                  <i class="fas fa-circle"></i> A number (0-9)
+                </li>
+                <li data-req="symbol">
+                  <i class="fas fa-circle"></i> A symbol (e.g. ! @ #)
+                </li>
               </ul>
             </div>
             <div class="input-field">
@@ -143,220 +157,7 @@
     <script src="js/nav.js"></script>
     <script src="js/register.js"></script>
     <!-- moved inline JS to js/register.js -->
-    <script>
-      //
-      (function () {
-        function setupToggle(btn) {
-          const targetId = btn.getAttribute("data-target");
-          const input = targetId
-            ? document.getElementById(targetId)
-            : btn?.previousElementSibling;
-          if (!input) return;
-          btn.addEventListener("click", function () {
-            const showing = input.getAttribute("type") === "text";
-            input.setAttribute("type", showing ? "password" : "text");
-            btn.setAttribute("aria-pressed", String(!showing));
-            const icon = btn.querySelector("i");
-            if (icon) {
-              icon.classList.toggle("fa-eye", showing);
-              icon.classList.toggle("fa-eye-slash", !showing);
-            }
-            btn.setAttribute("aria-label", showing ? "Show password" : "Hide password");
-          });
-        }
-        document.querySelectorAll(".toggle-password").forEach(setupToggle);
-      })();
-
-      // Mobile menu toggle
-      document
-        .querySelector(".mobile-menu-btn")
-        ?.addEventListener("click", function () {
-          document.querySelector(".nav-links")?.classList.toggle("active");
-        });
-
-      // Profile dropdown toggle (click + outside close)
-      (function () {
-        const menu = document.querySelector(".profile-menu");
-        if (!menu) return;
-        const btn = menu.querySelector(".profile-btn");
-        btn?.setAttribute("aria-expanded", "false");
-        btn?.addEventListener("click", function (e) {
-          e.preventDefault();
-          const open = menu.classList.toggle("open");
-          btn.setAttribute("aria-expanded", String(open));
-        });
-        document.addEventListener("click", function (e) {
-          if (!menu.contains(e.target)) {
-            menu.classList.remove("open");
-            btn?.setAttribute("aria-expanded", "false");
-          }
-        });
-      })();
-
-      // Registration form handling using localStorage
-      (function () {
-        const form = document.getElementById("registerForm");
-        const btn = document.getElementById("registerBtn");
-        const usernameEl = document.getElementById("reg-username");
-        const emailEl = document.getElementById("reg-email");
-        const passEl = document.getElementById("reg-password");
-        const confirmEl = document.getElementById("reg-confirm");
-        const hint = document.getElementById("reg-password-hint");
-
-        function setBusy(state, textBusy, textIdle) {
-          if (!btn) return;
-          btn.disabled = !!state;
-          btn.innerHTML = state
-            ? `<i class="fas fa-spinner fa-spin"></i> ${textBusy}`
-            : `<i class="fas fa-rocket"></i> ${textIdle}`;
-        }
-
-        function checkStrength(pw) {
-          const res = {
-            len: pw.length >= 8,
-            upper: /[A-Z]/.test(pw),
-            lower: /[a-z]/.test(pw),
-            number: /[0-9]/.test(pw),
-            symbol: /[^A-Za-z0-9]/.test(pw),
-          };
-          res.all = res.len && res.upper && res.lower && res.number && res.symbol;
-          return res;
-        }
-
-        function updateHint(pw) {
-          if (!hint) return;
-          const res = checkStrength(pw);
-          hint.querySelectorAll('li').forEach(function (li) {
-            const key = li.getAttribute('data-req');
-            const ok = !!res[key];
-            li.classList.toggle('ok', ok);
-            const icon = li.querySelector('i');
-            if (icon) {
-              icon.className = ok ? 'fas fa-check-circle' : 'fas fa-circle';
-            }
-          });
-        }
-
-        passEl?.addEventListener('input', function () {
-          updateHint(passEl.value || '');
-        });
-
-        // Redirect if already logged in
-        try {
-          const current = (window.StorageUtil || {}).getJSON?.(
-            "currentUser",
-            null
-          );
-          if (current && current.email) {
-            window.location.href = "home.html";
-          }
-        } catch {}
-
-        form?.addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          const username = usernameEl?.value.trim() || "";
-          const email = emailEl?.value.trim().toLowerCase() || "";
-          const password = passEl?.value || "";
-          const confirm = confirmEl?.value || "";
-
-          // Basic validation
-          if (!username || !email || !password || !confirm) {
-            swal("Missing info", "Please fill in all fields.", "warning");
-            return;
-          }
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            swal(
-              "Invalid email",
-              "Please enter a valid email address.",
-              "error"
-            );
-            return;
-          }
-          const strength = checkStrength(password);
-          if (!strength.all) {
-            swal(
-              "Weak password",
-              "Use at least 8 characters with uppercase, lowercase, number, and symbol.",
-              "error"
-            );
-            updateHint(password);
-            return;
-          }
-          if (password !== confirm) {
-            swal("Password mismatch", "Passwords do not match.", "error");
-            return;
-          }
-
-          setBusy(true, "Creating Account...", "Get Started");
-
-          // Persist user in localStorage
-          try {
-            const store = window.StorageUtil;
-            const users = store.getJSON("users", []);
-            const existsEmail = users.some(
-              (u) => (u.email || "").toLowerCase() === email
-            );
-            const existsUsername = users.some(
-              (u) => (u.username || "").toLowerCase() === (username || "").toLowerCase()
-            );
-            if (existsEmail || existsUsername) {
-              setBusy(false, "", "Get Started");
-              if (existsEmail && existsUsername) {
-                swal(
-                  "Already in use",
-                  "Both the email and username are already registered.",
-                  "error"
-                );
-              } else if (existsEmail) {
-                swal(
-                  "Email in use",
-                  "An account with this email already exists.",
-                  "error"
-                );
-              } else {
-                swal(
-                  "Username in use",
-                  "Please choose a different username.",
-                  "error"
-                );
-              }
-              return;
-            }
-
-            const user = {
-              id: Date.now(),
-              username,
-              email,
-              // Note: Storing plain text for demo purposes only
-              password,
-              createdAt: new Date().toISOString(),
-            };
-
-            users.push(user);
-            store.setJSON("users", users);
-            store.setJSON("currentUser", { id: user.id, username, email });
-
-            swal(
-              "Registration Successful!",
-              "Welcome to MaxAI! Your account has been created.",
-              "success"
-            );
-
-            setTimeout(function () {
-              window.location.href = "home.html";
-            }, 1200);
-          } catch (e) {
-            console.error(e);
-            setBusy(false, "", "Get Started");
-            swal(
-              "Error",
-              "Could not create account. Please try again.",
-              "error"
-            );
-          }
-        });
-      })();
-    </script>
+    
   </body>
 </html>
+
