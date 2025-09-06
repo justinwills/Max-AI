@@ -1056,24 +1056,24 @@ nav {
 
 footer {
   background: rgba(30, 41, 59, 0.95);
-  border-top: 1px solid rgba(140, 82, 255, 0.1);
-  padding: 40px 8vw;
+  padding: 20px 0;
+}
+
+.footer-bottom {
   text-align: center;
 }
 
-footer p {
-  color: hsla(0, 0%, 100%, 0.7);
-  font-size: 14px;
+.footer-bottom p {
+  color: hsla(0, 0%, 100%, 0.6);
 }
 
-footer a {
-  color: var(--primary);
+.footer-bottom a {
+  color: #8c52ff;
   text-decoration: none;
-  transition: color 0.3s ease;
 }
 
-footer a:hover {
-  color: var(--secondary);
+.footer-bottom a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
