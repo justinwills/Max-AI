@@ -32,19 +32,16 @@
   }
   function K(base) { return base + '::' + userScope(); }
   try {
-    const total = parseInt(localStorage.getItem(K('ai_foundations_quiz_total_v1')) || '0', 10) || 0;
-    const done  = parseInt(localStorage.getItem(K('ai_foundations_quiz_done_v1'))  || '0', 10) || 0;
-    if (total > 0 && done >= total && localStorage.getItem(K('ai_foundations_completed_v1')) !== 'true') {
-      localStorage.setItem(K('ai_foundations_completed_v1'), 'true');
-      const courseKey = K('home_courses_completed_bonus');
-      const hoursKey  = K('home_hours_learned_bonus');
-      const curCourses = parseInt(localStorage.getItem(courseKey) || '0', 10) || 0;
-      const curHours   = parseInt(localStorage.getItem(hoursKey)  || '0', 10) || 0;
-      localStorage.setItem(courseKey, String(curCourses + 1));
-      localStorage.setItem(hoursKey, String(curHours + 2));
-    }
-    const courseBonus = parseInt(localStorage.getItem(K('home_courses_completed_bonus')) || '0', 10) || 0;
-    const hoursBonus  = parseInt(localStorage.getItem(K('home_hours_learned_bonus'))  || '0', 10) || 0;
+    // Normalize bonuses based on actual completed courses to avoid double counting
+    const completedAI  = localStorage.getItem(K('ai_foundations_completed_v1')) === 'true';
+    const completedML  = localStorage.getItem(K('machine-learning_completed_v1')) === 'true';
+    const expectedCourses = (completedAI ? 1 : 0) + (completedML ? 1 : 0);
+    const expectedHours   = (completedAI ? 2 : 0) + (completedML ? 3 : 0);
+    localStorage.setItem(K('home_courses_completed_bonus'), String(expectedCourses));
+    localStorage.setItem(K('home_hours_learned_bonus'), String(expectedHours));
+
+    const courseBonus = expectedCourses;
+    const hoursBonus  = expectedHours;
     document.querySelectorAll('.progress-stats .stat-item').forEach(function (item) {
       const label = (item.querySelector('.stat-label')?.textContent || '').trim().toLowerCase();
       const numEl = item.querySelector('.stat-number'); if (!numEl) return;
@@ -133,4 +130,3 @@
   document.addEventListener('visibilitychange', ()=>{ if (document.visibilityState==='visible') sync(); });
   window.addEventListener('pageshow', sync);
 })();
-
