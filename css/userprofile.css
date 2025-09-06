@@ -1,581 +1,578 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0
 }
 
 body {
-  font-family: "Inter", sans-serif;
   background-color: #1e293b;
-  color: #fff;
+  font-family: Inter, sans-serif;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: hidden
 }
 
+body,
 h1,
 h2,
 h3,
 h4 {
-  color: #fff;
+  color: #fff
 }
 
 span {
-  font-size: 0.9rem;
+  font-size: .9rem
 }
 
-/*------------- Modern Navigation style start ------------*/
 nav {
+  backdrop-filter: blur(10px);
+  background: rgba(30, 41, 59, .95);
+  border-bottom: 1px solid rgba(140, 82, 255, .1);
   position: fixed;
   top: 0;
+  transition: all .3s ease;
   width: 100%;
-  background: rgba(30, 41, 59, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(140, 82, 255, 0.1);
-  z-index: 1000;
-  transition: all 0.3s ease;
+  z-index: 1000
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
   height: 80px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px
 }
 
 .logo {
-  height: 130px;
   cursor: pointer;
-  margin-left: -35px;
+  height: 130px;
+  margin-left: -35px
 }
 
 .nav-links {
-  display: flex;
-  gap: 32px;
   align-items: center;
+  display: flex;
+  gap: 32px
 }
 
 .nav-link {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  font-weight: 500;
+  color: hsla(0, 0%, 100%, .8);
   font-size: 16px;
-  transition: all 0.3s ease;
+  font-weight: 500;
   position: relative;
+  text-decoration: none;
+  transition: all .3s ease
 }
 
-.nav-link:hover,
-.nav-link.active {
-  color: #fff;
+.nav-link.active,
+.nav-link:hover {
+  color: #fff
 }
 
-.nav-link::after {
-  content: "";
-  position: absolute;
+.nav-link:after {
+  background: linear-gradient(90deg, #8c52ff, #cb6ce6, #ff66c4);
   bottom: -8px;
-  left: 0;
-  width: 0;
+  content: "";
   height: 2px;
-  background: linear-gradient(to right, #8c52ff, #cb6ce6, #ff66c4);
-  transition: width 0.3s ease;
+  left: 0;
+  position: absolute;
+  transition: width .3s ease;
+  width: 0
 }
 
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
+.nav-link.active:after,
+.nav-link:hover:after {
+  width: 100%
 }
 
 .nav-actions {
-  display: flex;
-  gap: 16px;
   align-items: center;
+  display: flex;
+  gap: 16px
 }
 
 .mobile-menu-btn {
-  display: none;
-  font-size: 24px;
-  cursor: pointer;
   color: #fff;
+  cursor: pointer;
+  display: none;
+  font-size: 24px
 }
 
-/* Modern Button Styles */
 .btn-primary {
-  background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
-  color: #fff;
-  text-decoration: none;
-  padding: 12px 24px;
-  border-radius: 25px;
-  font-weight: 600;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
   border: none;
+  border-radius: 25px;
+  color: #fff;
   cursor: pointer;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  padding: 12px 24px;
+  text-decoration: none;
+  transition: all .3s ease
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(140, 82, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(140, 82, 255, .3);
+  transform: translateY(-2px)
 }
 
-/* Circular profile button */
 .profile-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  align-items: center;
   background: linear-gradient(135deg, #8c52ff, #cb6ce6);
+  border: 1px solid hsla(0, 0%, 100%, .15);
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(140, 82, 255, .2);
   color: #fff;
   display: inline-flex;
-  align-items: center;
+  height: 40px;
   justify-content: center;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  transition: all 0.25s ease;
-  box-shadow: 0 6px 18px rgba(140, 82, 255, 0.2);
+  transition: all .25s ease;
+  width: 40px
 }
 
 .profile-btn i {
-  font-size: 18px;
+  font-size: 18px
 }
 
 .profile-btn:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 10px 28px rgba(140, 82, 255, 0.35);
+  box-shadow: 0 10px 28px rgba(140, 82, 255, .35);
+  transform: translateY(-2px) scale(1.03)
 }
 
-/* Profile dropdown menu */
 .profile-menu {
-  position: relative;
+  position: relative
 }
+
 .profile-menu .menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: rgba(30, 41, 59, 0.98);
-  border: 1px solid rgba(140, 82, 255, 0.2);
+  background: rgba(30, 41, 59, .98);
+  border: 1px solid rgba(140, 82, 255, .2);
   border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .25);
+  display: none;
   min-width: 180px;
   padding: 8px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
-  z-index: 1001;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 1001
 }
-.profile-menu:hover .menu,
+
+.profile-menu.open .menu,
 .profile-menu:focus-within .menu,
-.profile-menu.open .menu {
+.profile-menu:hover .menu {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 4px
 }
+
 .profile-menu .menu a {
-  display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
   border-radius: 10px;
   color: #fff;
-  text-decoration: none;
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  text-decoration: none
 }
+
 .profile-menu .menu a:hover {
-  background: rgba(140, 82, 255, 0.15);
+  background: rgba(140, 82, 255, .15)
 }
 
-/* Container for consistent spacing */
 .container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  max-width: 1200px;
+  padding: 0 20px
 }
 
-/* Footer styles */
 footer {
-  background: rgba(30, 41, 59, 0.95);
-  padding: 20px 0;
-  border-top: 1px solid rgba(140, 82, 255, 0.1);
+  background: rgba(30, 41, 59, .95);
+  border-top: 1px solid rgba(140, 82, 255, .1);
+  padding: 20px 0
 }
 
 .footer-bottom {
-  text-align: center;
+  border-top: 1px solid hsla(0, 0%, 100%, .1);
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center
 }
 
 .footer-bottom p {
-  color: rgba(255, 255, 255, 0.6);
+  color: hsla(0, 0%, 100%, .6)
 }
 
 .footer-bottom a {
   color: #8c52ff;
-  text-decoration: none;
+  text-decoration: none
 }
 
 .footer-bottom a:hover {
-  text-decoration: underline;
+  text-decoration: underline
 }
 
-/* Actions row for buttons */
 .actions {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 10px
 }
 
-/* Ghost button (neutral) */
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 10px 14px;
+  background: hsla(0, 0%, 100%, .08);
+  border: 1px solid hsla(0, 0%, 100%, .18);
   border-radius: 10px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  text-decoration: none
 }
 
-/* Destructive action button */
+.btn-danger,
+.btn-ghost {
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  padding: 10px 14px
+}
+
 .btn-danger {
   background: linear-gradient(135deg, #ef4444, #dc2626);
-  color: #fff;
-  border: 1px solid rgba(239, 68, 68, 0.5);
-  padding: 10px 14px;
+  border: 1px solid rgba(239, 68, 68, .5);
   border-radius: 10px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.25);
+  box-shadow: 0 10px 25px rgba(239, 68, 68, .25)
 }
-.btn-danger:hover { transform: translateY(-1px); }
 
-/* Password visibility field wrapper */
-.pw-field { position: relative; }
-.pw-field input { width: 100%; padding-right: 42px; }
+.btn-danger:hover {
+  transform: translateY(-1px)
+}
+
+.pw-field {
+  position: relative
+}
+
+.pw-field input {
+  padding-right: 42px;
+  width: 100%
+}
+
 .pw-field .toggle-password {
+  background: transparent;
+  border: none;
+  color: hsla(0, 0%, 100%, .8);
+  cursor: pointer;
+  padding: 4px;
   position: absolute;
   right: 10px;
   top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  padding: 4px;
+  transform: translateY(-50%)
 }
-.pw-field .toggle-password:hover { color: #ffffff; }
 
-/* Mobile responsive navigation */
-@media screen and (max-width: 768px) {
+.pw-field .toggle-password:hover {
+  color: #fff
+}
+
+@media screen and (max-width:768px) {
   .nav-links {
-    display: none;
+    display: none
   }
 
   .nav-links.active {
+    background: rgba(30, 41, 59, .98);
+    border-top: 1px solid rgba(140, 82, 255, .1);
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 80px;
     left: 0;
-    right: 0;
-    background: rgba(30, 41, 59, 0.98);
     padding: 20px;
-    border-top: 1px solid rgba(140, 82, 255, 0.1);
+    position: absolute;
+    right: 0;
+    top: 80px
   }
 
   .mobile-menu-btn {
-    display: block;
+    display: block
   }
 
   .nav-container {
-    padding: 0 16px;
+    padding: 0 16px
   }
 }
-/*------------- Modern Navigation style end ------------*/
 
-/* Modern User Profile Section - Dark Theme */
 .user-profile {
-  padding: 120px 0 80px;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  background: linear-gradient(135deg, #1e293b, #334155);
   min-height: 100vh;
+  padding: 120px 0 80px
 }
 
 .user-profile .section-header {
-  text-align: center;
   margin-bottom: 40px;
+  text-align: center
 }
 
 .user-profile .section-header h2 {
+  background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
+  -webkit-background-clip: text;
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
-  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background-clip: text
 }
 
 .user-profile .section-header p {
-  color: rgba(255, 255, 255, 0.8);
+  color: hsla(0, 0%, 100%, .8);
   font-size: 1.1rem;
-  max-width: 600px;
   margin: 0 auto;
+  max-width: 600px
 }
 
 .user-profile .user-content {
   display: grid;
   gap: 40px;
-  margin-top: 40px;
-  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 20px;
+  margin-top: 40px;
+  max-width: 1200px;
+  padding: 0 20px
 }
 
 .user-profile .profile-section {
-  display: flex;
   align-items: center;
-  gap: 30px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 40px;
-  border-radius: 20px;
-  border: 1px solid rgba(140, 82, 255, 0.1);
   backdrop-filter: blur(10px);
+  background: hsla(0, 0%, 100%, .05);
+  border: 1px solid rgba(140, 82, 255, .1);
+  border-radius: 20px;
+  display: flex;
+  gap: 30px;
+  padding: 40px
 }
 
 .user-profile .profile-image {
-  position: relative;
   flex-shrink: 0;
+  position: relative
 }
 
 .user-profile .profile-image img {
-  width: 120px;
-  height: 120px;
+  border: 4px solid rgba(140, 82, 255, .3);
   border-radius: 50%;
+  height: 120px;
   object-fit: cover;
-  border: 4px solid rgba(140, 82, 255, 0.3);
+  width: 120px
 }
 
 .user-profile .image-upload {
-  position: absolute;
   bottom: 0;
-  right: 0;
+  position: absolute;
+  right: 0
 }
 
 .user-profile .upload-btn {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
   background: linear-gradient(135deg, #8c52ff, #cb6ce6);
-  border-radius: 50%;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
   border: 3px solid #1e293b;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  transition: all .3s ease;
+  width: 40px
 }
 
 .user-profile .upload-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(140, 82, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(140, 82, 255, .4);
+  transform: scale(1.1)
 }
 
 .user-profile .profile-info h3 {
-  font-size: 2rem;
-  margin-bottom: 8px;
   background: linear-gradient(135deg, #8c52ff, #cb6ce6);
   -webkit-background-clip: text;
+  font-size: 2rem;
+  margin-bottom: 8px;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background-clip: text
 }
 
 .user-profile .user-role {
   color: #8c52ff;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 4px
 }
 
 .user-profile .user-email {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.95rem;
+  color: hsla(0, 0%, 100%, .7);
+  font-size: .95rem
 }
 
 .user-profile .details-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 30px;
+  grid-template-columns: 1fr 1fr
 }
 
 .user-profile .detail-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 30px;
-  border-radius: 20px;
-  border: 1px solid rgba(140, 82, 255, 0.1);
   backdrop-filter: blur(10px);
+  background: hsla(0, 0%, 100%, .05);
+  border: 1px solid rgba(140, 82, 255, .1);
+  border-radius: 20px;
+  padding: 30px
 }
 
 .user-profile .detail-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
   color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 20px
 }
 
 .user-profile .user-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 20px
 }
 
 .user-profile .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 8px
 }
 
 .user-profile .form-group label {
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 500;
-  font-size: 0.95rem;
+  color: hsla(0, 0%, 100%, .9);
+  font-size: .95rem;
+  font-weight: 500
 }
 
 .user-profile .form-group input {
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(140, 82, 255, 0.2);
+  background: hsla(0, 0%, 100%, .1);
+  border: 1px solid rgba(140, 82, 255, .2);
   border-radius: 10px;
   color: #fff;
   font-size: 1rem;
-  transition: all 0.3s ease;
+  padding: 12px 16px;
+  transition: all .3s ease
 }
 
 .user-profile .form-group input:focus {
-  outline: none;
   border-color: #8c52ff;
-  box-shadow: 0 0 0 3px rgba(140, 82, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(140, 82, 255, .1);
+  outline: none
 }
 
 .user-profile .form-group input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: hsla(0, 0%, 100%, .5)
 }
 
 .user-profile .progress-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-bottom: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 30px
 }
 
 .user-profile .stat-item {
-  text-align: center;
-  padding: 20px;
-  background: rgba(140, 82, 255, 0.1);
+  background: rgba(140, 82, 255, .1);
+  border: 1px solid rgba(140, 82, 255, .2);
   border-radius: 15px;
-  border: 1px solid rgba(140, 82, 255, 0.2);
+  padding: 20px;
+  text-align: center
 }
 
 .user-profile .stat-number {
+  color: #8c52ff;
   font-size: 2rem;
   font-weight: 700;
-  color: #8c52ff;
-  margin-bottom: 8px;
+  margin-bottom: 8px
 }
 
 .user-profile .stat-label {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
-  font-weight: 500;
+  color: hsla(0, 0%, 100%, .8);
+  font-size: .9rem;
+  font-weight: 500
 }
 
 .user-profile .recent-activity h4 {
   color: #fff;
-  margin-bottom: 20px;
   font-size: 1.2rem;
+  margin-bottom: 20px
 }
 
 .user-profile .activity-item {
-  display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.05);
+  background: hsla(0, 0%, 100%, .05);
   border-radius: 10px;
+  display: flex;
+  gap: 15px;
   margin-bottom: 15px;
+  padding: 15px
 }
 
 .user-profile .activity-icon {
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  background: rgba(140, 82, 255, 0.2);
+  background: rgba(140, 82, 255, .2);
   border-radius: 50%;
+  display: flex;
+  font-size: 1.5rem;
+  height: 40px;
+  justify-content: center;
+  width: 40px
 }
 
 .user-profile .activity-details p {
   color: #fff;
   font-weight: 500;
-  margin-bottom: 4px;
+  margin-bottom: 4px
 }
 
 .user-profile .activity-details span {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.85rem;
+  color: hsla(0, 0%, 100%, .6);
+  font-size: .85rem
 }
 
-/* Modern button styling */
 .user-profile .btn-primary {
   background: linear-gradient(135deg, #8c52ff, #cb6ce6);
-  color: white;
   border: none;
-  padding: 12px 24px;
   border-radius: 10px;
-  font-weight: 600;
-  font-size: 1rem;
+  color: #fff;
   cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
   display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px 24px;
   text-align: center;
+  text-decoration: none;
+  transition: all .3s ease
 }
 
 .user-profile .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(140, 82, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(140, 82, 255, .4);
+  transform: translateY(-2px)
 }
 
-/* Responsive adjustments for modern user profile */
-@media screen and (max-width: 768px) {
+@media screen and (max-width:768px) {
   .user-profile .profile-section {
     flex-direction: column;
-    text-align: center;
     gap: 20px;
+    text-align: center
   }
 
-  .user-profile .details-grid {
-    grid-template-columns: 1fr;
-  }
-
+  .user-profile .details-grid,
   .user-profile .progress-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr
   }
 
   .user-profile .profile-image img {
-    width: 100px;
     height: 100px;
+    width: 100px
   }
 
   .user-profile .section-header h2 {
-    font-size: 2rem;
+    font-size: 2rem
   }
 
   .user-profile .user-content {
-    padding: 0 16px;
+    padding: 0 16px
   }
 }

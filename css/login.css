@@ -1,303 +1,295 @@
-/* Login Page Specific Styles */
-
-/* Centered logo navbar */
 .logo-container {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
+  width: 100%
 }
 
 .logo {
-  height: 130px;
   cursor: pointer;
+  height: 130px
 }
 
-/* Main container for the login page */
 .login-container {
-  width: 100%;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  align-items: center;
+  background: linear-gradient(135deg, #1e293b, #334155);
   display: flex;
   justify-content: center;
-  align-items: center;
+  min-height: 100vh;
   padding: 100px 20px 20px;
   position: relative;
+  width: 100%
 }
 
-/* Background pattern overlay */
-.login-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+.login-container:before {
+  background-image: radial-gradient(circle at 20% 80%, rgba(140, 82, 255, .1) 0, transparent 50%), radial-gradient(circle at 80% 20%, rgba(203, 108, 230, .1) 0, transparent 50%), radial-gradient(circle at 40% 40%, rgba(255, 102, 196, .1) 0, transparent 50%);
   bottom: 0;
-  background-image: radial-gradient(
-      circle at 20% 80%,
-      rgba(140, 82, 255, 0.1) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(203, 108, 230, 0.1) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 40% 40%,
-      rgba(255, 102, 196, 0.1) 0%,
-      transparent 50%
-    );
+  content: "";
+  left: 0;
   pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0
 }
 
-/* Login form container styling */
 .form-box {
-  width: 100%;
-  max-width: 450px;
-  background: rgba(30, 41, 59, 0.95);
+  animation: slideInUp .8s ease-out;
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(140, 82, 255, 0.2);
+  background: rgba(30, 41, 59, .95);
+  border: 1px solid rgba(140, 82, 255, .2);
   border-radius: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .3);
+  max-width: 450px;
   padding: 40px;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  animation: slideInUp 0.8s ease-out;
   position: relative;
-  z-index: 10;
+  text-align: center;
+  width: 100%;
+  z-index: 10
 }
 
 @keyframes slideInUp {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px)
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0)
   }
 }
 
 .form-box h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 30px;
   background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
   -webkit-background-clip: text;
   background-clip: text;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
   -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: transparent
 }
 
 .input-group {
-  margin-bottom: 20px;
+  margin-bottom: 20px
 }
 
 .input-field {
-  background: rgba(255, 255, 255, 0.1);
-  margin: 15px 0;
+  align-items: center;
+  background: hsla(0, 0%, 100%, .1);
+  border: 1px solid hsla(0, 0%, 100%, .1);
   border-radius: 25px;
   display: flex;
-  align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  margin: 15px 0;
   overflow: hidden;
+  transition: all .3s ease
 }
 
 .input-field:focus-within {
-  border-color: rgba(140, 82, 255, 0.5);
-  box-shadow: 0 0 0 3px rgba(140, 82, 255, 0.1);
-  transform: translateY(-2px);
+  border-color: rgba(140, 82, 255, .5);
+  box-shadow: 0 0 0 3px rgba(140, 82, 255, .1);
+  transform: translateY(-2px)
 }
 
 .input-field i {
-  margin-left: 20px;
-  color: rgba(255, 255, 255, 0.6);
+  color: hsla(0, 0%, 100%, .6);
   font-size: 18px;
-  width: 20px;
+  margin-left: 20px;
   text-align: center;
+  width: 20px
 }
 
 .input-field input {
-  width: 100%;
   background: transparent;
   border: 0;
-  outline: 0;
-  padding: 18px 20px 18px 15px;
   color: #fff;
   font-size: 16px;
+  outline: 0;
+  padding: 18px 20px 18px 15px;
+  width: 100%
 }
 
-/* Show/Hide password button */
 .input-field .toggle-password {
+  align-items: center;
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: hsla(0, 0%, 100%, .7);
   cursor: pointer;
-  padding: 0 16px;
-  height: 100%;
   display: inline-flex;
-  align-items: center;
+  height: 100%;
   justify-content: center;
+  padding: 0 16px
 }
 
 .input-field .toggle-password i {
-  font-size: 16px;
+  font-size: 16px
 }
 
-.input-field .toggle-password:hover,
-.input-field .toggle-password:focus {
-  color: #ffffff;
-  outline: none;
+.input-field .toggle-password:focus,
+.input-field .toggle-password:hover {
+  color: #fff;
+  outline: none
 }
 
 .input-field input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: hsla(0, 0%, 100%, .5)
 }
 
 .forgot-password {
-  text-align: right;
   margin: 15px 0;
+  text-align: right
 }
 
 .forgot-password a {
   color: #8c52ff;
-  text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  transition: color .3s ease
 }
 
 .forgot-password a:hover {
   color: #cb6ce6;
-  text-decoration: underline;
+  text-decoration: underline
 }
 
 .btn-field {
-  width: 100%;
   margin-top: 30px;
+  width: 100%
 }
 
 .btn-field button {
-  width: 100%;
-  padding: 18px 32px;
+  align-items: center;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
   font-size: 16px;
   font-weight: 600;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
+  justify-content: center;
+  padding: 18px 32px;
+  transition: all .3s ease;
+  width: 100%
 }
 
 .btn-field button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(140, 82, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(140, 82, 255, .3);
+  transform: translateY(-2px)
 }
 
 .btn-field button:disabled {
-  opacity: 0.7;
   cursor: not-allowed;
-  transform: none;
+  opacity: .7;
+  transform: none
 }
 
 .register-link {
-  text-align: center;
-  margin-top: 25px;
-  color: rgba(255, 255, 255, 0.7);
+  color: hsla(0, 0%, 100%, .7);
   font-size: 14px;
+  margin-top: 25px;
+  text-align: center
 }
 
 .register-link a {
   color: #8c52ff;
-  text-decoration: none;
   font-weight: 600;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  transition: color .3s ease
 }
 
 .register-link a:hover {
   color: #cb6ce6;
-  text-decoration: underline;
+  text-decoration: underline
 }
 
-/* Back to login link on forgot page */
 .login-link {
-  text-align: center;
-  margin-top: 25px;
-  color: rgba(255, 255, 255, 0.7);
+  color: hsla(0, 0%, 100%, .7);
   font-size: 14px;
+  margin-top: 25px;
+  text-align: center
 }
 
 .login-link a {
   color: #8c52ff;
-  text-decoration: none;
   font-weight: 600;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  transition: color .3s ease
 }
 
 .login-link a:hover {
   color: #cb6ce6;
-  text-decoration: underline;
+  text-decoration: underline
 }
 
-/* Password hint styles */
 .password-hint {
   background: var(--white-05);
   border: 1px solid var(--primary-20);
   border-radius: 16px;
-  padding: 12px 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .15);
   margin-top: 8px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  padding: 12px 14px
 }
+
 .password-hint .hint-title {
-  font-size: 13px;
-  margin-bottom: 6px;
   color: var(--white-70);
+  font-size: 13px;
+  margin-bottom: 6px
 }
-.password-hint ul { list-style: none; margin: 0; padding: 0; }
+
+.password-hint ul {
+  list-style: none;
+  margin: 0;
+  padding: 0
+}
+
 .password-hint li {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 13px;
+  align-items: center;
   color: var(--white-70);
-  margin: 4px 0;
+  display: flex;
+  font-size: 13px;
+  gap: 8px;
+  margin: 4px 0
 }
-.password-hint li i { font-size: 12px; }
-.password-hint li.ok { color: #22c55e; }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+.password-hint li i {
+  font-size: 12px
+}
+
+.password-hint li.ok {
+  color: #22c55e
+}
+
+@media (max-width:768px) {
   .login-container {
-    padding: 80px 20px 20px;
+    padding: 80px 20px 20px
   }
 
   .form-box {
-    padding: 30px 25px;
     margin: 0 20px;
+    padding: 30px 25px
   }
 
   .form-box h2 {
-    font-size: 2rem;
+    font-size: 2rem
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width:480px) {
   .form-box {
-    padding: 25px 20px;
+    padding: 25px 20px
   }
 
   .form-box h2 {
-    font-size: 1.8rem;
+    font-size: 1.8rem
   }
 
   .input-field {
-    margin: 12px 0;
+    margin: 12px 0
   }
 
   .input-field input {
-    padding: 16px 18px 16px 12px;
     font-size: 14px;
+    padding: 16px 18px 16px 12px
   }
 }
