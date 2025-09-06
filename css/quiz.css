@@ -228,9 +228,8 @@ nav {
 }
 
 .header-visual {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
+  position: relative;
+  min-height: 220px;
 }
 
 .chip {
@@ -241,6 +240,8 @@ nav {
   display: inline-flex;
   gap: 8px;
   padding: 12px 16px;
+  position: absolute;
+  animation: float 6s ease-in-out infinite;
 }
 
 .chip i {
@@ -249,6 +250,33 @@ nav {
 
 .chip.alt i {
   color: #ff66c4;
+}
+
+/* Floating chip layout + staggered delays (desktop) */
+.header-visual .chip:nth-child(1) { left: 10%; top: 15%; animation-delay: 0s; }
+.header-visual .chip:nth-child(2) { right: 12%; top: 40%; animation-delay: .8s; }
+.header-visual .chip:nth-child(3) { left: 35%; bottom: 10%; animation-delay: 1.6s; }
+.header-visual .chip:nth-child(4) { right: 30%; top: 12%; animation-delay: 2.4s; }
+.header-visual .chip:nth-child(5) { left: 5%; bottom: 28%; animation-delay: 3.2s; }
+.header-visual .chip:nth-child(6) { right: 5%; bottom: 18%; animation-delay: 4s; }
+
+@keyframes float {
+  0%, to { transform: translateY(0); }
+  50%    { transform: translateY(-14px); }
+}
+
+/* Mobile: stack naturally, keep subtle float but not absolute */
+@media (max-width: 640px) {
+  .header-visual {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    min-height: unset;
+  }
+  .header-visual .chip {
+    position: static;
+  }
 }
 
 .quiz-section {
