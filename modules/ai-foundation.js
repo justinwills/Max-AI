@@ -47,6 +47,15 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
 
 // Reset progress button (AI Foundations)
 (function () {
+  // Scope all localStorage keys to current user so progress is per-user
+  function userScope() {
+    try {
+      const u = JSON.parse(localStorage.getItem("currentUser") || "null");
+      const id = u?.id || u?.email || u?.username;
+      return id ? String(id) : "guest";
+    } catch (_) { return "guest"; }
+  }
+  function K(base) { return base + "::" + userScope(); }
   const btn = document.getElementById("reset-progress");
   if (!btn) return;
   btn.addEventListener("click", function () {
@@ -60,16 +69,16 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
       if (!res.isConfirmed) return;
       try {
         // Clear quiz state and auxiliary data for this module
-        localStorage.removeItem("ai_foundations_quiz_v1");
-        localStorage.removeItem("ai_foundations_quiz_total_v1");
-        localStorage.removeItem("ai_foundations_quiz_done_v1");
+        localStorage.removeItem(K("ai_foundations_quiz_v1"));
+        localStorage.removeItem(K("ai_foundations_quiz_total_v1"));
+        localStorage.removeItem(K("ai_foundations_quiz_done_v1"));
         // Clear stored MCQ option order to allow reshuffle next time
-        localStorage.removeItem("ai_foundations_quiz_order_v1");
+        localStorage.removeItem(K("ai_foundations_quiz_order_v1"));
 
         // If completion was recorded, subtract Home bonuses once
-        if (localStorage.getItem("ai_foundations_completed_v1") === "true") {
-          const courseKey = "home_courses_completed_bonus";
-          const hoursKey = "home_hours_learned_bonus";
+        if (localStorage.getItem(K("ai_foundations_completed_v1")) === "true") {
+          const courseKey = K("home_courses_completed_bonus");
+          const hoursKey = K("home_hours_learned_bonus");
           const curCourses =
             parseInt(localStorage.getItem(courseKey) || "0", 10) || 0;
           const curHours =
@@ -79,10 +88,10 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
           localStorage.setItem(courseKey, String(newCourses));
           localStorage.setItem(hoursKey, String(newHours));
           // Remove recent-activity marker
-          localStorage.removeItem("home_activity_logged_ai_foundations_v1");
+          localStorage.removeItem(K("home_activity_logged_ai_foundations_v1"));
         }
         // Unset completion flag
-        localStorage.removeItem("ai_foundations_completed_v1");
+        localStorage.removeItem(K("ai_foundations_completed_v1"));
       } catch (_) {}
       location.reload();
     });
@@ -91,11 +100,20 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
 
 // Quiz rendering + logic with localStorage progress
 (function () {
-  const STORAGE_KEY = "ai_foundations_quiz_v1";
+  // Per-user storage keys
+  function userScope() {
+    try {
+      const u = JSON.parse(localStorage.getItem("currentUser") || "null");
+      const id = u?.id || u?.email || u?.username;
+      return id ? String(id) : "guest";
+    } catch (_) { return "guest"; }
+  }
+  function K(base) { return base + "::" + userScope(); }
+  const STORAGE_KEY = K("ai_foundations_quiz_v1");
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
   // Persist per-quiz option order so the correct answer isn't always first,
   // and the order remains stable across reloads.
-  const ORDER_KEY = "ai_foundations_quiz_order_v1";
+  const ORDER_KEY = K("ai_foundations_quiz_order_v1");
   let savedOrderMap = {};
   try {
     savedOrderMap = JSON.parse(localStorage.getItem(ORDER_KEY) || "{}");
@@ -445,8 +463,8 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     progBar.setAttribute("aria-valuenow", String(pct));
     // Persist coarse progress so other pages (e.g., home) can read it
     try {
-      localStorage.setItem("ai_foundations_quiz_total_v1", String(total));
-      localStorage.setItem("ai_foundations_quiz_done_v1", String(done));
+      localStorage.setItem(K("ai_foundations_quiz_total_v1"), String(total));
+      localStorage.setItem(K("ai_foundations_quiz_done_v1"), String(done));
     } catch (_) {}
 
     // When the course is completed (100%), set completion in localStorage
@@ -454,11 +472,11 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     try {
       if (
         pct === 100 &&
-        localStorage.getItem("ai_foundations_completed_v1") !== "true"
+        localStorage.getItem(K("ai_foundations_completed_v1")) !== "true"
       ) {
-        localStorage.setItem("ai_foundations_completed_v1", "true");
-        const courseKey = "home_courses_completed_bonus";
-        const hoursKey = "home_hours_learned_bonus";
+        localStorage.setItem(K("ai_foundations_completed_v1"), "true");
+        const courseKey = K("home_courses_completed_bonus");
+        const hoursKey = K("home_hours_learned_bonus");
         const curCourses =
           parseInt(localStorage.getItem(courseKey) || "0", 10) || 0;
         const curHours =

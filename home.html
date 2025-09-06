@@ -161,27 +161,34 @@
         });
       })();
 
-      // Apply course progress bonuses from localStorage to dashboard numbers
+      // Apply course progress bonuses from localStorage to dashboard numbers (per-user)
       (function () {
+        function userScope() {
+          try {
+            const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            const id = u?.id || u?.email || u?.username; return id ? String(id) : 'guest';
+          } catch(_) { return 'guest'; }
+        }
+        function K(base) { return base + '::' + userScope(); }
         try {
           const total =
             parseInt(
-              localStorage.getItem("ai_foundations_quiz_total_v1") || "0",
+              localStorage.getItem(K("ai_foundations_quiz_total_v1")) || "0",
               10
             ) || 0;
           const done =
             parseInt(
-              localStorage.getItem("ai_foundations_quiz_done_v1") || "0",
+              localStorage.getItem(K("ai_foundations_quiz_done_v1")) || "0",
               10
             ) || 0;
           if (
             total > 0 &&
             done >= total &&
-            localStorage.getItem("ai_foundations_completed_v1") !== "true"
+            localStorage.getItem(K("ai_foundations_completed_v1")) !== "true"
           ) {
-            localStorage.setItem("ai_foundations_completed_v1", "true");
-            const courseKey = "home_courses_completed_bonus";
-            const hoursKey = "home_hours_learned_bonus";
+            localStorage.setItem(K("ai_foundations_completed_v1"), "true");
+            const courseKey = K("home_courses_completed_bonus");
+            const hoursKey = K("home_hours_learned_bonus");
             const curCourses =
               parseInt(localStorage.getItem(courseKey) || "0", 10) || 0;
             const curHours =
@@ -192,12 +199,12 @@
 
           const courseBonus =
             parseInt(
-              localStorage.getItem("home_courses_completed_bonus") || "0",
+              localStorage.getItem(K("home_courses_completed_bonus")) || "0",
               10
             ) || 0;
           const hoursBonus =
             parseInt(
-              localStorage.getItem("home_hours_learned_bonus") || "0",
+              localStorage.getItem(K("home_hours_learned_bonus")) || "0",
               10
             ) || 0;
 
@@ -225,21 +232,27 @@
         } catch (_) {}
       })();
 
-      // Reflect AI Foundations completion in Recent Activity
+      // Reflect AI Foundations completion in Recent Activity (per-user)
 (function () {
+  function userScope() {
+    try { const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
+      const id = u?.id || u?.email || u?.username; return id ? String(id) : 'guest';
+    } catch(_) { return 'guest'; }
+  }
+  function K(base) { return base + '::' + userScope(); }
   const COURSES = [
     {
       id: "ai_foundations",
       title: 'AI Foundations',
-      completedKey: 'ai_foundations_completed_v1',
-      activityKey:  'home_activity_logged_ai_foundations_v1', // "true"
+      completedKey: K('ai_foundations_completed_v1'),
+      activityKey:  K('home_activity_logged_ai_foundations_v1'), // "true"
       icon: '<i class="fas fa-check-circle" style="color:#10b981"></i>'
     },
     {
       id: "machine-learning",
       title: 'Machine Learning',
-      completedKey: 'machine-learning_completed_v1',
-      activityKey:  'home_activity_logged_machine-learning_v1', // JSON: { ts, course }
+      completedKey: K('machine-learning_completed_v1'),
+      activityKey:  K('home_activity_logged_machine-learning_v1'), // JSON: { ts, course }
       icon: '<i class="fas fa-check-circle" style="color:#10b981"></i>'
     }
   ];
@@ -424,12 +437,18 @@
     </script>
 
     <script>
-      // Compute Justin's points from localStorage progress and sync to leaderboard
+      // Compute Justin's points from localStorage progress and sync to leaderboard (per-user)
       (function () {
         const LB_KEY = 'leaderboard_v1';
         const NAME = 'Justin';
-        const COURSES_KEY = 'home_courses_completed_bonus';
-        const HOURS_KEY = 'home_hours_learned_bonus';
+        function userScope() {
+          try { const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            const id = u?.id || u?.email || u?.username; return id ? String(id) : 'guest';
+          } catch(_) { return 'guest'; }
+        }
+        function K(base) { return base + '::' + userScope(); }
+        const COURSES_KEY = K('home_courses_completed_bonus');
+        const HOURS_KEY = K('home_hours_learned_bonus');
 
         const S = window.StorageUtil;
         function getInt(key) { return (S && S.getInt(key, 0)) || 0; }
