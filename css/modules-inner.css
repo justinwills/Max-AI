@@ -168,16 +168,6 @@ li {
 .progress-wrap {
   margin: 8px 0 20px;
 }
-.progress-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-.progress-text {
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 700;
-}
 .progress-bar {
   position: relative;
   height: 18px;
@@ -500,12 +490,6 @@ body {
   color: var(--light);
 }
 
-.callout.warn {
-  background: rgba(255, 193, 7, 0.1);
-  border-color: rgba(255, 193, 7, 0.3);
-  color: #fef3c7;
-}
-
 .callout.neutral {
   background: rgba(51, 65, 85, 0.5);
   color: var(--light);
@@ -768,26 +752,6 @@ body {
 }
 
 /* Exercise */
-.exercise {
-  background: rgba(71, 85, 105, 0.3);
-  border: 1px dashed rgba(140, 82, 255, 0.4);
-  padding: 20px;
-  border-radius: var(--radius-sm);
-  margin-top: 16px;
-}
-
-.exercise-title {
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--light);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.exercise-title i {
-  color: var(--primary);
-}
 
 /* Resources Grid */
 .resources-grid {
@@ -866,7 +830,6 @@ body {
   top: 100px;
 }
 
-.toc-nav,
 .toc-downloads,
 .toc-info {
   padding: 20px 24px;
@@ -877,44 +840,11 @@ body {
   border-bottom: none;
 }
 
-.toc-nav h4,
 .toc-downloads h4 {
   color: var(--light);
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 16px;
-}
-
-.toc-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.toc-list li {
-  margin-bottom: 12px;
-}
-
-.toc-list a {
-  color: var(--lighter);
-  text-decoration: none;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  transition: var(--transition);
-}
-
-.toc-list a:hover {
-  color: var(--primary);
-  background: rgba(140, 82, 255, 0.08);
-}
-
-.toc-list a i {
-  width: 16px;
-  text-align: center;
 }
 
 .download-item {
@@ -987,22 +917,6 @@ nav {
 }
 
 /* Brand text next to logo */
-nav a[aria-label="Go to Home"] {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-nav a[aria-label="Go to Home"]::after {
-  content: "max ai";
-  font-weight: 800;
-  letter-spacing: 0.2px;
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
 
 .mobile-menu-btn {
   display: none;
@@ -1052,19 +966,6 @@ nav a[aria-label="Go to Home"]::after {
 .navigation ul li a:hover::after,
 .navigation ul li a.active::after {
   width: 100%;
-}
-
-#menu-btn {
-  display: none;
-  height: 30px;
-  cursor: pointer;
-}
-
-#menu-close {
-  display: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: var(--white);
 }
 
 /* Profile dropdown in nav */

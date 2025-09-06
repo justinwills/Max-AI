@@ -683,15 +683,6 @@ nav {
 }
 
 /* Footer */
-.footer-links a {
-  color: var(--white-70);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: var(--primary);
-}
 
 .footer-bottom {
   text-align: center;

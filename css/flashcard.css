@@ -15,9 +15,7 @@ body {
 h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
+h4 {
   color: #fff;
 }
 
@@ -190,28 +188,6 @@ nav {
 }
 
 /* TBA Content Section */
-.tba-content {
-  padding: 120px 0 80px;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tba-text {
-  text-align: center;
-}
-
-.tba-text h1 {
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 16px;
-  background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
 
 /* Mobile responsive navigation */
 @media screen and (max-width: 768px) {

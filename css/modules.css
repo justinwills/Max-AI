@@ -373,25 +373,6 @@ nav {
   box-shadow: 0 8px 25px rgba(140, 82, 255, 0.3);
 }
 
-.module-stats {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-
-.module-stats span {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.module-stats i {
-  color: #8c52ff;
-}
-
 /* Learning Path Section */
 .learning-path {
   background: rgba(255, 255, 255, 0.02);
