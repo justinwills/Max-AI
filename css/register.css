@@ -2,12 +2,12 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  width: 100%
+  width: 100%;
 }
 
 .logo {
   cursor: pointer;
-  height: 130px
+  height: 130px;
 }
 
 .register-container {
@@ -18,44 +18,58 @@
   min-height: 100vh;
   padding: 100px 20px 20px;
   position: relative;
-  width: 100%
+  width: 100%;
 }
 
 .register-container:before {
-  background-image: radial-gradient(circle at 20% 80%, rgba(140, 82, 255, .1) 0, transparent 50%), radial-gradient(circle at 80% 20%, rgba(203, 108, 230, .1) 0, transparent 50%), radial-gradient(circle at 40% 40%, rgba(255, 102, 196, .1) 0, transparent 50%);
+  background-image: radial-gradient(
+      circle at 20% 80%,
+      rgba(140, 82, 255, 0.1) 0,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(203, 108, 230, 0.1) 0,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(255, 102, 196, 0.1) 0,
+      transparent 50%
+    );
   bottom: 0;
   content: "";
   left: 0;
   pointer-events: none;
   position: absolute;
   right: 0;
-  top: 0
+  top: 0;
 }
 
 .form-box {
-  animation: slideInUp .8s ease-out;
+  animation: slideInUp 0.8s ease-out;
   backdrop-filter: blur(20px);
-  background: rgba(30, 41, 59, .95);
-  border: 1px solid rgba(140, 82, 255, .2);
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(140, 82, 255, 0.2);
   border-radius: 30px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, .3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   max-width: 450px;
   padding: 40px;
   position: relative;
   text-align: center;
   width: 100%;
-  z-index: 10
+  z-index: 10;
 }
 
 @keyframes slideInUp {
   0% {
     opacity: 0;
-    transform: translateY(30px)
+    transform: translateY(30px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
   }
 }
 
@@ -67,36 +81,36 @@
   font-weight: 700;
   margin-bottom: 30px;
   -webkit-text-fill-color: transparent;
-  color: transparent
+  color: transparent;
 }
 
 .input-group {
-  margin-bottom: 20px
+  margin-bottom: 20px;
 }
 
 .input-field {
   align-items: center;
-  background: hsla(0, 0%, 100%, .1);
-  border: 1px solid hsla(0, 0%, 100%, .1);
+  background: hsla(0, 0%, 100%, 0.1);
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
   border-radius: 25px;
   display: flex;
   margin: 15px 0;
   overflow: hidden;
-  transition: all .3s ease
+  transition: all 0.3s ease;
 }
 
 .input-field:focus-within {
-  border-color: rgba(140, 82, 255, .5);
-  box-shadow: 0 0 0 3px rgba(140, 82, 255, .1);
-  transform: translateY(-2px)
+  border-color: rgba(140, 82, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(140, 82, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .input-field i {
-  color: hsla(0, 0%, 100%, .6);
+  color: hsla(0, 0%, 100%, 0.6);
   font-size: 18px;
   margin-left: 20px;
   text-align: center;
-  width: 20px
+  width: 20px;
 }
 
 .input-field input {
@@ -106,38 +120,38 @@
   font-size: 16px;
   outline: 0;
   padding: 18px 20px 18px 15px;
-  width: 100%
+  width: 100%;
 }
 
 .input-field .toggle-password {
   align-items: center;
   background: transparent;
   border: none;
-  color: hsla(0, 0%, 100%, .7);
+  color: hsla(0, 0%, 100%, 0.7);
   cursor: pointer;
   display: inline-flex;
   height: 100%;
   justify-content: center;
-  padding: 0 16px
+  padding: 0 16px;
 }
 
 .input-field .toggle-password i {
-  font-size: 16px
+  font-size: 16px;
 }
 
 .input-field .toggle-password:focus,
 .input-field .toggle-password:hover {
   color: #fff;
-  outline: none
+  outline: none;
 }
 
 .input-field input::placeholder {
-  color: hsla(0, 0%, 100%, .5)
+  color: hsla(0, 0%, 100%, 0.5);
 }
 
 .btn-field {
   margin-top: 30px;
-  width: 100%
+  width: 100%;
 }
 
 .btn-field button {
@@ -151,59 +165,59 @@
   gap: 10px;
   justify-content: center;
   padding: 18px 32px;
-  transition: all .3s ease;
-  width: 100%
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
 .btn-field button:hover {
-  box-shadow: 0 10px 25px rgba(140, 82, 255, .3);
-  transform: translateY(-2px)
+  box-shadow: 0 10px 25px rgba(140, 82, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 .btn-field button:disabled {
   cursor: not-allowed;
-  opacity: .7;
-  transform: none
+  opacity: 0.7;
+  transform: none;
 }
 
 .login-link {
-  color: hsla(0, 0%, 100%, .7);
+  color: hsla(0, 0%, 100%, 0.7);
   font-size: 14px;
   margin-top: 25px;
-  text-align: center
+  text-align: center;
 }
 
 .login-link a {
   color: #8c52ff;
   font-weight: 600;
   text-decoration: none;
-  transition: color .3s ease
+  transition: color 0.3s ease;
 }
 
 .login-link a:hover {
   color: #cb6ce6;
-  text-decoration: underline
+  text-decoration: underline;
 }
 
 .password-hint {
   background: var(--white-05);
   border: 1px solid var(--primary-20);
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, .15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   margin-top: 8px;
-  padding: 12px 14px
+  padding: 12px 14px;
 }
 
 .password-hint .hint-title {
   color: var(--white-70);
   font-size: 13px;
-  margin-bottom: 6px
+  margin-bottom: 6px;
 }
 
 .password-hint ul {
   list-style: none;
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 .password-hint li {
@@ -212,47 +226,47 @@
   display: flex;
   font-size: 13px;
   gap: 8px;
-  margin: 4px 0
+  margin: 4px 0;
 }
 
 .password-hint li i {
-  font-size: 12px
+  font-size: 12px;
 }
 
 .password-hint li.ok {
-  color: #22c55e
+  color: #22c55e;
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .register-container {
-    padding: 80px 20px 20px
+    padding: 80px 20px 20px;
   }
 
   .form-box {
     margin: 0 20px;
-    padding: 30px 25px
+    padding: 30px 25px;
   }
 
   .form-box h2 {
-    font-size: 2rem
+    font-size: 2rem;
   }
 }
 
-@media (max-width:480px) {
+@media (max-width: 480px) {
   .form-box {
-    padding: 25px 20px
+    padding: 25px 20px;
   }
 
   .form-box h2 {
-    font-size: 1.8rem
+    font-size: 1.8rem;
   }
 
   .input-field {
-    margin: 12px 0
+    margin: 12px 0;
   }
 
   .input-field input {
     font-size: 14px;
-    padding: 16px 18px 16px 12px
+    padding: 16px 18px 16px 12px;
   }
 }
