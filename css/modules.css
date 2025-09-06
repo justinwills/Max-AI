@@ -115,11 +115,13 @@ nav {
   padding: 12px 24px;
   text-decoration: none;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .btn-primary:hover {
   box-shadow: 0 10px 25px rgba(140, 82, 255, 0.3);
   transform: translateY(-2px);
+  text-decoration: none;
 }
 
 .profile-btn {
@@ -412,6 +414,11 @@ nav {
   padding: 12px 24px;
   text-decoration: none;
   transition: all 0.3s ease;
+}
+
+.btn-module a {
+  color: white;
+  text-decoration: none;
 }
 
 .btn-module:hover {
