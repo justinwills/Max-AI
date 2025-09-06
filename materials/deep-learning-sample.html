@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini Lab — Deep Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --card: #111936;
+        --ink: #e8edff;
+        --muted: #aab6da;
+        --accent1: #7c6cff;
+        --accent2: #19c37d;
+        --radius: 16px;
+        --shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(
+            1200px 400px at -10% -10%,
+            #182459 0%,
+            transparent 60%
+          ),
+          radial-gradient(1000px 500px at 120% 10%, #0e1b3d 0%, transparent 60%),
+          var(--bg);
+        color: var(--ink);
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+      }
+      header {
+        padding: 28px 16px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: linear-gradient(
+          180deg,
+          rgba(11, 16, 32, 0.95),
+          rgba(11, 16, 32, 0.7) 60%,
+          transparent
+        );
+        backdrop-filter: saturate(140%) blur(6px);
+      }
+      h1 {
+        font-size: clamp(24px, 3.5vw, 36px);
+        margin: 0;
+        font-weight: 800;
+      }
+      p.sub {
+        margin: 8px auto 0;
+        color: var(--muted);
+        max-width: 900px;
+      }
+      main {
+        max-width: 1200px;
+        margin: 18px auto 64px;
+        padding: 0 16px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 980px) {
+        .grid {
+          grid-template-columns: 1.2fr 0.8fr;
+        }
+      }
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(17, 25, 54, 0.95),
+          rgba(12, 18, 36, 0.97)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 16px;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--ink);
+        background: linear-gradient(180deg, #1a244a, #101832);
+        padding: 10px 14px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: transform 0.06s ease, box-shadow 0.2s ease,
+          border-color 0.2s ease;
+        user-select: none;
+        text-decoration: none;
+      }
+      .btn:hover {
+        border-color: rgba(124, 108, 255, 0.5);
+        box-shadow: 0 8px 20px rgba(124, 108, 255, 0.15);
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .btn.success {
+        background: linear-gradient(180deg, #1e3b2f, #142a22);
+        border-color: rgba(25, 195, 125, 0.5);
+      }
+      .btn.warn {
+        background: linear-gradient(180deg, #3b2f1e, #2a2214);
+        border-color: rgba(245, 158, 11, 0.5);
+      }
+      .label {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      select,
+      input[type="number"],
+      input[type="range"] {
+        background: #0c1224;
+        color: var(--ink);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 8px 10px;
+        font: inherit;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 12.5px;
+        background: #0b1226;
+        padding: 8px 10px;
+        border-radius: 10px;
+        overflow: auto;
+      }
+      canvas {
+        width: 100%;
+        height: 420px;
+        background: #0a0f1f;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+      }
+      .kpi {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .stat {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        background: #0b1226;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        padding: 8px 12px;
+        border-radius: 12px;
+      }
+      .progress {
+        width: 100%;
+        height: 8px;
+        background: #0d1531;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .progress > span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, #7c6cff, #19c37d);
+        width: 0%;
+      }
+      .small {
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mini Lab — Deep Learning</h1>
+      <p class="sub">
+        Interactive 2D playground for linear vs. multilayer perceptrons: build
+        datasets, pick activations, train with gradient descent, and visualize
+        the decision boundary, loss, and accuracy — all in your browser.
+      </p>
+    </header>
+
+    <main>
+      <div class="grid">
+        <!-- Left: Visualization -->
+        <section class="card">
+          <div class="row" style="justify-content: space-between">
+            <div>
+              <div class="label">Decision Boundary</div>
+              <canvas id="view" width="640" height="420"></canvas>
+            </div>
+          </div>
+          <div class="row kpi" style="margin-top: 10px">
+            <div class="stat"><span>Loss</span><b id="loss">—</b></div>
+            <div class="stat"><span>Accuracy</span><b id="acc">—</b></div>
+          </div>
+          <div class="row" style="margin-top: 10px">
+            <div class="stat" style="flex: 1">
+              <div>
+                <div class="small">Epochs</div>
+                <div class="progress"><span id="prog"></span></div>
+              </div>
+              <b id="epoch">0</b>
+            </div>
+            <button class="btn" id="step10">Train 10 epochs</button>
+            <button class="btn success" id="trainToggle">
+              Start Auto-Train
+            </button>
+            <button class="btn warn" id="reset">Reset Weights</button>
+          </div>
+        </section>
+
+        <!-- Right: Controls -->
+        <section class="card">
+          <div class="row">
+            <div style="flex: 1">
+              <div class="label">Dataset</div>
+              <select id="dataset">
+                <option value="blobs">Blobs (separable)</option>
+                <option value="xor">XOR (non-linear)</option>
+                <option value="moons">Two Moons (non-linear)</option>
+                <option value="rings">Concentric Rings (hard)</option>
+              </select>
+            </div>
+            <div style="flex: 1">
+              <div class="label">Samples</div>
+              <input
+                id="nSamples"
+                type="number"
+                min="40"
+                max="1000"
+                step="10"
+                value="200"
+              />
+            </div>
+            <button class="btn" id="regen">Regenerate</button>
+          </div>
+          <div class="row" style="margin-top: 10px">
+            <div style="flex: 1">
+              <div class="label">Model Type</div>
+              <select id="modelType">
+                <option value="linear">Linear (no hidden layer)</option>
+                <option value="mlp" selected>MLP (1 hidden layer)</option>
+              </select>
+            </div>
+            <div style="flex: 1">
+              <div class="label">Hidden Units</div>
+              <input
+                id="hidden"
+                type="number"
+                min="1"
+                max="30"
+                step="1"
+                value="8"
+              />
+            </div>
+          </div>
+          <div class="row" style="margin-top: 10px">
+            <div style="flex: 1">
+              <div class="label">Activation</div>
+              <select id="activation">
+                <option value="relu" selected>ReLU</option>
+                <option value="tanh">tanh</option>
+                <option value="sigmoid">sigmoid</option>
+              </select>
+            </div>
+            <div style="flex: 1">
+              <div class="label">Learning Rate</div>
+              <input
+                id="lr"
+                type="number"
+                min="0.0001"
+                max="1"
+                step="0.0001"
+                value="0.05"
+              />
+            </div>
+          </div>
+          <div class="row" style="margin-top: 10px">
+            <div style="flex: 1">
+              <div class="label">L2 Regularization (λ)</div>
+              <input
+                id="l2"
+                type="number"
+                min="0"
+                max="0.1"
+                step="0.001"
+                value="0.001"
+              />
+            </div>
+            <div style="flex: 1">
+              <div class="label">Train / Val Split</div>
+              <input id="split" type="range" min="50" max="90" value="80" />
+              <div class="small"><span id="splitLbl">80</span>% train</div>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 10px">
+            <button class="btn" id="export">Export Weights (.json)</button>
+            <button class="btn ghost" id="importBtn">Import Weights</button>
+            <input
+              id="importFile"
+              type="file"
+              accept="application/json"
+              style="display: none"
+            />
+          </div>
+          <p class="small">
+            Tips: Use <b>Linear</b> on Blobs to see a line as the boundary.
+            Switch to <b>MLP</b> + <b>ReLU/tanh</b> for XOR/Moons/Rings. Tune LR
+            & λ to avoid divergence/overfitting.
+          </p>
+        </section>
+      </div>
+
+      <section class="card" style="margin-top: 16px">
+        <div class="row" style="align-items: flex-start">
+          <div style="flex: 1">
+            <div class="label">Logs</div>
+            <pre id="log" class="mono" style="min-height: 120px">—</pre>
+          </div>
+          <div style="flex: 1">
+            <div class="label">Theory Cheatsheet</div>
+            <div class="mono" style="min-height: 120px">
+              Loss: cross-entropy for binary classification; L2 adds λ‖W‖².
+              Linear: y = σ(Wx + b). Non-linear decision boundaries require
+              hidden layers. MLP (1 hidden): h = φ(W1 x + b1); y = σ(W2 h + b2).
+              Backprop (binary CE): dL/dz2 = ŷ - y; dL/dW2 = (ŷ - y) hᵀ; dL/db2
+              = ŷ - y. Hidden: dL/dh = W2ᵀ (ŷ - y); dL/dz1 = dL/dh ⊙ φ'(z1);
+              dL/dW1 = (dL/dz1) xᵀ; dL/db1 = dL/dz1. φ': ReLU' = 1[z>0]; tanh' =
+              1 - tanh²(z); sigmoid' = σ(z)(1-σ(z)).
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // ======== Utility helpers ========
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => Array.from(document.querySelectorAll(s));
+      const randn = () => {
+        // Box-Muller
+        let u = 0,
+          v = 0;
+        while (u === 0) u = Math.random();
+        while (v === 0) v = Math.random();
+        return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+      };
+      function shuffleInPlace(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = (Math.random() * (i + 1)) | 0;
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+      }
+      function splitTrainVal(X, y, trainPct = 0.8) {
+        const n = X.length;
+        const idx = [...Array(n).keys()];
+        shuffleInPlace(idx);
+        const k = Math.floor(n * trainPct);
+        const tr = idx.slice(0, k),
+          va = idx.slice(k);
+        return {
+          Xtr: tr.map((i) => X[i]),
+          ytr: tr.map((i) => y[i]),
+          Xva: va.map((i) => X[i]),
+          yva: va.map((i) => y[i]),
+        };
+      }
+
+      // ======== Datasets (2D) ========
+      function makeBlobs(n = 200) {
+        const X = [],
+          y = [];
+        for (let i = 0; i < n; i++) {
+          const c = i < n / 2 ? -1 : 1;
+          const cx = c < 0 ? -1.2 : 1.2;
+          const cy = c < 0 ? -0.6 : 0.6;
+          const x = cx + 0.6 * randn();
+          const yy = cy + 0.6 * randn();
+          X.push([x, yy]);
+          y.push(c > 0 ? 1 : 0);
+        }
+        return { X, y };
+      }
+      function makeXOR(n = 200) {
+        const X = [],
+          y = [];
+        for (let i = 0; i < n; i++) {
+          const x = (Math.random() * 2 - 1) * 2;
+          const yy = (Math.random() * 2 - 1) * 2;
+          const label = x * yy > 0 ? 1 : 0; // quadrants
+          X.push([x, yy]);
+          y.push(label);
+        }
+        return { X, y };
+      }
+      function makeMoons(n = 200) {
+        const X = [],
+          y = [];
+        for (let i = 0; i < n; i++) {
+          const t = Math.random() * Math.PI;
+          const r = 0.7 + 0.15 * randn();
+          const x1 = r * Math.cos(t);
+          const y1 = r * Math.sin(t);
+          const x2 = 1 + r * Math.cos(t + Math.PI);
+          const y2 = -0.2 + r * Math.sin(t + Math.PI);
+          if (i < n / 2) {
+            X.push([x1, y1]);
+            y.push(0);
+          } else {
+            X.push([x2, y2]);
+            y.push(1);
+          }
+        }
+        return { X, y };
+      }
+      function makeRings(n = 200) {
+        const X = [],
+          y = [];
+        for (let i = 0; i < n; i++) {
+          const ring = i < n / 2 ? 0 : 1;
+          const r0 = ring ? 2.2 : 1.0;
+          const r = r0 + 0.15 * randn();
+          const t = Math.random() * 2 * Math.PI;
+          X.push([r * Math.cos(t), r * Math.sin(t)]);
+          y.push(ring);
+        }
+        return { X, y };
+      }
+
+      // ======== Math ops ========
+      function dot2(a, b) {
+        return a[0] * b[0] + a[1] * b[1];
+      }
+      function add(a, b) {
+        return a.map((v, i) => v + b[i]);
+      }
+      function sub(a, b) {
+        return a.map((v, i) => v - b[i]);
+      }
+      function mulScalar(a, s) {
+        return a.map((v) => v * s);
+      }
+      function sigmoid(z) {
+        return 1 / (1 + Math.exp(-z));
+      }
+      function dsigmoid(z) {
+        const s = sigmoid(z);
+        return s * (1 - s);
+      }
+      function tanh(z) {
+        return Math.tanh(z);
+      }
+      function dtanh(z) {
+        const t = Math.tanh(z);
+        return 1 - t * t;
+      }
+      function relu(z) {
+        return z > 0 ? z : 0;
+      }
+      function drelu(z) {
+        return z > 0 ? 1 : 0;
+      }
+
+      // ======== Model ========
+      class Model {
+        constructor(
+          type = "mlp",
+          hidden = 8,
+          act = "relu",
+          lr = 0.05,
+          l2 = 0.001
+        ) {
+          this.type = type;
+          this.hidden = hidden;
+          this.act = act;
+          this.lr = lr;
+          this.l2 = l2;
+          this.init();
+        }
+        init() {
+          if (this.type === "linear") {
+            this.W = [randn() * 0.5, randn() * 0.5];
+            this.b = 0;
+          } else {
+            this.W1 = Array.from({ length: this.hidden }, () => [
+              randn() * 0.5,
+              randn() * 0.5,
+            ]);
+            this.b1 = Array.from({ length: this.hidden }, () => 0);
+            this.W2 = Array.from({ length: this.hidden }, () => randn() * 0.5);
+            this.b2 = 0;
+          }
+        }
+        actFn(z) {
+          return this.act === "relu"
+            ? relu(z)
+            : this.act === "tanh"
+            ? tanh(z)
+            : sigmoid(z);
+        }
+        dactFn(z) {
+          return this.act === "relu"
+            ? drelu(z)
+            : this.act === "tanh"
+            ? dtanh(z)
+            : dsigmoid(z);
+        }
+        // forward returns yhat and cache
+        forward(x) {
+          if (this.type === "linear") {
+            const z = dot2(this.W, x) + this.b;
+            const yhat = sigmoid(z);
+            return { yhat, cache: { z } };
+          } else {
+            const z1 = this.W1.map(
+              (w, i) => w[0] * x[0] + w[1] * x[1] + this.b1[i]
+            );
+            const h = z1.map((z) => this.actFn(z));
+            const z2 = this.W2.reduce((s, w, i) => s + w * h[i], this.b2);
+            const yhat = sigmoid(z2);
+            return { yhat, cache: { z1, h, z2 } };
+          }
+        }
+        // one step of gradient descent on a mini-batch (full batch used here)
+        trainBatch(X, y) {
+          const n = X.length;
+          let loss = 0,
+            corr = 0;
+          // accumulate grads
+          if (this.type === "linear") {
+            let gW = [0, 0],
+              gb = 0;
+            const lam = this.l2;
+            for (let i = 0; i < n; i++) {
+              const {
+                yhat,
+                cache: { z },
+              } = this.forward(X[i]);
+              const t = y[i];
+              loss += -(
+                t * Math.log(yhat + 1e-9) +
+                (1 - t) * Math.log(1 - yhat + 1e-9)
+              );
+              if ((yhat > 0.5 ? 1 : 0) === t) corr++;
+              const dz = yhat - t; // dL/dz
+              gW[0] += dz * X[i][0];
+              gW[1] += dz * X[i][1];
+              gb += dz;
+            }
+            // L2
+            gW[0] += lam * 2 * this.W[0];
+            gW[1] += lam * 2 * this.W[1];
+            const lr = this.lr / n;
+            this.W[0] -= lr * gW[0];
+            this.W[1] -= lr * gW[1];
+            this.b -= lr * gb;
+            loss = loss / n + lam * (this.W[0] ** 2 + this.W[1] ** 2);
+          } else {
+            const H = this.hidden;
+            const lam = this.l2;
+            let gW1 = Array.from({ length: H }, () => [0, 0]);
+            let gb1 = Array.from({ length: H }, () => 0);
+            let gW2 = Array.from({ length: H }, () => 0);
+            let gb2 = 0;
+            for (let i = 0; i < n; i++) {
+              const x = X[i];
+              const t = y[i];
+              const {
+                yhat,
+                cache: { z1, h, z2 },
+              } = this.forward(x);
+              loss += -(
+                t * Math.log(yhat + 1e-9) +
+                (1 - t) * Math.log(1 - yhat + 1e-9)
+              );
+              if ((yhat > 0.5 ? 1 : 0) === t) corr++;
+              // output layer grads
+              const dz2 = yhat - t; // dL/dz2
+              for (let j = 0; j < H; j++) {
+                gW2[j] += dz2 * h[j];
+              }
+              gb2 += dz2;
+              // hidden layer grads
+              for (let j = 0; j < H; j++) {
+                const dh = this.W2[j] * dz2;
+                const dz1 = dh * this.dactFn(z1[j]);
+                gW1[j][0] += dz1 * x[0];
+                gW1[j][1] += dz1 * x[1];
+                gb1[j] += dz1;
+              }
+            }
+            // L2
+            for (let j = 0; j < H; j++) {
+              gW2[j] += lam * 2 * this.W2[j];
+              gW1[j][0] += lam * 2 * this.W1[j][0];
+              gW1[j][1] += lam * 2 * this.W1[j][1];
+            }
+            const lr = this.lr / n;
+            for (let j = 0; j < H; j++) {
+              this.W2[j] -= lr * gW2[j];
+              this.b2 -= (lr * gb2) / H;
+              this.W1[j][0] -= lr * gW1[j][0];
+              this.W1[j][1] -= lr * gW1[j][1];
+              this.b1[j] -= lr * gb1[j];
+            }
+            // average loss + L2
+            let l2sum = 0;
+            for (let j = 0; j < H; j++) {
+              l2sum +=
+                this.W2[j] ** 2 + this.W1[j][0] ** 2 + this.W1[j][1] ** 2;
+            }
+            loss = loss / n + lam * l2sum;
+          }
+          return { loss, acc: corr / n };
+        }
+        predict(x) {
+          return this.forward(x).yhat;
+        }
+        export() {
+          return JSON.stringify(
+            this,
+            (k, v) =>
+              [
+                "W1",
+                "b1",
+                "W2",
+                "b2",
+                "W",
+                "b",
+                "type",
+                "hidden",
+                "act",
+                "lr",
+                "l2",
+              ].includes(k)
+                ? v
+                : undefined,
+            2
+          );
+        }
+        import(obj) {
+          Object.assign(this, obj);
+        }
+      }
+
+      // ======== Rendering ========
+      const CAN = $("#view");
+      const CTX = CAN.getContext("2d");
+      function toCanvas(x) {
+        // map model space (~[-3,3]) to canvas
+        const m = 70;
+        const W = CAN.width,
+          H = CAN.height;
+        return [
+          ((x[0] + 3) / 6) * (W - 2 * m) + m,
+          H - (((x[1] + 3) / 6) * (H - 2 * m) + m),
+        ];
+      }
+      function fromCanvas(px, py) {
+        const m = 70,
+          W = CAN.width,
+          H = CAN.height;
+        const x = ((px - m) / (W - 2 * m)) * 6 - 3;
+        const y = ((H - py - m) / (H - 2 * m)) * 6 - 3;
+        return [x, y];
+      }
+
+      function drawBackground(model) {
+        const W = CAN.width,
+          H = CAN.height;
+        const img = CTX.createImageData(W, H);
+        const data = img.data;
+        const step = 4; // coarse grid
+        for (let y = 0; y < H; y += step) {
+          for (let x = 0; x < W; x += step) {
+            const p = fromCanvas(x, y);
+            const yhat = model.predict(p);
+            const c0 = Math.floor(40 + 120 * yhat);
+            const c1 = Math.floor(40 + 120 * (1 - yhat));
+            for (let dy = 0; dy < step; dy++) {
+              for (let dx = 0; dx < step; dx++) {
+                const idx = ((y + dy) * W + (x + dx)) * 4;
+                data[idx] = c0;
+                data[idx + 1] = c1;
+                data[idx + 2] = 200;
+                data[idx + 3] = 255;
+              }
+            }
+          }
+        }
+        CTX.putImageData(img, 0, 0);
+        // axes
+        CTX.strokeStyle = "rgba(255,255,255,.2)";
+        CTX.lineWidth = 1;
+        CTX.beginPath();
+        const o = toCanvas([0, 0]);
+        CTX.moveTo(0, o[1]);
+        CTX.lineTo(W, o[1]);
+        CTX.moveTo(o[0], 0);
+        CTX.lineTo(o[0], H);
+        CTX.stroke();
+      }
+
+      function drawPoints(X, y, trainMask) {
+        for (let i = 0; i < X.length; i++) {
+          const [px, py] = toCanvas(X[i]);
+          CTX.beginPath();
+          CTX.arc(px, py, 4, 0, Math.PI * 2);
+          const isTrain = trainMask ? trainMask[i] : true;
+          CTX.fillStyle = y[i]
+            ? isTrain
+              ? "#19c37d"
+              : "#19c37d88"
+            : isTrain
+            ? "#7c6cff"
+            : "#7c6cff88";
+          CTX.fill();
+          CTX.closePath();
+        }
+      }
+
+      function renderAll() {
+        drawBackground(model);
+        // mask for splitting visualization
+        const mask = Array(X.length).fill(false);
+        for (const i of idxTrain) mask[i] = true;
+        drawPoints(X, y, mask);
+      }
+
+      // ======== Lab state ========
+      let X = [],
+        y = [];
+      let idxTrain = [],
+        idxVal = [];
+      let model = null;
+      let auto = null;
+      let epoch = 0;
+      let splitPct = 0.8;
+
+      function regen() {
+        const n = +$("#nSamples").value;
+        const ds = $("#dataset").value;
+        let data;
+        if (ds === "blobs") data = makeBlobs(n);
+        else if (ds === "xor") data = makeXOR(n);
+        else if (ds === "moons") data = makeMoons(n);
+        else data = makeRings(n);
+        X = data.X;
+        y = data.y;
+        const sp = +$("#split").value / 100;
+        splitPct = sp;
+        const idx = [...Array(X.length).keys()];
+        shuffleInPlace(idx);
+        const k = Math.floor(X.length * sp);
+        idxTrain = idx.slice(0, k);
+        idxVal = idx.slice(k);
+        initModel();
+        epoch = 0;
+        updateKPI(0, 0);
+        renderAll();
+        log(
+          "Regenerated dataset: " +
+            ds +
+            ` | n=${n} | train=${Math.round(sp * 100)}%`
+        );
+      }
+      function initModel() {
+        model = new Model(
+          $("#modelType").value,
+          +$("#hidden").value,
+          $("#activation").value,
+          +$("#lr").value,
+          +$("#l2").value
+        );
+      }
+
+      function stepEpoch() {
+        const Xtr = idxTrain.map((i) => X[i]);
+        const ytr = idxTrain.map((i) => y[i]);
+        const stat = model.trainBatch(Xtr, ytr);
+        // val metrics
+        let corr = 0;
+        for (const i of idxVal) {
+          const p = model.predict(X[i]) > 0.5 ? 1 : 0;
+          if (p === y[i]) corr++;
+        }
+        const accVal = idxVal.length ? corr / idxVal.length : stat.acc;
+        epoch++;
+        updateKPI(stat.loss, accVal);
+        renderAll();
+      }
+
+      function updateKPI(loss, acc) {
+        $("#loss").textContent = loss ? loss.toFixed(4) : "—";
+        $("#acc").textContent = acc ? (acc * 100).toFixed(1) + "%" : "—";
+        $("#epoch").textContent = epoch;
+        $("#prog").style.width = Math.min(100, epoch) % +"%";
+      }
+
+      function log(s) {
+        const el = $("#log");
+        el.textContent =
+          (el.textContent === "—" ? "" : el.textContent + "\n") + s;
+        el.scrollTop = el.scrollHeight;
+      }
+
+      // ======== IO ========
+      $("#regen").addEventListener("click", regen);
+      $("#dataset").addEventListener("change", regen);
+      $("#nSamples").addEventListener("change", regen);
+      $("#modelType").addEventListener("change", () => {
+        initModel();
+        renderAll();
+        log("Model: " + $("#modelType").value);
+      });
+      $("#hidden").addEventListener("change", () => {
+        initModel();
+        renderAll();
+        log("Hidden units: " + $("#hidden").value);
+      });
+      $("#activation").addEventListener("change", () => {
+        initModel();
+        renderAll();
+        log("Activation: " + $("#activation").value);
+      });
+      $("#lr").addEventListener("change", () => {
+        initModel();
+        renderAll();
+        log("LR: " + $("#lr").value);
+      });
+      $("#l2").addEventListener("change", () => {
+        initModel();
+        renderAll();
+        log("L2: " + $("#l2").value);
+      });
+      $("#split").addEventListener("input", (e) => {
+        $("#splitLbl").textContent = e.target.value;
+      });
+      $("#split").addEventListener("change", regen);
+
+      $("#step10").addEventListener("click", () => {
+        for (let i = 0; i < 10; i++) stepEpoch();
+      });
+      $("#trainToggle").addEventListener("click", (e) => {
+        if (auto) {
+          clearInterval(auto);
+          auto = null;
+          e.target.textContent = "Start Auto-Train";
+        } else {
+          auto = setInterval(() => {
+            stepEpoch();
+          }, 60);
+          e.target.textContent = "Stop Auto-Train";
+        }
+      });
+      $("#reset").addEventListener("click", () => {
+        initModel();
+        epoch = 0;
+        updateKPI(0, 0);
+        renderAll();
+        log("Weights reset.");
+      });
+
+      $("#export").addEventListener("click", () => {
+        const blob = new Blob([model.export()], { type: "application/json" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "dl_model_weights.json";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+      $("#importBtn").addEventListener("click", () => $("#importFile").click());
+      $("#importFile").addEventListener("change", (e) => {
+        const f = e.target.files[0];
+        if (!f) return;
+        const fr = new FileReader();
+        fr.onload = () => {
+          const obj = JSON.parse(fr.result);
+          model.import(obj);
+          renderAll();
+          log("Weights imported.");
+        };
+        fr.readAsText(f);
+      });
+
+      // ======== Init ========
+      regen();
+      renderAll();
+    </script>
+  </body>
+</html>

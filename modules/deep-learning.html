@@ -35,7 +35,7 @@
           <li><a href="../modules.html" class="active">Modules</a></li>
           <li><a href="../flashcard.html">Flashcard</a></li>
           <li><a href="../quiz.html">Quiz</a></li>
-          <li><a href="../about.html">About Us</a></li>
+          <li><a href="../about.html">About</a></li>
         </ul>
         <div class="mobile-menu-btn" aria-label="Open menu" role="button" tabindex="0">
           <i class="fas fa-bars"></i>
@@ -205,6 +205,9 @@
             </div>
             <p>
               Recommended: complete the previous module
+              <a class="prereq-link" href="./ai-foundation.html"
+                ><i class="fas fa-book-open"></i> AI Foundation</a
+              > and
               <a class="prereq-link" href="./machine-learning.html"
                 ><i class="fas fa-book-open"></i> Machine Learning</a
               >
@@ -213,6 +216,7 @@
               light JavaScript helps for the demos.
             </p>
             <div class="tags">
+              <span class="tag">Completed AI Foundation</span>
               <span class="tag">Completed Machine Learning</span>
               <span class="tag">Basic algebra</span>
               <span class="tag">Optional: JavaScript basics</span>
@@ -238,9 +242,12 @@
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 8 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
+                  <span><i class="fas fa-file-text"></i>Video</span>
                 </div>
                 <div class="lesson-preview">
+                   <iframe width="560" height="315" src="https://www.youtube.com/embed/6M5VXKLf4D4" 
+title="Deep learning" frameborder="0" allowfullscreen></iframe>
+                    <br>
                   <p>
 When we interact with modern technology—whether it is recognizing a face in photos, translating languages instantly, or recommending a movie—we are often seeing deep learning at work. Deep learning is a branch of machine learning that uses networks of layers, known as neural networks, to recognize patterns in data.
 Think of deep learning like teaching a student. At first, the student learns simple facts such as letters or numbers. Later, they combine this knowledge into sentences, and eventually, into complete essays. Similarly, in deep learning, the first layers of a network learn simple patterns, while deeper layers combine these into more complex ideas.
@@ -341,6 +348,7 @@ CNNs made image recognition scalable, turning computer vision from theory into d
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
+                  
                   <p>
 Transformers solved this by introducing self-attention, allowing models to focus on relevant words or signals no matter how far apart they are. This leap turned machine translation, text generation, and even music composition into practical technologies.
 Examples include:
@@ -462,9 +470,12 @@ Why it matters: Generative models power applications like AI art, realistic deep
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 8 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
+                  <span><i class="fas fa-file-text"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
+                   <iframe width="560" height="315" src="https://www.youtube.com/embed/nIgIv4IfJ6s" 
+title="Deep learning" frameborder="0" allowfullscreen></iframe>
+                    <br>
                   <p>
 Deep networks allow RL agents to handle complex environments, like playing Go or controlling robots.
 Think of teaching a dog tricks: each correct move gets a treat, guiding future behavior.
@@ -479,57 +490,66 @@ Why it matters: Deep RL enables breakthroughs in gaming, robotics, recommendatio
             </div>
 
             <!-- Module summary -->
-            <div class="lesson-item" data-lesson="12">
+            <div class="lesson-item" data-lesson="9">
               <div class="lesson-header">
-                <div class="lesson-number">12</div>
+                <div class="lesson-number">09</div>
                 <div class="lesson-content">
                   <h4>Module Summary</h4>
                   <p>
-                    This module covered the basics of machine learning: supervised, unsupervised, and reinforcement learning, along with the data pipeline from dataset to prediction. Learners practiced simple models—linear regression and k-NN classification—and explored concepts of overfitting vs underfitting, proper train/validation/test splits, and key evaluation metrics. We also introduced feature engineering, hyperparameter tuning, and unsupervised methods like k-means clustering and PCA. Together, these lessons provide a solid foundation for building, evaluating, and improving ML models.
-                  </p>
-                  <p>
-                    Next steps: explore the Deep Learning and Neural Networks modules, try a
-                    small project.
+                    Deep learning extends machine learning by using multi-layer neural networks that automatically learn representations from raw data. This module introduced the full workflow, from preparing datasets and designing models to training, evaluation, and deployment. You explored specialized architectures like CNNs for vision, RNNs and Transformers for sequences and language, and cutting-edge approaches in modern architectures and generative models. You also learned how optimization, regularization, and hardware acceleration make training effective, and how reinforcement learning with deep networks powers decision-making agents. By the end, you can explain how deep learning achieves breakthroughs in areas like computer vision, natural language processing, generative AI, robotics, and beyond, while recognizing the key practices needed to train, evaluate, and deploy models responsibly.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <section class="content-section" id="resources">
-            <div class="section-header">
-              <div class="section-icon">
-                <i class="fas fa-book-open"></i>
-              </div>
-              <h3>Further Resources</h3>
+      <section class="content-section" id="resources">
+        <div class="section-header">
+          <div class="section-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <h3>Further Resources</h3>
+        </div>
+        <div class="resources-grid">
+          <div class="resource-card">
+            <div class="resource-icon">
+              <i class="fas fa-book"></i>
             </div>
-            <div class="resources-grid">
-              <div class="resource-card">
-                <div class="resource-icon">
-                  <i class="fas fa-book"></i>
-                </div>
-                <h4>Machine Learning Specialization</h4>
-                <p>Andrew Ng's comprehensive overview course</p>
-                <a
-                  href="https://www.coursera.org/specializations/machine-learning-introduction/"
-                  class="resource-link"
-                  >Learn More <i class="fas fa-arrow-right"></i
-                ></a>
-              </div>
-              <div class="resource-card">
-                <div class="resource-icon">
-                  <i class="fas fa-code"></i>
-                </div>
-                <h4>Kaggle</h4>
-                <p>Datasets and beginner notebooks.</p>
-                <a
-                  href="https://www.kaggle.com"
-                  class="resource-link"
-                  >Learn More <i class="fas fa-arrow-right"></i
-                ></a>
-              </div>
+            <h4>Deep Learning Specialization</h4>
+            <p>Andrew Ng’s 5-course program on neural networks and deep learning.</p>
+            <a
+              href="https://www.coursera.org/specializations/deep-learning"
+              class="resource-link"
+              >Learn More <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="resource-card">
+            <div class="resource-icon">
+              <i class="fas fa-laptop-code"></i>
             </div>
-          </section>
+            <h4>Neural Networks and Deep Learning (Free Book)</h4>
+            <p>Michael Nielsen’s classic beginner-friendly online book.</p>
+            <a
+              href="http://neuralnetworksanddeeplearning.com/"
+              class="resource-link"
+              >Learn More <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="resource-card">
+            <div class="resource-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h4>Papers with Code</h4>
+            <p>Browse state-of-the-art deep learning papers with open-source implementations.</p>
+            <a
+              href="https://paperswithcode.com/"
+              class="resource-link"
+              >Learn More <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+      </section>
+
         </div>
       </div>
 
@@ -541,7 +561,7 @@ Why it matters: Deep RL enables breakthroughs in gaming, robotics, recommendatio
             <span>Summary notes (PDF)</span>
             <a
               class="download-btn download-notes"
-              href="../materials/machine-learning-summary.pdf"
+              href="../materials/deep-learning-summary.pdf"
               download
               aria-label="Download summary notes PDF"
               >Download</a
@@ -549,12 +569,12 @@ Why it matters: Deep RL enables breakthroughs in gaming, robotics, recommendatio
           </div>
           <div class="download-item">
             <i class="fa-solid fa-file-code"></i>
-            <span>Sample code (JS)</span>
+            <span>Sample code (HTML)</span>
             <a
               class="download-btn"
-              href="../materials/machine-learning-sample.js"
+              href="../materials/deep-learning-sample.html"
               download
-              aria-label="Download sample code JS"
+              aria-label="Download sample code HTML"
             >
               Download
             </a>

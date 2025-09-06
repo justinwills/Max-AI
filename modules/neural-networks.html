@@ -35,7 +35,7 @@
           <li><a href="../modules.html" class="active">Modules</a></li>
           <li><a href="../flashcard.html">Flashcard</a></li>
           <li><a href="../quiz.html">Quiz</a></li>
-          <li><a href="../about.html">About Us</a></li>
+          <li><a href="../about.html">About</a></li>
         </ul>
         <div class="mobile-menu-btn" aria-label="Open menu" role="button" tabindex="0">
           <i class="fas fa-bars"></i>
@@ -256,12 +256,12 @@
                   <span><i class="fas fa-file-text"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/ntKn5TPHHAk" 
+title="Perceptron Explained Visually" frameborder="0" allowfullscreen></iframe>
+                  <br>
                   <p>
                     A neuron is the basic building block of neural networks: it multiplies inputs by weights, adds a bias, and passes the result through an activation function to decide whether it “fires.” The perceptron, the earliest version of this idea, can only solve linearly separable problems — like drawing a straight line to divide categories on a chart. You can think of it like a light switch with a dial: it only flips on when the combined input is strong enough. While limited, this simple mechanism is important because it laid the groundwork for all modern neural networks and gave us the first glimpse of how machines can make decisions from numbers.       
                   </p>
-                  <br>
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/ntKn5TPHHAk" 
-title="Perceptron Explained Visually" frameborder="0" allowfullscreen></iframe>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> neuron, weight, bias, activation, perceptron, linear separability
                   </div>
@@ -340,12 +340,13 @@ Multilayer perceptrons add hidden layers and nonlinear activation functions like
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
-                  <p>
-Training a network means reducing the gap between predictions and true labels, quantified by a loss function. Backpropagation efficiently computes how much each parameter contributes to the loss using the chain rule, and gradient descent updates the parameters step by step to minimize it. It’s like hiking downhill in thick fog: the loss is your altitude, the gradient is the slope under your feet, and gradient descent is carefully stepping toward the valley. This method is what made large-scale training possible, powering the modern era of deep learning.
-                  </p>
-                  <br>
                   <iframe width="560" height="315" src="https://www.youtube.com/embed/tIeHLnjs5U8" 
 title="Backpropagation Explained" frameborder="0" allowfullscreen></iframe>
+
+                  <br>
+<p>
+Training a network means reducing the gap between predictions and true labels, quantified by a loss function. Backpropagation efficiently computes how much each parameter contributes to the loss using the chain rule, and gradient descent updates the parameters step by step to minimize it. It’s like hiking downhill in thick fog: the loss is your altitude, the gradient is the slope under your feet, and gradient descent is carefully stepping toward the valley. This method is what made large-scale training possible, powering the modern era of deep learning.
+                  </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> loss function, cross-entropy, backpropagation, SGD, mini-batch
                   </div>
@@ -424,12 +425,12 @@ Successful training depends on careful setup and tuning. Poor weight initializat
                   <span><i class="fas fa-file-text"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
-                  <p>
-CNNs specialize in images by using filters that scan small local regions and share weights across the input, making them efficient at detecting edges, textures, and shapes. Pooling layers condense information while preserving key features, building up hierarchical representations from low-level details to high-level concepts. Think of CNNs like photographers with zoom lenses: they capture fine details first, then assemble them into a full picture. This design revolutionized computer vision, enabling breakthroughs in tasks like object recognition, medical imaging, and autonomous driving.
-                  </p>
-                  <br>
                   <iframe width="560" height="315" src="https://www.youtube.com/embed/YRhxdVk_sIs" 
 title="CNNs Explained" frameborder="0" allowfullscreen></iframe>
+                    <br>
+                    <p>
+CNNs specialize in images by using filters that scan small local regions and share weights across the input, making them efficient at detecting edges, textures, and shapes. Pooling layers condense information while preserving key features, building up hierarchical representations from low-level details to high-level concepts. Think of CNNs like photographers with zoom lenses: they capture fine details first, then assemble them into a full picture. This design revolutionized computer vision, enabling breakthroughs in tasks like object recognition, medical imaging, and autonomous driving.
+                  </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> convolution, kernel, stride, padding, pooling, feature map
                   </div>
@@ -454,12 +455,12 @@ title="CNNs Explained" frameborder="0" allowfullscreen></iframe>
                   <span><i class="fas fa-file-text"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/KJtZARuO3JY" 
+title="Transformers & Attention" frameborder="0" allowfullscreen></iframe>
+                  <br>
                   <p>
 Sequential data like text or speech requires models that handle order and context. RNNs do this by passing hidden states step by step, but struggle with long sequences due to vanishing gradients. LSTMs and GRUs alleviate the problem, yet still have limits. Transformers solved it by using self-attention, allowing every element to directly relate to every other. It’s like the difference between reading a book word by word and scanning the whole page at once while highlighting important connections. This leap in capability explains why Transformers now power everything from chatbots to large-scale generative AI.
                   </p>
-                  <br>
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/KJtZARuO3JY" 
-title="Transformers & Attention" frameborder="0" allowfullscreen></iframe>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> RNN, LSTM/GRU, attention, self-attention, positional encoding, encoder/decoder
                   </div>
@@ -473,9 +474,6 @@ title="Transformers & Attention" frameborder="0" allowfullscreen></iframe>
                 <div class="lesson-content">
                   <h4>Neural Network Mini Lab</h4>
                   <p>Try code on your own!</p>
-                </div>
-                <div class="lesson-status">
-                  <i class="fas fa-lock-open"></i>
                 </div>
               </div>
               <div class="lesson-details">

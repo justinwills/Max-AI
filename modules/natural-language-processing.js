@@ -191,7 +191,7 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
       };
     }
 
-    if (title.includes("chatbots and assistants")) {
+    if (title.includes("nlp in action — chatbots and virtual assistants")) {
       return {
         type: "mcq",
         prompt: "Which of these is a function of chatbots?",
@@ -220,7 +220,7 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
       };
     }
 
-    if (title.includes("summarization and information extractio")) {
+    if (title.includes("summarization and information extraction")) {
       return {
         type: "mcq",
         prompt: "What is the goal of summarization in NLP?",
@@ -238,7 +238,7 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
       };
     }
 
-    if (title.includes("nlp and ethics")) {
+    if (title.includes("nlp and ethic")) {
       return {
         type: "mcq",
         prompt: "Why is ethics important in NLP?",

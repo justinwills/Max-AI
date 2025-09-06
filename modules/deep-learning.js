@@ -239,7 +239,7 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
         hint: "Inputs = features; output/target = label.",
       };
     }
-    if (title.includes("reinforcement learning + deep networks")) {
+    if (title.includes("reinforcement learning with deep networks")) {
       return {
         type: "mcq",
         prompt: "How does reinforcement learning primarily train an agent?",

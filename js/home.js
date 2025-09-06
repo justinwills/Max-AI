@@ -71,7 +71,7 @@
       (completedML ? 3 : 0) +
       (completedDL ? 4 : 0) +
       (completedNN ? 4 : 0) +
-      (completedNLP ? 5 : 0) +
+      (completedNLP ? 3 : 0) +
       (completedAIE ? 1 : 0);
     localStorage.setItem(
       K("home_courses_completed_bonus"),

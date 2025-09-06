@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini Lab — Natural Language Processing (NLP)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --card: #121a33;
+        --ink: #e6ebff;
+        --muted: #a9b4d0;
+        --brand1: #7c6cff;
+        --brand2: #19c37d;
+        --warn: #f59e0b;
+        --danger: #ef4444;
+        --radius: 16px;
+        --shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(
+            1200px 500px at 10% -10%,
+            #1b2350 0%,
+            transparent 60%
+          ),
+          radial-gradient(1000px 600px at 120% 10%, #0e1b3d 0%, transparent 60%),
+          var(--bg);
+        color: var(--ink);
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+      }
+      header {
+        padding: 28px 20px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: linear-gradient(
+          180deg,
+          rgba(11, 16, 32, 0.9),
+          rgba(11, 16, 32, 0.6) 60%,
+          transparent
+        );
+        backdrop-filter: saturate(140%) blur(6px);
+      }
+      h1 {
+        font-size: clamp(24px, 3.5vw, 36px);
+        margin: 0;
+        font-weight: 800;
+      }
+      p.sub {
+        margin: 8px auto 0;
+        color: var(--muted);
+        max-width: 900px;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 18px auto 64px;
+        padding: 0 16px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 880px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(18, 26, 51, 0.9),
+          rgba(12, 18, 36, 0.95)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 18px;
+        position: relative;
+        overflow: hidden;
+      }
+      .card h2 {
+        font-size: 18px;
+        margin: 0 0 12px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: #dfe6ff;
+        background: linear-gradient(
+          90deg,
+          rgba(124, 108, 255, 0.2),
+          rgba(25, 195, 125, 0.18)
+        );
+        padding: 6px 10px;
+        border-radius: 999px;
+      }
+      textarea,
+      input[type="text"],
+      select {
+        width: 100%;
+        background: #0c1224;
+        color: var(--ink);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 12px;
+        font: inherit;
+      }
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: stretch;
+      }
+      .row > * {
+        flex: 1;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--ink);
+        background: linear-gradient(180deg, #1a244a, #101832);
+        padding: 10px 14px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: transform 0.06s ease, box-shadow 0.2s ease,
+          border-color 0.2s ease;
+        user-select: none;
+        text-decoration: none;
+      }
+      .btn:hover {
+        border-color: rgba(124, 108, 255, 0.5);
+        box-shadow: 0 8px 20px rgba(124, 108, 255, 0.15);
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .btn.success {
+        background: linear-gradient(180deg, #1e3b2f, #142a22);
+        border-color: rgba(25, 195, 125, 0.5);
+      }
+      .btn.warn {
+        background: linear-gradient(180deg, #3b2f1e, #2a2214);
+        border-color: rgba(245, 158, 11, 0.5);
+      }
+      .btn.ghost {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+      .hr {
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.08),
+          transparent
+        );
+        margin: 14px 0;
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 12.5px;
+        background: #0b1226;
+        padding: 8px 10px;
+        border-radius: 10px;
+        overflow: auto;
+      }
+      .kvs {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 10px;
+      }
+      .tag {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 11.5px;
+        color: #dbe3ff;
+      }
+      .footer {
+        text-align: center;
+        color: var(--muted);
+        padding: 20px;
+      }
+      .pill {
+        display: inline-flex;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px dashed rgba(255, 255, 255, 0.16);
+        font-size: 12px;
+        color: #cbd6ff;
+      }
+      .small {
+        font-size: 12.5px;
+      }
+      .stat {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        background: #0b1226;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        padding: 8px 12px;
+        border-radius: 12px;
+      }
+      .right {
+        text-align: right;
+      }
+      .progress {
+        width: 100%;
+        height: 8px;
+        background: #0d1531;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .progress > span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, #7c6cff, #19c37d);
+        width: 0%;
+      }
+      .label {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .checkrow {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .checkrow label {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        background: #0b1226;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        padding: 8px 10px;
+        border-radius: 10px;
+      }
+      .codebtns {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mini Lab — Natural Language Processing (NLP)</h1>
+      <p class="sub">
+        Hands-on demos for text cleaning, tokenization, vectorization, sentiment
+        & intent detection, extractive summarization, and information
+        extraction. Pure HTML + JavaScript, runs fully in your browser.
+      </p>
+    </header>
+
+    <main class="container">
+      <!-- Input Card -->
+      <section class="card">
+        <div class="badge">🧪 Lab Workspace</div>
+        <h2>1) Paste or type text</h2>
+        <div class="row">
+          <textarea
+            id="inputText"
+            placeholder="Paste a product review, an email, or a paragraph from an article. Example provided below."
+          ></textarea>
+          <div>
+            <div class="label">Quick Examples</div>
+            <div class="codebtns">
+              <button class="btn" data-example="review">
+                Load Product Review
+              </button>
+              <button class="btn" data-example="email">Load Short Email</button>
+              <button class="btn" data-example="news">
+                Load News Paragraph
+              </button>
+            </div>
+            <div class="hr"></div>
+            <div class="label">Utilities</div>
+            <div class="codebtns">
+              <button class="btn ghost" id="clearText">Clear</button>
+              <button class="btn" id="saveDraft">Save Draft</button>
+              <button class="btn success" id="exportReport">
+                Export Results (.txt)
+              </button>
+            </div>
+            <p class="muted small">
+              Your draft & results are stored locally (no server) under
+              <span class="mono">nlp_lab_state_v1</span>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preprocess & Tokenize -->
+      <section class="card">
+        <div class="badge">🔤 Preprocessing & Tokenization</div>
+        <h2>2) Clean and split the text</h2>
+        <div class="row">
+          <div>
+            <label class="label">Options</label>
+            <div class="checkrow">
+              <label
+                ><input type="checkbox" id="lowercase" checked />
+                lowercase</label
+              >
+              <label
+                ><input type="checkbox" id="stripPunct" checked /> remove
+                punctuation</label
+              >
+              <label
+                ><input type="checkbox" id="dropStop" checked /> drop
+                stop-words</label
+              >
+              <label><input type="checkbox" id="stem" /> simple stemming</label>
+            </div>
+            <div class="hr"></div>
+            <button class="btn" id="doTokenize">Tokenize</button>
+          </div>
+          <div>
+            <div class="label">Tokens</div>
+            <div id="tokensOut" class="mono" style="min-height: 92px">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vectorization & BoW -->
+      <section class="card">
+        <div class="badge">🧮 Vectorization</div>
+        <h2>3) Bag-of-Words & TF‑IDF (toy)</h2>
+        <div class="row">
+          <div>
+            <label class="label">Method</label>
+            <select id="vecMethod">
+              <option value="bow">Bag‑of‑Words (counts)</option>
+              <option value="tfidf">TF‑IDF (toy)</option>
+            </select>
+            <div class="hr"></div>
+            <button class="btn" id="doVectorize">Vectorize</button>
+          </div>
+          <div>
+            <div class="label">Vector (top 20 features)</div>
+            <div id="vectorOut" class="mono" style="min-height: 92px">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sentiment & Intent -->
+      <section class="card">
+        <div class="badge">🙂 Sentiment & 🎯 Intent</div>
+        <h2>4) Quick classifiers</h2>
+        <div class="row">
+          <div>
+            <button class="btn" id="doSentiment">
+              Run Sentiment (lexicon)
+            </button>
+            <div class="hr"></div>
+            <div class="kvs">
+              <div class="muted">Sentiment</div>
+              <div id="sentimentOut" class="stat"><span>—</span><b></b></div>
+              <div class="muted">Top words</div>
+              <div id="sentTop" class="mono">—</div>
+            </div>
+          </div>
+          <div>
+            <div class="label">Intent rules (editable)</div>
+            <textarea id="intentRules" class="mono" style="min-height: 160px">
+# One rule per line. Format: label => comma,separated,keywords
+book_flight => book,flight,ticket
+check_status => status,track,where
+refund_request => refund,return,cancel
+support_help => help,issue,error,problem
+buy_product => buy,price,order,cart
+          </textarea
+            >
+            <div class="hr"></div>
+            <button class="btn" id="doIntent">Detect Intent</button>
+            <div class="stat" id="intentOut"><span>—</span><b></b></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Extractive Summarization -->
+      <section class="card">
+        <div class="badge">📝 Summarization</div>
+        <h2>5) Extractive summary (frequency)</h2>
+        <div class="row">
+          <div>
+            <label class="label">Compression</label>
+            <select id="ratio">
+              <option value="0.15">15% of sentences</option>
+              <option value="0.25" selected>25% of sentences</option>
+              <option value="0.35">35% of sentences</option>
+            </select>
+            <div class="hr"></div>
+            <button class="btn" id="doSummarize">Summarize</button>
+          </div>
+          <div>
+            <div class="label">Summary</div>
+            <div id="summaryOut" class="mono" style="min-height: 92px">—</div>
+          </div>
+        </div>
+        <p class="muted small">
+          Algorithm: score each sentence by sum of (normalized) term
+          frequencies; select the highest-scoring sentences; restore original
+          order; lightly deduplicate.
+        </p>
+      </section>
+
+      <!-- Information Extraction -->
+      <section class="card">
+        <div class="badge">🔎 Information Extraction</div>
+        <h2>6) Pull key facts</h2>
+        <div class="row">
+          <div>
+            <div class="checkrow">
+              <label
+                ><input type="checkbox" id="ieDates" checked /> Dates</label
+              >
+              <label
+                ><input type="checkbox" id="ieMoney" checked /> Money</label
+              >
+              <label
+                ><input type="checkbox" id="ieEmails" checked /> Emails</label
+              >
+              <label><input type="checkbox" id="ieUrls" checked /> URLs</label>
+              <label
+                ><input type="checkbox" id="ieEntities" /> Proper Nouns
+                (heuristic)</label
+              >
+            </div>
+            <div class="hr"></div>
+            <button class="btn" id="doIE">Extract</button>
+          </div>
+          <div>
+            <div class="label">Extracted</div>
+            <div id="ieOut" class="mono" style="min-height: 92px">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ethics checklist & progress -->
+      <section class="card">
+        <div class="badge">⚖️ Ethics & Progress</div>
+        <h2>7) Responsible NLP checklist</h2>
+        <div class="checkrow" id="ethicsChecks">
+          <label
+            ><input type="checkbox" value="bias" /> Consider dataset bias</label
+          >
+          <label
+            ><input type="checkbox" value="fairness" /> Measure fairness across
+            groups</label
+          >
+          <label
+            ><input type="checkbox" value="privacy" /> Protect user
+            privacy</label
+          >
+          <label
+            ><input type="checkbox" value="safety" /> Filter harmful
+            outputs</label
+          >
+          <label
+            ><input type="checkbox" value="eval" /> Human-in-the-loop
+            evaluation</label
+          >
+        </div>
+        <div class="hr"></div>
+        <div class="row">
+          <div class="stat" style="flex: 2">
+            <div>
+              <div class="muted small">Completion</div>
+              <div class="progress"><span id="progressBar"></span></div>
+            </div>
+            <b id="progressPct">0%</b>
+          </div>
+          <button class="btn success" id="markComplete">
+            Mark Lab Complete
+          </button>
+        </div>
+        <p class="muted small right">
+          Saved as <span class="mono">nlp_lab_completed_v1</span>
+        </p>
+      </section>
+
+      <!-- Notes -->
+      <section class="card">
+        <div class="badge">🗒️ Notes</div>
+        <h2>Scratchpad</h2>
+        <textarea
+          id="notes"
+          placeholder="Write your observations, e.g., which tokens mattered most for sentiment, or how the summary changed with different ratios."
+        ></textarea>
+        <div style="margin-top: 10px; display: flex; gap: 10px">
+          <button class="btn" id="saveNotes">Save Notes</button>
+          <button class="btn ghost" id="clearNotes">Clear Notes</button>
+        </div>
+        <p class="muted small">
+          Stored under <span class="mono">nlp_lab_notes_v1</span>.
+        </p>
+      </section>
+
+      <p class="footer">
+        Built for Module 5 • Natural Language Processing (NLP). No external
+        libraries; ideal for teaching fundamentals.
+      </p>
+    </main>
+
+    <script>
+      // ---------- Utilities
+      const $ = (sel) => document.querySelector(sel);
+      const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+      const stateKey = "nlp_lab_state_v1";
+      const completeKey = "nlp_lab_completed_v1";
+      const notesKey = "nlp_lab_notes_v1";
+
+      const STOPWORDS = new Set(
+        `a,about,above,after,again,against,all,am,an,and,any,are,as,at,be,because,been,
+      before,being,below,between,both,but,by,could,did,do,does,doing,down,during,each,few,for,from,further,had,has,
+      have,having,he,he'd,he'll,he's,her,here,here's,hers,herself,him,himself,his,how,how's,i,i'd,i'll,i'm,i've,if,in,
+      into,is,it,it's,its,itself,let's,me,more,most,my,myself,no,nor,not,of,off,on,once,only,or,other,ought,our,ours,
+      ourselves,out,over,own,same,she,she'd,she'll,she's,should,so,some,such,than,that,that's,the,their,theirs,them,
+      themselves,then,there,there's,these,they,they'd,they'll,they're,they've,this,those,through,to,too,under,until,up,
+      very,was,we,we'd,we'll,we're,we've,were,what,what's,when,when's,where,where's,which,while,who,who's,whom,why,
+      why's,with,would,you,you'd,you'll,you're,you've,your,yours,yourself,yourselves`
+          .split(",")
+          .map((s) => s.trim())
+      );
+
+      const POSITIVE = new Map([
+        ["good", 2],
+        ["great", 3],
+        ["excellent", 4],
+        ["love", 3],
+        ["like", 2],
+        ["amazing", 3],
+        ["fast", 1.5],
+        ["happy", 1.5],
+        ["smooth", 1.2],
+        ["wonderful", 3],
+        ["perfect", 3.5],
+        ["friendly", 1.5],
+      ]);
+      const NEGATIVE = new Map([
+        ["bad", -2],
+        ["terrible", -4],
+        ["awful", -4],
+        ["hate", -3],
+        ["slow", -1.5],
+        ["broken", -3],
+        ["bug", -1.5],
+        ["sad", -1.5],
+        ["refund", -1.2],
+        ["late", -1.1],
+        ["angry", -2.5],
+      ]);
+
+      // Simple Porter-like stem (very rough)
+      function simpleStem(w) {
+        return w
+          .replace(/(ing|edly|edly|edly|ed|ly)$/, "")
+          .replace(/(ness|ment|ation|ions|ion|ers|er|s)$/, "");
+      }
+
+      function cleanAndTokenize(text) {
+        const doLower = $("#lowercase").checked;
+        const doPunct = $("#stripPunct").checked;
+        const doStop = $("#dropStop").checked;
+        const doStem = $("#stem").checked;
+
+        let t = text;
+        if (doLower) t = t.toLowerCase();
+        if (doPunct) t = t.replace(/[\p{P}\p{S}]+/gu, " ");
+        const raw = t.split(/\s+/).filter(Boolean);
+        const toks = raw.filter((tok) => !doStop || !STOPWORDS.has(tok));
+        return doStem ? toks.map(simpleStem).filter(Boolean) : toks;
+      }
+
+      function sentenceSplit(text) {
+        // naive split that keeps periods in abbreviations better than a plain split
+        const sents = text
+          .replace(/([.!?])\s+(?=[A-Z])/g, "$1|")
+          .split("|")
+          .map((s) => s.trim())
+          .filter((s) => s.length > 0);
+        return sents;
+      }
+
+      // ---------- Vectorization
+      function bow(tokens) {
+        const map = new Map();
+        for (const t of tokens) {
+          map.set(t, (map.get(t) || 0) + 1);
+        }
+        return map;
+      }
+
+      function tfidf(tokens, allTokens) {
+        // toy tf-idf: IDF from this single document + a tiny background
+        const tf = bow(tokens);
+        const vocab = Array.from(new Set(allTokens));
+        const N = 8; // pretend 8 docs background
+        const idf = new Map();
+        for (const term of vocab) {
+          const df = 1 + (term.length % 3); // fake df for demo
+          idf.set(term, Math.log((N + 1) / (df + 1)) + 1);
+        }
+        const vec = new Map();
+        for (const [term, count] of tf) {
+          vec.set(term, (count / tokens.length) * (idf.get(term) || 1));
+        }
+        return vec;
+      }
+
+      function topN(map, n = 20) {
+        return Array.from(map.entries())
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, n)
+          .map(([k, v]) => `${k}: ${v.toFixed(3)}`)
+          .join("\n");
+      }
+
+      // ---------- Sentiment
+      function sentiment(tokens) {
+        let score = 0;
+        const hits = [];
+        for (const t of tokens) {
+          if (POSITIVE.has(t)) {
+            score += POSITIVE.get(t);
+            hits.push(`+${t}`);
+          }
+          if (NEGATIVE.has(t)) {
+            score += NEGATIVE.get(t);
+            hits.push(`-${t}`);
+          }
+        }
+        const label =
+          score > 0.8 ? "positive" : score < -0.8 ? "negative" : "neutral";
+        return { score: +score.toFixed(2), label, hits };
+      }
+
+      // ---------- Intent (rule-based)
+      function parseRules(txt) {
+        const lines = txt
+          .split(/\n+/)
+          .map((l) => l.trim())
+          .filter((l) => l && !l.startsWith("#"));
+        const rules = [];
+        for (const line of lines) {
+          const [label, rest] = line.split("=>").map((s) => s.trim());
+          if (!label || !rest) continue;
+          rules.push({
+            label,
+            keywords: rest
+              .split(",")
+              .map((s) => s.trim().toLowerCase())
+              .filter(Boolean),
+          });
+        }
+        return rules;
+      }
+      function intentDetect(text, rules) {
+        const low = text.toLowerCase();
+        let best = { label: "unknown", score: 0 };
+        for (const r of rules) {
+          let s = 0;
+          for (const kw of r.keywords) {
+            if (low.includes(kw)) s++;
+          }
+          if (s > best.score) best = { label: r.label, score: s };
+        }
+        return best;
+      }
+
+      // ---------- Extractive summarization (frequency)
+      function summarize(text, ratio = 0.25) {
+        const sents = sentenceSplit(text);
+        if (sents.length <= 1) return text;
+        const tokensBySent = sents.map((s) => cleanAndTokenize(s));
+        const freq = new Map();
+        for (const toks of tokensBySent) {
+          for (const t of toks) {
+            freq.set(t, (freq.get(t) || 0) + 1);
+          }
+        }
+        const maxf = Math.max(...freq.values(), 1);
+        const scores = tokensBySent.map((toks) =>
+          toks.reduce((acc, t) => acc + (freq.get(t) || 0) / maxf, 0)
+        );
+        const k = Math.max(1, Math.round(sents.length * ratio));
+        const idx = scores
+          .map((s, i) => ({ s, i }))
+          .sort((a, b) => b.s - a.s)
+          .slice(0, k)
+          .map((o) => o.i)
+          .sort((a, b) => a - b);
+        // light dedup by Jaccard
+        const chosen = [];
+        function jacc(a, b) {
+          const sa = new Set(a),
+            sb = new Set(b);
+          const inter = [...sa].filter((x) => sb.has(x)).length;
+          return inter / (sa.size + sb.size - inter);
+        }
+        for (const i of idx) {
+          const toks = tokensBySent[i];
+          if (chosen.every((j) => jacc(tokensBySent[j], toks) < 0.6))
+            chosen.push(i);
+          if (chosen.length >= k) break;
+        }
+        return chosen
+          .sort((a, b) => a - b)
+          .map((i) => sents[i])
+          .join(" ");
+      }
+
+      // ---------- Information Extraction (regex heuristics)
+      const RE = {
+        date: /\b((?:\d{1,2}[\/-])?\d{1,2}[\/-]\d{2,4}|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\.?\s+\d{1,2},?\s+\d{2,4})\b/gi,
+        money:
+          /\b(?:USD|EUR|CNY|INR|\$|€|¥|₹)\s?\d{1,3}(?:[\,\s]?\d{3})*(?:\.\d+)?\b/g,
+        email: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi,
+        url: /https?:\/\/[\w.-]+(?:\/[\w\-._~:/?#[\]@!$&'()*+,;=.]+)?/gi,
+        proper: /\b([A-Z][a-z]{2,}(?:\s+[A-Z][a-z]{2,})+)\b/g,
+      };
+      function infoExtract(text, opts) {
+        const out = {};
+        if (opts.dates) {
+          out.dates = [...text.matchAll(RE.date)].map((m) => m[0]);
+        }
+        if (opts.money) {
+          out.money = [...text.matchAll(RE.money)].map((m) => m[0]);
+        }
+        if (opts.emails) {
+          out.emails = [...text.matchAll(RE.email)].map((m) => m[0]);
+        }
+        if (opts.urls) {
+          out.urls = [...text.matchAll(RE.url)].map((m) => m[0]);
+        }
+        if (opts.entities) {
+          out.entities = [...text.matchAll(RE.proper)].map((m) => m[0]);
+        }
+        return out;
+      }
+
+      // ---------- Progress & persistence
+      function updateProgress() {
+        const checks = $$('#ethicsChecks input[type="checkbox"]');
+        const done = checks.filter((c) => c.checked).length;
+        const pct = Math.round((done / checks.length) * 100);
+        $("#progressBar").style.width = pct + "%";
+        $("#progressPct").textContent = pct + "%";
+        const saved = JSON.parse(localStorage.getItem(stateKey) || "{}");
+        saved.ethics = checks.map((c) => ({ k: c.value, on: c.checked }));
+        localStorage.setItem(stateKey, JSON.stringify(saved));
+      }
+
+      function saveState() {
+        const saved = {
+          text: $("#inputText").value,
+          tokens: $("#tokensOut").textContent,
+          vector: $("#vectorOut").textContent,
+          sentiment: $("#sentimentOut").innerText,
+          intent: $("#intentOut").innerText,
+          summary: $("#summaryOut").textContent,
+          ie: $("#ieOut").textContent,
+          rules: $("#intentRules").value,
+          ethics: $$('#ethicsChecks input[type="checkbox"]').map((c) => ({
+            k: c.value,
+            on: c.checked,
+          })),
+        };
+        localStorage.setItem(stateKey, JSON.stringify(saved));
+      }
+
+      function restoreState() {
+        const saved = JSON.parse(localStorage.getItem(stateKey) || "null");
+        if (!saved) return;
+        $("#inputText").value = saved.text || "";
+        $("#tokensOut").textContent = saved.tokens || "—";
+        $("#vectorOut").textContent = saved.vector || "—";
+        $("#sentimentOut").querySelector("span").textContent =
+          saved.sentiment?.split("\n")[0] || "—";
+        $("#sentimentOut").querySelector("b").textContent =
+          saved.sentiment?.split("\n")[1] || "";
+        $("#intentOut").querySelector("span").textContent =
+          saved.intent?.split("\n")[0] || "—";
+        $("#intentOut").querySelector("b").textContent =
+          saved.intent?.split("\n")[1] || "";
+        $("#summaryOut").textContent = saved.summary || "—";
+        $("#ieOut").textContent = saved.ie || "—";
+        $("#intentRules").value = saved.rules || $("#intentRules").value;
+        if (saved.ethics) {
+          for (const c of saved.ethics) {
+            const el = $(`#ethicsChecks input[value="${c.k}"]`);
+            if (el) el.checked = !!c.on;
+          }
+        }
+        updateProgress();
+      }
+
+      // ---------- Export
+      function exportTxt() {
+        const txt = `NLP Mini Lab Report\n\nText:\n${
+          $("#inputText").value
+        }\n\nTokens:\n${$("#tokensOut").textContent}\n\nVector (top):\n${
+          $("#vectorOut").textContent
+        }\n\nSentiment:\n${$("#sentimentOut").innerText}\n\nIntent:\n${
+          $("#intentOut").innerText
+        }\n\nSummary:\n${$("#summaryOut").textContent}\n\nExtracted:\n${
+          $("#ieOut").textContent
+        }\n\nEthics checks: ${$("#progressPct").textContent}\n`;
+        const blob = new Blob([txt], { type: "text/plain" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "nlp_lab_report.txt";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      }
+
+      // ---------- Example texts
+      const EXAMPLES = {
+        review: `I absolutely love this phone! The battery life is excellent and the camera is great. However, the app store felt a bit slow yesterday. Overall, a wonderful experience for the price.`,
+        email: `Hi team, can you help me with my order? I want to cancel and request a refund. The package was late on Aug 12, 2025. Please reply to me at jane.doe@example.com or check https://shop.example.com/orders/1234. Thanks!`,
+        news: `On September 5, 2025, the city council approved a $3.2 million budget to upgrade public transit. Mayor Alice Johnson said the project will start in October and aims to reduce congestion by 15% in the first year.`,
+      };
+
+      // ---------- Bindings
+      document.addEventListener("DOMContentLoaded", () => {
+        // examples
+        $$(".card [data-example]").forEach((btn) =>
+          btn.addEventListener("click", (e) => {
+            const key = e.currentTarget.getAttribute("data-example");
+            $("#inputText").value = EXAMPLES[key] || "";
+          })
+        );
+
+        $("#clearText").addEventListener(
+          "click",
+          () => ($("#inputText").value = "")
+        );
+        $("#saveDraft").addEventListener("click", () => {
+          saveState();
+          alert("Saved locally.");
+        });
+        $("#exportReport").addEventListener("click", exportTxt);
+
+        // Tokenize
+        $("#doTokenize").addEventListener("click", () => {
+          const text = $("#inputText").value.trim();
+          if (!text) {
+            alert("Please paste or type some text first.");
+            return;
+          }
+          const tokens = cleanAndTokenize(text);
+          $("#tokensOut").textContent = tokens.join(" ");
+          saveState();
+        });
+
+        // Vectorize
+        $("#doVectorize").addEventListener("click", () => {
+          const toks =
+            $("#tokensOut").textContent === "—"
+              ? []
+              : $("#tokensOut").textContent.split(/\s+/).filter(Boolean);
+          if (!toks.length) {
+            alert("Tokenize first.");
+            return;
+          }
+          const method = $("#vecMethod").value;
+          let vecMap;
+          if (method === "bow") vecMap = bow(toks);
+          else vecMap = tfidf(toks, toks);
+          $("#vectorOut").textContent = topN(vecMap, 20);
+          saveState();
+        });
+
+        // Sentiment
+        $("#doSentiment").addEventListener("click", () => {
+          const toks =
+            $("#tokensOut").textContent === "—"
+              ? []
+              : $("#tokensOut").textContent.split(/\s+/).filter(Boolean);
+          if (!toks.length) {
+            alert("Tokenize first.");
+            return;
+          }
+          const res = sentiment(toks);
+          const out = $("#sentimentOut");
+          out.querySelector("span").textContent = res.label;
+          out.querySelector("b").textContent = res.score.toString();
+          $("#sentTop").textContent = res.hits.join(" ");
+          saveState();
+        });
+
+        // Intent
+        $("#doIntent").addEventListener("click", () => {
+          const text = $("#inputText").value.trim();
+          if (!text) {
+            alert("Please paste or type some text first.");
+            return;
+          }
+          const rules = parseRules($("#intentRules").value);
+          const best = intentDetect(text, rules);
+          const out = $("#intentOut");
+          out.querySelector("span").textContent = best.label;
+          out.querySelector("b").textContent =
+            best.score > 0 ? `${best.score} hit(s)` : "";
+          saveState();
+        });
+
+        // Summarize
+        $("#doSummarize").addEventListener("click", () => {
+          const text = $("#inputText").value.trim();
+          if (!text) {
+            alert("Please paste or type some text first.");
+            return;
+          }
+          const ratio = parseFloat($("#ratio").value);
+          const sum = summarize(text, ratio);
+          $("#summaryOut").textContent = sum;
+          saveState();
+        });
+
+        // IE
+        $("#doIE").addEventListener("click", () => {
+          const text = $("#inputText").value.trim();
+          if (!text) {
+            alert("Please paste or type some text first.");
+            return;
+          }
+          const out = infoExtract(text, {
+            dates: $("#ieDates").checked,
+            money: $("#ieMoney").checked,
+            emails: $("#ieEmails").checked,
+            urls: $("#ieUrls").checked,
+            entities: $("#ieEntities").checked,
+          });
+          $("#ieOut").textContent = JSON.stringify(out, null, 2);
+          saveState();
+        });
+
+        // Ethics
+        $$('#ethicsChecks input[type="checkbox"]').forEach((c) =>
+          c.addEventListener("change", updateProgress)
+        );
+        $("#markComplete").addEventListener("click", () => {
+          localStorage.setItem(completeKey, "true");
+          alert("Marked complete!");
+        });
+
+        // Notes
+        $("#saveNotes").addEventListener("click", () => {
+          localStorage.setItem(notesKey, $("#notes").value);
+          alert("Notes saved locally.");
+        });
+        $("#clearNotes").addEventListener("click", () => {
+          $("#notes").value = "";
+          localStorage.removeItem(notesKey);
+        });
+
+        // Restore
+        restoreState();
+        $("#notes").value = localStorage.getItem(notesKey) || "";
+        if (localStorage.getItem(completeKey) === "true") {
+          $("#markComplete").textContent = "Completed ✅";
+          $("#markComplete").disabled = true;
+        }
+      });
+    </script>
+  </body>
+</html>

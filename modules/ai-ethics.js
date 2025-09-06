@@ -31,7 +31,7 @@
   codeBtn &&
     codeBtn.addEventListener("click", function () {
       const code = ``;
-      download("machine-learning-sample.js", code, "application/javascript");
+      download("ai-ethics-sample.js", code, "application/javascript");
     });
 })();
 // Lesson interaction (header-only toggling; no lock system)
@@ -72,16 +72,14 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
       if (!res.isConfirmed) return;
       try {
         // Clear quiz state and auxiliary data for this module
-        localStorage.removeItem(K("machine_learning_quiz_v1"));
-        localStorage.removeItem(K("machine_learning_quiz_total_v1"));
-        localStorage.removeItem(K("machine_learning_quiz_done_v1"));
+        localStorage.removeItem(K("ai_ethics_quiz_v1"));
+        localStorage.removeItem(K("ai_ethics_quiz_total_v1"));
+        localStorage.removeItem(K("ai_ethics_quiz_done_v1"));
         // Clear stored MCQ option order to allow reshuffle next time
-        localStorage.removeItem(K("machine_learning_quiz_order_v1"));
+        localStorage.removeItem(K("ai_ethics_quiz_order_v1"));
 
         // If completion was recorded, subtract Home bonuses once
-        if (
-          localStorage.getItem(K("machine_learning_completed_v1")) === "true"
-        ) {
+        if (localStorage.getItem(K("ai_ethics_completed_v1")) === "true") {
           const courseKey = K("home_courses_completed_bonus");
           const hoursKey = K("home_hours_learned_bonus");
           const curCourses =
@@ -93,12 +91,10 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
           localStorage.setItem(courseKey, String(newCourses));
           localStorage.setItem(hoursKey, String(newHours));
           // Remove recent-activity marker
-          localStorage.removeItem(
-            K("home_activity_logged_machine_learning_v1")
-          );
+          localStorage.removeItem(K("home_activity_logged_ai_ethics_v1"));
         }
         // Unset completion flag
-        localStorage.removeItem(K("machine_learning_completed_v1"));
+        localStorage.removeItem(K("ai_ethics_completed_v1"));
       } catch (_) {}
       location.reload();
     });
@@ -119,11 +115,11 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
   function K(base) {
     return base + "::" + userScope();
   }
-  const STORAGE_KEY = K("machine_learning_quiz_v1");
+  const STORAGE_KEY = K("ai_ethics_quiz_v1");
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
   // Persist per-quiz option order so the correct answer isn't always first,
   // and the order remains stable across reloads.
-  const ORDER_KEY = K("machine_learning_quiz_order_v1");
+  const ORDER_KEY = K("ai_ethics_quiz_order_v1");
   let savedOrderMap = {};
   try {
     savedOrderMap = JSON.parse(localStorage.getItem(ORDER_KEY) || "{}");
@@ -407,8 +403,8 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     progBar.setAttribute("aria-valuenow", String(pct));
     // Persist coarse progress so other pages (e.g., home) can read it
     try {
-      localStorage.setItem(K("machine_learning_quiz_total_v1"), String(total));
-      localStorage.setItem(K("machine_learning_quiz_done_v1"), String(done));
+      localStorage.setItem(K("ai_ethics_quiz_total_v1"), String(total));
+      localStorage.setItem(K("ai_ethics_quiz_done_v1"), String(done));
     } catch (_) {}
 
     // When the course is completed (100%), set completion in localStorage
@@ -416,9 +412,9 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     try {
       if (
         pct === 100 &&
-        localStorage.getItem(K("machine_learning_completed_v1")) !== "true"
+        localStorage.getItem(K("ai_ethics_completed_v1")) !== "true"
       ) {
-        localStorage.setItem(K("machine_learning_completed_v1"), "true");
+        localStorage.setItem(K("ai_ethics_completed_v1"), "true");
         const courseKey = K("home_courses_completed_bonus");
         const hoursKey = K("home_hours_learned_bonus");
         const curCourses =

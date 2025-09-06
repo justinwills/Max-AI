@@ -205,9 +205,9 @@ nav {
 }
 
 .header-text h1 {
-  background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
+  background: linear-gradient(60deg, #8c52ff, #cb6ce6, #ff66c4);
   -webkit-background-clip: text;
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 800;
   margin-bottom: 16px;
   -webkit-text-fill-color: transparent;

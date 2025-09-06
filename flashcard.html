@@ -36,7 +36,7 @@
             >
               <i class="fas fa-user"></i>
             </button>
-            <div class="menu">
+            <div class="menu" role="menu">
               <a href="userprofile.html"
                 ><i class="fas fa-user-circle"></i> Profile</a
               >
@@ -47,19 +47,26 @@
           </div>
         </div>
 
-        <div class="mobile-menu-btn">
+        <div
+          class="mobile-menu-btn"
+          aria-label="Open menu"
+          role="button"
+          tabindex="0"
+        >
           <i class="fas fa-bars"></i>
         </div>
       </div>
     </nav>
-    <script src="js/nav.js"></script>
 
     <header class="page-header">
       <div class="container header-inner">
         <div class="header-text">
           <span class="badge"><i class="fas fa-bolt"></i> Study Mode</span>
           <h1>Flashcards</h1>
-          <p class="subtitle">Quickly review core AI & ML concepts</p>
+          <p class="subtitle">
+            Explore and master AI, ML, Neural Networks, <br />Deep Learning,
+            NLP, and AI Ethics
+          </p>
           <div class="header-actions">
             <a href="modules.html" class="btn-primary">
               <i class="fas fa-layer-group"></i> Browse Modules
@@ -69,10 +76,20 @@
             </button>
           </div>
         </div>
-        <div class="header-visual">
+        <div class="header-visual" aria-hidden="true">
           <div class="chip"><i class="fas fa-brain"></i><span>AI</span></div>
+          <div class="chip alt"><i class="fas fa-cogs"></i><span>ML</span></div>
+          <div class="chip">
+            <i class="fas fa-project-diagram"></i><span>NN</span>
+          </div>
           <div class="chip alt">
-            <i class="fas fa-robot"></i><span>ML</span>
+            <i class="fas fa-robot"></i><span>DL</span>
+          </div>
+          <div class="chip">
+            <i class="fas fa-language"></i><span>NLP</span>
+          </div>
+          <div class="chip alt">
+            <i class="fas fa-balance-scale"></i><span>AI Ethics</span>
           </div>
         </div>
       </div>
@@ -87,6 +104,10 @@
               <option value="all">All Topics</option>
               <option value="ai-foundation">AI Foundations</option>
               <option value="machine-learning">Machine Learning</option>
+              <option value="neural-networks">Neural Networks</option>
+              <option value="deep-learning">Deep Learning</option>
+              <option value="nlp">Natural Language Processing</option>
+              <option value="ethics">AI Ethics</option>
             </select>
           </div>
           <div class="control-group grow">
@@ -115,10 +136,13 @@
       <div class="footer-bottom">
         <p>
           &copy; 2025 MaxAI |
-          <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
+          <a href="mailto:rachellwanggg@gmail.com">Contact</a>
         </p>
       </div>
     </footer>
-    <script src="js/flashcard.js"></script>
+
+    <!-- JS at the end -->
+    <script defer src="js/nav.js"></script>
+    <script defer src="js/flashcard.js"></script>
   </body>
 </html>
