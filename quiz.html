@@ -52,25 +52,7 @@
         </div>
       </div>
     </nav>
-    <script>
-      (function () {
-        const menu = document.querySelector(".profile-menu");
-        if (!menu) return;
-        const btn = menu.querySelector(".profile-btn");
-        btn?.setAttribute("aria-expanded", "false");
-        btn?.addEventListener("click", function (e) {
-          e.preventDefault();
-          const open = menu.classList.toggle("open");
-          btn.setAttribute("aria-expanded", String(open));
-        });
-        document.addEventListener("click", function (e) {
-          if (!menu.contains(e.target)) {
-            menu.classList.remove("open");
-            btn?.setAttribute("aria-expanded", "false");
-          }
-        });
-      })();
-    </script>
+    <script src="js/nav.js"></script>
 
     <header class="page-header">
       <div class="container header-inner">
@@ -520,5 +502,6 @@
         quizCard.hidden = true;
       });
     </script>
+    <script src="js/quiz.js"></script>
   </body>
 </html>

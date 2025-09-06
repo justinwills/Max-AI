@@ -61,41 +61,7 @@
         </div>
       </div>
     </nav>
-    <script>
-      (function () {
-        const menu = document.querySelector(".profile-menu");
-        if (!menu) return;
-        const btn = menu.querySelector(".profile-btn");
-        btn?.setAttribute("aria-expanded", "false");
-        btn?.addEventListener("click", function (e) {
-          e.preventDefault();
-          const open = menu.classList.toggle("open");
-          btn.setAttribute("aria-expanded", String(open));
-        });
-        document.addEventListener("click", function (e) {
-          if (!menu.contains(e.target)) {
-            menu.classList.remove("open");
-            btn?.setAttribute("aria-expanded", "false");
-          }
-        });
-      })();
-    </script>
-    <script>
-      // Mobile menu toggle for inner modules page
-      (function(){
-        const burger = document.querySelector('.mobile-menu-btn');
-        const menuList = document.querySelector('nav .navigation ul');
-        if (burger && menuList) {
-          burger.addEventListener('click', function(){
-            menuList.classList.toggle('active');
-          });
-          // Close menu when a link is tapped (mobile)
-          menuList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            menuList.classList.remove('active');
-          }));
-        }
-      })();
-    </script>
+    <script src="../js/nav.js"></script>
 
     <section id="about-home">
       <div class="hero-content">

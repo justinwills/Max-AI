@@ -42,25 +42,7 @@
         </div>
       </div>
     </nav>
-    <script>
-      (function(){
-        const menu = document.querySelector('.profile-menu');
-        if (!menu) return;
-        const btn = menu.querySelector('.profile-btn');
-        btn?.setAttribute('aria-expanded','false');
-        btn?.addEventListener('click', function(e){
-          e.preventDefault();
-          const open = menu.classList.toggle('open');
-          btn.setAttribute('aria-expanded', String(open));
-        });
-        document.addEventListener('click', function(e){
-          if (!menu.contains(e.target)) {
-            menu.classList.remove('open');
-            btn?.setAttribute('aria-expanded','false');
-          }
-        });
-      })();
-    </script>
+    <script src="js/nav.js"></script>
 
 
 
@@ -193,30 +175,6 @@
     </footer>
 
 
-    <script>
-      // Mobile menu toggle
-      document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-        document.querySelector('.nav-links').classList.toggle('active');
-      });
-
-      // Add click event to start buttons
-      document.querySelectorAll(".btn-module").forEach((button) => {
-        button.addEventListener("click", function (e) {
-          e.stopPropagation();
-          // Add your start learning logic here
-          console.log("Starting module...");
-        });
-      });
-
-      // Debug: Log module cards to console
-      console.log("Module cards found:", document.querySelectorAll('.module-card').length);
-      
-      // Ensure modules are visible
-      document.querySelectorAll('.module-card').forEach((card, index) => {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-        console.log(`Module ${index + 1} is visible`);
-      });
-    </script>
+    <script src="js/modules.js"></script>
   </body>
 </html>
