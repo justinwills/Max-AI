@@ -437,60 +437,51 @@
     </script>
 
     <script>
-      // Compute Justin's points from localStorage progress and sync to leaderboard (per-user)
+      // Compute leaderboard from all registered users' progress (per-user keys)
       (function () {
         const LB_KEY = 'leaderboard_v1';
-        const NAME = 'Justin';
-        function userScope() {
-          try { const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
-            const id = u?.id || u?.email || u?.username; return id ? String(id) : 'guest';
-          } catch(_) { return 'guest'; }
-        }
-        function K(base) { return base + '::' + userScope(); }
-        const COURSES_KEY = K('home_courses_completed_bonus');
-        const HOURS_KEY = K('home_hours_learned_bonus');
-
         const S = window.StorageUtil;
-        function getInt(key) { return (S && S.getInt(key, 0)) || 0; }
 
-        function computePoints() {
-          const courses = getInt(COURSES_KEY);
-          const hours = getInt(HOURS_KEY);
-          return courses * 500 + hours * 50; // points = courses*500 + hours*50
+        function scopeForUser(u) {
+          const id = u?.id || u?.email || u?.username;
+          return id ? String(id) : 'guest';
+        }
+        function KForUser(base, u) { return base + '::' + scopeForUser(u); }
+        function toScore(courses, hours) { return courses * 500 + hours * 50; }
+        function getIntRaw(key) {
+          try { return parseInt(localStorage.getItem(key) || '0', 10) || 0; } catch { return 0; }
         }
 
-        function loadEntries() { return (S && S.getJSON(LB_KEY, [])) || []; }
-
-        function upsertJustin() {
-          const points = computePoints();
-          let entries = loadEntries();
-          let found = false;
-          entries = entries.map(e => {
-            if ((e?.name || '') === NAME) { found = true; return { name: NAME, score: points }; }
-            return { name: String(e?.name || ''), score: Number(e?.score) || 0 };
+        function buildEntries() {
+          const users = (S && S.getJSON('users', [])) || [];
+          if (!Array.isArray(users) || users.length === 0) return [];
+          return users.map(u => {
+            const courses = getIntRaw(KForUser('home_courses_completed_bonus', u));
+            const hours   = getIntRaw(KForUser('home_hours_learned_bonus', u));
+            const name = String(u?.username || u?.email || 'User');
+            return { name, score: toScore(courses, hours) };
           });
-          if (!found) entries.push({ name: NAME, score: points });
+        }
 
+        function sync() {
+          const entries = buildEntries();
           if (typeof window.updateLeaderboard === 'function') {
             window.updateLeaderboard(entries);
           } else {
-            if (S) S.setJSON(LB_KEY, entries);
-            else try { localStorage.setItem(LB_KEY, JSON.stringify(entries)); } catch {}
+            try { localStorage.setItem(LB_KEY, JSON.stringify(entries)); } catch {}
           }
         }
 
-        function sync() { upsertJustin(); }
-
-        // Initial sync
+        // Initial render
         sync();
-
-        // Re-sync when progress keys change (e.g., from other tabs)
+        // Update when any per-user bonus changes
         window.addEventListener('storage', (e) => {
-          if (e.key === COURSES_KEY || e.key === HOURS_KEY) sync();
+          if (!e.key) return;
+          if (e.key.includes('home_courses_completed_bonus::') || e.key.includes('home_hours_learned_bonus::') || e.key === 'users') {
+            sync();
+          }
         });
-        document.addEventListener('visibilitychange', () => {
-          if (document.visibilityState === 'visible') sync();
-        });
+        document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') sync(); });
         window.addEventListener('pageshow', sync);
       })();
     </script>
