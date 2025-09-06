@@ -205,6 +205,30 @@
   text-decoration: underline;
 }
 
+/* Password hint styles */
+.password-hint {
+  background: var(--white-05);
+  border: 1px solid var(--primary-20);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-top: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+.password-hint .hint-title {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: var(--white-70);
+}
+.password-hint ul { list-style: none; margin: 0; padding: 0; }
+.password-hint li {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px;
+  color: var(--white-70);
+  margin: 4px 0;
+}
+.password-hint li i { font-size: 12px; }
+.password-hint li.ok { color: #22c55e; }
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .register-container {

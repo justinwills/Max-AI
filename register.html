@@ -91,6 +91,16 @@
                 <i class="fas fa-eye"></i>
               </button>
             </div>
+            <div class="password-hint" id="reg-password-hint" aria-live="polite">
+              <p class="hint-title">Password must contain:</p>
+              <ul>
+                <li data-req="len"><i class="fas fa-circle"></i> At least 8 characters</li>
+                <li data-req="upper"><i class="fas fa-circle"></i> An uppercase letter (A-Z)</li>
+                <li data-req="lower"><i class="fas fa-circle"></i> A lowercase letter (a-z)</li>
+                <li data-req="number"><i class="fas fa-circle"></i> A number (0-9)</li>
+                <li data-req="symbol"><i class="fas fa-circle"></i> A symbol (e.g. ! @ #)</li>
+              </ul>
+            </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
               <input
@@ -188,6 +198,7 @@
         const emailEl = document.getElementById("reg-email");
         const passEl = document.getElementById("reg-password");
         const confirmEl = document.getElementById("reg-confirm");
+        const hint = document.getElementById("reg-password-hint");
 
         function setBusy(state, textBusy, textIdle) {
           if (!btn) return;
@@ -196,6 +207,36 @@
             ? `<i class="fas fa-spinner fa-spin"></i> ${textBusy}`
             : `<i class="fas fa-rocket"></i> ${textIdle}`;
         }
+
+        function checkStrength(pw) {
+          const res = {
+            len: pw.length >= 8,
+            upper: /[A-Z]/.test(pw),
+            lower: /[a-z]/.test(pw),
+            number: /[0-9]/.test(pw),
+            symbol: /[^A-Za-z0-9]/.test(pw),
+          };
+          res.all = res.len && res.upper && res.lower && res.number && res.symbol;
+          return res;
+        }
+
+        function updateHint(pw) {
+          if (!hint) return;
+          const res = checkStrength(pw);
+          hint.querySelectorAll('li').forEach(function (li) {
+            const key = li.getAttribute('data-req');
+            const ok = !!res[key];
+            li.classList.toggle('ok', ok);
+            const icon = li.querySelector('i');
+            if (icon) {
+              icon.className = ok ? 'fas fa-check-circle' : 'fas fa-circle';
+            }
+          });
+        }
+
+        passEl?.addEventListener('input', function () {
+          updateHint(passEl.value || '');
+        });
 
         // Redirect if already logged in
         try {
@@ -229,8 +270,14 @@
             );
             return;
           }
-          if (password.length < 6) {
-            swal("Weak password", "Use at least 6 characters.", "error");
+          const strength = checkStrength(password);
+          if (!strength.all) {
+            swal(
+              "Weak password",
+              "Use at least 8 characters with uppercase, lowercase, number, and symbol.",
+              "error"
+            );
+            updateHint(password);
             return;
           }
           if (password !== confirm) {
