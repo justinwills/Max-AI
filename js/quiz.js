@@ -45,7 +45,30 @@ function renderQuestion(){ const q=queue[index]; if (!q) return; questionText.te
 
 function handleAnswer(choice){ const q=queue[index]; const correct=q.answer; const children=Array.from(optionsEl.children); children.forEach((el,i)=>{ el.disabled=true; if (i===correct) el.classList.add('correct'); if (i===choice && i!==correct) el.classList.add('wrong'); }); const isCorrect=choice===correct; if (isCorrect){ score+=1; scoreCounter.textContent=String(score);} answers.push({ id:q.id, question:q.question, topic:q.topic, choice, correct, options:q.options, explain:q.explain, isCorrect }); nextBtn.disabled=false; nextBtn.innerHTML = index===queue.length-1 ? 'Finish <i class="fas fa-flag-checkered"></i>' : 'Next <i class="fas fa-arrow-right"></i>'; }
 
-function showResults(){ quizCard.hidden=true; resultCard.hidden=false; const total=queue.length; const percent=Math.round((score/total)*100); statScore.textContent=String(score); statTotal.textContent=String(total); statPercent.textContent=percent+'%'; let msg='Nice work! Keep practicing to master the concepts.'; if (percent===100) msg='Perfect score! You\'re a star!'; else if (percent>=80) msg='Great job! Strong understanding.'; else if (percent<50) msg='Good start—review and try again!'; resultSummary.textContent=msg; reviewList.hidden=true; }
+function showResults(){
+  quizCard.hidden=true; resultCard.hidden=false;
+  const total=queue.length; const percent=Math.round((score/total)*100);
+  statScore.textContent=String(score); statTotal.textContent=String(total); statPercent.textContent=percent+'%';
+  let msg='Nice work! Keep practicing to master the concepts.';
+  if (percent===100) msg='Perfect score! You\'re a star!';
+  else if (percent>=80) msg='Great job! Strong understanding.';
+  else if (percent<50) msg='Good start—review and try again!';
+  resultSummary.textContent=msg; reviewList.hidden=true;
+
+  // Persist attempt for average score on home dashboard (per-user scope)
+  try {
+    function userScope(){
+      try{ const u = JSON.parse(localStorage.getItem('currentUser')||'null'); const id = u?.id || u?.email || u?.username; return id ? String(id) : 'guest'; }catch{ return 'guest'; }
+    }
+    const key = 'quiz_attempts_v1::' + userScope();
+    let arr; try { arr = JSON.parse(localStorage.getItem(key)||'[]'); } catch { arr = []; }
+    if (!Array.isArray(arr)) arr = [];
+    arr.push({ ts: Date.now(), percent });
+    // keep last 50 attempts to bound storage
+    if (arr.length > 50) arr = arr.slice(arr.length - 50);
+    localStorage.setItem(key, JSON.stringify(arr));
+  } catch {}
+}
 
 function renderReview(){ reviewList.innerHTML = answers.map((a,idx)=>{ const topic=a.topic==='ai-foundation' ? 'AI Foundations' : 'Machine Learning'; return `
   <div class="review-item ${a.isCorrect ? 'ok' : 'bad'}">
@@ -60,4 +83,3 @@ startBtn.addEventListener('click', ()=>{ prepareQuiz(); document.getElementById(
 nextBtn.addEventListener('click', ()=>{ if (index < queue.length-1){ index+=1; updateProgress(); renderQuestion(); } else { updateProgress(); showResults(); } });
 reviewBtn.addEventListener('click', ()=>{ const hidden=reviewList.hidden; if (hidden) renderReview(); reviewList.hidden = !hidden; });
 retakeBtn.addEventListener('click', ()=>{ resultCard.hidden=true; quizCard.hidden=true; });
-

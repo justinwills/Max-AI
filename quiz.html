@@ -451,6 +451,27 @@
         else if (percent < 50) msg = "Good start—review and try again!";
         resultSummary.textContent = msg;
         reviewList.hidden = true;
+
+        // Persist attempt for dashboard average score (per-user key)
+        try {
+          function userScope() {
+            try {
+              const u = JSON.parse(localStorage.getItem("currentUser") || "null");
+              const id = u?.id || u?.email || u?.username;
+              return id ? String(id) : "guest";
+            } catch (_) {
+              return "guest";
+            }
+          }
+          const key = "quiz_attempts_v1::" + userScope();
+          const raw = localStorage.getItem(key);
+          let arr = [];
+          try { arr = raw ? JSON.parse(raw) : []; } catch (_) { arr = []; }
+          if (!Array.isArray(arr)) arr = [];
+          arr.push({ ts: Date.now(), percent });
+          if (arr.length > 50) arr = arr.slice(arr.length - 50);
+          localStorage.setItem(key, JSON.stringify(arr));
+        } catch (_) {}
       }
 
       function renderReview() {
