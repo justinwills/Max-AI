@@ -282,7 +282,7 @@ nav {
 
 .header-visual {
   position: relative;
-  min-height: 220px;
+  min-height: 280px;
 }
 
 .chip {
@@ -306,12 +306,12 @@ nav {
 }
 
 /* Floating chip layout + staggered delays (desktop) */
-.header-visual .chip:nth-child(1) { left: 10%; top: 15%; animation-delay: 0s; }
-.header-visual .chip:nth-child(2) { right: 12%; top: 40%; animation-delay: .8s; }
-.header-visual .chip:nth-child(3) { left: 35%; bottom: 10%; animation-delay: 1.6s; }
-.header-visual .chip:nth-child(4) { right: 30%; top: 12%; animation-delay: 2.4s; }
-.header-visual .chip:nth-child(5) { left: 5%; bottom: 28%; animation-delay: 3.2s; }
-.header-visual .chip:nth-child(6) { right: 5%; bottom: 18%; animation-delay: 4s; }
+.header-visual .chip:nth-child(1) { left: 6%;  top: 8%;  animation-delay: 0s; }
+.header-visual .chip:nth-child(2) { right: 8%; top: 38%; animation-delay: .8s; }
+.header-visual .chip:nth-child(3) { left: 40%; bottom: 6%; animation-delay: 1.6s; }
+.header-visual .chip:nth-child(4) { right: 22%; top: 10%; animation-delay: 2.4s; }
+.header-visual .chip:nth-child(5) { left: 12%; bottom: 34%; animation-delay: 3.2s; }
+.header-visual .chip:nth-child(6) { right: 6%; bottom: 10%; animation-delay: 4s; }
 
 @keyframes float {
   0%, to { transform: translateY(0); }
