@@ -1,17 +1,47 @@
 /* Lightweight localStorage helpers for consistent, safe access */
 (function (window) {
+  // In-memory fallback if both localStorage and sessionStorage are unavailable
+  const mem = Object.create(null);
+
+  function tryGet(storage, key) {
+    try { return storage.getItem(key); } catch { return null; }
+  }
+  function trySet(storage, key, value) {
+    try { storage.setItem(key, value); return true; } catch { return false; }
+  }
+  function tryRemove(storage, key) {
+    try { storage.removeItem(key); return true; } catch { return false; }
+  }
+
   const StorageUtil = {
     get(key) {
-      try { return window.localStorage.getItem(key); } catch { return null; }
+      // Prefer localStorage, then sessionStorage, then memory
+      const vLocal = tryGet(window.localStorage, key);
+      if (vLocal != null && vLocal !== "") return vLocal;
+      const vSession = tryGet(window.sessionStorage, key);
+      if (vSession != null && vSession !== "") return vSession;
+      return Object.prototype.hasOwnProperty.call(mem, key) ? mem[key] : null;
     },
 
     set(key, value) {
-      try { window.localStorage.setItem(key, String(value)); } catch {}
+      const str = String(value);
+      if (!trySet(window.localStorage, key, str)) {
+        if (!trySet(window.sessionStorage, key, str)) {
+          mem[key] = str;
+        }
+      }
+    },
+
+    remove(key) {
+      const okLocal = tryRemove(window.localStorage, key);
+      const okSession = tryRemove(window.sessionStorage, key);
+      if (Object.prototype.hasOwnProperty.call(mem, key)) delete mem[key];
+      return okLocal || okSession;
     },
 
     getJSON(key, fallback = null) {
       try {
-        const raw = window.localStorage.getItem(key);
+        const raw = this.get(key);
         if (raw == null || raw === "") return fallback;
         const parsed = JSON.parse(raw);
         return parsed == null ? fallback : parsed;
@@ -19,18 +49,24 @@
     },
 
     setJSON(key, value) {
-      try { window.localStorage.setItem(key, JSON.stringify(value)); } catch {}
+      const str = JSON.stringify(value);
+      if (!trySet(window.localStorage, key, str)) {
+        if (!trySet(window.sessionStorage, key, str)) {
+          mem[key] = str;
+        }
+      }
     },
 
     getInt(key, fallback = 0) {
       try {
-        const n = parseInt(window.localStorage.getItem(key) || "", 10);
+        const raw = this.get(key);
+        const n = parseInt(raw || "", 10);
         return Number.isFinite(n) ? n : fallback;
       } catch { return fallback; }
     },
 
     setInt(key, value) {
-      try { window.localStorage.setItem(key, String(Math.floor(value || 0))); } catch {}
+      this.set(key, String(Math.floor(value || 0)));
     },
 
     incInt(key, by = 1) {
@@ -50,4 +86,3 @@
 
   window.StorageUtil = StorageUtil;
 })(window);
-

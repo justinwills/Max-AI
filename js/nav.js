@@ -1,5 +1,39 @@
 // Common navigation helpers: profile dropdown + mobile menu toggle
 (function () {
+  // Lightweight SweetAlert fallbacks for offline/file:// contexts
+  (function(){
+    try {
+      if (typeof window.swal !== 'function') {
+        window.swal = function(title, text, icon){
+          try {
+            const msg = [title || '', text || ''].filter(Boolean).join('\n');
+            alert(msg || 'Notice');
+          } catch { alert('Notice'); }
+          try { return Promise.resolve({}); } catch { return undefined; }
+        };
+      }
+      if (!window.Swal || typeof window.Swal.fire !== 'function') {
+        window.Swal = window.Swal || {};
+        window.Swal.fire = function(opts){
+          try {
+            const title = (opts && opts.title) || '';
+            const text = (opts && opts.text) || '';
+            const msg = [title, text].filter(Boolean).join('\n') || 'Are you sure?';
+            if (opts && opts.showCancelButton) {
+              const ok = confirm(msg);
+              return Promise.resolve({ isConfirmed: !!ok });
+            } else {
+              alert(msg);
+              return Promise.resolve({});
+            }
+          } catch {
+            alert('Notice');
+            try { return Promise.resolve({}); } catch { return undefined; }
+          }
+        };
+      }
+    } catch {}
+  })();
   // Profile dropdown toggle (click + outside close)
   (function () {
     const menu = document.querySelector('.profile-menu');

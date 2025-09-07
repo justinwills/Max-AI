@@ -34,12 +34,29 @@
       : '<i class="fas fa-sign-in-alt"></i> Login';
   }
 
-  // Treat visiting this page as logout by default
+  // Only log out when explicitly requested via ?logout or #logout
   try {
     const url = new URL(window.location.href);
-    const shouldLogout = url.searchParams.has('logout') || window.location.hash === '#logout' || true;
+    const hasReset = url.searchParams.has('reset') || window.location.hash === '#reset';
+    const shouldLogout = url.searchParams.has('logout') || window.location.hash === '#logout';
+    if (hasReset) {
+      try { window.localStorage.clear(); } catch {}
+      try { window.sessionStorage.clear(); } catch {}
+      try { swal('Storage Cleared', 'Local and session data removed for this origin.', 'success'); } catch {}
+      setTimeout(function(){ window.location.replace('login.html'); }, 500);
+      return;
+    }
     if (shouldLogout) {
       try { window.localStorage.removeItem('currentUser'); } catch {}
+      try { window.sessionStorage.removeItem('currentUser'); } catch {}
+    } else {
+      // If already logged in and not explicitly logging out, go to home
+      const store = window.StorageUtil;
+      const current = store?.getJSON?.('currentUser', null);
+      if (current && (current.email || current.username || current.id)) {
+        window.location.replace('home.html');
+        return;
+      }
     }
   } catch {}
 
@@ -54,21 +71,37 @@
     setBusy(true);
     try {
       const store = window.StorageUtil;
-      const users = store.getJSON('users', []);
+      // Be resilient if StorageUtil is unavailable or data is malformed
+      let users = store?.getJSON?.('users', null);
+      if (!Array.isArray(users)) {
+        try {
+          const raw = window.localStorage.getItem('users') || window.sessionStorage.getItem('users') || '[]';
+          users = JSON.parse(raw);
+        } catch { users = []; }
+      }
+      users = Array.isArray(users) ? users : [];
+
+      // Flexible identifier matching: try both email and username regardless of '@'
+      const ident = identifier.toLowerCase();
       let user = null;
       if (identifier.includes('@')) {
-        const email = identifier.toLowerCase();
-        user = users.find((u) => (u.email || '').toLowerCase() === email);
+        user = users.find((u) => (u.email || '').toLowerCase() === ident) ||
+               users.find((u) => (u.username || '').toLowerCase() === ident);
       } else {
-        const uname = identifier.toLowerCase();
-        user = users.find((u) => (u.username || '').toLowerCase() === uname);
+        user = users.find((u) => (u.username || '').toLowerCase() === ident) ||
+               users.find((u) => (u.email || '').toLowerCase() === ident);
       }
-      if (!user || user.password !== password) {
+      // Password comparison with gentle whitespace tolerance
+      const storedPw = String(user?.password ?? '');
+      const ok = !!user && (storedPw === password || storedPw.trim() === password.trim());
+      if (!ok) {
         setBusy(false);
         swal('Invalid credentials', 'Email/username or password is incorrect.', 'error');
         return;
       }
-      store.setJSON('currentUser', { id: user.id, username: user.username, email: user.email });
+      const cu = { id: user.id, username: user.username, email: user.email };
+      store?.setJSON?.('currentUser', cu);
+      try { window.sessionStorage.setItem('currentUser', JSON.stringify(cu)); } catch {}
       swal('Login Successful!', 'Welcome back to MaxAI!', 'success');
       setTimeout(function () { window.location.href = 'home.html'; }, 1000);
     } catch (e) {
@@ -78,4 +111,3 @@
     }
   });
 })();
-

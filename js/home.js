@@ -32,9 +32,97 @@
 
 // Dashboard bonuses (per-user)
 (function () {
+  function refreshDashboard() {
+    function userScope() {
+      try {
+        const store = window.StorageUtil;
+        const u = store?.getJSON?.("currentUser", null) || null;
+        const id = u?.id || u?.email || u?.username;
+        return id ? String(id) : "guest";
+      } catch (_) {
+        return "guest";
+      }
+    }
+    function K(base) { return base + "::" + userScope(); }
+    try {
+      const anyFlag = (base) => {
+        const userKey = K(base);
+        const vU = localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+        if (vU === "true") return true;
+        const guestKey = base + "::guest";
+        const vG = localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey);
+        return vG === "true";
+      };
+      const anyRaw = (base) => {
+        const userKey = K(base);
+        const vU = localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+        if (vU != null) return vU;
+        const guestKey = base + "::guest";
+        return localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey);
+      };
+      const isCompleted = (prefix) => {
+        if (anyFlag(prefix + "_completed_v1")) return true;
+        const total = parseInt(anyRaw(prefix + "_quiz_total_v1") || "0", 10) || 0;
+        const done = parseInt(anyRaw(prefix + "_quiz_done_v1") || "0", 10) || 0;
+        return total > 0 && done >= total;
+      };
+      const completedAI = isCompleted("ai_foundations");
+      const completedML = isCompleted("machine_learning");
+      const completedDL = isCompleted("deep_learning");
+      const completedNN = isCompleted("neural_networks");
+      const completedNLP = isCompleted("natural_language_processing");
+      const completedAIE = isCompleted("ai_ethics");
+      const expectedCourses = (completedAI?1:0)+(completedML?1:0)+(completedDL?1:0)+(completedNN?1:0)+(completedNLP?1:0)+(completedAIE?1:0);
+      const expectedHours = (completedAI?2:0)+(completedML?3:0)+(completedDL?4:0)+(completedNN?4:0)+(completedNLP?3:0)+(completedAIE?1:0);
+      const ccKey = K("home_courses_completed_bonus");
+      const hrKey = K("home_hours_learned_bonus");
+      // Prefer stored values if present (written by modules on completion), else computed
+      const storedC = parseInt((localStorage.getItem(ccKey) ?? window.sessionStorage.getItem(ccKey) ?? ""), 10);
+      const storedH = parseInt((localStorage.getItem(hrKey) ?? window.sessionStorage.getItem(hrKey) ?? ""), 10);
+      const courses = Number.isFinite(storedC) && storedC >= 0 ? Math.max(storedC, expectedCourses) : expectedCourses;
+      const hours = Number.isFinite(storedH) && storedH >= 0 ? Math.max(storedH, expectedHours) : expectedHours;
+      localStorage.setItem(ccKey, String(courses));
+      localStorage.setItem(hrKey, String(hours));
+      try {
+        window.sessionStorage.setItem(ccKey, String(courses));
+        window.sessionStorage.setItem(hrKey, String(hours));
+      } catch {}
+      // Average score
+      let avgScore = 0;
+      try {
+        const attemptsRaw = localStorage.getItem(K("quiz_attempts_v1")) || window.sessionStorage.getItem(K("quiz_attempts_v1"));
+        const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
+        if (Array.isArray(attempts) && attempts.length > 0) {
+          const sum = attempts.reduce((s,a)=> s + (Number(a?.percent)||0), 0);
+          avgScore = Math.round(sum / attempts.length);
+        }
+      } catch {}
+      document.querySelectorAll('.progress-stats .stat-item').forEach((item)=>{
+        const label = (item.querySelector('.stat-label')?.textContent||'').trim().toLowerCase();
+        const numEl = item.querySelector('.stat-number');
+        if (!numEl) return;
+        if (label === 'courses completed') numEl.textContent = String(courses);
+        else if (label === 'hours learned') numEl.textContent = String(hours);
+        else if (label === 'average score') numEl.textContent = (Number.isFinite(avgScore)?avgScore:0) + '%';
+      });
+    } catch (_) {}
+  }
+
+  // Initial render
+  refreshDashboard();
+  // Recompute when returning to the page or storage changes
+  window.addEventListener('pageshow', refreshDashboard);
+  document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'visible') refreshDashboard(); });
+  window.addEventListener('storage', function(e){
+    if (!e.key) return;
+    if (e.key.includes('_completed_v1::') || e.key.includes('_quiz_total_v1::') || e.key.includes('_quiz_done_v1::') || e.key.includes('home_courses_completed_bonus::') || e.key.includes('home_hours_learned_bonus::')) {
+      refreshDashboard();
+    }
+  });
   function userScope() {
     try {
-      const u = JSON.parse(localStorage.getItem("currentUser") || "null");
+      const store = window.StorageUtil;
+      const u = store?.getJSON?.("currentUser", null) || null;
       const id = u?.id || u?.email || u?.username;
       return id ? String(id) : "guest";
     } catch (_) {
@@ -46,19 +134,33 @@
   }
   try {
     // Normalize bonuses based on actual completed courses to avoid double counting
-    const completedAI =
-      localStorage.getItem(K("ai_foundations_completed_v1")) === "true";
-    const completedML =
-      localStorage.getItem(K("machine_learning_completed_v1")) === "true";
-    const completedDL =
-      localStorage.getItem(K("deep_learning_completed_v1")) === "true";
-    const completedNN =
-      localStorage.getItem(K("neural_networks_completed_v1")) === "true";
-    const completedNLP =
-      localStorage.getItem(K("natural_language_processing_completed_v1")) ===
-      "true";
-    const completedAIE =
-      localStorage.getItem(K("ai_ethics_completed_v1")) === "true";
+    const anyFlag = (base) => {
+      const userKey = K(base);
+      const vU = localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+      if (vU === "true") return true;
+      const guestKey = base + "::guest";
+      const vG = localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey);
+      return vG === "true";
+    };
+    const anyRaw = (base) => {
+      const userKey = K(base);
+      const vU = localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+      if (vU != null) return vU;
+      const guestKey = base + "::guest";
+      return localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey);
+    };
+    function isCompleted(prefix) {
+      if (anyFlag(prefix + "_completed_v1")) return true;
+      const total = parseInt(anyRaw(prefix + "_quiz_total_v1") || "0", 10) || 0;
+      const done = parseInt(anyRaw(prefix + "_quiz_done_v1") || "0", 10) || 0;
+      return total > 0 && done >= total;
+    }
+    const completedAI = isCompleted("ai_foundations");
+    const completedML = isCompleted("machine_learning");
+    const completedDL = isCompleted("deep_learning");
+    const completedNN = isCompleted("neural_networks");
+    const completedNLP = isCompleted("natural_language_processing");
+    const completedAIE = isCompleted("ai_ethics");
     const expectedCourses =
       (completedAI ? 1 : 0) +
       (completedML ? 1 : 0) +
@@ -73,18 +175,21 @@
       (completedNN ? 4 : 0) +
       (completedNLP ? 3 : 0) +
       (completedAIE ? 1 : 0);
-    localStorage.setItem(
-      K("home_courses_completed_bonus"),
-      String(expectedCourses)
-    );
-    localStorage.setItem(K("home_hours_learned_bonus"), String(expectedHours));
+    const ccKey = K("home_courses_completed_bonus");
+    const hrKey = K("home_hours_learned_bonus");
+    localStorage.setItem(ccKey, String(expectedCourses));
+    localStorage.setItem(hrKey, String(expectedHours));
+    try {
+      window.sessionStorage.setItem(ccKey, String(expectedCourses));
+      window.sessionStorage.setItem(hrKey, String(expectedHours));
+    } catch {}
 
     const courseBonus = expectedCourses;
     const hoursBonus = expectedHours;
     // Compute Average Score from stored quiz attempts (per-user)
     let avgScore = 0;
     try {
-      const attemptsRaw = localStorage.getItem(K("quiz_attempts_v1"));
+      const attemptsRaw = localStorage.getItem(K("quiz_attempts_v1")) || window.sessionStorage.getItem(K("quiz_attempts_v1"));
       const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
       if (Array.isArray(attempts) && attempts.length > 0) {
         const sum = attempts.reduce((s, a) => s + (Number(a?.percent) || 0), 0);
@@ -100,14 +205,13 @@
           .toLowerCase();
         const numEl = item.querySelector(".stat-number");
         if (!numEl) return;
-        const base =
-          parseInt((numEl.textContent || "0").replace(/[^0-9]/g, ""), 10) || 0;
-        if (label === "courses completed")
-          numEl.textContent = String(base + courseBonus);
-        else if (label === "hours learned")
-          numEl.textContent = String(base + hoursBonus);
-        else if (label === "average score")
+        if (label === "courses completed") {
+          numEl.textContent = String(courseBonus);
+        } else if (label === "hours learned") {
+          numEl.textContent = String(hoursBonus);
+        } else if (label === "average score") {
           numEl.textContent = (Number.isFinite(avgScore) ? avgScore : 0) + "%";
+        }
       });
   } catch (_) {}
 })();
@@ -116,7 +220,8 @@
 (function () {
   function userScope() {
     try {
-      const u = JSON.parse(localStorage.getItem("currentUser") || "null");
+      const store = window.StorageUtil;
+      const u = store?.getJSON?.("currentUser", null) || null;
       const id = u?.id || u?.email || u?.username;
       return id ? String(id) : "guest";
     } catch (_) {
@@ -129,7 +234,7 @@
   function refresh() {
     let avgScore = 0;
     try {
-      const attemptsRaw = localStorage.getItem(K("quiz_attempts_v1"));
+      const attemptsRaw = localStorage.getItem(K("quiz_attempts_v1")) || window.sessionStorage.getItem(K("quiz_attempts_v1"));
       const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
       if (Array.isArray(attempts) && attempts.length > 0) {
         const sum = attempts.reduce((s, a) => s + (Number(a?.percent) || 0), 0);
@@ -159,7 +264,8 @@
 (function () {
   function userScope() {
     try {
-      const u = JSON.parse(localStorage.getItem("currentUser") || "null");
+      const store = window.StorageUtil;
+      const u = store?.getJSON?.("currentUser", null) || null;
       const id = u?.id || u?.email || u?.username;
       return id ? String(id) : "guest";
     } catch (_) {
@@ -216,7 +322,12 @@
   const ra = document.querySelector(".recent-activity");
   if (!ra) return;
   function getActivityDate(course) {
-    const raw = localStorage.getItem(course.activityKey);
+    const base = String(course.activityKey || "").split("::")[0];
+    const raw =
+      localStorage.getItem(course.activityKey) ||
+      window.sessionStorage.getItem(course.activityKey) ||
+      localStorage.getItem(base + "::guest") ||
+      window.sessionStorage.getItem(base + "::guest");
     try {
       const parsed = JSON.parse(raw);
       if (parsed && parsed.ts) return new Date(parsed.ts);
@@ -231,7 +342,12 @@
     });
   }
   function upsertActivity(course) {
-    const completed = localStorage.getItem(course.completedKey) === "true";
+    const base = String(course.completedKey || "").split("::")[0];
+    const completed =
+      (localStorage.getItem(course.completedKey) ||
+        window.sessionStorage.getItem(course.completedKey) ||
+        localStorage.getItem(base + "::guest") ||
+        window.sessionStorage.getItem(base + "::guest")) === "true";
     let item = ra.querySelector(`.activity-item[data-course="${course.id}"]`);
     if (completed) {
       const whenText = formatDate(getActivityDate(course));
@@ -383,7 +499,8 @@
   }
   function getIntRaw(key) {
     try {
-      return parseInt(localStorage.getItem(key) || "0", 10) || 0;
+      const v = localStorage.getItem(key) ?? window.sessionStorage.getItem(key);
+      return parseInt(v || "0", 10) || 0;
     } catch {
       return 0;
     }

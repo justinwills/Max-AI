@@ -46,7 +46,7 @@
               <a href="userprofile.html"
                 ><i class="fas fa-user-circle"></i> Profile</a
               >
-              <a href="login.html"
+              <a href="login.html?logout=1"
                 ><i class="fas fa-right-from-bracket"></i> Logout</a
               >
             </div>
@@ -58,25 +58,7 @@
         </div>
       </div>
     </nav>
-    <script>
-      (function () {
-        const menu = document.querySelector(".profile-menu");
-        if (!menu) return;
-        const btn = menu.querySelector(".profile-btn");
-        btn?.setAttribute("aria-expanded", "false");
-        btn?.addEventListener("click", function (e) {
-          e.preventDefault();
-          const open = menu.classList.toggle("open");
-          btn.setAttribute("aria-expanded", String(open));
-        });
-        document.addEventListener("click", function (e) {
-          if (!menu.contains(e.target)) {
-            menu.classList.remove("open");
-            btn?.setAttribute("aria-expanded", "false");
-          }
-        });
-      })();
-    </script>
+    
 
     <section id="user-details" class="user-profile">
       <div class="container">

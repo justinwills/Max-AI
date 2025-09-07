@@ -49,7 +49,8 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
 (function () {
   function userScope() {
     try {
-      const u = JSON.parse(localStorage.getItem("currentUser") || "null");
+      const store = window.StorageUtil;
+      const u = store?.getJSON?.("currentUser", null) || null;
       const id = u?.id || u?.email || u?.username;
       return id ? String(id) : "guest";
     } catch (_) {
@@ -425,10 +426,15 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
     progFill.style.width = pct + "%";
     progBar.setAttribute("aria-valuenow", String(pct));
     // Persist coarse progress so other pages (e.g., home) can read it
-    try {
-      localStorage.setItem(K("machine_learning_quiz_total_v1"), String(total));
-      localStorage.setItem(K("machine_learning_quiz_done_v1"), String(done));
-    } catch (_) {}
+  try {
+    const tKey = K("machine_learning_quiz_total_v1");
+    const dKey = K("machine_learning_quiz_done_v1");
+    const tVal = String(total);
+    const dVal = String(done);
+    localStorage.setItem(tKey, tVal);
+    localStorage.setItem(dKey, dVal);
+    try { sessionStorage.setItem(tKey, tVal); sessionStorage.setItem(dKey, dVal); } catch(_) {}
+  } catch (_) {}
 
     // When the course is completed (100%), set completion in localStorage
     // and increment home stats bonuses exactly once.
@@ -437,15 +443,27 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
         pct === 100 &&
         localStorage.getItem(K("machine_learning_completed_v1")) !== "true"
       ) {
-        localStorage.setItem(K("machine_learning_completed_v1"), "true");
+        const cKey = K("machine_learning_completed_v1");
+        localStorage.setItem(cKey, "true");
+        try { sessionStorage.setItem(cKey, "true"); } catch(_) {}
         const courseKey = K("home_courses_completed_bonus");
         const hoursKey = K("home_hours_learned_bonus");
         const curCourses =
           parseInt(localStorage.getItem(courseKey) || "0", 10) || 0;
         const curHours =
           parseInt(localStorage.getItem(hoursKey) || "0", 10) || 0;
-        localStorage.setItem(courseKey, String(curCourses + 1));
-        localStorage.setItem(hoursKey, String(curHours + 3));
+        const newC = String(curCourses + 1);
+        const newH = String(curHours + 3);
+        localStorage.setItem(courseKey, newC);
+        localStorage.setItem(hoursKey, newH);
+        try { sessionStorage.setItem(courseKey, newC); sessionStorage.setItem(hoursKey, newH); } catch(_) {}
+        // Log recent activity timestamp
+        try {
+          const actKey = K("home_activity_logged_machine_learning_v1");
+          const payload = JSON.stringify({ ts: Date.now() });
+          localStorage.setItem(actKey, payload);
+          try { sessionStorage.setItem(actKey, payload); } catch (_) {}
+        } catch (_) {}
       }
     } catch (_) {}
   }

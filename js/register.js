@@ -84,7 +84,10 @@
       const user = { id: Date.now(), username, email, password, createdAt: new Date().toISOString() };
       users.push(user);
       store.setJSON('users', users);
-      store.setJSON('currentUser', { id: user.id, username, email });
+      try { window.sessionStorage.setItem('users', JSON.stringify(users)); } catch {}
+      const cu = { id: user.id, username, email };
+      store.setJSON('currentUser', cu);
+      try { window.sessionStorage.setItem('currentUser', JSON.stringify(cu)); } catch {}
       swal('Registration Successful!', 'Welcome to MaxAI! Your account has been created.', 'success');
       setTimeout(function () { window.location.href = 'home.html'; }, 1200);
     } catch (e) {
@@ -93,4 +96,3 @@
     }
   });
 })();
-

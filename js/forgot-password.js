@@ -64,10 +64,11 @@
       if (idx === -1) { setBusy(false); swal('Account not found', 'No user with that email.', 'error'); return; }
       if ((users[idx].password || '') !== current) { setBusy(false); swal('Incorrect password', 'Current password is incorrect.', 'error'); return; }
       users[idx].password = password; store.setJSON('users', users);
+      try { window.sessionStorage.setItem('users', JSON.stringify(users)); } catch {}
       try { window.localStorage.removeItem('currentUser'); } catch {}
+      try { window.sessionStorage.removeItem('currentUser'); } catch {}
       swal('Password Updated', 'Your password has been reset. Please log in.', 'success');
       setTimeout(function () { window.location.href = 'login.html'; }, 1200);
     } catch (e) { console.error(e); setBusy(false); swal('Error', 'Could not reset password. Please try again.', 'error'); }
   });
 })();
-

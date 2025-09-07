@@ -186,10 +186,12 @@ document
     setMsg("ok", "Password updated.");
   });
 
-// Delete account
-document
-  .getElementById("delete-account")
-  ?.addEventListener("click", function () {
+// Delete account (bind once)
+(function(){
+  const __del = document.getElementById("delete-account");
+  if (!__del || __del.__delBound) return;
+  __del.__delBound = true;
+  __del.addEventListener("click", function () {
     Swal.fire({
       title: "Delete account?",
       text: "This will permanently remove your profile and learning progress on this device.",
@@ -210,7 +212,10 @@ document
         const filtered = Array.isArray(users)
           ? users.filter((u) => u && u.id !== current.id)
           : [];
+        // Persist updated users list across both storages
         S.setJSON("users", filtered);
+        try { sessionStorage.setItem("users", JSON.stringify(filtered)); } catch (_) {}
+        try { sessionStorage.setItem("users", JSON.stringify(filtered)); } catch (_) {}
         const scope = (function () {
           try {
             return String(
@@ -221,19 +226,25 @@ document
           }
         })();
         const suffix = "::" + scope;
+        // Remove per-user keys for both localStorage and sessionStorage
         try {
           const keys = [];
           for (let i = 0; i < localStorage.length; i++) {
             const k = localStorage.key(i);
             if (k) keys.push(k);
           }
-          keys.forEach((k) => {
-            if (k.endsWith(suffix)) localStorage.removeItem(k);
-          });
+          keys.forEach((k) => { if (k && k.endsWith(suffix)) localStorage.removeItem(k); });
         } catch (_) {}
         try {
-          localStorage.removeItem("currentUser");
+          const sKeys = [];
+          for (let i = 0; i < sessionStorage.length; i++) {
+            const k = sessionStorage.key(i);
+            if (k) sKeys.push(k);
+          }
+          sKeys.forEach((k) => { if (k && k.endsWith(suffix)) sessionStorage.removeItem(k); });
         } catch (_) {}
+        try { localStorage.removeItem("currentUser"); } catch (_) {}
+        try { sessionStorage.removeItem("currentUser"); } catch (_) {}
         S.setJSON("currentUser", null);
         Swal.fire({
           icon: "success",
@@ -253,6 +264,7 @@ document
       }
     });
   });
+})();
 
 // Password visibility toggles on profile page
 (function () {
@@ -516,10 +528,12 @@ document
   document.querySelectorAll(".toggle-password").forEach(setupToggle);
 })();
 
-// Delete account: remove user + all per-user progress keys, then sign out
-document
-  .getElementById("delete-account")
-  ?.addEventListener("click", function () {
+// Delete account: remove user + all per-user progress keys, then sign out (bind once)
+(function(){
+  const __del = document.getElementById("delete-account");
+  if (!__del || __del.__delBound) return;
+  __del.__delBound = true;
+  __del.addEventListener("click", function () {
     Swal.fire({
       title: "Delete account?",
       text: "This will permanently remove your profile and learning progress on this device.",
@@ -560,15 +574,20 @@ document
             const k = localStorage.key(i);
             if (k) keys.push(k);
           }
-          keys.forEach((k) => {
-            if (k.endsWith(suffix)) localStorage.removeItem(k);
-          });
+          keys.forEach((k) => { if (k && k.endsWith(suffix)) localStorage.removeItem(k); });
+        } catch (_) {}
+        try {
+          const sKeys = [];
+          for (let i = 0; i < sessionStorage.length; i++) {
+            const k = sessionStorage.key(i);
+            if (k) sKeys.push(k);
+          }
+          sKeys.forEach((k) => { if (k && k.endsWith(suffix)) sessionStorage.removeItem(k); });
         } catch (_) {}
 
         // Clear session
-        try {
-          localStorage.removeItem("currentUser");
-        } catch (_) {}
+        try { localStorage.removeItem("currentUser"); } catch (_) {}
+        try { sessionStorage.removeItem("currentUser"); } catch (_) {}
         S.setJSON("currentUser", null);
 
         Swal.fire({
@@ -589,3 +608,4 @@ document
       }
     });
   });
+})();
