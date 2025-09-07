@@ -49,68 +49,6 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
   e.stopPropagation();
 });
 
-// Reset progress button (AI Foundations)
-(function () {
-  function userScope() {
-    try {
-      const u = JSON.parse(localStorage.getItem("currentUser") || "null");
-      const id = u?.id || u?.email || u?.username;
-      return id ? String(id) : "guest";
-    } catch (_) {
-      return "guest";
-    }
-  }
-  function K(base) {
-    return base + "::" + userScope();
-  }
-  const btn = document.getElementById("reset-progress");
-  if (!btn) return;
-  btn.addEventListener("click", function () {
-    Swal.fire({
-      title: "Reset progress?",
-      text: "This will clear saved answers and unlink completion.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, reset",
-    }).then((res) => {
-      if (!res.isConfirmed) return;
-      try {
-        // Clear quiz state and auxiliary data for this module
-        localStorage.removeItem(K("natural_language_processing_quiz_v1"));
-        localStorage.removeItem(K("natural_language_processing_quiz_total_v1"));
-        localStorage.removeItem(K("natural_language_processing_quiz_done_v1"));
-        // Clear stored MCQ option order to allow reshuffle next time
-        localStorage.removeItem(K("natural_language_processing_quiz_order_v1"));
-
-        // If completion was recorded, subtract Home bonuses once
-        if (
-          localStorage.getItem(
-            K("natural_language_processing_completed_v1")
-          ) === "true"
-        ) {
-          const courseKey = K("home_courses_completed_bonus");
-          const hoursKey = K("home_hours_learned_bonus");
-          const curCourses =
-            parseInt(localStorage.getItem(courseKey) || "0", 10) || 0;
-          const curHours =
-            parseInt(localStorage.getItem(hoursKey) || "0", 10) || 0;
-          const newCourses = Math.max(0, curCourses - 1);
-          const newHours = Math.max(0, curHours - 2);
-          localStorage.setItem(courseKey, String(newCourses));
-          localStorage.setItem(hoursKey, String(newHours));
-          // Remove recent-activity marker
-          localStorage.removeItem(
-            K("home_activity_logged_natural_language_processing_v1")
-          );
-        }
-        // Unset completion flag
-        localStorage.removeItem(K("natural_language_processing_completed_v1"));
-      } catch (_) {}
-      location.reload();
-    });
-  });
-})();
-
 // Quiz rendering + logic with localStorage progress
 (function () {
   function userScope() {
