@@ -27,7 +27,7 @@
   const emailEl = document.getElementById('reg-email');
   const passEl = document.getElementById('reg-password');
   const confirmEl = document.getElementById('reg-confirm');
-  const hint = document.getElementById('reg-password-hint');
+  // password hint removed from UI
 
   function setBusy(state, textBusy, textIdle) {
     if (!btn) return;
@@ -35,21 +35,7 @@
     btn.innerHTML = state ? `<i class="fas fa-spinner fa-spin"></i> ${textBusy}` : `<i class="fas fa-rocket"></i> ${textIdle}`;
   }
 
-  function checkStrength(pw) {
-    const res = { len: pw.length >= 8, upper: /[A-Z]/.test(pw), lower: /[a-z]/.test(pw), number: /[0-9]/.test(pw), symbol: /[^A-Za-z0-9]/.test(pw) };
-    res.all = res.len && res.upper && res.lower && res.number && res.symbol; return res;
-  }
-
-  function updateHint(pw) {
-    if (!hint) return; const res = checkStrength(pw);
-    hint.querySelectorAll('li').forEach(function (li) {
-      const key = li.getAttribute('data-req'); const ok = !!res[key];
-      li.classList.toggle('ok', ok);
-      const icon = li.querySelector('i'); if (icon) { icon.className = ok ? 'fas fa-check-circle' : 'fas fa-circle'; }
-    });
-  }
-
-  passEl?.addEventListener('input', function () { updateHint(passEl.value || ''); });
+  // remove password strength checker and hint updates
 
   // Redirect if already logged in
   try {
@@ -65,8 +51,7 @@
     const confirm = confirmEl?.value || '';
     if (!username || !email || !password || !confirm) { swal('Missing info', 'Please fill in all fields.', 'warning'); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { swal('Invalid email', 'Please enter a valid email address.', 'error'); return; }
-    const strength = checkStrength(password);
-    if (!strength.all) { swal('Weak password', 'Use at least 8 characters with uppercase, lowercase, number, and symbol.', 'error'); updateHint(password); return; }
+    // Password strength restriction removed; allow any password
     if (password !== confirm) { swal('Password mismatch', 'Passwords do not match.', 'error'); return; }
 
     setBusy(true, 'Creating Account...', 'Get Started');
