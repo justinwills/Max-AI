@@ -321,6 +321,22 @@
   ];
   const ra = document.querySelector(".recent-activity");
   if (!ra) return;
+  function isCourseCompletedFlag(keyWithScope) {
+    const base = String(keyWithScope || "").split("::")[0];
+    const v =
+      localStorage.getItem(keyWithScope) ||
+      window.sessionStorage.getItem(keyWithScope) ||
+      localStorage.getItem(base + "::guest") ||
+      window.sessionStorage.getItem(base + "::guest");
+    return v === "true";
+  }
+  function areAllCompleted() {
+    try {
+      return COURSES.every((c) => isCourseCompletedFlag(c.completedKey));
+    } catch (_) {
+      return false;
+    }
+  }
   function getActivityDate(course) {
     const base = String(course.activityKey || "").split("::")[0];
     const raw =
@@ -334,12 +350,57 @@
     } catch (_) {}
     return new Date();
   }
+  function getLatestCompletionDate() {
+    let latest = 0;
+    try {
+      COURSES.forEach((c) => {
+        const base = String(c.activityKey || "").split("::")[0];
+        const raw =
+          localStorage.getItem(c.activityKey) ||
+          window.sessionStorage.getItem(c.activityKey) ||
+          localStorage.getItem(base + "::guest") ||
+          window.sessionStorage.getItem(base + "::guest");
+        if (!raw) return;
+        try {
+          const parsed = JSON.parse(raw);
+          const ts = Number(parsed?.ts) || 0;
+          if (ts > latest) latest = ts;
+        } catch (_) {}
+      });
+    } catch (_) {}
+    return latest > 0 ? new Date(latest) : new Date();
+  }
   function formatDate(d) {
     return d.toLocaleDateString(undefined, {
       year: "numeric",
       month: "short",
       day: "numeric",
     });
+  }
+  function renderPerfectBadge() {
+    const existing = ra.querySelector(".activity-item.perfect-badge");
+    if (!areAllCompleted()) {
+      if (existing) existing.remove();
+      return;
+    }
+    const whenText = formatDate(getLatestCompletionDate());
+    if (!existing) {
+      const item = document.createElement("div");
+      item.className = "activity-item perfect-badge";
+      item.setAttribute("data-course", "all_courses");
+      item.innerHTML = `
+        <div class="activity-icon">
+          <i class="fas fa-trophy" style="color:#facc15"></i>
+        </div>
+        <div class="activity-details">
+          <p>Perfect! Completed all lessons <span class="perfect-label">PERFECT</span></p>
+          <span class="activity-time">${whenText}</span>
+        </div>`;
+      ra.prepend(item);
+    } else {
+      const timeEl = existing.querySelector(".activity-time");
+      if (timeEl) timeEl.textContent = whenText;
+    }
   }
   function upsertActivity(course) {
     const base = String(course.completedKey || "").split("::")[0];
@@ -366,7 +427,10 @@
     }
   }
   function renderAll() {
+    // Render course completions
     COURSES.forEach(upsertActivity);
+    // Render overall perfect badge (kept at top)
+    renderPerfectBadge();
   }
   renderAll();
   window.addEventListener("storage", (e) => {
