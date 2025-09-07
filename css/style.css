@@ -672,6 +672,32 @@ nav {
   width: 250px;
 }
 
+/* Make team section responsive */
+.team-grid {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .team-grid {
+    gap: 24px;
+  }
+  .team-member {
+    width: calc(50% - 16px);
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .team-grid {
+    gap: 16px;
+  }
+  .team-member {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
 .team-member.animate-in {
   opacity: 1;
   transform: translateY(0);
