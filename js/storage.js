@@ -1,16 +1,29 @@
-/* Lightweight localStorage helpers for consistent, safe access */
 (function (window) {
   // In-memory fallback if both localStorage and sessionStorage are unavailable
   const mem = Object.create(null);
 
   function tryGet(storage, key) {
-    try { return storage.getItem(key); } catch { return null; }
+    try {
+      return storage.getItem(key);
+    } catch {
+      return null;
+    }
   }
   function trySet(storage, key, value) {
-    try { storage.setItem(key, value); return true; } catch { return false; }
+    try {
+      storage.setItem(key, value);
+      return true;
+    } catch {
+      return false;
+    }
   }
   function tryRemove(storage, key) {
-    try { storage.removeItem(key); return true; } catch { return false; }
+    try {
+      storage.removeItem(key);
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   const StorageUtil = {
@@ -45,7 +58,9 @@
         if (raw == null || raw === "") return fallback;
         const parsed = JSON.parse(raw);
         return parsed == null ? fallback : parsed;
-      } catch { return fallback; }
+      } catch {
+        return fallback;
+      }
     },
 
     setJSON(key, value) {
@@ -62,7 +77,9 @@
         const raw = this.get(key);
         const n = parseInt(raw || "", 10);
         return Number.isFinite(n) ? n : fallback;
-      } catch { return fallback; }
+      } catch {
+        return fallback;
+      }
     },
 
     setInt(key, value) {
