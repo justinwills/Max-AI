@@ -24,27 +24,14 @@
   const currentEl = document.getElementById('fp-current');
   const passEl = document.getElementById('fp-password');
   const confirmEl = document.getElementById('fp-confirm');
-  const hint = document.getElementById('fp-password-hint');
 
   function setBusy(state) {
     if (!btn) return;
     btn.disabled = !!state;
     btn.innerHTML = state ? '<i class="fas fa-spinner fa-spin"></i> Resetting...' : '<i class="fas fa-unlock"></i> Reset Password';
   }
-  function checkStrength(pw) {
-    const r = { len: pw.length >= 8, upper: /[A-Z]/.test(pw), lower: /[a-z]/.test(pw), number: /[0-9]/.test(pw), symbol: /[^A-Za-z0-9]/.test(pw) };
-    r.all = r.len && r.upper && r.lower && r.number && r.symbol; return r;
-  }
-  function updateHint(pw) {
-    if (!hint) return; const res = checkStrength(pw);
-    hint.querySelectorAll('li').forEach((li) => {
-      const key = li.getAttribute('data-req'); const ok = !!res[key];
-      li.classList.toggle('ok', ok);
-      const icon = li.querySelector('i'); if (icon) icon.className = ok ? 'fas fa-check-circle' : 'fas fa-circle';
-    });
-  }
-  passEl?.addEventListener('input', function(){ updateHint(passEl.value || ''); });
 
+  // Submit handling without password strength restrictions
   form?.addEventListener('submit', function (event) {
     event.preventDefault();
     const email = (emailEl?.value || '').trim().toLowerCase();
@@ -53,8 +40,6 @@
     const confirm = confirmEl?.value || '';
     if (!email || !current || !password || !confirm) { swal('Missing info', 'Please fill in all fields.', 'warning'); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { swal('Invalid email', 'Please enter a valid email address.', 'error'); return; }
-    const strong = password.length >= 8 && /[A-Z]/.test(password) && /[a-z]/.test(password) && /[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password);
-    if (!strong) { swal('Weak password', 'Use at least 8 characters with uppercase, lowercase, number, and symbol.', 'error'); updateHint(password); return; }
     if (password !== confirm) { swal('Password mismatch', 'Passwords do not match.', 'error'); return; }
 
     setBusy(true);
