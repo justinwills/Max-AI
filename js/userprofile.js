@@ -187,7 +187,7 @@ document
   });
 
 // Delete account (bind once)
-(function(){
+(function () {
   const __del = document.getElementById("delete-account");
   if (!__del || __del.__delBound) return;
   __del.__delBound = true;
@@ -214,8 +214,12 @@ document
           : [];
         // Persist updated users list across both storages
         S.setJSON("users", filtered);
-        try { sessionStorage.setItem("users", JSON.stringify(filtered)); } catch (_) {}
-        try { sessionStorage.setItem("users", JSON.stringify(filtered)); } catch (_) {}
+        try {
+          sessionStorage.setItem("users", JSON.stringify(filtered));
+        } catch (_) {}
+        try {
+          sessionStorage.setItem("users", JSON.stringify(filtered));
+        } catch (_) {}
         const scope = (function () {
           try {
             return String(
@@ -233,7 +237,9 @@ document
             const k = localStorage.key(i);
             if (k) keys.push(k);
           }
-          keys.forEach((k) => { if (k && k.endsWith(suffix)) localStorage.removeItem(k); });
+          keys.forEach((k) => {
+            if (k && k.endsWith(suffix)) localStorage.removeItem(k);
+          });
         } catch (_) {}
         try {
           const sKeys = [];
@@ -241,10 +247,16 @@ document
             const k = sessionStorage.key(i);
             if (k) sKeys.push(k);
           }
-          sKeys.forEach((k) => { if (k && k.endsWith(suffix)) sessionStorage.removeItem(k); });
+          sKeys.forEach((k) => {
+            if (k && k.endsWith(suffix)) sessionStorage.removeItem(k);
+          });
         } catch (_) {}
-        try { localStorage.removeItem("currentUser"); } catch (_) {}
-        try { sessionStorage.removeItem("currentUser"); } catch (_) {}
+        try {
+          localStorage.removeItem("currentUser");
+        } catch (_) {}
+        try {
+          sessionStorage.removeItem("currentUser");
+        } catch (_) {}
         S.setJSON("currentUser", null);
         Swal.fire({
           icon: "success",
@@ -291,13 +303,6 @@ document
   }
   document.querySelectorAll(".toggle-password").forEach(setupToggle);
 })();
-
-// Mobile menu toggle
-document
-  .querySelector(".mobile-menu-btn")
-  ?.addEventListener("click", function () {
-    document.querySelector(".nav-links")?.classList.toggle("active");
-  });
 
 // Load current user and populate profile
 (function () {
@@ -529,7 +534,7 @@ document
 })();
 
 // Delete account: remove user + all per-user progress keys, then sign out (bind once)
-(function(){
+(function () {
   const __del = document.getElementById("delete-account");
   if (!__del || __del.__delBound) return;
   __del.__delBound = true;
@@ -574,7 +579,9 @@ document
             const k = localStorage.key(i);
             if (k) keys.push(k);
           }
-          keys.forEach((k) => { if (k && k.endsWith(suffix)) localStorage.removeItem(k); });
+          keys.forEach((k) => {
+            if (k && k.endsWith(suffix)) localStorage.removeItem(k);
+          });
         } catch (_) {}
         try {
           const sKeys = [];
@@ -582,12 +589,18 @@ document
             const k = sessionStorage.key(i);
             if (k) sKeys.push(k);
           }
-          sKeys.forEach((k) => { if (k && k.endsWith(suffix)) sessionStorage.removeItem(k); });
+          sKeys.forEach((k) => {
+            if (k && k.endsWith(suffix)) sessionStorage.removeItem(k);
+          });
         } catch (_) {}
 
         // Clear session
-        try { localStorage.removeItem("currentUser"); } catch (_) {}
-        try { sessionStorage.removeItem("currentUser"); } catch (_) {}
+        try {
+          localStorage.removeItem("currentUser");
+        } catch (_) {}
+        try {
+          sessionStorage.removeItem("currentUser");
+        } catch (_) {}
         S.setJSON("currentUser", null);
 
         Swal.fire({
