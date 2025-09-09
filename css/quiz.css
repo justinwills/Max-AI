@@ -28,86 +28,11 @@ h4 {
   color: #fff;
 }
 
-nav {
-  backdrop-filter: blur(10px);
-  background: rgba(30, 41, 59, 0.95);
-  border-bottom: 1px solid rgba(140, 82, 255, 0.1);
-  position: fixed;
-  top: 0;
-  transition: all 0.3s ease;
-  width: 100%;
-  z-index: 1000;
-}
-
-.nav-container {
-  align-items: center;
-  display: flex;
-  height: 80px;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 0 20px;
-}
-
 /* Allow main content to take remaining height so footer is visible */
 .quiz-section {
   flex: 1 0 auto;
 }
-
-.logo {
-  cursor: pointer;
-  height: 130px;
-  margin-left: -35px;
-}
-
-.nav-links {
-  align-items: center;
-  display: flex;
-  gap: 32px;
-}
-
-.nav-link {
-  color: hsla(0, 0%, 100%, 0.8);
-  font-size: 16px;
-  font-weight: 500;
-  position: relative;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.nav-link.active,
-.nav-link:hover {
-  color: #fff;
-}
-
-.nav-link:after {
-  background: linear-gradient(90deg, #8c52ff, #cb6ce6, #ff66c4);
-  bottom: -8px;
-  content: "";
-  height: 2px;
-  left: 0;
-  position: absolute;
-  transition: width 0.3s ease;
-  width: 0;
-}
-
-.nav-link.active:after,
-.nav-link:hover:after {
-  width: 100%;
-}
-
-.nav-actions {
-  align-items: center;
-  display: flex;
-  gap: 16px;
-}
-
-.mobile-menu-btn {
-  color: #fff;
-  cursor: pointer;
-  display: none;
-  font-size: 24px;
-}
+/* Navigation styles moved to css/nav.css */
 
 .btn-primary {
   align-items: center;
@@ -253,16 +178,45 @@ nav {
 }
 
 /* Floating chip layout + staggered delays (desktop) */
-.header-visual .chip:nth-child(1) { left: 6%;  top: 8%;  animation-delay: 0s; }
-.header-visual .chip:nth-child(2) { right: 8%; top: 38%; animation-delay: .8s; }
-.header-visual .chip:nth-child(3) { left: 40%; bottom: 6%; animation-delay: 1.6s; }
-.header-visual .chip:nth-child(4) { right: 22%; top: 10%; animation-delay: 2.4s; }
-.header-visual .chip:nth-child(5) { left: 12%; bottom: 34%; animation-delay: 3.2s; }
-.header-visual .chip:nth-child(6) { right: 6%; bottom: 10%; animation-delay: 4s; }
+.header-visual .chip:nth-child(1) {
+  left: 6%;
+  top: 8%;
+  animation-delay: 0s;
+}
+.header-visual .chip:nth-child(2) {
+  right: 8%;
+  top: 38%;
+  animation-delay: 0.8s;
+}
+.header-visual .chip:nth-child(3) {
+  left: 40%;
+  bottom: 6%;
+  animation-delay: 1.6s;
+}
+.header-visual .chip:nth-child(4) {
+  right: 22%;
+  top: 10%;
+  animation-delay: 2.4s;
+}
+.header-visual .chip:nth-child(5) {
+  left: 12%;
+  bottom: 34%;
+  animation-delay: 3.2s;
+}
+.header-visual .chip:nth-child(6) {
+  right: 6%;
+  bottom: 10%;
+  animation-delay: 4s;
+}
 
 @keyframes float {
-  0%, to { transform: translateY(0); }
-  50%    { transform: translateY(-14px); }
+  0%,
+  to {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
 }
 
 /* Mobile: stack naturally, keep subtle float but not absolute */

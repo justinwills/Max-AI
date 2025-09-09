@@ -23,81 +23,7 @@ span {
   font-size: 0.9rem;
 }
 
-nav {
-  backdrop-filter: blur(10px);
-  background: rgba(30, 41, 59, 0.95);
-  border-bottom: 1px solid rgba(140, 82, 255, 0.1);
-  position: fixed;
-  top: 0;
-  transition: all 0.3s ease;
-  width: 100%;
-  z-index: 1000;
-}
-
-.nav-container {
-  align-items: center;
-  display: flex;
-  height: 80px;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 0 20px;
-}
-
-.logo {
-  cursor: pointer;
-  height: 130px;
-  margin-left: -35px;
-}
-
-.nav-links {
-  align-items: center;
-  display: flex;
-  gap: 32px;
-}
-
-.nav-link {
-  color: hsla(0, 0%, 100%, 0.8);
-  font-size: 16px;
-  font-weight: 500;
-  position: relative;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.nav-link.active,
-.nav-link:hover {
-  color: #fff;
-}
-
-.nav-link:after {
-  background: linear-gradient(90deg, #8c52ff, #cb6ce6, #ff66c4);
-  bottom: -8px;
-  content: "";
-  height: 2px;
-  left: 0;
-  position: absolute;
-  transition: width 0.3s ease;
-  width: 0;
-}
-
-.nav-link.active:after,
-.nav-link:hover:after {
-  width: 100%;
-}
-
-.nav-actions {
-  align-items: center;
-  display: flex;
-  gap: 16px;
-}
-
-.mobile-menu-btn {
-  color: #fff;
-  cursor: pointer;
-  display: none;
-  font-size: 24px;
-}
+/* Navigation styles moved to css/nav.css */
 
 .btn-primary {
   align-items: center;
@@ -470,7 +396,11 @@ footer {
 
 /* Special badge when all lessons are completed */
 .user-profile .activity-item.perfect-badge {
-  background: linear-gradient(135deg, rgba(250, 204, 21, 0.15), rgba(234, 179, 8, 0.12));
+  background: linear-gradient(
+    135deg,
+    rgba(250, 204, 21, 0.15),
+    rgba(234, 179, 8, 0.12)
+  );
   border: 1px solid rgba(250, 204, 21, 0.35);
 }
 .user-profile .activity-item.perfect-badge .activity-icon {
