@@ -38,22 +38,22 @@
     const current = currentEl?.value || '';
     const password = passEl?.value || '';
     const confirm = confirmEl?.value || '';
-    if (!email || !current || !password || !confirm) { swal('Missing info', 'Please fill in all fields.', 'warning'); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { swal('Invalid email', 'Please enter a valid email address.', 'error'); return; }
-    if (password !== confirm) { swal('Password mismatch', 'Passwords do not match.', 'error'); return; }
+    if (!email || !current || !password || !confirm) { Swal.fire({ title: 'Missing info', text: 'Please fill in all fields.', icon: 'warning' }); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { Swal.fire({ title: 'Invalid email', text: 'Please enter a valid email address.', icon: 'error' }); return; }
+    if (password !== confirm) { Swal.fire({ title: 'Password mismatch', text: 'Passwords do not match.', icon: 'error' }); return; }
 
     setBusy(true);
     try {
       const store = window.StorageUtil; const users = store.getJSON('users', []);
       const idx = users.findIndex((u) => (u.email || '').toLowerCase() === email);
-      if (idx === -1) { setBusy(false); swal('Account not found', 'No user with that email.', 'error'); return; }
-      if ((users[idx].password || '') !== current) { setBusy(false); swal('Incorrect password', 'Current password is incorrect.', 'error'); return; }
+      if (idx === -1) { setBusy(false); Swal.fire({ title: 'Account not found', text: 'No user with that email.', icon: 'error' }); return; }
+      if ((users[idx].password || '') !== current) { setBusy(false); Swal.fire({ title: 'Incorrect password', text: 'Current password is incorrect.', icon: 'error' }); return; }
       users[idx].password = password; store.setJSON('users', users);
       try { window.sessionStorage.setItem('users', JSON.stringify(users)); } catch {}
       try { window.localStorage.removeItem('currentUser'); } catch {}
       try { window.sessionStorage.removeItem('currentUser'); } catch {}
-      swal('Password Updated', 'Your password has been reset. Please log in.', 'success');
+      Swal.fire({ title: 'Password Updated', text: 'Your password has been reset. Please log in.', icon: 'success' });
       setTimeout(function () { window.location.href = 'login.html'; }, 1200);
-    } catch (e) { console.error(e); setBusy(false); swal('Error', 'Could not reset password. Please try again.', 'error'); }
+    } catch (e) { console.error(e); setBusy(false); Swal.fire({ title: 'Error', text: 'Could not reset password. Please try again.', icon: 'error' }); }
   });
 })();

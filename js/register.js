@@ -49,10 +49,10 @@
     const email = emailEl?.value.trim().toLowerCase() || '';
     const password = passEl?.value || '';
     const confirm = confirmEl?.value || '';
-    if (!username || !email || !password || !confirm) { swal('Missing info', 'Please fill in all fields.', 'warning'); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { swal('Invalid email', 'Please enter a valid email address.', 'error'); return; }
+    if (!username || !email || !password || !confirm) { Swal.fire({ title: 'Missing info', text: 'Please fill in all fields.', icon: 'warning' }); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { Swal.fire({ title: 'Invalid email', text: 'Please enter a valid email address.', icon: 'error' }); return; }
     // Password strength restriction removed; allow any password
-    if (password !== confirm) { swal('Password mismatch', 'Passwords do not match.', 'error'); return; }
+    if (password !== confirm) { Swal.fire({ title: 'Password mismatch', text: 'Passwords do not match.', icon: 'error' }); return; }
 
     setBusy(true, 'Creating Account...', 'Get Started');
     try {
@@ -61,9 +61,9 @@
       const existsUsername = users.some((u) => (u.username || '').toLowerCase() === (username || '').toLowerCase());
       if (existsEmail || existsUsername) {
         setBusy(false, '', 'Get Started');
-        if (existsEmail && existsUsername) swal('Already in use', 'Both the email and username are already registered.', 'error');
-        else if (existsEmail) swal('Email in use', 'An account with this email already exists.', 'error');
-        else swal('Username in use', 'Please choose a different username.', 'error');
+        if (existsEmail && existsUsername) Swal.fire({ title: 'Already in use', text: 'Both the email and username are already registered.', icon: 'error' });
+        else if (existsEmail) Swal.fire({ title: 'Email in use', text: 'An account with this email already exists.', icon: 'error' });
+        else Swal.fire({ title: 'Username in use', text: 'Please choose a different username.', icon: 'error' });
         return;
       }
       const user = { id: Date.now(), username, email, password, createdAt: new Date().toISOString() };
@@ -73,11 +73,11 @@
       const cu = { id: user.id, username, email };
       store.setJSON('currentUser', cu);
       try { window.sessionStorage.setItem('currentUser', JSON.stringify(cu)); } catch {}
-      swal('Registration Successful!', 'Welcome to MaxAI! Your account has been created.', 'success');
+      Swal.fire({ title: 'Registration Successful!', text: 'Welcome to MaxAI! Your account has been created.', icon: 'success' });
       setTimeout(function () { window.location.href = 'home.html'; }, 1200);
     } catch (e) {
       console.error(e); setBusy(false, '', 'Get Started');
-      swal('Error', 'Could not create account. Please try again.', 'error');
+      Swal.fire({ title: 'Error', text: 'Could not create account. Please try again.', icon: 'error' });
     }
   });
 })();

@@ -1,4 +1,11 @@
 // Password visibility toggles
+// SweetAlert compatibility (supports SweetAlert2 or falls back to alert)
+try {
+  if (typeof window !== 'undefined' && !window.swal && window.Swal && window.Swal.fire) {
+    window.swal = function (title, text, icon) { return window.Swal.fire({ title, text, icon }); };
+  }
+} catch {}
+
 (function () {
   function setupToggle(btn) {
     const targetId = btn.getAttribute('data-target');
@@ -42,7 +49,7 @@
     if (hasReset) {
       try { window.localStorage.clear(); } catch {}
       try { window.sessionStorage.clear(); } catch {}
-      try { swal('Storage Cleared', 'Local and session data removed for this origin.', 'success'); } catch {}
+      try { Swal.fire({ title: 'Storage Cleared', text: 'Local and session data removed for this origin.', icon: 'success' }); } catch {}
       setTimeout(function(){ window.location.replace('login.html'); }, 500);
       return;
     }
@@ -65,7 +72,7 @@
     const identifier = idEl?.value.trim() || '';
     const password = passEl?.value || '';
     if (!identifier || !password) {
-      swal('Missing info', 'Please enter email/username and password.', 'warning');
+      Swal.fire({ title: 'Missing info', text: 'Please enter email/username and password.', icon: 'warning' });
       return;
     }
     setBusy(true);
@@ -96,18 +103,18 @@
       const ok = !!user && (storedPw === password || storedPw.trim() === password.trim());
       if (!ok) {
         setBusy(false);
-        swal('Invalid credentials', 'Email/username or password is incorrect.', 'error');
+        Swal.fire({ title: 'Invalid credentials', text: 'Email/username or password is incorrect.', icon: 'error' });
         return;
       }
       const cu = { id: user.id, username: user.username, email: user.email };
       store?.setJSON?.('currentUser', cu);
       try { window.sessionStorage.setItem('currentUser', JSON.stringify(cu)); } catch {}
-      swal('Login Successful!', 'Welcome back to MaxAI!', 'success');
+      Swal.fire({ title: 'Login Successful!', text: 'Welcome back to MaxAI!', icon: 'success' });
       setTimeout(function () { window.location.href = 'home.html'; }, 1000);
     } catch (e) {
       console.error(e);
       setBusy(false);
-      swal('Error', 'Could not log in. Please try again.', 'error');
+      Swal.fire({ title: 'Error', text: 'Could not log in. Please try again.', icon: 'error' });
     }
   });
 })();

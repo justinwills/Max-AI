@@ -4,13 +4,17 @@
   (function(){
     try {
       if (typeof window.swal !== 'function') {
-        window.swal = function(title, text, icon){
-          try {
-            const msg = [title || '', text || ''].filter(Boolean).join('\n');
-            alert(msg || 'Notice');
-          } catch { alert('Notice'); }
-          try { return Promise.resolve({}); } catch { return undefined; }
-        };
+        if (window.Swal && typeof window.Swal.fire === 'function') {
+          window.swal = function(title, text, icon){ return window.Swal.fire({ title, text, icon }); };
+        } else {
+          window.swal = function(title, text){
+            try {
+              const msg = [title || '', text || ''].filter(Boolean).join('\n');
+              alert(msg || 'Notice');
+            } catch { alert('Notice'); }
+            try { return Promise.resolve({}); } catch { return undefined; }
+          };
+        }
       }
       if (!window.Swal || typeof window.Swal.fire !== 'function') {
         window.Swal = window.Swal || {};
