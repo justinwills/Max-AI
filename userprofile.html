@@ -207,26 +207,6 @@
       </div>
     </footer>
     <script src="js/nav.js"></script>
-    <script>
-      // Ensure hamburger works on this page even if other scripts fail
-      (function(){
-        function toggleMenu(){
-          var links = document.querySelector('.nav-links');
-          if (links) links.classList.toggle('active');
-          var alt = document.querySelector('nav .navigation ul');
-          if (alt) alt.classList.toggle('active');
-        }
-        var btn = document.querySelector('.mobile-menu-btn');
-        if (btn && !btn.__maxaiBound){
-          btn.__maxaiBound = true;
-          btn.addEventListener('click', function(e){ e.preventDefault(); toggleMenu(); });
-        }
-        document.addEventListener('click', function(e){
-          var t = e.target.closest ? e.target.closest('.mobile-menu-btn') : null;
-          if (t){ e.preventDefault(); toggleMenu(); }
-        });
-      })();
-    </script>
     <script src="js/userprofile.js"></script>
   </body>
 </html>
