@@ -9,6 +9,7 @@
     <script src="../js/storage.js"></script>
 
     <link rel="stylesheet" href="../css/modules-inner.css" />
+    <link rel="stylesheet" href="../css/nav.css" />
 
     <link rel="stylesheet" href="../vendor/sweetalert2/sweetalert2.min.css" />
     <script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
@@ -17,58 +18,37 @@
   </head>
   <body>
     <nav>
-        <img src="../img/logo.svg" class="logo" alt="MaxAI" />
-      </a>
+      <div class="nav-container">
+        <a href="../home.html" aria-label="Go to Home">
+          <img src="../img/logo.svg" class="logo" alt="MaxAI" />
+        </a>
 
-      <div class="navigation">
-        <ul>
-          <li><a href="../home.html">Home</a></li>
-          <li><a href="../modules.html" class="active">Modules</a></li>
-          <li><a href="../flashcard.html">Flashcard</a></li>
-          <li><a href="../quiz.html">Quiz</a></li>
-          <li><a href="../about.html">About</a></li>
-        </ul>
+        <div class="nav-links">
+          <a href="../home.html" class="nav-link">Home</a>
+          <a href="../modules.html" class="nav-link active">Modules</a>
+          <a href="../flashcard.html" class="nav-link">Flashcard</a>
+          <a href="../quiz.html" class="nav-link">Quiz</a>
+          <a href="../about.html" class="nav-link">About</a>
+        </div>
+
+        <div class="nav-actions">
+          <div class="profile-menu">
+            <button type="button" class="profile-btn" aria-label="Profile" aria-expanded="false">
+              <i class="fas fa-user"></i>
+            </button>
+            <div class="menu">
+              <a href="../userprofile.html"><i class="fas fa-user-circle"></i> Profile</a>
+              <a href="../login.html?logout=1"><i class="fas fa-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
+        </div>
+
         <div class="mobile-menu-btn" aria-label="Open menu" role="button" tabindex="0">
           <i class="fas fa-bars"></i>
         </div>
       </div>
-
-      <div class="profile-menu">
-        <button
-          type="button"
-          class="profile-btn"
-          aria-label="Profile"
-          aria-expanded="false"
-        >
-          <i class="fas fa-user"></i>
-        </button>
-        <div class="menu">
-          <a href="../userprofile.html"
-            ><i class="fas fa-user-circle"></i> Profile</a
-          >
-          <a href="../login.html?logout=1"
-            ><i class="fas fa-right-from-bracket"></i> Logout</a
-          >
-        </div>
-      </div>
     </nav>
     <script src="../js/nav.js"></script>
-    <script>
-      // Mobile menu toggle for inner modules page
-      (function(){
-        const burger = document.querySelector('.mobile-menu-btn');
-        const menuList = document.querySelector('nav .navigation ul');
-        if (burger && menuList) {
-          burger.addEventListener('click', function(){
-            menuList.classList.toggle('active');
-          });
-          // Close menu when a link is tapped (mobile)
-          menuList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            menuList.classList.remove('active');
-          }));
-        }
-      })();
-    </script>
 
     <section id="about-home">
       <div class="hero-content">

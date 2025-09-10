@@ -920,100 +920,7 @@ body {
   width: 16px;
 }
 
-nav {
-  align-items: center;
-  backdrop-filter: blur(10px);
-  background: rgba(30, 41, 59, 0.95);
-  border-bottom: 1px solid rgba(140, 82, 255, 0.1);
-  display: flex;
-  height: 80px;
-  justify-content: space-between;
-  padding: 0 8vw;
-  position: fixed;
-  top: 0;
-  transition: var(--transition);
-  width: 100%;
-  z-index: 1000;
-}
-
-.mobile-menu-btn {
-  color: #fff;
-  cursor: pointer;
-  display: none;
-  font-size: 24px;
-}
-
-.logo {
-  cursor: pointer;
-  height: 130px;
-  margin-left: -35px;
-  padding-top: 15px;
-}
-
-.navigation ul {
-  align-items: center;
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-
-.navigation ul li a {
-  color: hsla(0, 0%, 100%, 0.8);
-  font-size: 16px;
-  font-weight: 500;
-  position: relative;
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.navigation ul li a.active,
-.navigation ul li a:hover {
-  color: var(--white);
-}
-
-.navigation ul li a:after {
-  background: var(--gradient-text);
-  bottom: -8px;
-  content: "";
-  height: 2px;
-  left: 0;
-  position: absolute;
-  transition: width 0.3s ease;
-  width: 0;
-}
-
-.navigation ul li a.active:after,
-.navigation ul li a:hover:after {
-  width: 100%;
-}
-
-.profile-btn {
-  align-items: center;
-  background: linear-gradient(
-    135deg,
-    var(--primary, #8c52ff),
-    var(--secondary, #cb6ce6)
-  );
-  border: 1px solid hsla(0, 0%, 100%, 0.15);
-  border-radius: 50%;
-  box-shadow: 0 6px 18px rgba(140, 82, 255, 0.2);
-  color: #fff;
-  display: inline-flex;
-  height: 40px;
-  justify-content: center;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  width: 40px;
-}
-
-.profile-btn i {
-  font-size: 18px;
-}
-
-.profile-btn:hover {
-  box-shadow: 0 10px 28px rgba(140, 82, 255, 0.35);
-  transform: translateY(-2px) scale(1.03);
-}
+/* Navigation visuals are handled by css/nav.css for consistency */
 
 .profile-menu {
   position: relative;
@@ -1138,42 +1045,7 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .navigation ul {
-    background: rgba(30, 41, 59, 0.98);
-    border-top: 1px solid rgba(140, 82, 255, 0.1);
-    display: none;
-    flex-direction: column;
-    gap: 20px;
-    left: 0;
-    padding: 24px 8vw;
-    position: absolute;
-    right: 0;
-    top: 80px;
-  }
-
-  .navigation ul.active {
-    display: flex;
-  }
-
-  .mobile-menu-btn {
-    display: block;
-    position: absolute;
-    right: 16px;
-    top: 20px;
-    z-index: 1002;
-  }
-
-  .logo {
-    height: 100px;
-    margin-left: -20px;
-  }
-
-  .profile-menu {
-    position: absolute;
-    right: 52px;
-    top: 20px;
-    z-index: 1002;
-  }
+  /* Navigation mobile rules moved to css/nav.css */
 
   .course-img {
     height: 220px;
@@ -1206,10 +1078,7 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .navigation ul li a {
-    font-size: 1.05rem;
-    padding: 12px 0;
-  }
+  /* Navigation link sizes moved to css/nav.css */
 }
 
 @media (max-width: 480px) {

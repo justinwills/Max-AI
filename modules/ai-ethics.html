@@ -9,66 +9,60 @@
     <script src="../js/storage.js"></script>
 
     <link rel="stylesheet" href="../css/modules-inner.css" />
-
+    <link rel="stylesheet" href="../css/nav.css" />
     <link rel="stylesheet" href="../vendor/sweetalert2/sweetalert2.min.css" />
     <script src="../vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
     <script src="../vendor/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../js/nav.js"></script>
   </head>
   <body>
     <nav>
-        <img src="../img/logo.svg" class="logo" alt="MaxAI" />
-      </a>
+      <div class="nav-container">
+        <a href="../home.html" aria-label="Go to Home">
+          <img src="../img/logo.svg" class="logo" alt="MaxAI" />
+        </a>
 
-      <div class="navigation">
-        <ul>
-          <li><a href="../home.html">Home</a></li>
-          <li><a href="../modules.html" class="active">Modules</a></li>
-          <li><a href="../flashcard.html">Flashcard</a></li>
-          <li><a href="../quiz.html">Quiz</a></li>
-          <li><a href="../about.html">About</a></li>
-        </ul>
-        <div class="mobile-menu-btn" aria-label="Open menu" role="button" tabindex="0">
-          <i class="fas fa-bars"></i>
+        <div class="nav-links">
+          <a href="../home.html" class="nav-link">Home</a>
+          <a href="../modules.html" class="nav-link active">Modules</a>
+          <a href="../flashcard.html" class="nav-link">Flashcard</a>
+          <a href="../quiz.html" class="nav-link">Quiz</a>
+          <a href="../about.html" class="nav-link">About</a>
         </div>
-      </div>
 
-      <div class="profile-menu">
-        <button
-          type="button"
-          class="profile-btn"
-          aria-label="Profile"
-          aria-expanded="false"
+        <div class="nav-actions">
+          <div class="profile-menu">
+            <button
+              type="button"
+              class="profile-btn"
+              aria-label="Profile"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i>
+            </button>
+            <div class="menu">
+              <a href="../userprofile.html"
+                ><i class="fas fa-user-circle"></i> Profile</a
+              >
+              <a href="../login.html?logout=1"
+                ><i class="fas fa-right-from-bracket"></i> Logout</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mobile-menu-btn"
+          aria-label="Open menu"
+          role="button"
+          tabindex="0"
         >
-          <i class="fas fa-user"></i>
-        </button>
-        <div class="menu">
-          <a href="../userprofile.html"
-            ><i class="fas fa-user-circle"></i> Profile</a
-          >
-          <a href="../login.html?logout=1"
-            ><i class="fas fa-right-from-bracket"></i> Logout</a
-          >
+          <i class="fas fa-bars"></i>
         </div>
       </div>
     </nav>
     <script src="../js/nav.js"></script>
-    <script>
-      // Mobile menu toggle for inner modules page
-      (function(){
-        const burger = document.querySelector('.mobile-menu-btn');
-        const menuList = document.querySelector('nav .navigation ul');
-        if (burger && menuList) {
-          burger.addEventListener('click', function(){
-            menuList.classList.toggle('active');
-          });
-          // Close menu when a link is tapped (mobile)
-          menuList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            menuList.classList.remove('active');
-          }));
-        }
-      })();
-    </script>
 
     <section id="about-home">
       <div class="hero-content">
@@ -78,7 +72,8 @@
         </div>
         <h1>AI Ethics & Future</h1>
         <p class="hero-subtitle">
-               Examine the ethical challenges, societal impacts, and the future direction of artificial intelligence.
+          Examine the ethical challenges, societal impacts, and the future
+          direction of artificial intelligence.
         </p>
         <div class="hero-stats">
           <div class="stat-item">
@@ -165,63 +160,85 @@
         </div>
 
         <div class="content-sections">
-        <!-- Learning Objectives ---->
-        <section class="content-section" id="objectives">
-        <div class="section-header">
-            <div class="section-icon">
-            <i class="fas fa-bullseye"></i>
+          <!-- Learning Objectives ---->
+          <section class="content-section" id="objectives">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <h3>Learning Objectives</h3>
             </div>
-            <h3>Learning Objectives</h3>
-        </div>
-        <div class="objectives-grid">
-            <div class="objective-item">
-            <i class="fas fa-check-circle"></i>
-            <span>Identify how bias enters AI systems and apply fairness metrics & mitigations</span>
+            <div class="objectives-grid">
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Identify how bias enters AI systems and apply fairness
+                  metrics & mitigations</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Explain privacy principles such as data minimization,
+                  differential privacy, and federated learning</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Document and audit models with transparency tools like Model
+                  Cards and Datasheets</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Use explainability responsibly and define
+                  escalation/remediation paths for accountability</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Apply safety practices: red-teaming, alignment, runtime
+                  safeguards, and human-in-the-loop</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Discuss emerging trends: Retrieval-Augmented Generation, edge
+                  deployment, and agentic workflows</span
+                >
+              </div>
+              <div class="objective-item">
+                <i class="fas fa-check-circle"></i>
+                <span
+                  >Reflect on responsible AI practices that balance innovation,
+                  ethics, and real-world duty of care</span
+                >
+              </div>
             </div>
-            <div class="objective-item">
-            <i class="fas fa-check-circle"></i>
-            <span>Explain privacy principles such as data minimization, differential privacy, and federated learning</span>
-            </div>
-            <div class="objective-item">
-            <i class="fas fa-check-circle"></i>
-            <span>Document and audit models with transparency tools like Model Cards and Datasheets</span>
-            </div>
-            <div class="objective-item">
-            <i class="fas fa-check-circle"></i>
-            <span>Use explainability responsibly and define escalation/remediation paths for accountability</span>
-            </div>
-            <div class="objective-item">
-            <i class="fas fa-check-circle"></i>
-            <span>Apply safety practices: red-teaming, alignment, runtime safeguards, and human-in-the-loop</span>
-            </div>
-            <div class="objective-item">
-            <i class="fas fa-check-circle"></i>
-            <span>Discuss emerging trends: Retrieval-Augmented Generation, edge deployment, and agentic workflows</span>
-            </div>
-            <div class="objective-item">
-            <i class="fas fa-check-circle"></i>
-            <span>Reflect on responsible AI practices that balance innovation, ethics, and real-world duty of care</span>
-            </div>
-        </div>
-        </section>
+          </section>
 
-        <section class="content-section" id="prerequisites">
-        <div class="section-header">
-            <div class="section-icon">
-            <i class="fas fa-list-check"></i>
+          <section class="content-section" id="prerequisites">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-list-check"></i>
+              </div>
+              <h3>Prerequisites</h3>
             </div>
-            <h3>Prerequisites</h3>
-        </div>
-        <p>
-            Curiosity about how AI affects people and society. No coding required—focus is on concepts, risks, and governance. 
-            Optional: familiarity with basic AI/ML ideas helps but is not necessary.
-        </p>
-        <div class="tags">
-            <span class="tag">No coding required</span>
-            <span class="tag">Beginner friendly</span>
-            <span class="tag">Focus on ethics & governance</span>
-        </div>
-        </section>
+            <p>
+              Curiosity about how AI affects people and society. No coding
+              required—focus is on concepts, risks, and governance. Optional:
+              familiarity with basic AI/ML ideas helps but is not necessary.
+            </p>
+            <div class="tags">
+              <span class="tag">No coding required</span>
+              <span class="tag">Beginner friendly</span>
+              <span class="tag">Focus on ethics & governance</span>
+            </div>
+          </section>
 
           <div class="lessons-container">
             <h3 class="lessons-title">Course Lessons</h3>
@@ -231,9 +248,7 @@
                 <div class="lesson-number">01</div>
                 <div class="lesson-content">
                   <h4>Fairness from Data to Decisions</h4>
-                  <p>
-                    Measuring and mitigating bias in real workflows
-                  </p>
+                  <p>Measuring and mitigating bias in real workflows</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -245,17 +260,34 @@
                   <span><i class="fas fa-video"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/yN7ypxC7838" 
-title="All Machine Learning Models Explained in 5 Minutes" frameborder="0" allowfullscreen></iframe>
-                    <br>
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/yN7ypxC7838"
+                    title="All Machine Learning Models Explained in 5 Minutes"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <br />
                   <p>
-                    Bias creeps in through datasets (sampling, labeling), features (proxies for protected attributes), and 
-decision thresholds (different error costs across groups). A practical workflow is: define harm and 
-stakeholders → choose fairness metrics aligned to context → run disaggregated evaluation (by 
-subgroup) → mitigate via data balancing/reweighting, algorithmic changes (e.g., constraints for equalized odds), or post-processing (group-aware thresholds) → monitor drift over time. Remember that metrics trade off: demographic parity equalizes positive rates, while equalized odds equalizes error rates—pick based on the real-world duty of care (e.g., screening vs. adjudication). Document decisions and residual risks
+                    Bias creeps in through datasets (sampling, labeling),
+                    features (proxies for protected attributes), and decision
+                    thresholds (different error costs across groups). A
+                    practical workflow is: define harm and stakeholders → choose
+                    fairness metrics aligned to context → run disaggregated
+                    evaluation (by subgroup) → mitigate via data
+                    balancing/reweighting, algorithmic changes (e.g.,
+                    constraints for equalized odds), or post-processing
+                    (group-aware thresholds) → monitor drift over time. Remember
+                    that metrics trade off: demographic parity equalizes
+                    positive rates, while equalized odds equalizes error
+                    rates—pick based on the real-world duty of care (e.g.,
+                    screening vs. adjudication). Document decisions and residual
+                    risks
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> demographic parity, equalized odds, calibration, subgroup analysis, post-processing
+                    <strong>Key terms:</strong> demographic parity, equalized
+                    odds, calibration, subgroup analysis, post-processing
                   </div>
                 </div>
               </div>
@@ -266,9 +298,7 @@ subgroup) → mitigate via data balancing/reweighting, algorithmic changes (e.g.
                 <div class="lesson-number">02</div>
                 <div class="lesson-content">
                   <h4>Privacy & Data Governance by Design</h4>
-                  <p>
-                    Protecting people while preserving utility
-                  </p>
+                  <p>Protecting people while preserving utility</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -281,12 +311,23 @@ subgroup) → mitigate via data balancing/reweighting, algorithmic changes (e.g.
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Build around data minimization (collect only what you need), purpose limitation (no surprise uses), and secure lifecycle (ingestion → storage → access → deletion). Technical safeguards include differential 
-privacy (adding calibrated noise so single records have limited influence), federated learning (train where data lives), and secure aggregation or confidential computing to reduce exposure. Beware 
-“anonymous” data—linkage attacks can re-identify rows. Track lineage and consent; log who accessed what and why. When generating synthetic data, validate that it doesn’t memorize individuals (membership inference tests). Make privacy impact assessments routine, not exceptional.
+                    Build around data minimization (collect only what you need),
+                    purpose limitation (no surprise uses), and secure lifecycle
+                    (ingestion → storage → access → deletion). Technical
+                    safeguards include differential privacy (adding calibrated
+                    noise so single records have limited influence), federated
+                    learning (train where data lives), and secure aggregation or
+                    confidential computing to reduce exposure. Beware
+                    “anonymous” data—linkage attacks can re-identify rows. Track
+                    lineage and consent; log who accessed what and why. When
+                    generating synthetic data, validate that it doesn’t memorize
+                    individuals (membership inference tests). Make privacy
+                    impact assessments routine, not exceptional.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> differential privacy (ε), federated learning, secure aggregation, data minimization, lineage
+                    <strong>Key terms:</strong> differential privacy (ε),
+                    federated learning, secure aggregation, data minimization,
+                    lineage
                   </div>
                 </div>
               </div>
@@ -296,11 +337,12 @@ privacy (adding calibrated noise so single records have limited influence), fede
               <div class="lesson-header">
                 <div class="lesson-number">03</div>
                 <div class="lesson-content">
-                  <h4>
-                    Transparency, Explainability & Accountability
-                  </h4>
+                  <h4>Transparency, Explainability & Accountability</h4>
                   <p>
-                    Ensure ongoing transparency and accountability by documenting models and datasets, maintaining decision logs, using explainability responsibly, and defining clear escalation and remediation paths.
+                    Ensure ongoing transparency and accountability by
+                    documenting models and datasets, maintaining decision logs,
+                    using explainability responsibly, and defining clear
+                    escalation and remediation paths.
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -312,21 +354,32 @@ privacy (adding calibrated noise so single records have limited influence), fede
                   <span><i class="fas fa-clock"></i> 10 min</span>
                   <span><i class="fas fa-file-text"></i> Video</span>
                 </div>
-                <div class="lesson-preview">    
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/5e0FeCWDwM4" 
-title="Fairness from Data to Decisions" frameborder="0" allowfullscreen></iframe>
-                    <br>
-                    <p>
-Transparency is more than a one-time disclosure. Publish Model Cards (intended use, training data 
-sources, metrics by subgroup, known limitations) and Datasheets for Datasets (collection process, 
-consent, licensing, caveats). Maintain decision logs (inputs, versioned model, thresholds) for auditability 
-and incident response. Use explainability responsibly: local methods (e.g., SHAP/LIME) can aid 
-debugging, but don’t over-promise causal truth; pair explanations with user education and uncertainty 
-ranges. Define escalation paths: who pauses a model, how rollbacks work, and what remediation looks 
-like for affected users
-                    </p>
+                <div class="lesson-preview">
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/5e0FeCWDwM4"
+                    title="Fairness from Data to Decisions"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <br />
+                  <p>
+                    Transparency is more than a one-time disclosure. Publish
+                    Model Cards (intended use, training data sources, metrics by
+                    subgroup, known limitations) and Datasheets for Datasets
+                    (collection process, consent, licensing, caveats). Maintain
+                    decision logs (inputs, versioned model, thresholds) for
+                    auditability and incident response. Use explainability
+                    responsibly: local methods (e.g., SHAP/LIME) can aid
+                    debugging, but don’t over-promise causal truth; pair
+                    explanations with user education and uncertainty ranges.
+                    Define escalation paths: who pauses a model, how rollbacks
+                    work, and what remediation looks like for affected users
+                  </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> model card, datasheet, audit trail, SHAP/LIME, uncertainty disclosure
+                    <strong>Key terms:</strong> model card, datasheet, audit
+                    trail, SHAP/LIME, uncertainty disclosure
                   </div>
                 </div>
               </div>
@@ -350,16 +403,22 @@ like for affected users
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Operational safety blends pre-deployment testing with live defenses. Red-team models to probe for 
-harmful content, data exfiltration, jailbreaks, prompt injection, or privacy leaks. Align models with policy 
-via instruction tuning and refusal/deflection strategies; layer content filters, rate limiting, and abuse 
-detection in production. For connected systems and agents, constrain tools (principle of least privilege), 
-validate outputs (grounding/verification), and add human-in-the-loop for high-impact actions. 
-Continuously monitor for drift and incidents; create a lightweight Safety Review checklist for every 
-change (new data, new prompt, new integration).
+                    Operational safety blends pre-deployment testing with live
+                    defenses. Red-team models to probe for harmful content, data
+                    exfiltration, jailbreaks, prompt injection, or privacy
+                    leaks. Align models with policy via instruction tuning and
+                    refusal/deflection strategies; layer content filters, rate
+                    limiting, and abuse detection in production. For connected
+                    systems and agents, constrain tools (principle of least
+                    privilege), validate outputs (grounding/verification), and
+                    add human-in-the-loop for high-impact actions. Continuously
+                    monitor for drift and incidents; create a lightweight Safety
+                    Review checklist for every change (new data, new prompt, new
+                    integration).
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> red-teaming, alignment, content filtering, prompt injection, least privilege.
+                    <strong>Key terms:</strong> red-teaming, alignment, content
+                    filtering, prompt injection, least privilege.
                   </div>
                 </div>
               </div>
@@ -383,21 +442,26 @@ change (new data, new prompt, new integration).
                 </div>
                 <div class="lesson-preview">
                   <p>
-                   Three impactful shifts: (1) Retrieval-Augmented Generation (RAG) to ground outputs in your sources, 
-reducing hallucinations and enabling citations; invest in document chunking, metadata, and evaluation 
-beyond string-match. (2) On-device/edge models for privacy, lower latency, and resilience; plan for 
-model quantization and fallback paths. (3) Agentic workflows that chain tools and tasks; require 
-guardrails, state inspection, and sandboxed execution. Expect stronger sustainability pressures—
-optimize with distillation, quantization, caching, and scheduled batch jobs. Evaluation must evolve: add 
-task-specific checklists, human ratings, and safety benchmarks alongside accuracy.
+                    Three impactful shifts: (1) Retrieval-Augmented Generation
+                    (RAG) to ground outputs in your sources, reducing
+                    hallucinations and enabling citations; invest in document
+                    chunking, metadata, and evaluation beyond string-match. (2)
+                    On-device/edge models for privacy, lower latency, and
+                    resilience; plan for model quantization and fallback paths.
+                    (3) Agentic workflows that chain tools and tasks; require
+                    guardrails, state inspection, and sandboxed execution.
+                    Expect stronger sustainability pressures— optimize with
+                    distillation, quantization, caching, and scheduled batch
+                    jobs. Evaluation must evolve: add task-specific checklists,
+                    human ratings, and safety benchmarks alongside accuracy.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> RAG, grounding, quantization, distillation, agent sandboxing
+                    <strong>Key terms:</strong> RAG, grounding, quantization,
+                    distillation, agent sandboxing
                   </div>
                 </div>
               </div>
             </div>
-
 
             <!-- Module summary -->
             <div class="lesson-item" data-lesson="6">
@@ -476,7 +540,6 @@ task-specific checklists, human ratings, and safety benchmarks alongside accurac
               >Download</a
             >
           </div>
-
         </div>
 
         <div class="toc-info">
