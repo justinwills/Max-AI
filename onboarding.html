@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MaxAI - Onboarding</title>
+
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="vendor/sweetalert2/sweetalert2.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/onboarding.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="index.html" aria-label="Go to Home">
+          <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        </a>
+      </div>
+    </nav>
+
+    <main class="onboarding">
+      <div class="container">
+        <div class="ob-card">
+          <div class="ob-header">
+            <h2>Let’s personalize your learning</h2>
+            <p>Answer a few quick questions so we can tailor your dashboard.</p>
+          </div>
+
+          <form id="onboardingForm">
+            <section class="ob-step" data-step="1">
+              <h3><span class="step">1</span> Your Goals</h3>
+              <p class="hint">What brings you to MaxAI? Select all that apply.</p>
+              <div class="options-grid">
+                <label class="chip">
+                  <input type="checkbox" name="goals" value="career" />
+                  <span>Career growth</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="goals" value="academic" />
+                  <span>Academic study</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="goals" value="projects" />
+                  <span>Personal projects</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="goals" value="certification" />
+                  <span>Certification</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="goals" value="curiosity" />
+                  <span>General curiosity</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label for="goalText">Any specific goal?</label>
+                <input id="goalText" type="text" placeholder="e.g., Build an NLP chatbot" />
+              </div>
+            </section>
+
+            <section class="ob-step" data-step="2">
+              <h3><span class="step">2</span> Prior Knowledge</h3>
+              <p class="hint">How familiar are you with AI/ML?</p>
+              <div class="radio-group">
+                <label class="radio">
+                  <input type="radio" name="level" value="beginner" required />
+                  <span>Beginner</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="level" value="intermediate" />
+                  <span>Intermediate</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="level" value="advanced" />
+                  <span>Advanced</span>
+                </label>
+              </div>
+            </section>
+
+            <section class="ob-step" data-step="3">
+              <h3><span class="step">3</span> Learning Preferences</h3>
+              <p class="hint">Pick the styles you like. Select all that apply.</p>
+              <div class="options-grid">
+                <label class="chip">
+                  <input type="checkbox" name="style" value="videos" />
+                  <span>Videos</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="style" value="reading" />
+                  <span>Reading</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="style" value="projects" />
+                  <span>Hands-on projects</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="style" value="flashcards" />
+                  <span>Flashcards</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="style" value="quizzes" />
+                  <span>Quizzes</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="style" value="short" />
+                  <span>Short sessions</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="style" value="deep" />
+                  <span>Deep dives</span>
+                </label>
+              </div>
+            </section>
+
+            <div class="actions">
+              <button type="button" id="backBtn" class="btn-secondary" disabled>
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <button type="button" id="nextBtn" class="btn-primary">
+                <i class="fas fa-arrow-right"></i> Next
+              </button>
+              <button type="submit" id="finishBtn" class="btn-primary" style="display:none">
+                <i class="fas fa-check"></i> Finish
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script src="vendor/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/onboarding.js"></script>
+  </body>
+  </html>
+

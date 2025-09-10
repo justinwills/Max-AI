@@ -73,8 +73,8 @@
       const cu = { id: user.id, username, email };
       store.setJSON('currentUser', cu);
       try { window.sessionStorage.setItem('currentUser', JSON.stringify(cu)); } catch {}
-      Swal.fire({ title: 'Registration Successful!', text: 'Welcome to MaxAI! Your account has been created.', icon: 'success' });
-      setTimeout(function () { window.location.href = 'home.html'; }, 1200);
+      Swal.fire({ title: 'Registration Successful!', text: 'Welcome to MaxAI! Let’s personalize your learning.', icon: 'success' });
+      setTimeout(function () { window.location.href = 'onboarding.html'; }, 800);
     } catch (e) {
       console.error(e); setBusy(false, '', 'Get Started');
       Swal.fire({ title: 'Error', text: 'Could not create account. Please try again.', icon: 'error' });

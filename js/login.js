@@ -61,7 +61,14 @@ try {
       const store = window.StorageUtil;
       const current = store?.getJSON?.('currentUser', null);
       if (current && (current.email || current.username || current.id)) {
-        window.location.replace('home.html');
+        try {
+          const users = store?.getJSON?.('users', []) || [];
+          const me = users.find(u => u.id === current.id);
+          const dest = (me && me.onboarding && me.onboarding.completed) ? 'home.html' : 'onboarding.html';
+          window.location.replace(dest);
+        } catch {
+          window.location.replace('onboarding.html');
+        }
         return;
       }
     }
@@ -109,8 +116,14 @@ try {
       const cu = { id: user.id, username: user.username, email: user.email };
       store?.setJSON?.('currentUser', cu);
       try { window.sessionStorage.setItem('currentUser', JSON.stringify(cu)); } catch {}
+      let dest = 'onboarding.html';
+      try {
+        const users = store?.getJSON?.('users', []) || [];
+        const me = users.find(u => u.id === user.id);
+        if (me && me.onboarding && me.onboarding.completed) dest = 'home.html';
+      } catch {}
       Swal.fire({ title: 'Login Successful!', text: 'Welcome back to MaxAI!', icon: 'success' });
-      setTimeout(function () { window.location.href = 'home.html'; }, 1000);
+      setTimeout(function () { window.location.href = dest; }, 800);
     } catch (e) {
       console.error(e);
       setBusy(false);

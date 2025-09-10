@@ -216,6 +216,60 @@
   } catch (_) {}
 })();
 
+// Personalized learning plan (based on onboarding)
+(function(){
+  const card = document.getElementById('learning-plan-card');
+  if (!card) return;
+  const body = card.querySelector('.learning-plan-body');
+  function getCurrent(){
+    try {
+      const store = window.StorageUtil;
+      const cu = store.getJSON('currentUser', null);
+      if (!cu) return null;
+      const users = store.getJSON('users', []);
+      return users.find(u => u.id === cu.id) || null;
+    } catch { return null; }
+  }
+  function recommendedModules(level){
+    // Map of id -> {title, href}
+    const Mods = {
+      ai_foundations: { title: 'AI Foundations', href: 'modules/ai-foundation.html' },
+      ai_ethics: { title: 'AI Ethics', href: 'modules/ai-ethics.html' },
+      machine_learning: { title: 'Machine Learning', href: 'modules/machine-learning.html' },
+      neural_networks: { title: 'Neural Networks', href: 'modules/neural-networks.html' },
+      natural_language_processing: { title: 'Natural Language Processing', href: 'modules/natural-language-processing.html' },
+      deep_learning: { title: 'Deep Learning', href: 'modules/deep-learning.html' },
+    };
+    if (level === 'advanced') return [Mods.deep_learning, Mods.natural_language_processing, Mods.ai_ethics];
+    if (level === 'intermediate') return [Mods.machine_learning, Mods.neural_networks, Mods.natural_language_processing];
+    return [Mods.ai_foundations, Mods.ai_ethics, Mods.machine_learning];
+  }
+  function render(){
+    const user = getCurrent();
+    const ob = user?.onboarding || null;
+    if (!ob || !ob.completed) {
+      body.innerHTML = '<p class="lp-empty">We’ll suggest modules after onboarding. <a href="onboarding.html">Start now</a>.</p>';
+      return;
+    }
+    const mods = recommendedModules(ob.level || 'beginner');
+    const goalTxt = (ob.goals && ob.goals.length) ? ob.goals.join(', ') : 'your goals';
+    let html = '';
+    html += '<div class="lp-items">';
+    mods.forEach((m, i) => {
+      html += '<div class="lp-item">';
+      html += '<a href="'+m.href+'">'+m.title+'</a>';
+      html += '<div class="lp-badge">Step '+(i+1)+'</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+    html += '<p class="lp-empty">Tailored for: '+goalTxt+'. Preference: '+(Array.isArray(ob.style)&&ob.style.length?ob.style.join(', '):'any')+'.</p>';
+    body.innerHTML = html;
+  }
+  render();
+  window.addEventListener('storage', render);
+  document.addEventListener('visibilitychange', function(){ if (document.visibilityState==='visible') render(); });
+})();
+
 // Live update Average Score on storage changes
 (function () {
   function userScope() {

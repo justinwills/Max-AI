@@ -1,0 +1,118 @@
+body {
+  background-color: #1e293b;
+}
+
+.onboarding {
+  min-height: 100vh;
+  padding: 120px 0 60px;
+  background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.ob-card {
+  backdrop-filter: blur(10px);
+  background: hsla(0, 0%, 100%, 0.05);
+  border: 1px solid rgba(140, 82, 255, 0.15);
+  border-radius: 20px;
+  padding: 28px;
+}
+
+.ob-header h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.ob-header p {
+  color: hsla(0, 0%, 100%, 0.8);
+  margin-bottom: 22px;
+}
+
+.ob-step { margin-bottom: 18px; }
+.ob-step h3 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+.ob-step .step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8c52ff, #cb6ce6);
+  color: #fff;
+  font-weight: 700;
+  margin-right: 8px;
+}
+.hint { color: hsla(0,0%,100%,0.75); margin-bottom: 12px; }
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(140,82,255,0.2);
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+}
+.chip input { accent-color: #8c52ff; }
+
+.radio-group { display: flex; gap: 16px; flex-wrap: wrap; }
+.radio { color: #fff; display: inline-flex; align-items: center; gap: 8px; }
+.radio input { accent-color: #8c52ff; }
+
+.form-group { margin-top: 8px; }
+.form-group label { color: #fff; display: block; margin-bottom: 6px; }
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(140,82,255,0.25);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+}
+
+.actions {
+  display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px;
+}
+.btn-secondary {
+  align-items: center;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(140,82,255,0.25);
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 14px; font-weight: 600;
+  gap: 8px; padding: 10px 18px;
+}
+
+.btn-primary {
+  align-items: center;
+  background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
+  border: none; border-radius: 12px;
+  color: #fff; cursor: pointer;
+  display: inline-flex;
+  font-size: 14px; font-weight: 600;
+  gap: 8px; padding: 10px 18px;
+}
+
+@media (max-width: 640px) {
+  .actions { justify-content: stretch; }
+  .actions button { flex: 1; }
+}
+
