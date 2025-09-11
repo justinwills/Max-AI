@@ -53,7 +53,8 @@ span {
 .header-text h1 {
   background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
   -webkit-background-clip: text;
-  font-size: 3rem;
+  margin-left: 20px;
+  font-size: clamp(1.75rem, 4vw + 0.5rem, 3rem);
   font-weight: 800;
   margin-bottom: 10px;
   margin-top: -20px;
@@ -140,7 +141,7 @@ span {
   background: linear-gradient(135deg, #8c52ff, #cb6ce6);
   -webkit-background-clip: text;
   color: #fff;
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 3.5vw + 0.5rem, 2.5rem);
   margin-bottom: 16px;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -148,7 +149,7 @@ span {
 
 .user-profile .section-header h2 {
   font-family: Inter, sans-serif;
-  font-size: 3rem;
+  font-size: clamp(1.75rem, 4vw + 0.5rem, 3rem);
   font-weight: 800;
 }
 
