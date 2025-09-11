@@ -1010,13 +1010,18 @@ footer {
 
   .hero-content,
   .hero-visual {
+    text-align: center;
     max-width: 100%;
     width: 100%;
   }
 
-  .hero-visual {
-    height: 300px;
-    order: 2;
+  .hero-stats {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .floating-card {
+    margin-bottom: 170px;
   }
 
   #about-home h1 {
@@ -1086,7 +1091,6 @@ footer {
 
 /* Tighten hero spacing further on small phones */
 @media (max-width: 640px) {
-  /* Tighten hero even more on phones */
   #about-home {
     padding: 76px 5vw 0;
   }
@@ -1116,8 +1120,14 @@ footer {
   #about-home {
     padding: 72px 4vw 0;
   }
-  /* Hide hero visual to eliminate residual gap on very small screens */
-  .hero-visual { display:none; height:0; margin:0; }
+  /* Show compact hero visual on very small screens */
+  .hero-visual {
+    display: flex;
+    height: 100px;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+  }
   .card-1 {
     top: 0;
     left: 6%;
