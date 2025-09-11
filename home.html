@@ -62,7 +62,12 @@
         </div>
         <div class="user-content">
           <div class="dashboard-grid">
-            <div class="card" id="learning-plan-card" aria-live="polite">
+            <div
+              class="card anim-slow"
+              id="learning-plan-card"
+              data-anim="up"
+              data-anim-delay="80"
+            >
               <h3>Your Learning Plan</h3>
               <div class="learning-plan-body">
                 <p class="lp-empty">We’ll suggest modules after onboarding.</p>
@@ -90,21 +95,29 @@
                     <div class="stat-number">0</div>
                     <div class="stat-label">Hours Learned</div>
                   </div>
-                  
                 </div>
                 <div class="xp-section" aria-live="polite">
                   <div class="xp-summary">
                     <div class="xp-level">Level 1</div>
-                    <div class="xp-values"><span class="xp-current">0</span> / <span class="xp-next">1000</span> XP</div>
+                    <div class="xp-values">
+                      <span class="xp-current">0</span> /
+                      <span class="xp-next">1000</span> XP
+                    </div>
                   </div>
-                  <div class="xp-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <div
+                    class="xp-progress"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                  >
                     <div class="xp-progress-fill" style="width: 0%"></div>
                   </div>
                   <div class="xp-progress-label">0% to next level</div>
                 </div>
               </div>
             </div>
-            
+
             <div class="card sidebar-card activity-card">
               <div class="sidebar-section">
                 <h3>Recent Activity</h3>
@@ -121,11 +134,13 @@
               </ul>
             </div>
 
-            <div class="card achievements-card" aria-live="polite">
+            <div class="card achievements-card">
               <h3>Achievements</h3>
               <div class="achievements-list">
                 <!-- Populated by JS; placeholder for no achievements -->
-                <div class="achievement-empty">No achievements yet — start a quiz to earn your first badge!</div>
+                <div class="achievement-empty">
+                  No achievements yet — start a quiz to earn your first badge!
+                </div>
               </div>
             </div>
           </div>
