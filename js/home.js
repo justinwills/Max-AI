@@ -352,6 +352,7 @@
     if (!containers.length) return;
     const { xp } = computeXP();
     const L = levelFromXP(xp);
+    const allComplete = COURSE_PREFIXES.every((p) => isCompleted(p));
     containers.forEach((root) => {
       const levelEl = root.querySelector(".xp-level");
       const currEl = root.querySelector(".xp-current");
@@ -402,6 +403,21 @@
       }
       if (bar) bar.setAttribute("aria-valuenow", String(L.pct));
       if (label) label.textContent = `${L.pct}% to next level`;
+
+      // Certificate link: show when criteria are met (all modules completed)
+      let certLink = root.querySelector('.certificate-link');
+      if (allComplete) {
+        if (!certLink) {
+          certLink = document.createElement('a');
+          certLink.className = 'certificate-link';
+          certLink.href = 'certificate.html';
+          certLink.textContent = 'View Certificate';
+          certLink.setAttribute('aria-label', 'View your course certificate');
+          root.appendChild(certLink);
+        }
+      } else if (certLink) {
+        certLink.remove();
+      }
     });
   }
   function renderAchievements() {
