@@ -54,14 +54,14 @@
 
     <header class="page-header">
       <div class="container header-inner">
-        <div class="header-text">
+        <div class="header-text anim-slow" data-anim="up" data-anim-delay="60">
           <span class="badge"
             ><i class="fas fa-clipboard-check"></i> Quiz Mode</span
           >
           <h1>Quiz</h1>
           <p class="subtitle">Test your understanding</p>
         </div>
-        <div class="header-visual" aria-hidden="true">
+        <div class="header-visual" aria-hidden="true" data-anim="scale" data-anim-delay="120">
           <div class="chip"><i class="fas fa-brain"></i><span>AI</span></div>
           <div class="chip alt"><i class="fas fa-cogs"></i><span>ML</span></div>
           <div class="chip">
@@ -82,7 +82,7 @@
 
     <section class="quiz-section">
       <div class="container">
-        <div class="controls">
+        <div class="controls" data-anim="up" data-anim-delay="160">
           <div class="control-group">
             <label for="topicSelect"><i class="fas fa-book"></i> Topic</label>
             <select id="topicSelect">
@@ -114,7 +114,7 @@
           </div>
         </div>
 
-        <div id="quizCard" class="quiz-card" aria-live="polite" hidden>
+        <div id="quizCard" class="quiz-card anim-fast" data-anim="up" aria-live="polite" hidden>
           <div class="quiz-header-row">
             <div class="progress">
               <div id="progressBar" class="bar" style="width: 0%"></div>
@@ -142,7 +142,7 @@
           </div>
         </div>
 
-        <div id="resultCard" class="result-card" hidden>
+        <div id="resultCard" class="result-card anim-fast" data-anim="up" hidden>
           <div class="result-header">
             <h2><i class="fas fa-trophy"></i> Quiz Results</h2>
             <p id="resultSummary"></p>

@@ -58,7 +58,7 @@
 
     <header class="page-header">
       <div class="container header-inner">
-        <div class="header-text">
+        <div class="header-text anim-slow" data-anim="up" data-anim-delay="60">
           <span class="badge"><i class="fas fa-bolt"></i> Study Mode</span>
           <h1>Flashcards</h1>
           <p class="subtitle">
@@ -74,7 +74,12 @@
             </button>
           </div>
         </div>
-        <div class="header-visual" aria-hidden="true">
+        <div
+          class="header-visual"
+          aria-hidden="true"
+          data-anim="scale"
+          data-anim-delay="120"
+        >
           <div class="chip"><i class="fas fa-brain"></i><span>AI</span></div>
           <div class="chip alt"><i class="fas fa-cogs"></i><span>ML</span></div>
           <div class="chip">
@@ -95,7 +100,7 @@
 
     <section class="flashcards-section">
       <div class="container">
-        <div class="controls">
+        <div class="controls" data-anim="up" data-anim-delay="160">
           <div class="control-group">
             <label for="topicSelect"><i class="fas fa-book"></i> Topic</label>
             <select id="topicSelect">
@@ -134,7 +139,7 @@
       <div class="footer-bottom">
         <p>
           &copy; 2025 MaxAI |
-          <a href="mailto:rachellwanggg@gmail.com">Contact</a>
+          <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
         </p>
       </div>
     </footer>

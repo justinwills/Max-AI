@@ -529,6 +529,44 @@ const searchInput = document.getElementById("searchInput");
 const showHints = document.getElementById("showHints");
 const shuffleBtn = document.getElementById("shuffleBtn");
 
+// Lightweight entrance animations for dynamically rendered cards
+let flashIO = null;
+function ensureFlashIO() {
+  if (flashIO) return flashIO;
+  const opts = { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0.03 };
+  flashIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add("anim-in");
+        e.target.classList.remove("anim-init");
+        flashIO.unobserve(e.target);
+      }
+    });
+  }, opts);
+  return flashIO;
+}
+function prepareFlashcardAnimations() {
+  const prefersReduce =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cards = Array.from(grid.querySelectorAll(".flashcard"));
+  if (cards.length === 0) return;
+  const io = ensureFlashIO();
+  cards.forEach((el, idx) => {
+    el.classList.add("anim-init", "anim-up");
+    // Stagger for nicer cascade
+    const delay = Math.min(600, idx * 5);
+    el.setAttribute("data-anim-delay", "");
+    el.style.setProperty("--anim-delay", `${delay}ms`);
+    if (prefersReduce) {
+      el.classList.add("anim-in");
+      el.classList.remove("anim-init");
+    } else {
+      io.observe(el);
+    }
+  });
+}
+
 // Topic label mapping (so non-ML topics display correctly)
 const TOPIC_LABELS = {
   "ai-foundation": "AI Foundations",
@@ -603,6 +641,11 @@ function render() {
   grid.querySelectorAll(".hint").forEach((h) => {
     h.style.display = showHints.checked ? "block" : "none";
   });
+
+  // Prepare and run entrance animations for the rendered cards
+  try {
+    prepareFlashcardAnimations();
+  } catch {}
 }
 
 topicSelect.addEventListener("change", render);

@@ -1155,6 +1155,24 @@ function renderQuestion() {
     optionsEl.appendChild(btn);
   });
 
+  // Animate question + options into view
+  try {
+    const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const qBlock = questionText.closest('.question-block');
+    if (qBlock) {
+      qBlock.classList.add('anim-init','anim-up');
+      qBlock.style.setProperty('--anim-delay','80ms');
+      requestAnimationFrame(()=>{ qBlock.classList.add('anim-in'); qBlock.classList.remove('anim-init'); });
+    }
+    const btns = Array.from(optionsEl.querySelectorAll('.option-btn'));
+    btns.forEach((el, idx)=>{
+      el.classList.add('anim-init','anim-up');
+      el.style.setProperty('--anim-delay', `${120 + idx*40}ms`);
+      if (prefersReduce) { el.classList.add('anim-in'); el.classList.remove('anim-init'); }
+      else requestAnimationFrame(()=>{ el.classList.add('anim-in'); el.classList.remove('anim-init'); });
+    });
+  } catch {}
+
   updateProgress();
 }
 
@@ -1162,6 +1180,12 @@ function renderQuestion() {
 function finishQuiz() {
   quizCard.hidden = true;
   resultCard.hidden = false;
+  // Animate result card reveal
+  try {
+    resultCard.classList.add('anim-init','anim-up');
+    resultCard.style.setProperty('--anim-delay','100ms');
+    requestAnimationFrame(()=>{ resultCard.classList.add('anim-in'); resultCard.classList.remove('anim-init'); });
+  } catch {}
 
   const total = queue.length;
   const percent = total > 0 ? Math.round((score / total) * 100) : 0;
@@ -1175,6 +1199,16 @@ function finishQuiz() {
   else if (percent < 50) msg = "Good start—review and try again!";
   resultSummary.textContent = msg;
   reviewList.hidden = true;
+
+  // Stagger in result stats
+  try {
+    const stats = Array.from(document.querySelectorAll('.result-stats .stat'));
+    stats.forEach((el, idx)=>{
+      el.classList.add('anim-init','anim-up');
+      el.style.setProperty('--anim-delay', `${120 + idx*80}ms`);
+      requestAnimationFrame(()=>{ el.classList.add('anim-in'); el.classList.remove('anim-init'); });
+    });
+  } catch {}
 
   // Persist attempt for dashboard average score (per-user key)
   try {
@@ -1244,6 +1278,12 @@ if (startBtn) {
     }
     resultCard.hidden = true;
     quizCard.hidden = false;
+    // Animate quiz card reveal
+    try {
+      quizCard.classList.add('anim-init','anim-up');
+      quizCard.style.removeProperty('--anim-delay');
+      requestAnimationFrame(()=>{ quizCard.classList.add('anim-in'); quizCard.classList.remove('anim-init'); });
+    } catch {}
     renderQuestion();
   });
 }
