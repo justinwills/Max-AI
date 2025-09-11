@@ -1005,7 +1005,7 @@ footer {
   #about-home {
     flex-direction: column;
     gap: 24px;
-    padding: 110px 6vw 6vw;
+    padding: 96px 6vw 4vw;
   }
 
   .hero-content,
@@ -1030,7 +1030,8 @@ footer {
   #course-inner {
     flex-direction: column;
     gap: 24px;
-    padding: 100px 6vw 6vw;
+    padding: 56px 6vw 4vw;
+    min-height: auto;
   }
 
   #course-inner .overview {
@@ -1046,7 +1047,9 @@ footer {
 
 @media (max-width: 768px) {
   /* Navigation mobile rules moved to css/nav.css */
-
+  .hero-content {
+    margin-top: 30px;
+  }
   .course-img {
     height: 220px;
   }
@@ -1081,7 +1084,56 @@ footer {
   /* Navigation link sizes moved to css/nav.css */
 }
 
+/* Tighten hero spacing further on small phones */
+@media (max-width: 640px) {
+  /* Tighten hero even more on phones */
+  #about-home {
+    padding: 76px 5vw 0;
+  }
+  .hero-visual {
+    height: 120px;
+  }
+  .card-1 {
+    top: 2%;
+    left: 8%;
+  }
+  .card-2 {
+    top: 24%;
+    right: 16%;
+  }
+  .card-3 {
+    bottom: 0;
+    left: 28%;
+  }
+  #course-inner {
+    padding: 32px 5vw 4vw;
+    min-height: auto;
+  }
+}
+
 @media (max-width: 480px) {
+  /* Extra-tight layout for very small devices */
+  #about-home {
+    padding: 72px 4vw 0;
+  }
+  /* Hide hero visual to eliminate residual gap on very small screens */
+  .hero-visual { display:none; height:0; margin:0; }
+  .card-1 {
+    top: 0;
+    left: 6%;
+  }
+  .card-2 {
+    top: 18%;
+    right: 12%;
+  }
+  .card-3 {
+    bottom: 0;
+    left: 26%;
+  }
+  #course-inner {
+    padding: 28px 4vw 4vw;
+    min-height: auto;
+  }
   #about-home h1 {
     font-size: 2.2rem;
   }
