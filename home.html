@@ -57,6 +57,9 @@
 
     <section id="user-details" class="user-profile">
       <div class="container">
+        <div class="header-text" id="header-text">
+          <h1>Welcome Back, user!</h1>
+        </div>
         <div class="user-content">
           <div class="dashboard-grid">
             <div class="card" id="learning-plan-card" aria-live="polite">
@@ -71,7 +74,7 @@
               <ol class="leaderboard-list"></ol>
             </div>
 
-            <aside class="card sidebar-card">
+            <div class="card sidebar-card progress-card">
               <div class="sidebar-section">
                 <h3>Learning Progress</h3>
                 <div class="progress-stats">
@@ -89,12 +92,34 @@
                   </div>
                 </div>
               </div>
-              <hr />
+            </div>
+            
+            <div class="card sidebar-card activity-card">
               <div class="sidebar-section">
                 <h3>Recent Activity</h3>
-                <div class="recent-activity"></div>
+                <div class="recent-activity activity-grid"></div>
               </div>
-            </aside>
+            </div>
+
+            <div class="card xp-card" aria-live="polite">
+              <h3>XP Progress</h3>
+              <div class="xp-summary">
+                <div class="xp-level">Level 1</div>
+                <div class="xp-values"><span class="xp-current">0</span> / <span class="xp-next">1000</span> XP</div>
+              </div>
+              <div class="xp-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="xp-progress-fill" style="width: 0%"></div>
+              </div>
+              <div class="xp-progress-label">0% to next level</div>
+            </div>
+
+            <div class="card achievements-card" aria-live="polite">
+              <h3>Achievements</h3>
+              <div class="achievements-list">
+                <!-- Populated by JS; placeholder for no achievements -->
+                <div class="achievement-empty">No achievements yet — start a quiz to earn your first badge!</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

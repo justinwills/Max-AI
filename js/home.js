@@ -1,33 +1,11 @@
 // Common nav handled by nav.js
 
-// Profile image upload (guarded)
-(function () {
-  const fileInput = document.getElementById("file-input");
-  if (!fileInput) return;
-  fileInput.addEventListener("change", function (e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function (ev) {
-      const el = document.getElementById("profile-pic");
-      if (el && ev.target?.result) el.src = ev.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
-})();
-
-// Simple form save toast (guarded)
-(function () {
-  const form = document.querySelector(".user-form");
-  if (!form) return;
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    Swal.fire({
-      icon: "success",
-      title: "Saved",
-      text: "Changes saved successfully!",
-    });
-  });
+(() => {
+  const headerText = document.getElementById("header-text");
+  if (!headerText) return;
+  const user = window.StorageUtil?.getJSON?.("currentUser", null) || null;
+  const name = user?.name || user?.username || user?.email;
+  headerText.innerHTML = `<h1>Welcome Back, ${name}!</h1>`;
 })();
 
 // Dashboard bonuses (per-user)
@@ -43,26 +21,38 @@
         return "guest";
       }
     }
-    function K(base) { return base + "::" + userScope(); }
+    function K(base) {
+      return base + "::" + userScope();
+    }
     try {
       const anyFlag = (base) => {
         const userKey = K(base);
-        const vU = localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+        const vU =
+          localStorage.getItem(userKey) ??
+          window.sessionStorage.getItem(userKey);
         if (vU === "true") return true;
         const guestKey = base + "::guest";
-        const vG = localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey);
+        const vG =
+          localStorage.getItem(guestKey) ??
+          window.sessionStorage.getItem(guestKey);
         return vG === "true";
       };
       const anyRaw = (base) => {
         const userKey = K(base);
-        const vU = localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+        const vU =
+          localStorage.getItem(userKey) ??
+          window.sessionStorage.getItem(userKey);
         if (vU != null) return vU;
         const guestKey = base + "::guest";
-        return localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey);
+        return (
+          localStorage.getItem(guestKey) ??
+          window.sessionStorage.getItem(guestKey)
+        );
       };
       const isCompleted = (prefix) => {
         if (anyFlag(prefix + "_completed_v1")) return true;
-        const total = parseInt(anyRaw(prefix + "_quiz_total_v1") || "0", 10) || 0;
+        const total =
+          parseInt(anyRaw(prefix + "_quiz_total_v1") || "0", 10) || 0;
         const done = parseInt(anyRaw(prefix + "_quiz_done_v1") || "0", 10) || 0;
         return total > 0 && done >= total;
       };
@@ -72,15 +62,43 @@
       const completedNN = isCompleted("neural_networks");
       const completedNLP = isCompleted("natural_language_processing");
       const completedAIE = isCompleted("ai_ethics");
-      const expectedCourses = (completedAI?1:0)+(completedML?1:0)+(completedDL?1:0)+(completedNN?1:0)+(completedNLP?1:0)+(completedAIE?1:0);
-      const expectedHours = (completedAI?2:0)+(completedML?3:0)+(completedDL?4:0)+(completedNN?4:0)+(completedNLP?3:0)+(completedAIE?1:0);
+      const expectedCourses =
+        (completedAI ? 1 : 0) +
+        (completedML ? 1 : 0) +
+        (completedDL ? 1 : 0) +
+        (completedNN ? 1 : 0) +
+        (completedNLP ? 1 : 0) +
+        (completedAIE ? 1 : 0);
+      const expectedHours =
+        (completedAI ? 2 : 0) +
+        (completedML ? 3 : 0) +
+        (completedDL ? 4 : 0) +
+        (completedNN ? 4 : 0) +
+        (completedNLP ? 3 : 0) +
+        (completedAIE ? 1 : 0);
       const ccKey = K("home_courses_completed_bonus");
       const hrKey = K("home_hours_learned_bonus");
       // Prefer stored values if present (written by modules on completion), else computed
-      const storedC = parseInt((localStorage.getItem(ccKey) ?? window.sessionStorage.getItem(ccKey) ?? ""), 10);
-      const storedH = parseInt((localStorage.getItem(hrKey) ?? window.sessionStorage.getItem(hrKey) ?? ""), 10);
-      const courses = Number.isFinite(storedC) && storedC >= 0 ? Math.max(storedC, expectedCourses) : expectedCourses;
-      const hours = Number.isFinite(storedH) && storedH >= 0 ? Math.max(storedH, expectedHours) : expectedHours;
+      const storedC = parseInt(
+        localStorage.getItem(ccKey) ??
+          window.sessionStorage.getItem(ccKey) ??
+          "",
+        10
+      );
+      const storedH = parseInt(
+        localStorage.getItem(hrKey) ??
+          window.sessionStorage.getItem(hrKey) ??
+          "",
+        10
+      );
+      const courses =
+        Number.isFinite(storedC) && storedC >= 0
+          ? Math.max(storedC, expectedCourses)
+          : expectedCourses;
+      const hours =
+        Number.isFinite(storedH) && storedH >= 0
+          ? Math.max(storedH, expectedHours)
+          : expectedHours;
       localStorage.setItem(ccKey, String(courses));
       localStorage.setItem(hrKey, String(hours));
       try {
@@ -90,32 +108,52 @@
       // Average score
       let avgScore = 0;
       try {
-        const attemptsRaw = localStorage.getItem(K("quiz_attempts_v1")) || window.sessionStorage.getItem(K("quiz_attempts_v1"));
+        const attemptsRaw =
+          localStorage.getItem(K("quiz_attempts_v1")) ||
+          window.sessionStorage.getItem(K("quiz_attempts_v1"));
         const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
         if (Array.isArray(attempts) && attempts.length > 0) {
-          const sum = attempts.reduce((s,a)=> s + (Number(a?.percent)||0), 0);
+          const sum = attempts.reduce(
+            (s, a) => s + (Number(a?.percent) || 0),
+            0
+          );
           avgScore = Math.round(sum / attempts.length);
         }
       } catch {}
-      document.querySelectorAll('.progress-stats .stat-item').forEach((item)=>{
-        const label = (item.querySelector('.stat-label')?.textContent||'').trim().toLowerCase();
-        const numEl = item.querySelector('.stat-number');
-        if (!numEl) return;
-        if (label === 'courses completed') numEl.textContent = String(courses);
-        else if (label === 'hours learned') numEl.textContent = String(hours);
-        else if (label === 'average score') numEl.textContent = (Number.isFinite(avgScore)?avgScore:0) + '%';
-      });
+      document
+        .querySelectorAll(".progress-stats .stat-item")
+        .forEach((item) => {
+          const label = (item.querySelector(".stat-label")?.textContent || "")
+            .trim()
+            .toLowerCase();
+          const numEl = item.querySelector(".stat-number");
+          if (!numEl) return;
+          if (label === "courses completed")
+            numEl.textContent = String(courses);
+          else if (label === "hours learned") numEl.textContent = String(hours);
+          else if (label === "average score")
+            numEl.textContent =
+              (Number.isFinite(avgScore) ? avgScore : 0) + "%";
+        });
     } catch (_) {}
   }
 
   // Initial render
   refreshDashboard();
   // Recompute when returning to the page or storage changes
-  window.addEventListener('pageshow', refreshDashboard);
-  document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'visible') refreshDashboard(); });
-  window.addEventListener('storage', function(e){
+  window.addEventListener("pageshow", refreshDashboard);
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") refreshDashboard();
+  });
+  window.addEventListener("storage", function (e) {
     if (!e.key) return;
-    if (e.key.includes('_completed_v1::') || e.key.includes('_quiz_total_v1::') || e.key.includes('_quiz_done_v1::') || e.key.includes('home_courses_completed_bonus::') || e.key.includes('home_hours_learned_bonus::')) {
+    if (
+      e.key.includes("_completed_v1::") ||
+      e.key.includes("_quiz_total_v1::") ||
+      e.key.includes("_quiz_done_v1::") ||
+      e.key.includes("home_courses_completed_bonus::") ||
+      e.key.includes("home_hours_learned_bonus::")
+    ) {
       refreshDashboard();
     }
   });
@@ -136,18 +174,25 @@
     // Normalize bonuses based on actual completed courses to avoid double counting
     const anyFlag = (base) => {
       const userKey = K(base);
-      const vU = localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+      const vU =
+        localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
       if (vU === "true") return true;
       const guestKey = base + "::guest";
-      const vG = localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey);
+      const vG =
+        localStorage.getItem(guestKey) ??
+        window.sessionStorage.getItem(guestKey);
       return vG === "true";
     };
     const anyRaw = (base) => {
       const userKey = K(base);
-      const vU = localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+      const vU =
+        localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
       if (vU != null) return vU;
       const guestKey = base + "::guest";
-      return localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey);
+      return (
+        localStorage.getItem(guestKey) ??
+        window.sessionStorage.getItem(guestKey)
+      );
     };
     function isCompleted(prefix) {
       if (anyFlag(prefix + "_completed_v1")) return true;
@@ -189,7 +234,9 @@
     // Compute Average Score from stored quiz attempts (per-user)
     let avgScore = 0;
     try {
-      const attemptsRaw = localStorage.getItem(K("quiz_attempts_v1")) || window.sessionStorage.getItem(K("quiz_attempts_v1"));
+      const attemptsRaw =
+        localStorage.getItem(K("quiz_attempts_v1")) ||
+        window.sessionStorage.getItem(K("quiz_attempts_v1"));
       const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
       if (Array.isArray(attempts) && attempts.length > 0) {
         const sum = attempts.reduce((s, a) => s + (Number(a?.percent) || 0), 0);
@@ -216,58 +263,322 @@
   } catch (_) {}
 })();
 
-// Personalized learning plan (based on onboarding)
-(function(){
-  const card = document.getElementById('learning-plan-card');
-  if (!card) return;
-  const body = card.querySelector('.learning-plan-body');
-  function getCurrent(){
+// XP progress + Achievements renderer
+(function () {
+  function userScope() {
     try {
       const store = window.StorageUtil;
-      const cu = store.getJSON('currentUser', null);
-      if (!cu) return null;
-      const users = store.getJSON('users', []);
-      return users.find(u => u.id === cu.id) || null;
-    } catch { return null; }
+      const u = store?.getJSON?.("currentUser", null) || null;
+      const id = u?.id || u?.email || u?.username;
+      return id ? String(id) : "guest";
+    } catch (_) {
+      return "guest";
+    }
   }
-  function recommendedModules(level){
-    // Map of id -> {title, href}
+  function K(base) {
+    return base + "::" + userScope();
+  }
+  const COURSE_PREFIXES = [
+    "ai_foundations",
+    "machine_learning",
+    "deep_learning",
+    "neural_networks",
+    "natural_language_processing",
+    "ai_ethics",
+  ];
+  function getInt(key, d = 0) {
+    try {
+      const v = localStorage.getItem(key) ?? window.sessionStorage.getItem(key);
+      const n = parseInt(v || "", 10);
+      return Number.isFinite(n) ? n : d;
+    } catch (_) {
+      return d;
+    }
+  }
+  function anyFlag(base) {
+    try {
+      const userKey = K(base);
+      const vU = localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+      if (vU === "true") return true;
+      const guestKey = base + "::guest";
+      const vG = localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey);
+      return vG === "true";
+    } catch (_) {
+      return false;
+    }
+  }
+  function isCompleted(prefix) {
+    if (anyFlag(prefix + "_completed_v1")) return true;
+    const total = getInt(K(prefix + "_quiz_total_v1"));
+    const done = getInt(K(prefix + "_quiz_done_v1"));
+    return total > 0 && done >= total;
+  }
+  function anyQuizDone() {
+    return COURSE_PREFIXES.some((p) => getInt(K(p + "_quiz_done_v1")) > 0 || anyFlag(p + "_completed_v1"));
+  }
+  function computeXP() {
+    const courses = getInt(K("home_courses_completed_bonus"), 0);
+    const hours = getInt(K("home_hours_learned_bonus"), 0);
+    // Same scale used for leaderboard scoring
+    const xp = courses * 500 + hours * 50;
+    return { courses, hours, xp };
+  }
+  function levelFromXP(xp) {
+    const stride = 1000; // xp per level
+    const level = Math.floor(xp / stride) + 1;
+    const into = xp % stride;
+    const pct = Math.max(0, Math.min(100, Math.round((into / stride) * 100)));
+    return { level, stride, into, pct, next: stride };
+  }
+  function renderXP() {
+    const xpCard = document.querySelector(".xp-card");
+    if (!xpCard) return;
+    const { xp } = computeXP();
+    const L = levelFromXP(xp);
+    const levelEl = xpCard.querySelector(".xp-level");
+    const currEl = xpCard.querySelector(".xp-current");
+    const nextEl = xpCard.querySelector(".xp-next");
+    const barFill = xpCard.querySelector(".xp-progress-fill");
+    const bar = xpCard.querySelector(".xp-progress");
+    const label = xpCard.querySelector(".xp-progress-label");
+    if (levelEl) levelEl.textContent = `Level ${L.level}`;
+    if (currEl) currEl.textContent = String(L.into);
+    if (nextEl) nextEl.textContent = String(L.next);
+    if (barFill) barFill.style.width = `${L.pct}%`;
+    if (bar) bar.setAttribute("aria-valuenow", String(L.pct));
+    if (label) label.textContent = `${L.pct}% to next level`;
+  }
+  function renderAchievements() {
+    const root = document.querySelector(".achievements-card .achievements-list");
+    if (!root) return;
+    const { hours } = computeXP();
+    const badges = [];
+    if (anyQuizDone()) badges.push({ key: "first_quiz", icon: "🏁", label: "First Quiz Completed" });
+    if (hours >= 5) badges.push({ key: "five_hours", icon: "⏱️", label: "5 Hours Learned" });
+    if (isCompleted("neural_networks")) badges.push({ key: "nn_master", icon: "🧠", label: "Neural Network Master" });
+    if (badges.length === 0) {
+      root.innerHTML = '<div class="achievement-empty">No achievements yet — start a quiz to earn your first badge!</div>';
+      return;
+    }
+    root.innerHTML = badges
+      .map((b) => `<span class="achievement-badge" data-badge="${b.key}"><span class="icon">${b.icon}</span><span class="label">${b.label}</span></span>`)
+      .join("");
+  }
+  function renderAll() {
+    renderXP();
+    renderAchievements();
+  }
+  renderAll();
+  window.addEventListener("pageshow", renderAll);
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") renderAll();
+  });
+  window.addEventListener("storage", function (e) {
+    if (!e.key) return;
+    if (
+      e.key.includes("home_courses_completed_bonus::") ||
+      e.key.includes("home_hours_learned_bonus::") ||
+      e.key.includes("_quiz_done_v1::") ||
+      e.key.includes("_completed_v1::")
+    ) {
+      renderAll();
+    }
+  });
+})();
+
+// Personalized learning plan (based on onboarding)
+(function () {
+  const card = document.getElementById("learning-plan-card");
+  if (!card) return;
+  const body = card.querySelector(".learning-plan-body");
+  function getCurrent() {
+    try {
+      const store = window.StorageUtil;
+      const cu = store.getJSON("currentUser", null);
+      if (!cu) return null;
+      const users = store.getJSON("users", []);
+      return users.find((u) => u.id === cu.id) || null;
+    } catch {
+      return null;
+    }
+  }
+  function recommendedModules(level) {
+    // Map of id -> {id, title, href, icon, desc}
     const Mods = {
-      ai_foundations: { title: 'AI Foundations', href: 'modules/ai-foundation.html' },
-      ai_ethics: { title: 'AI Ethics', href: 'modules/ai-ethics.html' },
-      machine_learning: { title: 'Machine Learning', href: 'modules/machine-learning.html' },
-      neural_networks: { title: 'Neural Networks', href: 'modules/neural-networks.html' },
-      natural_language_processing: { title: 'Natural Language Processing', href: 'modules/natural-language-processing.html' },
-      deep_learning: { title: 'Deep Learning', href: 'modules/deep-learning.html' },
+      ai_foundations: {
+        id: "ai_foundations",
+        title: "AI Foundations",
+        href: "modules/ai-foundation.html",
+        icon: "img/ai-foundation.png",
+        desc: "Core concepts and terminology",
+      },
+      ai_ethics: {
+        id: "ai_ethics",
+        title: "AI Ethics",
+        href: "modules/ai-ethics.html",
+        icon: "img/ai-ethics.png",
+        desc: "Responsible AI and fairness",
+      },
+      machine_learning: {
+        id: "machine_learning",
+        title: "Machine Learning",
+        href: "modules/machine-learning.html",
+        icon: "img/machine-learning.png",
+        desc: "Supervised and unsupervised basics",
+      },
+      neural_networks: {
+        id: "neural_networks",
+        title: "Neural Networks",
+        href: "modules/neural-networks.html",
+        icon: "img/neural-networks.png",
+        desc: "Perceptrons to modern architectures",
+      },
+      natural_language_processing: {
+        id: "natural_language_processing",
+        title: "Natural Language Processing",
+        href: "modules/natural-language-processing.html",
+        icon: "img/nlp.png",
+        desc: "Text processing and embeddings",
+      },
+      deep_learning: {
+        id: "deep_learning",
+        title: "Deep Learning",
+        href: "modules/deep-learning.html",
+        icon: "img/deep-learning.png",
+        desc: "CNNs, RNNs and beyond",
+      },
     };
-    if (level === 'advanced') return [Mods.deep_learning, Mods.natural_language_processing, Mods.ai_ethics];
-    if (level === 'intermediate') return [Mods.machine_learning, Mods.neural_networks, Mods.natural_language_processing];
+    if (level === "advanced")
+      return [
+        Mods.deep_learning,
+        Mods.natural_language_processing,
+        Mods.ai_ethics,
+      ];
+    if (level === "intermediate")
+      return [
+        Mods.machine_learning,
+        Mods.neural_networks,
+        Mods.natural_language_processing,
+      ];
     return [Mods.ai_foundations, Mods.ai_ethics, Mods.machine_learning];
   }
-  function render(){
+  function userScope() {
+    try {
+      const store = window.StorageUtil;
+      const u = store?.getJSON?.("currentUser", null) || null;
+      const id = u?.id || u?.email || u?.username;
+      return id ? String(id) : "guest";
+    } catch (_) {
+      return "guest";
+    }
+  }
+  function K(base) {
+    return base + "::" + userScope();
+  }
+  function anyRaw(base) {
+    const userKey = K(base);
+    const vU =
+      localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+    if (vU != null) return vU;
+    const guestKey = base + "::guest";
+    return (
+      localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey)
+    );
+  }
+  function anyFlag(base) {
+    const v = anyRaw(base);
+    return v === "true";
+  }
+  function moduleProgress(prefix) {
+    const total = parseInt(anyRaw(prefix + "_quiz_total_v1") || "0", 10) || 0;
+    const done = parseInt(anyRaw(prefix + "_quiz_done_v1") || "0", 10) || 0;
+    const completed =
+      anyFlag(prefix + "_completed_v1") || (total > 0 && done >= total);
+    const started = done > 0 && !completed;
+    return { total, done, completed, started };
+  }
+  function render() {
     const user = getCurrent();
     const ob = user?.onboarding || null;
     if (!ob || !ob.completed) {
-      body.innerHTML = '<p class="lp-empty">We’ll suggest modules after onboarding. <a href="onboarding.html">Start now</a>.</p>';
+      body.innerHTML =
+        '<p class="lp-empty">We’ll suggest modules after onboarding. <a href="onboarding.html">Start now</a>.</p>';
       return;
     }
-    const mods = recommendedModules(ob.level || 'beginner');
-    const goalTxt = (ob.goals && ob.goals.length) ? ob.goals.join(', ') : 'your goals';
-    let html = '';
+    const mods = recommendedModules(ob.level || "beginner");
+    const goalTxt =
+      ob.goals && ob.goals.length ? ob.goals.join(", ") : "your goals";
+    let html = "";
     html += '<div class="lp-items">';
     mods.forEach((m, i) => {
-      html += '<div class="lp-item">';
-      html += '<a href="'+m.href+'">'+m.title+'</a>';
-      html += '<div class="lp-badge">Step '+(i+1)+'</div>';
-      html += '</div>';
+      const icon = m.icon ? m.icon : "";
+      const id = m.id || "";
+      const p = id
+        ? moduleProgress(id)
+        : { completed: false, started: false, done: 0, total: 0 };
+      const ctaLabel = p.completed
+        ? "Revisit"
+        : p.started
+        ? "Continue"
+        : "Start";
+      const ctaIcon = p.completed ? '<i class="fas fa-check"></i>' : "";
+      const progressHtml =
+        p.total > 0 && p.done > 0
+          ? '<span class="lp-progress" aria-label="Progress">' +
+            p.done +
+            "/" +
+            p.total +
+            "</span>"
+          : "";
+      const desc = m.desc ? m.desc : "";
+      const stateClass = p.completed
+        ? " completed"
+        : p.started
+        ? " started"
+        : "";
+      html +=
+        '<div class="lp-item' +
+        stateClass +
+        '"' +
+        (id ? ' data-module="' + id + '"' : "") +
+        ">";
+      html += '<span class="lp-accent" aria-hidden="true"></span>';
+      html +=
+        '<a class="lp-link" href="' +
+        m.href +
+        '" aria-label="Open ' +
+        m.title +
+        '">';
+      html += '<div class="lp-left">';
+      if (icon)
+        html +=
+          '<img class="lp-icon" src="' + icon + '" alt="' + m.title + ' icon">';
+      html += '<span class="lp-texts">';
+      html += '<span class="lp-title">' + m.title + "</span>";
+      if (desc) html += '<span class="lp-desc">' + desc + "</span>";
+      html += "</span>";
+      html += "</div>";
+      html += progressHtml;
+      html += '<span class="lp-cta">' + ctaIcon + ctaLabel + "</span>";
+      html += "</a>";
+      html += "</div>";
     });
-    html += '</div>';
-    html += '<p class="lp-empty">Tailored for: '+goalTxt+'. Preference: '+(Array.isArray(ob.style)&&ob.style.length?ob.style.join(', '):'any')+'.</p>';
+    html += "</div>";
+    html +=
+      '<p class="lp-empty">Tailored for: ' +
+      goalTxt +
+      ". Preferences: " +
+      (Array.isArray(ob.style) && ob.style.length
+        ? ob.style.join(", ")
+        : "any") +
+      ".</p>";
     body.innerHTML = html;
   }
   render();
-  window.addEventListener('storage', render);
-  document.addEventListener('visibilitychange', function(){ if (document.visibilityState==='visible') render(); });
+  window.addEventListener("storage", render);
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") render();
+  });
 })();
 
 // Live update Average Score on storage changes
@@ -288,7 +599,9 @@
   function refresh() {
     let avgScore = 0;
     try {
-      const attemptsRaw = localStorage.getItem(K("quiz_attempts_v1")) || window.sessionStorage.getItem(K("quiz_attempts_v1"));
+      const attemptsRaw =
+        localStorage.getItem(K("quiz_attempts_v1")) ||
+        window.sessionStorage.getItem(K("quiz_attempts_v1"));
       const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
       if (Array.isArray(attempts) && attempts.length > 0) {
         const sum = attempts.reduce((s, a) => s + (Number(a?.percent) || 0), 0);
@@ -485,6 +798,35 @@
     COURSES.forEach(upsertActivity);
     // Render overall perfect badge (kept at top)
     renderPerfectBadge();
+    // No bottom fade overlay needed; skip overflow toggling
+
+    // Match Recent Activity item heights to Learning Plan items
+    try {
+      function syncHeights(){
+        const lpItem = document.querySelector('#learning-plan-card .lp-item');
+        let h = 0;
+        if (lpItem) {
+          const rect = lpItem.getBoundingClientRect();
+          h = Math.round(rect.height);
+        }
+        if (!h || !Number.isFinite(h)) h = 56; // fallback
+        document.querySelectorAll('.activity-grid .activity-item').forEach((el)=>{
+          el.style.minHeight = h + 'px';
+        });
+      }
+      syncHeights();
+      if (!window.__lpResizeObserver){
+        const target = document.getElementById('learning-plan-card');
+        if (target && 'ResizeObserver' in window){
+          window.__lpResizeObserver = new ResizeObserver(()=>{
+            syncHeights();
+          });
+          window.__lpResizeObserver.observe(target);
+        } else {
+          window.addEventListener('resize', syncHeights);
+        }
+      }
+    } catch(_){}
   }
   renderAll();
   window.addEventListener("storage", (e) => {

@@ -33,17 +33,31 @@
 
         <div class="nav-actions">
           <div class="profile-menu">
-            <button type="button" class="profile-btn" aria-label="Profile" aria-expanded="false">
+            <button
+              type="button"
+              class="profile-btn"
+              aria-label="Profile"
+              aria-expanded="false"
+            >
               <i class="fas fa-user"></i>
             </button>
             <div class="menu">
-              <a href="../userprofile.html"><i class="fas fa-user-circle"></i> Profile</a>
-              <a href="../login.html?logout=1"><i class="fas fa-right-from-bracket"></i> Logout</a>
+              <a href="../userprofile.html"
+                ><i class="fas fa-user-circle"></i> Profile</a
+              >
+              <a href="../login.html?logout=1"
+                ><i class="fas fa-right-from-bracket"></i> Logout</a
+              >
             </div>
           </div>
         </div>
 
-        <div class="mobile-menu-btn" aria-label="Open menu" role="button" tabindex="0">
+        <div
+          class="mobile-menu-btn"
+          aria-label="Open menu"
+          role="button"
+          tabindex="0"
+        >
           <i class="fas fa-bars"></i>
         </div>
       </div>
@@ -58,7 +72,8 @@
         </div>
         <h1>Neural Networks</h1>
         <p class="hero-subtitle">
-          Explore neurons, nonlinear architectures, training algorithms, and modern network designs from MLPs to Transformers.
+          Explore neurons, nonlinear architectures, training algorithms, and
+          modern network designs from MLPs to Transformers.
         </p>
         <div class="hero-stats">
           <div class="stat-item">
@@ -164,15 +179,24 @@
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Choose losses/optimizers and train without exploding/vanishing gradients</span>
+                <span
+                  >Choose losses/optimizers and train without
+                  exploding/vanishing gradients</span
+                >
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Regularize to reduce overfitting and evaluate with the right metrics</span>
+                <span
+                  >Regularize to reduce overfitting and evaluate with the right
+                  metrics</span
+                >
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Recognize when to use CNNs vs. sequence models (RNNs/Transformers)</span>
+                <span
+                  >Recognize when to use CNNs vs. sequence models
+                  (RNNs/Transformers)</span
+                >
               </div>
             </div>
           </section>
@@ -190,7 +214,8 @@
                 ><i class="fas fa-book-open"></i> Deep Learning</a
               >
               to ensure you're comfortable with deep learning concepts and
-              terminology. You should know basic Python and a little linear algebra/calculus.
+              terminology. You should know basic Python and a little linear
+              algebra/calculus.
             </p>
             <div class="tags">
               <span class="tag">Completed Deep Learning</span>
@@ -201,14 +226,15 @@
 
           <div class="lessons-container">
             <h3 class="lessons-title">Course Lessons</h3>
-                        <!-- Course Lessons --->
+            <!-- Course Lessons --->
             <div class="lesson-item" data-lesson="1">
               <div class="lesson-header">
                 <div class="lesson-number">01</div>
                 <div class="lesson-content">
                   <h4>Neurons & Perceptron</h4>
                   <p>
-                    Learn how neurons combine inputs to form simple linear decision boundaries.
+                    Learn how neurons combine inputs to form simple linear
+                    decision boundaries.
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -221,14 +247,31 @@
                   <span><i class="fas fa-file-text"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/ntKn5TPHHAk" 
-title="Perceptron Explained Visually" frameborder="0" allowfullscreen></iframe>
-                  <br>
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/ntKn5TPHHAk"
+                    title="Perceptron Explained Visually"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <br />
                   <p>
-                    A neuron is the basic building block of neural networks: it multiplies inputs by weights, adds a bias, and passes the result through an activation function to decide whether it “fires.” The perceptron, the earliest version of this idea, can only solve linearly separable problems — like drawing a straight line to divide categories on a chart. You can think of it like a light switch with a dial: it only flips on when the combined input is strong enough. While limited, this simple mechanism is important because it laid the groundwork for all modern neural networks and gave us the first glimpse of how machines can make decisions from numbers.       
+                    A neuron is the basic building block of neural networks: it
+                    multiplies inputs by weights, adds a bias, and passes the
+                    result through an activation function to decide whether it
+                    “fires.” The perceptron, the earliest version of this idea,
+                    can only solve linearly separable problems — like drawing a
+                    straight line to divide categories on a chart. You can think
+                    of it like a light switch with a dial: it only flips on when
+                    the combined input is strong enough. While limited, this
+                    simple mechanism is important because it laid the groundwork
+                    for all modern neural networks and gave us the first glimpse
+                    of how machines can make decisions from numbers.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> neuron, weight, bias, activation, perceptron, linear separability
+                    <strong>Key terms:</strong> neuron, weight, bias,
+                    activation, perceptron, linear separability
                   </div>
                 </div>
               </div>
@@ -239,7 +282,11 @@ title="Perceptron Explained Visually" frameborder="0" allowfullscreen></iframe>
                 <div class="lesson-number">02</div>
                 <div class="lesson-content">
                   <h4>Linear Neural Networks</h4>
-                  <p>Learn how linear neural networks process inputs with weighted sums, why they are limited to linearly separable problems</p>
+                  <p>
+                    Learn how linear neural networks process inputs with
+                    weighted sums, why they are limited to linearly separable
+                    problems
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -252,10 +299,20 @@ title="Perceptron Explained Visually" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="lesson-preview">
                   <p>
-Linear neural networks stack layers that perform only linear operations, but no matter how many are added, the result is still just one linear transformation. This makes them powerful for simple problems but incapable of modeling curved or complex decision boundaries. Imagine stacking magnifying glasses on top of each other: you can enlarge an image, but you never fundamentally change it. Recognizing this limitation underscores why nonlinearity is essential — it is the key that allows neural networks to go beyond traditional linear models and tackle real-world complexity.
+                    Linear neural networks stack layers that perform only linear
+                    operations, but no matter how many are added, the result is
+                    still just one linear transformation. This makes them
+                    powerful for simple problems but incapable of modeling
+                    curved or complex decision boundaries. Imagine stacking
+                    magnifying glasses on top of each other: you can enlarge an
+                    image, but you never fundamentally change it. Recognizing
+                    this limitation underscores why nonlinearity is essential —
+                    it is the key that allows neural networks to go beyond
+                    traditional linear models and tackle real-world complexity.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> linear layer, affine, rank, expressivity
+                    <strong>Key terms:</strong> linear layer, affine, rank,
+                    expressivity
                   </div>
                 </div>
               </div>
@@ -266,7 +323,10 @@ Linear neural networks stack layers that perform only linear operations, but no 
                 <div class="lesson-number">03</div>
                 <div class="lesson-content">
                   <h4>Multilayer Perceptrons (MLPs) & Nonlinearity</h4>
-                  <p>See how nonlinear activations make MLPs capable of modeling complex patterns.</p>
+                  <p>
+                    See how nonlinear activations make MLPs capable of modeling
+                    complex patterns.
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -279,10 +339,21 @@ Linear neural networks stack layers that perform only linear operations, but no 
                 </div>
                 <div class="lesson-preview">
                   <p>
-Multilayer perceptrons add hidden layers and nonlinear activation functions like ReLU or Tanh, breaking the “just one linear map” barrier. This unlocks the ability to approximate highly complex functions, as proven by the universal approximation theorem. Think of it like a factory assembly line: each stage makes small changes, but nonlinearities are where the magic happens — bending, shaping, or painting the product into something new. This combination makes MLPs the prototype for most modern neural networks, showing how stacking simple parts with nonlinearity creates surprising power.
+                    Multilayer perceptrons add hidden layers and nonlinear
+                    activation functions like ReLU or Tanh, breaking the “just
+                    one linear map” barrier. This unlocks the ability to
+                    approximate highly complex functions, as proven by the
+                    universal approximation theorem. Think of it like a factory
+                    assembly line: each stage makes small changes, but
+                    nonlinearities are where the magic happens — bending,
+                    shaping, or painting the product into something new. This
+                    combination makes MLPs the prototype for most modern neural
+                    networks, showing how stacking simple parts with
+                    nonlinearity creates surprising power.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> MLP, hidden layer, ReLU, SiLU/Swish
+                    <strong>Key terms:</strong> MLP, hidden layer, ReLU,
+                    SiLU/Swish
                   </div>
                 </div>
               </div>
@@ -293,7 +364,10 @@ Multilayer perceptrons add hidden layers and nonlinear activation functions like
                 <div class="lesson-number">04</div>
                 <div class="lesson-content">
                   <h4>Losses, Backprop & Gradient Descent</h4>
-                  <p>Learn how backpropagation and gradient descent train networks by reducing loss.</p>
+                  <p>
+                    Learn how backpropagation and gradient descent train
+                    networks by reducing loss.
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -305,15 +379,31 @@ Multilayer perceptrons add hidden layers and nonlinear activation functions like
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/tIeHLnjs5U8" 
-title="Backpropagation Explained" frameborder="0" allowfullscreen></iframe>
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/tIeHLnjs5U8"
+                    title="Backpropagation Explained"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
 
-                  <br>
-<p>
-Training a network means reducing the gap between predictions and true labels, quantified by a loss function. Backpropagation efficiently computes how much each parameter contributes to the loss using the chain rule, and gradient descent updates the parameters step by step to minimize it. It’s like hiking downhill in thick fog: the loss is your altitude, the gradient is the slope under your feet, and gradient descent is carefully stepping toward the valley. This method is what made large-scale training possible, powering the modern era of deep learning.
+                  <br />
+                  <p>
+                    Training a network means reducing the gap between
+                    predictions and true labels, quantified by a loss function.
+                    Backpropagation efficiently computes how much each parameter
+                    contributes to the loss using the chain rule, and gradient
+                    descent updates the parameters step by step to minimize it.
+                    It’s like hiking downhill in thick fog: the loss is your
+                    altitude, the gradient is the slope under your feet, and
+                    gradient descent is carefully stepping toward the valley.
+                    This method is what made large-scale training possible,
+                    powering the modern era of deep learning.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> loss function, cross-entropy, backpropagation, SGD, mini-batch
+                    <strong>Key terms:</strong> loss function, cross-entropy,
+                    backpropagation, SGD, mini-batch
                   </div>
                 </div>
               </div>
@@ -324,7 +414,10 @@ Training a network means reducing the gap between predictions and true labels, q
                 <div class="lesson-number">05</div>
                 <div class="lesson-content">
                   <h4>Regularization & Generalization</h4>
-                  <p>Discover how regularization methods reduce overfitting and improve generalization.</p>
+                  <p>
+                    Discover how regularization methods reduce overfitting and
+                    improve generalization.
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -337,10 +430,21 @@ Training a network means reducing the gap between predictions and true labels, q
                 </div>
                 <div class="lesson-preview">
                   <p>
-Neural networks often overfit — memorizing training data but failing on new examples. Regularization solves this by encouraging robustness. Weight decay discourages extreme weights, dropout randomly silences neurons so others must adapt, and data augmentation creates variations of inputs to promote flexibility. It’s similar to studying for an exam: memorizing past questions may fail you on new ones, but practicing with varied exercises ensures true understanding. These techniques are vital because without them, models would collapse when facing slightly different real-world data.
+                    Neural networks often overfit — memorizing training data but
+                    failing on new examples. Regularization solves this by
+                    encouraging robustness. Weight decay discourages extreme
+                    weights, dropout randomly silences neurons so others must
+                    adapt, and data augmentation creates variations of inputs to
+                    promote flexibility. It’s similar to studying for an exam:
+                    memorizing past questions may fail you on new ones, but
+                    practicing with varied exercises ensures true understanding.
+                    These techniques are vital because without them, models
+                    would collapse when facing slightly different real-world
+                    data.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> overfitting, underfitting, weight decay, dropout, early stopping, augmentation
+                    <strong>Key terms:</strong> overfitting, underfitting,
+                    weight decay, dropout, early stopping, augmentation
                   </div>
                 </div>
               </div>
@@ -351,7 +455,10 @@ Neural networks often overfit — memorizing training data but failing on new ex
                 <div class="lesson-number">06</div>
                 <div class="lesson-content">
                   <h4>Initialization, Normalization & Optimizers</h4>
-                  <p>Explore techniques that stabilize training and speed convergence in deep networks.</p>
+                  <p>
+                    Explore techniques that stabilize training and speed
+                    convergence in deep networks.
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -364,10 +471,21 @@ Neural networks often overfit — memorizing training data but failing on new ex
                 </div>
                 <div class="lesson-preview">
                   <p>
-Successful training depends on careful setup and tuning. Poor weight initialization can cause gradients to vanish or explode, but methods like Xavier or He scaling balance this. Normalization layers such as BatchNorm stabilize activations, making learning smoother. Optimizers like Adam add momentum and adaptive step sizes, accelerating progress. Imagine preparing for a marathon: initialization is starting with the right energy, normalization is keeping your pace steady, and optimizers are like wearing better shoes with a smart race strategy. Together, these techniques make training large networks both feasible and efficient.
+                    Successful training depends on careful setup and tuning.
+                    Poor weight initialization can cause gradients to vanish or
+                    explode, but methods like Xavier or He scaling balance this.
+                    Normalization layers such as BatchNorm stabilize
+                    activations, making learning smoother. Optimizers like Adam
+                    add momentum and adaptive step sizes, accelerating progress.
+                    Imagine preparing for a marathon: initialization is starting
+                    with the right energy, normalization is keeping your pace
+                    steady, and optimizers are like wearing better shoes with a
+                    smart race strategy. Together, these techniques make
+                    training large networks both feasible and efficient.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> Xavier/He init, BatchNorm, LayerNorm, Adam, AdamW, learning-rate schedule, warmup
+                    <strong>Key terms:</strong> Xavier/He init, BatchNorm,
+                    LayerNorm, Adam, AdamW, learning-rate schedule, warmup
                   </div>
                 </div>
               </div>
@@ -378,7 +496,10 @@ Successful training depends on careful setup and tuning. Poor weight initializat
                 <div class="lesson-number">07</div>
                 <div class="lesson-content">
                   <h4>Convolutional Neural Networks (CNNs) for Vision</h4>
-                  <p>Learn how CNNs extract spatial features for image and vision tasks.</p>
+                  <p>
+                    Learn how CNNs extract spatial features for image and vision
+                    tasks.
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -386,18 +507,35 @@ Successful training depends on careful setup and tuning. Poor weight initializat
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 40 min</span>
+                  <span><i class="fas fa-clock"></i> 25 min</span>
                   <span><i class="fas fa-file-text"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/YRhxdVk_sIs" 
-title="CNNs Explained" frameborder="0" allowfullscreen></iframe>
-                    <br>
-                    <p>
-CNNs specialize in images by using filters that scan small local regions and share weights across the input, making them efficient at detecting edges, textures, and shapes. Pooling layers condense information while preserving key features, building up hierarchical representations from low-level details to high-level concepts. Think of CNNs like photographers with zoom lenses: they capture fine details first, then assemble them into a full picture. This design revolutionized computer vision, enabling breakthroughs in tasks like object recognition, medical imaging, and autonomous driving.
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/YRhxdVk_sIs"
+                    title="CNNs Explained"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <br />
+                  <p>
+                    CNNs specialize in images by using filters that scan small
+                    local regions and share weights across the input, making
+                    them efficient at detecting edges, textures, and shapes.
+                    Pooling layers condense information while preserving key
+                    features, building up hierarchical representations from
+                    low-level details to high-level concepts. Think of CNNs like
+                    photographers with zoom lenses: they capture fine details
+                    first, then assemble them into a full picture. This design
+                    revolutionized computer vision, enabling breakthroughs in
+                    tasks like object recognition, medical imaging, and
+                    autonomous driving.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> convolution, kernel, stride, padding, pooling, feature map
+                    <strong>Key terms:</strong> convolution, kernel, stride,
+                    padding, pooling, feature map
                   </div>
                 </div>
               </div>
@@ -408,7 +546,10 @@ CNNs specialize in images by using filters that scan small local regions and sha
                 <div class="lesson-number">08</div>
                 <div class="lesson-content">
                   <h4>Sequences: RNNs vs. Transformers</h4>
-                  <p>Compare RNNs’ stepwise processing with Transformers’ self-attention mechanism.</p>
+                  <p>
+                    Compare RNNs’ stepwise processing with Transformers’
+                    self-attention mechanism.
+                  </p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -416,18 +557,35 @@ CNNs specialize in images by using filters that scan small local regions and sha
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 40 min</span>
+                  <span><i class="fas fa-clock"></i> 1 hour 20 min</span>
                   <span><i class="fas fa-file-text"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/KJtZARuO3JY" 
-title="Transformers & Attention" frameborder="0" allowfullscreen></iframe>
-                  <br>
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/KJtZARuO3JY"
+                    title="Transformers & Attention"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                  <br />
                   <p>
-Sequential data like text or speech requires models that handle order and context. RNNs do this by passing hidden states step by step, but struggle with long sequences due to vanishing gradients. LSTMs and GRUs alleviate the problem, yet still have limits. Transformers solved it by using self-attention, allowing every element to directly relate to every other. It’s like the difference between reading a book word by word and scanning the whole page at once while highlighting important connections. This leap in capability explains why Transformers now power everything from chatbots to large-scale generative AI.
+                    Sequential data like text or speech requires models that
+                    handle order and context. RNNs do this by passing hidden
+                    states step by step, but struggle with long sequences due to
+                    vanishing gradients. LSTMs and GRUs alleviate the problem,
+                    yet still have limits. Transformers solved it by using
+                    self-attention, allowing every element to directly relate to
+                    every other. It’s like the difference between reading a book
+                    word by word and scanning the whole page at once while
+                    highlighting important connections. This leap in capability
+                    explains why Transformers now power everything from chatbots
+                    to large-scale generative AI.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> RNN, LSTM/GRU, attention, self-attention, positional encoding, encoder/decoder
+                    <strong>Key terms:</strong> RNN, LSTM/GRU, attention,
+                    self-attention, positional encoding, encoder/decoder
                   </div>
                 </div>
               </div>
@@ -448,18 +606,20 @@ Sequential data like text or speech requires models that handle order and contex
                 </div>
                 <div class="lesson-preview">
                   <p>
-See linear limits: choose Linear dataset → small noise → watch the boundary form quickly with a few hidden units.
-
-Solve XOR: switch to XOR, try tanh with 8–12 hidden units and lr ≈ 0.03–0.1. Notice how nonlinearity + hidden units enable learning.
-
-Explore ReLU vs tanh: on Circles, compare ReLU vs tanh (ReLU often needs a bit more hidden units).
-
-Regularization: add small L2 (e.g., 0.001) and see smoother, less overfit boundaries at high noise.
-
-Reproducibility: tweak the seed; use Save/Load to keep a session; Export the trained model as JSON and Import it later.
+                    See linear limits: choose Linear dataset → small noise →
+                    watch the boundary form quickly with a few hidden units.
+                    Solve XOR: switch to XOR, try tanh with 8–12 hidden units
+                    and lr ≈ 0.03–0.1. Notice how nonlinearity + hidden units
+                    enable learning. Explore ReLU vs tanh: on Circles, compare
+                    ReLU vs tanh (ReLU often needs a bit more hidden units).
+                    Regularization: add small L2 (e.g., 0.001) and see smoother,
+                    less overfit boundaries at high noise. Reproducibility:
+                    tweak the seed; use Save/Load to keep a session; Export the
+                    trained model as JSON and Import it later.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> linear limits, relu, tanh, regularization
+                    <strong>Key terms:</strong> linear limits, relu, tanh,
+                    regularization
                   </div>
                 </div>
               </div>
@@ -472,67 +632,83 @@ Reproducibility: tweak the seed; use Save/Load to keep a session; Export the tra
                 <div class="lesson-content">
                   <h4>Module Summary</h4>
                   <p>
-                    Nonlinearity is what gives neural networks their expressive power, while depth allows them to build hierarchical feature representations. At the core of training, backpropagation together with SGD-family optimizers serves as the workhorse, with stability depending heavily on proper initialization, normalization, and learning rate choices. To ensure real-world performance, networks must generalize beyond the training data, which requires regularization techniques and disciplined evaluation. In practice, CNNs remain the dominant choice for image-based tasks, whereas sequence modeling is increasingly driven by attention-based architectures such as Transformers.
+                    Nonlinearity is what gives neural networks their expressive
+                    power, while depth allows them to build hierarchical feature
+                    representations. At the core of training, backpropagation
+                    together with SGD-family optimizers serves as the workhorse,
+                    with stability depending heavily on proper initialization,
+                    normalization, and learning rate choices. To ensure
+                    real-world performance, networks must generalize beyond the
+                    training data, which requires regularization techniques and
+                    disciplined evaluation. In practice, CNNs remain the
+                    dominant choice for image-based tasks, whereas sequence
+                    modeling is increasingly driven by attention-based
+                    architectures such as Transformers.
                   </p>
                   <p>
-                    Next steps: explore the Natural Language Processing and AI Ethics modules, try a
-                    small project.
+                    Next steps: explore the Natural Language Processing and AI
+                    Ethics modules, try a small project.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-<section class="content-section" id="resources">
-  <div class="section-header">
-    <div class="section-icon">
-      <i class="fas fa-brain"></i>
-    </div>
-    <h3>Further Resources</h3>
-  </div>
-  <div class="resources-grid">
-    <div class="resource-card">
-      <div class="resource-icon">
-        <i class="fas fa-book"></i>
-      </div>
-      <h4>Neural Networks and Deep Learning</h4>
-      <p>Michael Nielsen’s classic free online book for beginners.</p>
-      <a
-        href="http://neuralnetworksanddeeplearning.com/"
-        class="resource-link"
-      >
-        Learn More <i class="fas fa-arrow-right"></i>
-      </a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-icon">
-        <i class="fas fa-laptop-code"></i>
-      </div>
-      <h4>Deep Learning Specialization</h4>
-      <p>Andrew Ng’s Coursera program focusing on neural networks and deep learning.</p>
-      <a
-        href="https://www.coursera.org/specializations/deep-learning"
-        class="resource-link"
-      >
-        Learn More <i class="fas fa-arrow-right"></i>
-      </a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-icon">
-        <i class="fas fa-database"></i>
-      </div>
-      <h4>TensorFlow Playground</h4>
-      <p>Interactive tool to visualize and experiment with neural networks in the browser.</p>
-      <a
-        href="https://playground.tensorflow.org/"
-        class="resource-link"
-      >
-        Try It <i class="fas fa-arrow-right"></i>
-      </a>
-    </div>
-  </div>
-</section>
-
+          <section class="content-section" id="resources">
+            <div class="section-header">
+              <div class="section-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <h3>Further Resources</h3>
+            </div>
+            <div class="resources-grid">
+              <div class="resource-card">
+                <div class="resource-icon">
+                  <i class="fas fa-book"></i>
+                </div>
+                <h4>Neural Networks and Deep Learning</h4>
+                <p>Michael Nielsen’s classic free online book for beginners.</p>
+                <a
+                  href="http://neuralnetworksanddeeplearning.com/"
+                  class="resource-link"
+                >
+                  Learn More <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+              <div class="resource-card">
+                <div class="resource-icon">
+                  <i class="fas fa-laptop-code"></i>
+                </div>
+                <h4>Deep Learning Specialization</h4>
+                <p>
+                  Andrew Ng’s Coursera program focusing on neural networks and
+                  deep learning.
+                </p>
+                <a
+                  href="https://www.coursera.org/specializations/deep-learning"
+                  class="resource-link"
+                >
+                  Learn More <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+              <div class="resource-card">
+                <div class="resource-icon">
+                  <i class="fas fa-database"></i>
+                </div>
+                <h4>TensorFlow Playground</h4>
+                <p>
+                  Interactive tool to visualize and experiment with neural
+                  networks in the browser.
+                </p>
+                <a
+                  href="https://playground.tensorflow.org/"
+                  class="resource-link"
+                >
+                  Try It <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
 
