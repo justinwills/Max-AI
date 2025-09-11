@@ -302,17 +302,20 @@ footer {
 }
 
 /* XP progress */
-.xp-card .xp-summary {
+.xp-card .xp-summary,
+.xp-section .xp-summary {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   margin-bottom: 10px;
 }
-.xp-card .xp-level {
+.xp-card .xp-level,
+.xp-section .xp-level {
   font-weight: 800;
   font-size: 1.1rem;
 }
-.xp-card .xp-values {
+.xp-card .xp-values,
+.xp-section .xp-values {
   color: hsla(0, 0%, 100%, 0.8);
   font-weight: 600;
 }
@@ -369,7 +372,7 @@ footer {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2px; /* tighter gap between items */
-  max-height: 340px;
+  max-height: 270px;
   overflow: auto;
   padding-right: 6px; /* room for scrollbar */
   position: relative;
@@ -411,6 +414,36 @@ footer {
   font-size: 0.8rem; /* smaller timestamp */
 }
 
+/* Challenges */
+.challenges-card .challenge-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.challenges-card .challenge-list li {
+  background: hsla(0, 0%, 100%, 0.06);
+  border: 1px solid rgba(140, 82, 255, 0.18);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-weight: 600;
+}
+.challenges-card .challenge-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.challenges-card .challenge-list li .state {
+  width: 18px;
+  display: inline-flex;
+  justify-content: center;
+}
+.challenges-card .challenge-list li.done {
+  border-color: rgba(34, 197, 94, 0.6);
+  background: rgba(34, 197, 94, 0.12);
+}
+
 /* Learning plan card */
 #learning-plan-card .learning-plan-body {
   display: grid;
@@ -418,7 +451,7 @@ footer {
   gap: 12px;
 }
 #learning-plan-card .learning-plan-body {
-  max-height: 380px; /* prevent dominating height */
+  max-height: 450px; /* prevent dominating height */
   overflow: auto;
   padding-right: 6px;
 }
@@ -694,9 +727,9 @@ footer {
 
 .user-profile .progress-stats {
   display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 30px;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin-bottom: 24px;
 }
 
 .user-profile .stat-item {
@@ -830,7 +863,7 @@ footer {
   }
 }
 .card#learning-plan-card {
-  padding: 18px 18px; /* compact the learning plan card */
+  padding: 18px 18px;
 }
 .card#learning-plan-card h3 {
   margin-bottom: 12px;

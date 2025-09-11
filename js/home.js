@@ -331,22 +331,24 @@
     return { level, stride, into, pct, next: stride };
   }
   function renderXP() {
-    const xpCard = document.querySelector(".xp-card");
-    if (!xpCard) return;
+    const containers = document.querySelectorAll(".xp-card, .xp-section");
+    if (!containers.length) return;
     const { xp } = computeXP();
     const L = levelFromXP(xp);
-    const levelEl = xpCard.querySelector(".xp-level");
-    const currEl = xpCard.querySelector(".xp-current");
-    const nextEl = xpCard.querySelector(".xp-next");
-    const barFill = xpCard.querySelector(".xp-progress-fill");
-    const bar = xpCard.querySelector(".xp-progress");
-    const label = xpCard.querySelector(".xp-progress-label");
-    if (levelEl) levelEl.textContent = `Level ${L.level}`;
-    if (currEl) currEl.textContent = String(L.into);
-    if (nextEl) nextEl.textContent = String(L.next);
-    if (barFill) barFill.style.width = `${L.pct}%`;
-    if (bar) bar.setAttribute("aria-valuenow", String(L.pct));
-    if (label) label.textContent = `${L.pct}% to next level`;
+    containers.forEach((root)=>{
+      const levelEl = root.querySelector(".xp-level");
+      const currEl = root.querySelector(".xp-current");
+      const nextEl = root.querySelector(".xp-next");
+      const barFill = root.querySelector(".xp-progress-fill");
+      const bar = root.querySelector(".xp-progress");
+      const label = root.querySelector(".xp-progress-label");
+      if (levelEl) levelEl.textContent = `Level ${L.level}`;
+      if (currEl) currEl.textContent = String(L.into);
+      if (nextEl) nextEl.textContent = String(L.next);
+      if (barFill) barFill.style.width = `${L.pct}%`;
+      if (bar) bar.setAttribute("aria-valuenow", String(L.pct));
+      if (label) label.textContent = `${L.pct}% to next level`;
+    });
   }
   function renderAchievements() {
     const root = document.querySelector(".achievements-card .achievements-list");
@@ -364,9 +366,50 @@
       .map((b) => `<span class="achievement-badge" data-badge="${b.key}"><span class="icon">${b.icon}</span><span class="label">${b.label}</span></span>`)
       .join("");
   }
+  function renderChallenges() {
+    const root = document.querySelector('.challenges-card .challenge-list');
+    if (!root) return;
+    const dayKey = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const today = dayKey(new Date());
+    // Quiz today
+    let quizToday = false;
+    try {
+      const attemptsRaw = localStorage.getItem(K('quiz_attempts_v1')) || window.sessionStorage.getItem(K('quiz_attempts_v1'));
+      const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
+      if (Array.isArray(attempts)) {
+        quizToday = attempts.some((a)=>{ const ts = a?.ts || a?.time || a?.date; return ts && dayKey(new Date(ts))===today; });
+      }
+    } catch {}
+    // Module completion today
+    const ids = ['ai_foundations','machine_learning','deep_learning','neural_networks','natural_language_processing','ai_ethics'];
+    let moduleToday = false;
+    try {
+      moduleToday = ids.some((id)=>{
+        const raw = localStorage.getItem(K(`home_activity_logged_${id}_v1`)) || window.sessionStorage.getItem(K(`home_activity_logged_${id}_v1`));
+        if (!raw) return false;
+        try { const parsed = JSON.parse(raw); return parsed?.ts && dayKey(new Date(parsed.ts))===today; } catch { return false; }
+      });
+    } catch {}
+    // XP milestone: reach 50% to next level
+    const { xp } = computeXP();
+    const L = levelFromXP(xp);
+    const milestone = L.pct >= 50;
+    const items = [
+      { key: 'quiz_today', label: 'Complete a quiz today', done: !!quizToday },
+      { key: 'module_today', label: 'Complete a module today', done: !!moduleToday },
+      { key: 'xp_50', label: 'Reach 50% to next level', done: !!milestone },
+    ];
+    root.innerHTML = items.map(i => `
+      <li class="challenge-item ${i.done?'done':''}" data-key="${i.key}">
+        <span class="state">${i.done?'<i class="fas fa-check-circle"></i>':'<i class="far fa-circle"></i>'}</span>
+        <span class="label">${i.label}</span>
+      </li>
+    `).join('');
+  }
   function renderAll() {
     renderXP();
     renderAchievements();
+    renderChallenges();
   }
   renderAll();
   window.addEventListener("pageshow", renderAll);
