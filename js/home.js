@@ -105,19 +105,24 @@
         window.sessionStorage.setItem(ccKey, String(courses));
         window.sessionStorage.setItem(hrKey, String(hours));
       } catch {}
-      // Average score
+      // Average score (exclude module quick checks that log with a `source`)
       let avgScore = 0;
       try {
         const attemptsRaw =
           localStorage.getItem(K("quiz_attempts_v1")) ||
           window.sessionStorage.getItem(K("quiz_attempts_v1"));
-        const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
-        if (Array.isArray(attempts) && attempts.length > 0) {
-          const sum = attempts.reduce(
+        let attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
+        if (!Array.isArray(attempts)) attempts = [];
+        // Keep only main Quiz page attempts (no `source` field)
+        const mainAttempts = attempts.filter(
+          (a) => a && (a.source == null || a.source === "quiz")
+        );
+        if (mainAttempts.length > 0) {
+          const sum = mainAttempts.reduce(
             (s, a) => s + (Number(a?.percent) || 0),
             0
           );
-          avgScore = Math.round(sum / attempts.length);
+          avgScore = Math.round(sum / mainAttempts.length);
         }
       } catch {}
       document
@@ -231,16 +236,20 @@
 
     const courseBonus = expectedCourses;
     const hoursBonus = expectedHours;
-    // Compute Average Score from stored quiz attempts (per-user)
+    // Compute Average Score from stored quiz attempts (per-user), excluding module quick checks
     let avgScore = 0;
     try {
       const attemptsRaw =
         localStorage.getItem(K("quiz_attempts_v1")) ||
         window.sessionStorage.getItem(K("quiz_attempts_v1"));
-      const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
-      if (Array.isArray(attempts) && attempts.length > 0) {
-        const sum = attempts.reduce((s, a) => s + (Number(a?.percent) || 0), 0);
-        avgScore = Math.round(sum / attempts.length);
+      let attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
+      if (!Array.isArray(attempts)) attempts = [];
+      const mainAttempts = attempts.filter(
+        (a) => a && (a.source == null || a.source === "quiz")
+      );
+      if (mainAttempts.length > 0) {
+        const sum = mainAttempts.reduce((s, a) => s + (Number(a?.percent) || 0), 0);
+        avgScore = Math.round(sum / mainAttempts.length);
       }
     } catch (_) {}
 
@@ -355,7 +364,18 @@
     if (!root) return;
     const { hours } = computeXP();
     const badges = [];
-    if (anyQuizDone()) badges.push({ key: "first_quiz", icon: "🏁", label: "First Quiz Completed" });
+    // Determine if the user has completed at least one MAIN quiz attempt (not module quick checks)
+    let hasMainQuiz = false;
+    try {
+      const attemptsRaw =
+        localStorage.getItem(K("quiz_attempts_v1")) ||
+        window.sessionStorage.getItem(K("quiz_attempts_v1"));
+      const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
+      if (Array.isArray(attempts)) {
+        hasMainQuiz = attempts.some((a) => a && (a.source == null || a.source === "quiz"));
+      }
+    } catch {}
+    if (hasMainQuiz) badges.push({ key: "first_quiz", icon: "🏁", label: "First Quiz Completed" });
     if (hours >= 5) badges.push({ key: "five_hours", icon: "⏱️", label: "5 Hours Learned" });
     if (isCompleted("neural_networks")) badges.push({ key: "nn_master", icon: "🧠", label: "Neural Network Master" });
     if (badges.length === 0) {
@@ -377,7 +397,11 @@
       const attemptsRaw = localStorage.getItem(K('quiz_attempts_v1')) || window.sessionStorage.getItem(K('quiz_attempts_v1'));
       const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
       if (Array.isArray(attempts)) {
-        quizToday = attempts.some((a)=>{ const ts = a?.ts || a?.time || a?.date; return ts && dayKey(new Date(ts))===today; });
+        quizToday = attempts.some((a)=>{
+          if (!a || !(a.source == null || a.source === 'quiz')) return false; // exclude module quick checks
+          const ts = a.ts || a.time || a.date;
+          return ts && dayKey(new Date(ts)) === today;
+        });
       }
     } catch {}
     // Module completion today
@@ -422,7 +446,8 @@
       e.key.includes("home_courses_completed_bonus::") ||
       e.key.includes("home_hours_learned_bonus::") ||
       e.key.includes("_quiz_done_v1::") ||
-      e.key.includes("_completed_v1::")
+      e.key.includes("_completed_v1::") ||
+      e.key === K("quiz_attempts_v1")
     ) {
       renderAll();
     }
@@ -645,10 +670,14 @@
       const attemptsRaw =
         localStorage.getItem(K("quiz_attempts_v1")) ||
         window.sessionStorage.getItem(K("quiz_attempts_v1"));
-      const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
-      if (Array.isArray(attempts) && attempts.length > 0) {
-        const sum = attempts.reduce((s, a) => s + (Number(a?.percent) || 0), 0);
-        avgScore = Math.round(sum / attempts.length);
+      let attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
+      if (!Array.isArray(attempts)) attempts = [];
+      const mainAttempts = attempts.filter(
+        (a) => a && (a.source == null || a.source === "quiz")
+      );
+      if (mainAttempts.length > 0) {
+        const sum = mainAttempts.reduce((s, a) => s + (Number(a?.percent) || 0), 0);
+        avgScore = Math.round(sum / mainAttempts.length);
       }
     } catch (_) {}
     document.querySelectorAll(".progress-stats .stat-item").forEach((item) => {

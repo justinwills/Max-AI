@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MaxAI - Feedback</title>
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+  </head>
+  <body class="user-profile">
+    <nav>
+      <div class="nav-container">
+        <a href="home.html" aria-label="Go to Home">
+          <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        </a>
+        <div class="nav-links">
+          <a href="home.html" class="nav-link">Home</a>
+          <a href="modules.html" class="nav-link">Modules</a>
+          <a href="flashcard.html" class="nav-link">Flashcard</a>
+          <a href="quiz.html" class="nav-link">Quiz</a>
+          <a href="about.html" class="nav-link">About</a>
+        </div>
+      </div>
+    </nav>
+    <script src="js/nav.js"></script>
+    <section class="user-profile">
+      <div class="container">
+        <div class="header-text"><h1>Feedback</h1></div>
+        <div class="dashboard-grid">
+          <div class="card" aria-live="polite">
+            <h3>Quick Survey</h3>
+            <form id="feedback-form">
+              <div class="form-group">
+                <label for="rating">How satisfied are you?</label>
+                <select id="rating" required>
+                  <option value="5">⭐⭐⭐⭐⭐</option>
+                  <option value="4">⭐⭐⭐⭐</option>
+                  <option value="3">⭐⭐⭐</option>
+                  <option value="2">⭐⭐</option>
+                  <option value="1">⭐</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="comment">Any suggestions?</label>
+                <textarea id="comment" rows="4" placeholder="Your feedback helps us improve..."></textarea>
+              </div>
+              <button class="btn-primary" type="submit">Submit Feedback</button>
+              <div id="fb-status" style="margin-top:10px"></div>
+            </form>
+          </div>
+          <div class="card">
+            <h3>Why we ask</h3>
+            <p>We use your input to improve content, pacing, and UX. Thank you!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-bottom"><p>&copy; 2025 MaxAI</p></div>
+    </footer>
+    <script>
+      (function(){
+        function scope(){
+          try{const s=window.StorageUtil;const u=s?.getJSON?.('currentUser',null)||null;const id=u?.id||u?.email||u?.username;return id?String(id):'guest';}catch{return 'guest'}
+        }
+        const KEY = 'feedback_v1::'+scope();
+        const form = document.getElementById('feedback-form');
+        const statusEl = document.getElementById('fb-status');
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          const rating = document.getElementById('rating').value;
+          const comment = document.getElementById('comment').value.trim();
+          let arr = [];
+          try{ arr = JSON.parse(localStorage.getItem(KEY)||'[]'); if(!Array.isArray(arr)) arr = []; }catch{arr=[]}
+          arr.push({ ts: Date.now(), rating: Number(rating), comment });
+          localStorage.setItem(KEY, JSON.stringify(arr));
+          statusEl.textContent = 'Thank you for your feedback!';
+          form.reset();
+        });
+      })();
+    </script>
+  </body>
+  </html>
+

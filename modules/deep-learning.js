@@ -213,6 +213,20 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
         icon.style.color = "#10b981";
       }
       item?.classList.add("completed");
+      // Log a quiz attempt with timestamp for challenges on Home
+      try {
+        const key = K("quiz_attempts_v1");
+        let arr = [];
+        try {
+          const raw = localStorage.getItem(key) || window.sessionStorage.getItem(key);
+          arr = raw ? JSON.parse(raw) : [];
+        } catch (_) { arr = []; }
+        if (!Array.isArray(arr)) arr = [];
+        arr.push({ ts: Date.now(), percent: 100, source: "lesson" });
+        if (arr.length > 50) arr = arr.slice(arr.length - 50);
+        localStorage.setItem(key, JSON.stringify(arr));
+        try { window.sessionStorage.setItem(key, JSON.stringify(arr)); } catch(_){}
+      } catch(_){}
     } catch (_) {}
   }
 

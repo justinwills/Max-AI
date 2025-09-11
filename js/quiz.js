@@ -1196,7 +1196,7 @@ function finishQuiz() {
       arr = [];
     }
     if (!Array.isArray(arr)) arr = [];
-    arr.push({ ts: Date.now(), percent });
+    arr.push({ ts: Date.now(), percent, source: 'quiz' });
     if (arr.length > 50) arr = arr.slice(arr.length - 50);
     localStorage.setItem(key, JSON.stringify(arr));
   } catch (_) {}

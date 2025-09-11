@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MaxAI - Certificate</title>
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <style>
+      .cert {
+        background: #fff;
+        color: #0f172a;
+        border-radius: 16px;
+        padding: 32px;
+      }
+      .cert h2 { margin-bottom: 8px; }
+      .cert .name { font-size: 2rem; font-weight: 800; margin: 12px 0; }
+      .cert .meta { color: #334155; }
+      @media print { nav, footer, .actions { display:none !important; } body { background:#fff; } }
+    </style>
+  </head>
+  <body class="user-profile">
+    <nav>
+      <div class="nav-container">
+        <a href="home.html" aria-label="Go to Home">
+          <img src="img/logo.svg" class="logo" alt="MaxAI" />
+        </a>
+        <div class="nav-links">
+          <a href="home.html" class="nav-link">Home</a>
+          <a href="modules.html" class="nav-link">Modules</a>
+          <a href="quiz.html" class="nav-link">Quiz</a>
+        </div>
+      </div>
+    </nav>
+    <script src="js/nav.js"></script>
+    <section class="user-profile">
+      <div class="container">
+        <div class="header-text"><h1>Certificate</h1></div>
+        <div class="dashboard-grid">
+          <div class="card cert" aria-live="polite">
+            <h2>Certificate of Completion</h2>
+            <div class="name" id="cert-name">Learner Name</div>
+            <p class="meta" id="cert-meta">Completed 0 courses</p>
+            <p>This certifies that the learner has successfully completed coursework in MaxAI.</p>
+          </div>
+          <div class="card actions">
+            <h3>Actions</h3>
+            <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-bottom"><p>&copy; 2025 MaxAI</p></div>
+    </footer>
+    <script>
+      (function(){
+        function scope(){ try{ const s=window.StorageUtil; const u=s?.getJSON?.('currentUser',null)||null; const id=u?.id||u?.email||u?.username; return id?String(id):'guest'; }catch{return 'guest'} }
+        function K(base){ return base+'::'+scope(); }
+        const s = window.StorageUtil;
+        const user = s?.getJSON?.('currentUser', null) || null;
+        const name = user?.name || user?.username || user?.email || 'Learner';
+        const completed = ['ai_foundations','machine_learning','deep_learning','neural_networks','natural_language_processing','ai_ethics']
+          .map(id => localStorage.getItem(K(id+'_completed_v1'))||window.sessionStorage.getItem(K(id+'_completed_v1')))
+          .filter(v => v==='true').length;
+        document.getElementById('cert-name').textContent = name;
+        document.getElementById('cert-meta').textContent = 'Completed '+completed+' course'+(completed===1?'':'s');
+      })();
+    </script>
+  </body>
+  </html>
+
