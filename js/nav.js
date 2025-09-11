@@ -83,6 +83,7 @@
       .anim-up.anim-init{transform:translateY(16px)}
       .anim-right.anim-init{transform:translateX(-16px)}
       .anim-scale.anim-init{transform:scale(.96)}
+      .anim-fade.anim-init{transform:none}
       .anim-init,.anim-in{transition:opacity .6s ease, transform .6s ease}
       .anim-slow .anim-init,.anim-slow.anim-init{transition-duration:.9s}
       .anim-fast .anim-init,.anim-fast.anim-init{transition-duration:.35s}
@@ -122,7 +123,7 @@
         if (el.__animPrepared) return;
         el.__animPrepared = true;
         const type = (el.getAttribute('data-anim')||'').trim();
-        if (type === 'up' || type === 'right' || type === 'scale') el.classList.add('anim-'+type);
+        if (type === 'up' || type === 'right' || type === 'scale' || type === 'fade') el.classList.add('anim-'+type);
         el.classList.add('anim-init');
         const delay = el.getAttribute('data-anim-delay');
         if (delay) {

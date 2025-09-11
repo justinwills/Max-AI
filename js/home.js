@@ -248,7 +248,10 @@
         (a) => a && (a.source == null || a.source === "quiz")
       );
       if (mainAttempts.length > 0) {
-        const sum = mainAttempts.reduce((s, a) => s + (Number(a?.percent) || 0), 0);
+        const sum = mainAttempts.reduce(
+          (s, a) => s + (Number(a?.percent) || 0),
+          0
+        );
         avgScore = Math.round(sum / mainAttempts.length);
       }
     } catch (_) {}
@@ -307,10 +310,13 @@
   function anyFlag(base) {
     try {
       const userKey = K(base);
-      const vU = localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
+      const vU =
+        localStorage.getItem(userKey) ?? window.sessionStorage.getItem(userKey);
       if (vU === "true") return true;
       const guestKey = base + "::guest";
-      const vG = localStorage.getItem(guestKey) ?? window.sessionStorage.getItem(guestKey);
+      const vG =
+        localStorage.getItem(guestKey) ??
+        window.sessionStorage.getItem(guestKey);
       return vG === "true";
     } catch (_) {
       return false;
@@ -323,7 +329,9 @@
     return total > 0 && done >= total;
   }
   function anyQuizDone() {
-    return COURSE_PREFIXES.some((p) => getInt(K(p + "_quiz_done_v1")) > 0 || anyFlag(p + "_completed_v1"));
+    return COURSE_PREFIXES.some(
+      (p) => getInt(K(p + "_quiz_done_v1")) > 0 || anyFlag(p + "_completed_v1")
+    );
   }
   function computeXP() {
     const courses = getInt(K("home_courses_completed_bonus"), 0);
@@ -344,7 +352,7 @@
     if (!containers.length) return;
     const { xp } = computeXP();
     const L = levelFromXP(xp);
-    containers.forEach((root)=>{
+    containers.forEach((root) => {
       const levelEl = root.querySelector(".xp-level");
       const currEl = root.querySelector(".xp-current");
       const nextEl = root.querySelector(".xp-next");
@@ -354,13 +362,52 @@
       if (levelEl) levelEl.textContent = `Level ${L.level}`;
       if (currEl) currEl.textContent = String(L.into);
       if (nextEl) nextEl.textContent = String(L.next);
-      if (barFill) barFill.style.width = `${L.pct}%`;
+      // Apply inline width so the bar is visible and animates immediately
+      if (barFill) {
+        // Set target as CSS var for stylesheet-driven cases
+        barFill.style.setProperty('--xp-pct', `${L.pct}%`);
+        barFill.setAttribute('data-pct', String(L.pct));
+        const progressCard = barFill.closest('.sidebar-card.progress-card');
+        const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const animate = () => {
+          if (!barFill) return;
+          if (prefersReduce) {
+            barFill.style.width = `${L.pct}%`;
+            return;
+          }
+          barFill.style.width = '0%';
+          void barFill.offsetWidth; // reflow to start transition
+          requestAnimationFrame(() => { barFill.style.width = `${L.pct}%`; });
+        };
+        if (progressCard && progressCard.classList.contains('anim-in')) {
+          animate();
+        } else if (progressCard) {
+          // Prepare initial state while waiting for reveal
+          barFill.style.width = '0%';
+          if (!progressCard.__xpMo) {
+            const mo = new MutationObserver(() => {
+              if (progressCard.classList.contains('anim-in')) {
+                try { mo.disconnect(); } catch {}
+                progressCard.__xpMo = null;
+                animate();
+              }
+            });
+            mo.observe(progressCard, { attributes: true, attributeFilter: ['class'] });
+            progressCard.__xpMo = mo;
+          }
+        } else {
+          // Fallback if structure changes
+          animate();
+        }
+      }
       if (bar) bar.setAttribute("aria-valuenow", String(L.pct));
       if (label) label.textContent = `${L.pct}% to next level`;
     });
   }
   function renderAchievements() {
-    const root = document.querySelector(".achievements-card .achievements-list");
+    const root = document.querySelector(
+      ".achievements-card .achievements-list"
+    );
     if (!root) return;
     const { hours } = computeXP();
     const badges = [];
@@ -372,46 +419,82 @@
         window.sessionStorage.getItem(K("quiz_attempts_v1"));
       const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
       if (Array.isArray(attempts)) {
-        hasMainQuiz = attempts.some((a) => a && (a.source == null || a.source === "quiz"));
+        hasMainQuiz = attempts.some(
+          (a) => a && (a.source == null || a.source === "quiz")
+        );
       }
     } catch {}
-    if (hasMainQuiz) badges.push({ key: "first_quiz", icon: "🏁", label: "First Quiz Completed" });
-    if (hours >= 5) badges.push({ key: "five_hours", icon: "⏱️", label: "5 Hours Learned" });
-    if (isCompleted("neural_networks")) badges.push({ key: "nn_master", icon: "🧠", label: "Neural Network Master" });
+    if (hasMainQuiz)
+      badges.push({
+        key: "first_quiz",
+        icon: "🏁",
+        label: "First Quiz Completed",
+      });
+    if (hours >= 5)
+      badges.push({ key: "five_hours", icon: "⏱️", label: "5 Hours Learned" });
+    if (isCompleted("neural_networks"))
+      badges.push({
+        key: "nn_master",
+        icon: "🧠",
+        label: "Neural Network Master",
+      });
     if (badges.length === 0) {
-      root.innerHTML = '<div class="achievement-empty">No achievements yet — start a quiz to earn your first badge!</div>';
+      root.innerHTML =
+        '<div class="achievement-empty">No achievements yet — start a quiz to earn your first badge!</div>';
       return;
     }
     root.innerHTML = badges
-      .map((b) => `<span class="achievement-badge" data-badge="${b.key}"><span class="icon">${b.icon}</span><span class="label">${b.label}</span></span>`)
+      .map(
+        (b) =>
+          `<span class="achievement-badge" data-badge="${b.key}"><span class="icon">${b.icon}</span><span class="label">${b.label}</span></span>`
+      )
       .join("");
   }
   function renderChallenges() {
-    const root = document.querySelector('.challenges-card .challenge-list');
+    const root = document.querySelector(".challenges-card .challenge-list");
     if (!root) return;
-    const dayKey = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const dayKey = (d) =>
+      `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+        d.getDate()
+      ).padStart(2, "0")}`;
     const today = dayKey(new Date());
     // Quiz today
     let quizToday = false;
     try {
-      const attemptsRaw = localStorage.getItem(K('quiz_attempts_v1')) || window.sessionStorage.getItem(K('quiz_attempts_v1'));
+      const attemptsRaw =
+        localStorage.getItem(K("quiz_attempts_v1")) ||
+        window.sessionStorage.getItem(K("quiz_attempts_v1"));
       const attempts = attemptsRaw ? JSON.parse(attemptsRaw) : [];
       if (Array.isArray(attempts)) {
-        quizToday = attempts.some((a)=>{
-          if (!a || !(a.source == null || a.source === 'quiz')) return false; // exclude module quick checks
+        quizToday = attempts.some((a) => {
+          if (!a || !(a.source == null || a.source === "quiz")) return false; // exclude module quick checks
           const ts = a.ts || a.time || a.date;
           return ts && dayKey(new Date(ts)) === today;
         });
       }
     } catch {}
     // Module completion today
-    const ids = ['ai_foundations','machine_learning','deep_learning','neural_networks','natural_language_processing','ai_ethics'];
+    const ids = [
+      "ai_foundations",
+      "machine_learning",
+      "deep_learning",
+      "neural_networks",
+      "natural_language_processing",
+      "ai_ethics",
+    ];
     let moduleToday = false;
     try {
-      moduleToday = ids.some((id)=>{
-        const raw = localStorage.getItem(K(`home_activity_logged_${id}_v1`)) || window.sessionStorage.getItem(K(`home_activity_logged_${id}_v1`));
+      moduleToday = ids.some((id) => {
+        const raw =
+          localStorage.getItem(K(`home_activity_logged_${id}_v1`)) ||
+          window.sessionStorage.getItem(K(`home_activity_logged_${id}_v1`));
         if (!raw) return false;
-        try { const parsed = JSON.parse(raw); return parsed?.ts && dayKey(new Date(parsed.ts))===today; } catch { return false; }
+        try {
+          const parsed = JSON.parse(raw);
+          return parsed?.ts && dayKey(new Date(parsed.ts)) === today;
+        } catch {
+          return false;
+        }
       });
     } catch {}
     // XP milestone: reach 50% to next level
@@ -419,16 +502,28 @@
     const L = levelFromXP(xp);
     const milestone = L.pct >= 50;
     const items = [
-      { key: 'quiz_today', label: 'Complete a quiz today', done: !!quizToday },
-      { key: 'module_today', label: 'Complete a module today', done: !!moduleToday },
-      { key: 'xp_50', label: 'Reach 50% to next level', done: !!milestone },
+      { key: "quiz_today", label: "Complete a quiz today", done: !!quizToday },
+      {
+        key: "module_today",
+        label: "Complete a module today",
+        done: !!moduleToday,
+      },
+      { key: "xp_50", label: "Reach 50% to next level", done: !!milestone },
     ];
-    root.innerHTML = items.map(i => `
-      <li class="challenge-item ${i.done?'done':''}" data-key="${i.key}">
-        <span class="state">${i.done?'<i class="fas fa-check-circle"></i>':'<i class="far fa-circle"></i>'}</span>
+    root.innerHTML = items
+      .map(
+        (i) => `
+      <li class="challenge-item ${i.done ? "done" : ""}" data-key="${i.key}">
+        <span class="state">${
+          i.done
+            ? '<i class="fas fa-check-circle"></i>'
+            : '<i class="far fa-circle"></i>'
+        }</span>
         <span class="label">${i.label}</span>
       </li>
-    `).join('');
+    `
+      )
+      .join("");
   }
   function renderAll() {
     renderXP();
@@ -676,7 +771,10 @@
         (a) => a && (a.source == null || a.source === "quiz")
       );
       if (mainAttempts.length > 0) {
-        const sum = mainAttempts.reduce((s, a) => s + (Number(a?.percent) || 0), 0);
+        const sum = mainAttempts.reduce(
+          (s, a) => s + (Number(a?.percent) || 0),
+          0
+        );
         avgScore = Math.round(sum / mainAttempts.length);
       }
     } catch (_) {}
@@ -874,31 +972,33 @@
 
     // Match Recent Activity item heights to Learning Plan items
     try {
-      function syncHeights(){
-        const lpItem = document.querySelector('#learning-plan-card .lp-item');
+      function syncHeights() {
+        const lpItem = document.querySelector("#learning-plan-card .lp-item");
         let h = 0;
         if (lpItem) {
           const rect = lpItem.getBoundingClientRect();
           h = Math.round(rect.height);
         }
         if (!h || !Number.isFinite(h)) h = 56; // fallback
-        document.querySelectorAll('.activity-grid .activity-item').forEach((el)=>{
-          el.style.minHeight = h + 'px';
-        });
+        document
+          .querySelectorAll(".activity-grid .activity-item")
+          .forEach((el) => {
+            el.style.minHeight = h + "px";
+          });
       }
       syncHeights();
-      if (!window.__lpResizeObserver){
-        const target = document.getElementById('learning-plan-card');
-        if (target && 'ResizeObserver' in window){
-          window.__lpResizeObserver = new ResizeObserver(()=>{
+      if (!window.__lpResizeObserver) {
+        const target = document.getElementById("learning-plan-card");
+        if (target && "ResizeObserver" in window) {
+          window.__lpResizeObserver = new ResizeObserver(() => {
             syncHeights();
           });
           window.__lpResizeObserver.observe(target);
         } else {
-          window.addEventListener('resize', syncHeights);
+          window.addEventListener("resize", syncHeights);
         }
       }
-    } catch(_){}
+    } catch (_) {}
   }
   renderAll();
   window.addEventListener("storage", (e) => {

@@ -160,6 +160,14 @@ body {
   z-index: 2;
 }
 
+/* Improve wrapping on small screens */
+@media (max-width: 640px) {
+  .modules-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+}
+@media (max-width: 420px) {
+  .modules-grid { grid-template-columns: 1fr; }
+}
+
 .module-card {
   backdrop-filter: blur(10px);
   background: hsla(0, 0%, 100%, 0.15);

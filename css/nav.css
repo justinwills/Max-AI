@@ -1,5 +1,21 @@
 /* Shared navigation styles across all pages */
 
+/* Global, page-agnostic helpers loaded everywhere via nav.css */
+/* Make media responsive by default */
+img, video { max-width: 100%; height: auto; }
+
+/* Standard container with responsive side padding */
+.container { width: 100%; margin: 0 auto; max-width: 1200px; padding: 0 20px; }
+@media (max-width: 640px) { .container { padding: 0 16px; } }
+
+/* (hover-lift utility removed per request) */
+
+/* Respect reduced motion without disabling all site transitions */
+@media (prefers-reduced-motion: reduce) {
+  .anim-init,
+  .anim-in { transition: none !important; }
+}
+
 :root {
   --nav-bg: rgba(30, 41, 59, 0.95);
   --nav-border: rgba(140, 82, 255, 0.1);
