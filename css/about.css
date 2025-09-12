@@ -132,6 +132,8 @@ footer {
 @media screen and (max-width: 1200px) {
   .team-grid {
     gap: 25px;
+    justify-content: center;
+    align-items: center;
   }
 
   .team-member {
@@ -145,6 +147,7 @@ footer {
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
+    align-items: center;
   }
 
   .team-member {
@@ -153,23 +156,32 @@ footer {
     max-width: 320px;
     min-width: 280px;
     padding: 20px;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 @media screen and (max-width: 600px) {
   .team-grid {
-    align-items: center;
     flex-direction: column;
     gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .team-member-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .team-member {
     height: auto;
-    max-width: 100%;
     min-height: 420px;
-    min-width: 0;
     padding: 20px;
     width: 90%;
+    max-width: 360px;
+    margin: 0 auto;
   }
 
   .member-info {

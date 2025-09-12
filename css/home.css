@@ -50,6 +50,19 @@ span {
   transform: translateY(-2px);
 }
 
+/* Locked state for disabled-looking actions */
+.btn-primary.locked {
+  background: linear-gradient(135deg, #475569, #334155);
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.8;
+  pointer-events: none; /* prevent clicks */
+}
+.btn-primary.locked:hover {
+  box-shadow: none;
+  transform: none;
+}
+
 .header-text h1 {
   background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
   -webkit-background-clip: text;
@@ -286,6 +299,40 @@ footer {
 
 .leaderboard-card {
   padding: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.certificate-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Ensure the certificate card uses a single column width like peers */
+.dashboard-grid > .certificate-card {
+  grid-column: 1 / span 1;
+}
+
+/* Certificate actions layout */
+.certificate-card .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Responsive tweaks for certificate area */
+@media (max-width: 768px) {
+  .certificate-card .actions { flex-direction: column !important; gap: 12px !important; }
+  .certificate-card .actions .btn-primary { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .card { padding: 16px; }
+  .card h3 { font-size: 1.1rem; }
 }
 
 .card h3 {
@@ -737,9 +784,15 @@ footer {
 }
 
 /* Small stagger for podium bars */
-.leaderboard-card.anim-in .podium .podium-item:nth-child(1) .bar { transition-delay: 80ms; }
-.leaderboard-card.anim-in .podium .podium-item:nth-child(2) .bar { transition-delay: 140ms; }
-.leaderboard-card.anim-in .podium .podium-item:nth-child(3) .bar { transition-delay: 200ms; }
+.leaderboard-card.anim-in .podium .podium-item:nth-child(1) .bar {
+  transition-delay: 80ms;
+}
+.leaderboard-card.anim-in .podium .podium-item:nth-child(2) .bar {
+  transition-delay: 140ms;
+}
+.leaderboard-card.anim-in .podium .podium-item:nth-child(3) .bar {
+  transition-delay: 200ms;
+}
 
 .podium-item .name {
   font-size: 0.9rem;

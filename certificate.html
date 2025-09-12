@@ -81,6 +81,14 @@
         document.getElementById('cert-name').textContent = name;
         document.getElementById('cert-meta').textContent = 'Completed '+completed+' course'+(completed===1?'':'s');
       })();
+      (function(){
+        try {
+          var params = new URLSearchParams(window.location.search);
+          if (params.has('download')) {
+            setTimeout(function(){ window.print(); }, 300);
+          }
+        } catch (e) { /* no-op */ }
+      })();
     </script>
   </body>
   </html>

@@ -135,10 +135,33 @@
             <div class="card achievements-card">
               <h3>Achievements</h3>
               <div class="achievements-list">
-                <!-- Populated by JS; placeholder for no achievements -->
                 <div class="achievement-empty">
                   No achievements yet — start a quiz to earn your first badge!
                 </div>
+              </div>
+            </div>
+
+            <div class="card certificate-card">
+              <h3>Download Your Certificate</h3>
+              <p id="certificate-desc">View and save your completion certificate as a PDF.</p>
+              <div
+                class="actions"
+                style="
+                  display: flex;
+                  gap: 4px;
+                  flex-wrap: wrap;
+                  margin-top: 15px;
+                "
+              >
+                <a
+                  href="#"
+                  class="btn-primary locked"
+                  aria-label="Locked — complete all modules to unlock certificate"
+                  title="Complete all modules to unlock"
+                >
+                  <i class="fas fa-lock"></i>
+                  <span style="margin-left: 6px">Locked</span>
+                </a>
               </div>
             </div>
           </div>
@@ -155,5 +178,6 @@
       </div>
     </footer>
     <script src="js/home.js"></script>
+    <script src="js/nav.js"></script>
   </body>
 </html>

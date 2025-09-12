@@ -418,6 +418,41 @@
       } else if (certLink) {
         certLink.remove();
       }
+
+      // Update certificate card description based on completion
+      try {
+        const card = document.querySelector('.certificate-card');
+        const desc = card?.querySelector('#certificate-desc') || card?.querySelector('p');
+        if (desc) {
+          desc.textContent = allComplete
+            ? 'View and save your completion certificate as a PDF.'
+            : 'Complete all modules to unlock certificate';
+        }
+        const btn = card?.querySelector('.btn-primary');
+        if (btn) {
+          const icon = btn.querySelector('i');
+          const label = btn.querySelector('span');
+          if (allComplete) {
+            btn.classList.remove('locked');
+            btn.setAttribute('href', 'certificate.html');
+            btn.setAttribute('aria-label', 'View certificate');
+            btn.removeAttribute('title');
+            btn.removeAttribute('aria-disabled');
+            btn.setAttribute('tabindex', '0');
+            if (icon) { icon.classList.remove('fa-lock'); icon.classList.add('fa-eye'); }
+            if (label) { label.textContent = 'View Certificate'; }
+          } else {
+            btn.classList.add('locked');
+            btn.setAttribute('href', '#');
+            btn.setAttribute('aria-label', 'Locked — complete all modules to unlock certificate');
+            btn.setAttribute('title', 'Complete all modules to unlock');
+            btn.setAttribute('aria-disabled', 'true');
+            btn.setAttribute('tabindex', '-1');
+            if (icon) { icon.classList.remove('fa-eye'); icon.classList.add('fa-lock'); }
+            if (label) { label.textContent = 'Locked'; }
+          }
+        }
+      } catch (e) {}
     });
   }
   function renderAchievements() {
