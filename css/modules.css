@@ -484,9 +484,6 @@ footer {
   .path-arrow {
     transform: rotate(90deg);
   }
-
-  .btn-module i.fas.fa-arrow-right::before {
-  }
 }
 
 @media screen and (max-width: 480px) {

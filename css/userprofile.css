@@ -491,8 +491,8 @@ footer {
     width: 100px;
   }
 
-  .user-profile .section-header h2 {
-    font-size: 2rem;
+  .user-profile .section-header h1 {
+    font-size: clamp(2.25rem, 8vw + 0.25rem, 3rem);
   }
 
   .user-profile .user-content {
