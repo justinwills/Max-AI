@@ -1,4 +1,3 @@
-/* Elegant certificate canvas */
 .certificate {
   --border: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
   background: transparent; /* frame only */
@@ -8,10 +7,10 @@
   position: relative;
   color: #e5e7eb;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-  padding: 0; /* match image bounds */
-  width: auto; /* wrap to image width */
+  padding: 0;
+  width: auto;
   margin: 0 auto;
-  display: inline-block; /* shrink to fit */
+  display: inline-block;
 }
 
 .seal {
@@ -50,7 +49,6 @@
   border-radius: 12px;
 }
 
-/* Print: show only the certificate canvas */
 @media print {
   nav,
   footer,
@@ -72,13 +70,11 @@
   }
 }
 
-/* Tighten the title spacing */
 .header-text {
   margin-top: 0;
   margin-bottom: 12px;
 }
 
-/* Center the main certificate area */
 .cert-page {
   display: grid;
   gap: 20px;

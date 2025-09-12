@@ -326,13 +326,23 @@ footer {
 
 /* Responsive tweaks for certificate area */
 @media (max-width: 768px) {
-  .certificate-card .actions { flex-direction: column !important; gap: 12px !important; }
-  .certificate-card .actions .btn-primary { width: 100%; justify-content: center; }
+  .certificate-card .actions {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .certificate-card .actions .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 480px) {
-  .card { padding: 16px; }
-  .card h3 { font-size: 1.1rem; }
+  .card {
+    padding: 16px;
+  }
+  .card h3 {
+    font-size: 1.1rem;
+  }
 }
 
 .card h3 {
@@ -860,7 +870,6 @@ footer {
   padding: 15px;
 }
 
-/* Special badge when all lessons are completed */
 .user-profile .activity-item.perfect-badge {
   background: linear-gradient(
     135deg,
