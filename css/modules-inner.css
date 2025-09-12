@@ -247,6 +247,21 @@ p {
   --transition: all 0.3s ease;
 }
 
+/* Responsive media embeds */
+/* Make lesson preview iframes scale fluidly with a 16:9 ratio */
+.lesson-preview iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  display: block;
+}
+
+/* Ensure the container doesn't constrain the iframe width */
+.lesson-preview {
+  max-width: 100%;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
