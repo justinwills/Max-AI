@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -45,6 +45,7 @@
               <a href="../userprofile.html"
                 ><i class="fas fa-user-circle"></i> Profile</a
               >
+              <a href="../feedback.html"><i class="fas fa-comment-dots"></i> Feedback</a>
               <a href="../login.html?logout=1"
                 ><i class="fas fa-right-from-bracket"></i> Logout</a
               >
@@ -230,7 +231,7 @@
             </div>
             <p>
               Curiosity about how AI affects people and society. No coding
-              required—focus is on concepts, risks, and governance. Optional:
+              requiredâ€”focus is on concepts, risks, and governance. Optional:
               familiarity with basic AI/ML ideas helps but is not necessary.
             </p>
             <div class="tags">
@@ -273,15 +274,15 @@
                     Bias creeps in through datasets (sampling, labeling),
                     features (proxies for protected attributes), and decision
                     thresholds (different error costs across groups). A
-                    practical workflow is: define harm and stakeholders → choose
-                    fairness metrics aligned to context → run disaggregated
-                    evaluation (by subgroup) → mitigate via data
+                    practical workflow is: define harm and stakeholders â†’ choose
+                    fairness metrics aligned to context â†’ run disaggregated
+                    evaluation (by subgroup) â†’ mitigate via data
                     balancing/reweighting, algorithmic changes (e.g.,
                     constraints for equalized odds), or post-processing
-                    (group-aware thresholds) → monitor drift over time. Remember
+                    (group-aware thresholds) â†’ monitor drift over time. Remember
                     that metrics trade off: demographic parity equalizes
                     positive rates, while equalized odds equalizes error
-                    rates—pick based on the real-world duty of care (e.g.,
+                    ratesâ€”pick based on the real-world duty of care (e.g.,
                     screening vs. adjudication). Document decisions and residual
                     risks
                   </p>
@@ -313,19 +314,19 @@
                   <p>
                     Build around data minimization (collect only what you need),
                     purpose limitation (no surprise uses), and secure lifecycle
-                    (ingestion → storage → access → deletion). Technical
+                    (ingestion â†’ storage â†’ access â†’ deletion). Technical
                     safeguards include differential privacy (adding calibrated
                     noise so single records have limited influence), federated
                     learning (train where data lives), and secure aggregation or
                     confidential computing to reduce exposure. Beware
-                    “anonymous” data—linkage attacks can re-identify rows. Track
+                    â€œanonymousâ€ dataâ€”linkage attacks can re-identify rows. Track
                     lineage and consent; log who accessed what and why. When
-                    generating synthetic data, validate that it doesn’t memorize
+                    generating synthetic data, validate that it doesnâ€™t memorize
                     individuals (membership inference tests). Make privacy
                     impact assessments routine, not exceptional.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> differential privacy (ε),
+                    <strong>Key terms:</strong> differential privacy (Îµ),
                     federated learning, secure aggregation, data minimization,
                     lineage
                   </div>
@@ -372,7 +373,7 @@
                     decision logs (inputs, versioned model, thresholds) for
                     auditability and incident response. Use explainability
                     responsibly: local methods (e.g., SHAP/LIME) can aid
-                    debugging, but don’t over-promise causal truth; pair
+                    debugging, but donâ€™t over-promise causal truth; pair
                     explanations with user education and uncertainty ranges.
                     Define escalation paths: who pauses a model, how rollbacks
                     work, and what remediation looks like for affected users
@@ -428,7 +429,7 @@
               <div class="lesson-header">
                 <div class="lesson-number">05</div>
                 <div class="lesson-content">
-                  <h4>The Near Future of AI—Trends You Can Use</h4>
+                  <h4>The Near Future of AIâ€”Trends You Can Use</h4>
                   <p>What to build, how to evaluate, and where risks shif</p>
                 </div>
                 <div class="lesson-status">
@@ -450,7 +451,7 @@
                     resilience; plan for model quantization and fallback paths.
                     (3) Agentic workflows that chain tools and tasks; require
                     guardrails, state inspection, and sandboxed execution.
-                    Expect stronger sustainability pressures— optimize with
+                    Expect stronger sustainability pressuresâ€” optimize with
                     distillation, quantization, caching, and scheduled batch
                     jobs. Evaluation must evolve: add task-specific checklists,
                     human ratings, and safety benchmarks alongside accuracy.
@@ -475,7 +476,7 @@
                     modern deep learning. You can distinguish ANI vs. AGI vs.
                     ASI, structure data into features and labels with proper
                     splits, pick between supervised/unsupervised/RL, evaluate
-                    models with precision/recall/F1/ROC‑AUC, mitigate
+                    models with precision/recall/F1/ROCâ€‘AUC, mitigate
                     overfitting, and reason about fairness, privacy and
                     transparency.
                   </p>
@@ -514,7 +515,7 @@
                   <i class="fas fa-code"></i>
                 </div>
                 <h4>scikit-learn</h4>
-                <p>Beginner‑friendly machine learning API</p>
+                <p>Beginnerâ€‘friendly machine learning API</p>
                 <a
                   href="https://scikit-learn.org/stable/index.html"
                   class="resource-link"
@@ -548,7 +549,7 @@
             <span>Estimated time: ~1 hour</span>
           </div>
         </div>
-      </aside>
+                    </aside>
     </section>
     <footer>
       <div class="footer-bottom">

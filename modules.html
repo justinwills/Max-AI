@@ -10,13 +10,12 @@
     <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css" />
   </head>
   <body>
-
     <nav>
       <div class="nav-container">
         <a href="home.html" aria-label="Go to Home">
           <img src="img/logo.svg" class="logo" alt="MaxAI" />
         </a>
-        
+
         <div class="nav-links">
           <a href="home.html" class="nav-link">Home</a>
           <a href="modules.html" class="nav-link active">Modules</a>
@@ -24,18 +23,31 @@
           <a href="quiz.html" class="nav-link">Quiz</a>
           <a href="about.html" class="nav-link">About</a>
         </div>
-        
+
         <div class="nav-actions">
           <div class="profile-menu">
-            <button type="button" class="profile-btn" aria-label="Profile" aria-expanded="false"><i class="fas fa-user"></i></button>
+            <button
+              type="button"
+              class="profile-btn"
+              aria-label="Profile"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i>
+            </button>
             <div class="menu">
-              <a href="userprofile.html"><i class="fas fa-user-circle"></i> Profile</a>
-              <a href="feedback.html"><i class="fas fa-comment-dots"></i> Feedback</a>
-              <a href="login.html?logout=1"><i class="fas fa-right-from-bracket"></i> Logout</a>
+              <a href="userprofile.html"
+                ><i class="fas fa-user-circle"></i> Profile</a
+              >
+              <a href="feedback.html"
+                ><i class="fas fa-comment-dots"></i> Feedback</a
+              >
+              <a href="login.html?logout=1"
+                ><i class="fas fa-right-from-bracket"></i> Logout</a
+              >
             </div>
           </div>
         </div>
-        
+
         <div class="mobile-menu-btn">
           <i class="fas fa-bars"></i>
         </div>
@@ -43,164 +55,256 @@
     </nav>
     <script src="js/nav.js"></script>
 
-
-
     <section id="modules" class="modules-section">
       <div class="container">
-        <div class="section-header anim-slow" data-anim="up" data-anim-delay="40">
+        <div
+          class="section-header anim-slow"
+          data-anim="up"
+          data-anim-delay="40"
+        >
           <h2>Learning Modules</h2>
-          <p>Choose from our carefully curated modules designed to build your AI knowledge step by step</p>
+          <p>
+            Choose from our carefully curated modules designed to build your AI
+            knowledge step by step
+          </p>
         </div>
 
         <div class="modules-grid">
-
-          <div class="module-card" data-anim="up" data-anim-delay="0" onclick="window.location.href='modules/ai-foundation.html'">
+          <div
+            class="module-card"
+            data-anim="up"
+            data-anim-delay="0"
+            onclick="window.location.href='modules/ai-foundation.html'"
+          >
             <div class="module-image">
               <img src="img/ai-foundation.png" alt="AI Fundamentals" />
               <div class="module-badge">Beginner</div>
             </div>
             <div class="module-content">
               <div class="module-meta">
-                <span class="module-level"><i class="fas fa-signal"></i> Beginner</span>
-                <span class="module-duration"><i class="fas fa-clock"></i> 1-2 hours</span>
+                <span class="module-level"
+                  ><i class="fas fa-signal"></i> Beginner</span
+                >
+                <span class="module-duration"
+                  ><i class="fas fa-clock"></i> 1-2 hours</span
+                >
               </div>
               <h3>AI Foundations</h3>
-              <p>Learn the basics of artificial intelligence, machine learning concepts, and the history of AI development.</p>
-                             <div class="module-features">
-                 <span><i class="fas fa-check"></i> 12 Lessons</span>
-                 <span><i class="fas fa-check"></i> Hands-on Projects</span>
-               </div>
-               <div class="module-actions">
-                <a class="btn-module" href="modules/ai-foundation.html">Start Learning <i class="fas fa-arrow-right"></i></a>
+              <p>
+                Learn the basics of artificial intelligence, machine learning
+                concepts, and the history of AI development.
+              </p>
+              <div class="module-features">
+                <span><i class="fas fa-check"></i> 12 Lessons</span>
+                <span><i class="fas fa-check"></i> Hands-on Projects</span>
+              </div>
+              <div class="module-actions">
+                <a class="btn-module" href="modules/ai-foundation.html"
+                  >Start Learning <i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
 
-
-          <div class="module-card" data-anim="up" data-anim-delay="60" onclick="window.location.href='modules/machine-learning.html'">
+          <div
+            class="module-card"
+            data-anim="up"
+            data-anim-delay="60"
+            onclick="window.location.href='modules/machine-learning.html'"
+          >
             <div class="module-image">
               <img src="img/machine-learning.png" alt="Machine Learning" />
               <div class="module-badge">Intermediate</div>
             </div>
             <div class="module-content">
               <div class="module-meta">
-                <span class="module-level"><i class="fas fa-signal"></i> Intermediate</span>
-                <span class="module-duration"><i class="fas fa-clock"></i> 2-4 hours</span>
+                <span class="module-level"
+                  ><i class="fas fa-signal"></i> Intermediate</span
+                >
+                <span class="module-duration"
+                  ><i class="fas fa-clock"></i> 2-4 hours</span
+                >
               </div>
               <h3>Machine Learning</h3>
-              <p>Dive into supervised and unsupervised learning, algorithms, and practical applications of ML.</p>
-                             <div class="module-features">
-                 <span><i class="fas fa-check"></i> 12 Lessons</span>
-                 <span><i class="fas fa-check"></i> Real Datasets</span>
-               </div>
-               <div class="module-actions">
-                <a class="btn-module" href="modules/machine-learning.html">Start Learning <i class="fas fa-arrow-right"></i></a>
+              <p>
+                Dive into supervised and unsupervised learning, algorithms, and
+                practical applications of ML.
+              </p>
+              <div class="module-features">
+                <span><i class="fas fa-check"></i> 12 Lessons</span>
+                <span><i class="fas fa-check"></i> Real Datasets</span>
+              </div>
+              <div class="module-actions">
+                <a class="btn-module" href="modules/machine-learning.html"
+                  >Start Learning <i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
 
-          <div class="module-card" data-anim="up" data-anim-delay="120" onclick="window.location.href='modules/deep-learning.html'">
+          <div
+            class="module-card"
+            data-anim="up"
+            data-anim-delay="120"
+            onclick="window.location.href='modules/deep-learning.html'"
+          >
             <div class="module-image">
               <img src="img/deep-learning.png" alt="Deep Learning" />
               <div class="module-badge">Intermediate</div>
             </div>
             <div class="module-content">
               <div class="module-meta">
-                <span class="module-level"><i class="fas fa-signal"></i> Intermediate</span>
-                <span class="module-duration"><i class="fas fa-clock"></i> 2-4 hours</span>
+                <span class="module-level"
+                  ><i class="fas fa-signal"></i> Intermediate</span
+                >
+                <span class="module-duration"
+                  ><i class="fas fa-clock"></i> 2-4 hours</span
+                >
               </div>
               <h3>Deep Learning</h3>
-              <p>Explore advanced deep learning architectures and cutting-edge AI research. </p>
-                             <div class="module-features">
-                 <span><i class="fas fa-check"></i> 11 Lessons</span>
-                 <span><i class="fas fa-check"></i> Research Papers</span>
-               </div>
-               <div class="module-actions">
-                <a class="btn-module" href="modules/deep-learning.html">Start Learning <i class="fas fa-arrow-right"></i></a>
+              <p>
+                Explore advanced deep learning architectures and cutting-edge AI
+                research.
+              </p>
+              <div class="module-features">
+                <span><i class="fas fa-check"></i> 10 Lessons</span>
+                <span><i class="fas fa-check"></i> Research Papers</span>
+              </div>
+              <div class="module-actions">
+                <a class="btn-module" href="modules/deep-learning.html"
+                  >Start Learning <i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
-          <div class="module-card" data-anim="up" data-anim-delay="180" onclick="window.location.href='modules/neural-networks.html'">
+          <div
+            class="module-card"
+            data-anim="up"
+            data-anim-delay="180"
+            onclick="window.location.href='modules/neural-networks.html'"
+          >
             <div class="module-image">
               <img src="img/neural-networks.png" alt="Neural Networks" />
               <div class="module-badge">Specialized</div>
             </div>
             <div class="module-content">
               <div class="module-meta">
-                <span class="module-level"><i class="fas fa-signal"></i> Specialized</span>
-                <span class="module-duration"><i class="fas fa-clock"></i> 3-5 hours</span>
+                <span class="module-level"
+                  ><i class="fas fa-signal"></i> Specialized</span
+                >
+                <span class="module-duration"
+                  ><i class="fas fa-clock"></i> 3-5 hours</span
+                >
               </div>
               <h3>Neural Networks</h3>
-              <p>Master the fundamentals and architectures of neural networks, including backpropagation and real-world applications.</p>
+              <p>
+                Master the fundamentals and architectures of neural networks,
+                including backpropagation and real-world applications.
+              </p>
               <div class="module-features">
                 <span><i class="fas fa-check"></i> 10 Lessons</span>
                 <span><i class="fas fa-check"></i> Videos</span>
               </div>
               <div class="module-actions">
-                <a class="btn-module" href="modules/neural-networks.html">Start Learning <i class="fas fa-arrow-right"></i></a>
+                <a class="btn-module" href="modules/neural-networks.html"
+                  >Start Learning <i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
-          <div class="module-card" data-anim="up" data-anim-delay="240" onclick="window.location.href='modules/natural-language-processing.html'">
+          <div
+            class="module-card"
+            data-anim="up"
+            data-anim-delay="240"
+            onclick="window.location.href='modules/natural-language-processing.html'"
+          >
             <div class="module-image">
               <img src="img/nlp.png" alt="Natural Language Processing" />
               <div class="module-badge">Specialized</div>
             </div>
             <div class="module-content">
               <div class="module-meta">
-                <span class="module-level"><i class="fas fa-signal"></i> Specialized</span>
-                <span class="module-duration"><i class="fas fa-clock"></i> 3-5 hours</span>
+                <span class="module-level"
+                  ><i class="fas fa-signal"></i> Specialized</span
+                >
+                <span class="module-duration"
+                  ><i class="fas fa-clock"></i> 3-5 hours</span
+                >
               </div>
               <h3>Natural Language Processing</h3>
-              <p>Discover the world of NLP, from text processing and sentiment analysis to language models and chatbots.</p>
+              <p>
+                Discover the world of NLP, from text processing and sentiment
+                analysis to language models and chatbots.
+              </p>
               <div class="module-features">
                 <span><i class="fas fa-check"></i> 9 Lessons</span>
                 <span><i class="fas fa-check"></i> Real-world Projects</span>
               </div>
               <div class="module-actions">
-                <a class="btn-module" href="modules/natural-language-processing.html">Start Learning <i class="fas fa-arrow-right"></i></a>
+                <a
+                  class="btn-module"
+                  href="modules/natural-language-processing.html"
+                  >Start Learning <i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
-          <div class="module-card" data-anim="up" data-anim-delay="300" onclick="window.location.href='modules/ai-ethics.html'">
+          <div
+            class="module-card"
+            data-anim="up"
+            data-anim-delay="300"
+            onclick="window.location.href='modules/ai-ethics.html'"
+          >
             <div class="module-image">
               <img src="img/ai-ethics.png" alt="AI Ethics and Future of AI" />
               <div class="module-badge">All Levels</div>
             </div>
             <div class="module-content">
               <div class="module-meta">
-                <span class="module-level"><i class="fas fa-signal"></i> All Levels</span>
-                <span class="module-duration"><i class="fas fa-clock"></i> 1-2 hours</span>
+                <span class="module-level"
+                  ><i class="fas fa-signal"></i> All Levels</span
+                >
+                <span class="module-duration"
+                  ><i class="fas fa-clock"></i> 1-2 hours</span
+                >
               </div>
               <h3>AI Ethics and Future of AI</h3>
-              <p>Examine the ethical challenges, societal impacts, and the future direction of artificial intelligence.</p>
+              <p>
+                Examine the ethical challenges, societal impacts, and the future
+                direction of artificial intelligence.
+              </p>
               <div class="module-features">
                 <span><i class="fas fa-check"></i> 6 Lessons</span>
                 <span><i class="fas fa-check"></i> Case Studies</span>
               </div>
               <div class="module-actions">
-                <a class="btn-module" href="modules/ai-ethics.html">Start Learning <i class="fas fa-arrow-right"></i></a>
+                <a class="btn-module" href="modules/ai-ethics.html"
+                  >Start Learning <i class="fas fa-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
         </div>
 
-
         <div class="learning-path">
           <div class="section-header" data-anim="up" data-anim-delay="40">
             <h2>Recommended Learning Path</h2>
-            <p>Follow our structured curriculum to maximize your learning experience</p>
+            <p>
+              Follow our structured curriculum to maximize your learning
+              experience
+            </p>
           </div>
           <div class="path-container">
             <div class="path-step">
-              
               <div class="step-number">1</div>
               <div class="step-content">
                 <h4>AI Fundamentals</h4>
                 <p>Start with the basics</p>
               </div>
             </div>
-            <div class="path-arrow" data-anim="fade" data-anim-delay="80">→</div>
+            <div class="path-arrow" data-anim="fade" data-anim-delay="80">
+              →
+            </div>
             <div class="path-step" data-anim="up" data-anim-delay="120">
               <div class="step-number">2</div>
               <div class="step-content">
@@ -208,7 +312,9 @@
                 <p>Build on fundamentals</p>
               </div>
             </div>
-            <div class="path-arrow" data-anim="fade" data-anim-delay="160">→</div>
+            <div class="path-arrow" data-anim="fade" data-anim-delay="160">
+              →
+            </div>
             <div class="path-step" data-anim="up" data-anim-delay="200">
               <div class="step-number">3</div>
               <div class="step-content">
@@ -216,7 +322,9 @@
                 <p>Advanced concepts</p>
               </div>
             </div>
-            <div class="path-arrow" data-anim="fade" data-anim-delay="240">→</div>
+            <div class="path-arrow" data-anim="fade" data-anim-delay="240">
+              →
+            </div>
             <div class="path-step" data-anim="up" data-anim-delay="280">
               <div class="step-number">4</div>
               <div class="step-content">
@@ -229,14 +337,14 @@
       </div>
     </section>
 
-
-
     <footer>
       <div class="footer-bottom">
-        <p>&copy; 2025 MaxAI | <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a></p>
+        <p>
+          &copy; 2025 MaxAI |
+          <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
+        </p>
       </div>
     </footer>
-
 
     <script src="js/modules.js"></script>
   </body>

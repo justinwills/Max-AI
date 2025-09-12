@@ -1,4 +1,4 @@
-// Download helpers for notes and sample code
+// Download helpers for notes and Mini Lab code
 (function () {
   function download(filename, content, mime) {
     try {

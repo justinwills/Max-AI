@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -38,6 +38,7 @@
             </button>
             <div class="menu">
               <a href="../userprofile.html"><i class="fas fa-user-circle"></i> Profile</a>
+              <a href="../feedback.html"><i class="fas fa-comment-dots"></i> Feedback</a>
               <a href="../login.html?logout=1"><i class="fas fa-right-from-bracket"></i> Logout</a>
             </div>
           </div>
@@ -160,7 +161,7 @@
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
-                <span>Prepare data end-to-end (clean → encode/scale → split) without leakage.</span>
+                <span>Prepare data end-to-end (clean â†’ encode/scale â†’ split) without leakage.</span>
               </div>
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
@@ -253,7 +254,7 @@
                 <div class="lesson-content">
                   <h4>The ML Data Pipeline</h4>
                   <p>
-                    Walk through dataset → preprocessing → training → prediction.
+                    Walk through dataset â†’ preprocessing â†’ training â†’ prediction.
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -305,7 +306,7 @@ title="Linear Regression" frameborder="0" allowfullscreen></iframe>
                     <br>
                   <p>
                     Linear regression models the relationship between a numeric target and one or more features using a straight
-                    line. Training selects parameters—slope and intercept—that minimize the mean squared error between true
+                    line. Training selects parametersâ€”slope and interceptâ€”that minimize the mean squared error between true
                     and predicted values; solutions can use least squares or iterative gradient descent. Once fitted, the line
                     generalizes to forecast values for new inputs.
                   </p>
@@ -351,7 +352,7 @@ title="Linear Regression" frameborder="0" allowfullscreen></iframe>
                 <div class="lesson-number">05</div>
                 <div class="lesson-content">
                   <h4>Overfitting vs Underfitting</h4>
-                  <p>Show underfit vs overfit curves and bias–variance tradeoff.</p>
+                  <p>Show underfit vs overfit curves and biasâ€“variance tradeoff.</p>
                 </div>
                 <div class="lesson-status">
                   <i class="fas fa-lock-open"></i>
@@ -369,7 +370,7 @@ title="Overfitting and Underfitting" frameborder="0" allowfullscreen></iframe>
                   <p>
                     Generalization depends on model complexity. Underfitting occurs when the model is too simple to capture
                     patterns, leading to high errors on both training and test data. Overfitting happens when the model memorizes
-                    noise, yielding very low training error but poor test performance. The goal is a balance—often helped by
+                    noise, yielding very low training error but poor test performance. The goal is a balanceâ€”often helped by
                     regularization, simpler models, and proper validation.
                   </p>
                   <div class="callout neutral">
@@ -429,7 +430,7 @@ title="Overfitting and Underfitting" frameborder="0" allowfullscreen></iframe>
                 <div class="lesson-preview">
 
                   <p>
-                    Different tasks require different metrics. For regression, common choices include MAE, MSE/RMSE, and R²
+                    Different tasks require different metrics. For regression, common choices include MAE, MSE/RMSE, and RÂ²
                     to summarize error and explained variance. For classification, accuracy can be misleading with class
                     imbalance, so we track precision, recall, and F1, and examine the confusion matrix; threshold-based curves
                     like ROC and PR help compare classifiers.
@@ -489,8 +490,8 @@ title="Overfitting and Underfitting" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Model selection chooses a configuration that performs best on validation data. Hyperparameters—such as k
-                    in k-NN or tree depth—are tuned via grid or random search combined with cross-validation. Learning and
+                    Model selection chooses a configuration that performs best on validation data. Hyperparametersâ€”such as k
+                    in k-NN or tree depthâ€”are tuned via grid or random search combined with cross-validation. Learning and
                     validation curves diagnose whether collecting more data, simplifying the model, or regularizing would likely
                     improve generalization.
                   <div class="callout neutral">
@@ -566,7 +567,7 @@ title="Overfitting and Underfitting" frameborder="0" allowfullscreen></iframe>
                 <div class="lesson-content">
                   <h4>Module Summary</h4>
                   <p>
-                    This module covered the basics of machine learning: supervised, unsupervised, and reinforcement learning, along with the data pipeline from dataset to prediction. Learners practiced simple models—linear regression and k-NN classification—and explored concepts of overfitting vs underfitting, proper train/validation/test splits, and key evaluation metrics. We also introduced feature engineering, hyperparameter tuning, and unsupervised methods like k-means clustering and PCA. Together, these lessons provide a solid foundation for building, evaluating, and improving ML models.
+                    This module covered the basics of machine learning: supervised, unsupervised, and reinforcement learning, along with the data pipeline from dataset to prediction. Learners practiced simple modelsâ€”linear regression and k-NN classificationâ€”and explored concepts of overfitting vs underfitting, proper train/validation/test splits, and key evaluation metrics. We also introduced feature engineering, hyperparameter tuning, and unsupervised methods like k-means clustering and PCA. Together, these lessons provide a solid foundation for building, evaluating, and improving ML models.
                   </p>
                   <p>
                     Next steps: explore the Deep Learning and Neural Networks modules, try a
@@ -630,12 +631,12 @@ title="Overfitting and Underfitting" frameborder="0" allowfullscreen></iframe>
           </div>
           <div class="download-item">
             <i class="fa-solid fa-file-code"></i>
-            <span>Sample code (JS)</span>
+            <span>Mini Lab code (JS)</span>
             <a
               class="download-btn"
               href="../materials/machine-learning-sample.js"
               download
-              aria-label="Download sample code JS"
+              aria-label="Download Mini Lab code JS"
             >
               Download
             </a>
@@ -648,7 +649,7 @@ title="Overfitting and Underfitting" frameborder="0" allowfullscreen></iframe>
             <span>Estimated time: ~3 hours</span>
           </div>
         </div>
-      </aside>
+                    </aside>
     </section>
     <footer>
       <div class="footer-bottom">
