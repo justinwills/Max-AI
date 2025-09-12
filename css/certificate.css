@@ -1,0 +1,86 @@
+/* Elegant certificate canvas */
+.certificate {
+  --border: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
+  background: transparent; /* frame only */
+  border: 10px solid transparent;
+  border-radius: 18px;
+  background-clip: padding-box;
+  position: relative;
+  color: #e5e7eb;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  padding: 0; /* match image bounds */
+  width: auto; /* wrap to image width */
+  margin: 0 auto;
+  display: inline-block; /* shrink to fit */
+}
+
+.seal {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffd1ec, #cb6ce6 60%, #8c52ff);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 25px rgba(140, 82, 255, 0.35);
+  border: 4px solid rgba(255, 255, 255, 0.6);
+}
+.seal span {
+  display: block;
+  font-weight: 900;
+  text-align: center;
+}
+.seal .year {
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+
+.actions {
+  text-align: center;
+}
+.actions .btn-primary {
+  width: 100%;
+  justify-content: center;
+}
+.certificate-photo {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Print: show only the certificate canvas */
+@media print {
+  nav,
+  footer,
+  .actions,
+  .header-text {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  .certificate {
+    box-shadow: none;
+    margin: 0;
+    width: auto;
+    border-width: 6px;
+  }
+  .user-profile {
+    padding: 0;
+  }
+}
+
+/* Tighten the title spacing */
+.header-text {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+/* Center the main certificate area */
+.cert-page {
+  display: grid;
+  gap: 20px;
+  justify-content: center;
+}
