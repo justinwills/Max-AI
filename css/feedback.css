@@ -1,0 +1,220 @@
+.section {
+  padding: 80px 0 60px;
+  margin-top: 30px;
+  min-height: 100vh;
+}
+
+.header-text h1 {
+  background: linear-gradient(135deg, #8c52ff, #ff66c4, #cb6ce6);
+  -webkit-background-clip: text;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.feedback-form {
+  display: grid;
+  gap: 14px;
+}
+.form-row {
+  display: grid;
+  gap: 8px;
+}
+.helper {
+  color: hsla(0, 0%, 100%, 0.75);
+  font-size: 0.9rem;
+}
+.error {
+  color: #ff8da1;
+  font-size: 0.9rem;
+}
+
+.rating {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+  align-items: center;
+  gap: 6px;
+}
+.rating input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.rating label {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: hsla(0, 0%, 100%, 0.06);
+  transition: transform 0.1s ease, background 0.2s ease;
+}
+.rating label:hover,
+.rating label:focus {
+  transform: translateY(-1px);
+  background: hsla(0, 0%, 100%, 0.12);
+}
+.rating svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: #cbd5e1;
+  stroke-width: 1.6;
+}
+.rating input:checked ~ label svg,
+.rating label:hover ~ label svg,
+.rating label:hover svg {
+  fill: url(#grad);
+  stroke: transparent;
+}
+
+.inline {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.tag-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tag {
+  display: inline-block;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  user-select: none;
+}
+.tag:active {
+  transform: scale(0.98);
+}
+.tag input {
+  display: none;
+}
+.tag input:checked + span {
+  color: #fff;
+}
+/* old sibling rule kept off to avoid double visuals */
+
+/* Make the whole tag look filled when selected (more specific overrides) */
+.tag .pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: hsla(0, 0%, 100%, 0.08);
+  border: 1px solid hsla(0, 0%, 100%, 0.18);
+  color: hsla(0, 0%, 100%, 0.9);
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.08s ease, border-color 0.2s ease,
+    color 0.2s ease, box-shadow 0.2s ease;
+}
+.tag:hover .pill {
+  background: hsla(0, 0%, 100%, 0.12);
+  transform: translateY(-1px);
+}
+.tag:focus-within .pill {
+  box-shadow: 0 0 0 3px rgba(140, 82, 255, 0.18);
+  border-color: rgba(140, 82, 255, 0.5);
+}
+.tag input:checked + .pill {
+  background: linear-gradient(135deg, #8c52ff, #cb6ce6, #ff66c4);
+  border-color: rgba(255, 255, 255, 0);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(140, 82, 255, 0.25);
+}
+
+.char-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.btn-secondary {
+  background: hsla(0, 0%, 100%, 0.08);
+  color: #fff;
+  border: 1px solid hsla(0, 0%, 100%, 0.15);
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.history {
+  margin-top: 10px;
+  display: none;
+}
+.history.visible {
+  display: block;
+}
+.history-item {
+  background: hsla(0, 0%, 100%, 0.05);
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+/* Modern textarea styling */
+textarea#comment {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  padding: 14px 16px;
+  line-height: 1.6;
+  border-radius: 14px;
+  border: 1px solid hsla(0, 0%, 100%, 0.18);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.04)
+  );
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+textarea#comment:focus {
+  border-color: rgba(140, 82, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(140, 82, 255, 0.18);
+}
+textarea#comment::placeholder {
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+/* Make the feedback card span full width */
+.dashboard-grid .card.feedback-wide {
+  grid-column: 1 / -1;
+}
+
+/* Reduce top spacing for this page */
+section.user-profile {
+  padding: 80px 0 60px;
+  min-height: 100vh;
+}
+
+/* Content link styles (avoid nav/footer conflicts) */
+section.user-profile a:not(.nav-link):not(.profile-btn) {
+  color: #8c52ff;
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+section.user-profile a:not(.nav-link):not(.profile-btn):hover,
+section.user-profile a:not(.nav-link):not(.profile-btn):focus {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #cb6ce6;
+}

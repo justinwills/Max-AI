@@ -6,8 +6,10 @@
     <title>MaxAI - Feedback</title>
     <link rel="stylesheet" href="css/home.css" />
     <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/feedback.css" />
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css" />
   </head>
-  <body class="user-profile">
+  <body>
     <nav>
       <div class="nav-container">
         <a href="home.html" aria-label="Go to Home">
@@ -20,65 +22,207 @@
           <a href="quiz.html" class="nav-link">Quiz</a>
           <a href="about.html" class="nav-link">About</a>
         </div>
+        <div class="nav-actions">
+          <div class="profile-menu">
+            <button
+              type="button"
+              class="profile-btn"
+              aria-label="Profile"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i>
+            </button>
+            <div class="menu" role="menu">
+              <a href="userprofile.html"
+                ><i class="fas fa-user-circle"></i> Profile</a
+              >
+              <a href="feedback.html"
+                ><i class="fas fa-comment-dots"></i> Feedback</a
+              >
+              <a href="login.html?logout=1"
+                ><i class="fas fa-right-from-bracket"></i> Logout</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mobile-menu-btn"
+          aria-label="Open menu"
+          role="button"
+          tabindex="0"
+        >
+          <i class="fas fa-bars"></i>
+        </div>
       </div>
     </nav>
     <script src="js/nav.js"></script>
-    <section class="user-profile">
+    <script src="js/storage.js"></script>
+
+    <section class="section">
       <div class="container">
         <div class="header-text"><h1>Feedback</h1></div>
         <div class="dashboard-grid">
-          <div class="card" aria-live="polite">
+          <div class="card feedback-wide" aria-live="polite">
             <h3>Quick Survey</h3>
-            <form id="feedback-form">
-              <div class="form-group">
-                <label for="rating">How satisfied are you?</label>
-                <select id="rating" required>
-                  <option value="5">⭐⭐⭐⭐⭐</option>
-                  <option value="4">⭐⭐⭐⭐</option>
-                  <option value="3">⭐⭐⭐</option>
-                  <option value="2">⭐⭐</option>
-                  <option value="1">⭐</option>
-                </select>
+            <form id="feedback-form" class="feedback-form" novalidate>
+              <div class="form-row">
+                <label id="rating-label"
+                  >How satisfied are you with MaxAI?
+                  <span class="helper">(1 = poor, 5 = excellent)</span></label
+                >
+                <div
+                  class="rating"
+                  role="radiogroup"
+                  aria-labelledby="rating-label"
+                >
+                  <!-- Radios are reversed for easy fill styling -->
+                  <input type="radio" name="rating" id="rate5" value="5" />
+                  <label for="rate5" aria-label="5">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M12 2.5l2.9 6 6.6.6-5 4.4 1.6 6.4L12 16.9 5.9 19.9 7.5 13.1 2.5 9.1l6.6-.6L12 2.5z"
+                      />
+                    </svg>
+                  </label>
+                  <input type="radio" name="rating" id="rate4" value="4" />
+                  <label for="rate4" aria-label="4">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M12 2.5l2.9 6 6.6.6-5 4.4 1.6 6.4L12 16.9 5.9 19.9 7.5 13.1 2.5 9.1l6.6-.6L12 2.5z"
+                      />
+                    </svg>
+                  </label>
+                  <input type="radio" name="rating" id="rate3" value="3" />
+                  <label for="rate3" aria-label="3">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M12 2.5l2.9 6 6.6.6-5 4.4 1.6 6.4L12 16.9 5.9 19.9 7.5 13.1 2.5 9.1l6.6-.6L12 2.5z"
+                      />
+                    </svg>
+                  </label>
+                  <input type="radio" name="rating" id="rate2" value="2" />
+                  <label for="rate2" aria-label="2">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M12 2.5l2.9 6 6.6.6-5 4.4 1.6 6.4L12 16.9 5.9 19.9 7.5 13.1 2.5 9.1l6.6-.6L12 2.5z"
+                      />
+                    </svg>
+                  </label>
+                  <input type="radio" name="rating" id="rate1" value="1" />
+                  <label for="rate1" aria-label="1">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M12 2.5l2.9 6 6.6.6-5 4.4 1.6 6.4L12 16.9 5.9 19.9 7.5 13.1 2.5 9.1l6.6-.6L12 2.5z"
+                      />
+                    </svg>
+                  </label>
+                  <!-- gradient for filled stars -->
+                  <svg width="0" height="0" style="position: absolute">
+                    <defs>
+                      <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
+                        <stop offset="0%" stop-color="#8c52ff" />
+                        <stop offset="50%" stop-color="#cb6ce6" />
+                        <stop offset="100%" stop-color="#ff66c4" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                <div id="rating-error" class="error" aria-live="polite"></div>
               </div>
-              <div class="form-group">
+
+              <div class="form-row">
+                <label
+                  >What did you like most?
+                  <span class="helper">(optional)</span></label
+                >
+                <div class="tag-list" role="group" aria-label="Highlights">
+                  <label class="tag">
+                    <input type="checkbox" name="highlights" value="Content" />
+                    <span class="pill">Content</span>
+                  </label>
+                  <label class="tag">
+                    <input type="checkbox" name="highlights" value="UX" />
+                    <span class="pill">UX</span>
+                  </label>
+                  <label class="tag">
+                    <input type="checkbox" name="highlights" value="Speed" />
+                    <span class="pill">Speed</span>
+                  </label>
+                  <label class="tag">
+                    <input type="checkbox" name="highlights" value="Accuracy" />
+                    <span class="pill">Accuracy</span>
+                  </label>
+                  <label class="tag">
+                    <input type="checkbox" name="highlights" value="Design" />
+                    <span class="pill">Design</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
                 <label for="comment">Any suggestions?</label>
-                <textarea id="comment" rows="4" placeholder="Your feedback helps us improve..."></textarea>
+                <textarea
+                  id="comment"
+                  rows="4"
+                  maxlength="500"
+                  placeholder="Your feedback helps us improve..."
+                ></textarea>
+                <div class="char-row">
+                  <span class="helper"
+                    >Tip: specific examples are most helpful</span
+                  >
+                  <span id="char-count" class="helper">0/500</span>
+                </div>
               </div>
-              <button class="btn-primary" type="submit">Submit Feedback</button>
-              <div id="fb-status" style="margin-top:10px"></div>
+
+              <div class="form-row">
+                <div class="inline">
+                  <input type="checkbox" id="allow-contact" />
+                  <label for="allow-contact">May we follow up with you?</label>
+                </div>
+                <div class="inline" id="email-row" style="display: none">
+                  <label for="email" style="min-width: 80px">Email:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                    style="
+                      flex: 1;
+                      min-width: 220px;
+                      padding: 10px;
+                      border-radius: 8px;
+                      border: 1px solid hsla(0, 0%, 100%, 0.2);
+                      background: hsla(0, 0%, 100%, 0.06);
+                      color: #fff;
+                    "
+                  />
+                </div>
+                <div id="email-error" class="error" aria-live="polite"></div>
+              </div>
+
+              <div class="actions">
+                <button class="btn-primary" type="submit">
+                  Submit Feedback
+                </button>
+              </div>
+
+              <div id="fb-status" class="helper" aria-live="polite"></div>
             </form>
-          </div>
-          <div class="card">
-            <h3>Why we ask</h3>
-            <p>We use your input to improve content, pacing, and UX. Thank you!</p>
           </div>
         </div>
       </div>
     </section>
-    <footer>
-      <div class="footer-bottom"><p>&copy; 2025 MaxAI</p></div>
-    </footer>
-    <script>
-      (function(){
-        function scope(){
-          try{const s=window.StorageUtil;const u=s?.getJSON?.('currentUser',null)||null;const id=u?.id||u?.email||u?.username;return id?String(id):'guest';}catch{return 'guest'}
-        }
-        const KEY = 'feedback_v1::'+scope();
-        const form = document.getElementById('feedback-form');
-        const statusEl = document.getElementById('fb-status');
-        form.addEventListener('submit', function(e){
-          e.preventDefault();
-          const rating = document.getElementById('rating').value;
-          const comment = document.getElementById('comment').value.trim();
-          let arr = [];
-          try{ arr = JSON.parse(localStorage.getItem(KEY)||'[]'); if(!Array.isArray(arr)) arr = []; }catch{arr=[]}
-          arr.push({ ts: Date.now(), rating: Number(rating), comment });
-          localStorage.setItem(KEY, JSON.stringify(arr));
-          statusEl.textContent = 'Thank you for your feedback!';
-          form.reset();
-        });
-      })();
-    </script>
-  </body>
-  </html>
 
+    <footer>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 MaxAI |
+          <a href="mailto:rachellwanggg@gmail.com">andrianateam.com</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="js/feedback.js"></script>
+  </body>
+</html>
