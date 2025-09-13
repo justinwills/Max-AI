@@ -69,6 +69,15 @@
         completedAt: new Date().toISOString(),
       };
       store.setJSON('users', users);
+      // Also record lightweight per-user flags for file:// contexts
+      try {
+        const scope = String(cu.id || cu.email || cu.username || 'guest');
+        const K = (base) => base + '::' + scope;
+        store.set(K('onboarding_completed_v1'), 'true');
+        store.setJSON(K('onboarding_level'), data.level || 'beginner');
+        store.setJSON(K('onboarding_goals'), Array.isArray(data.goals) ? data.goals : []);
+        store.setJSON(K('onboarding_style'), Array.isArray(data.style) ? data.style : []);
+      } catch {}
       // light success and go to dashboard
       Swal.fire({ icon: 'success', title: 'All set!', text: 'Your dashboard will be tailored to your goals.' });
       setTimeout(function(){ window.location.replace('home.html'); }, 800);
@@ -93,4 +102,3 @@
 
   showStep(idx);
 })();
-

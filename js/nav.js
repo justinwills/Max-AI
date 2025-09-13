@@ -162,4 +162,46 @@
     let raf;
     window.addEventListener('resize', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => prepareTargets()); });
   })();
+
+  // Data handoff for file:// via URL hash when navigating to home
+  (function(){
+    function scope(){
+      try{ const s = window.StorageUtil; const u = s?.getJSON?.('currentUser', null) || null; const id = u?.id || u?.email || u?.username; return id ? String(id) : 'guest'; }catch{ return 'guest'; }
+    }
+    function g(key){ try{ const S = window.StorageUtil; const v = S?.get?.(key); if (v!=null && v!=='') return v; }catch{} try{ const v = localStorage.getItem(key); if (v!=null && v!=='') return v; }catch{} try{ const v = sessionStorage.getItem(key); if (v!=null && v!=='') return v; }catch{} return null; }
+    function gj(key, d){ try{ const v=g(key); if (v==null || v==='') return d; return JSON.parse(v); }catch{ return d; } }
+    function dataSnapshot(){
+      const sc = scope();
+      const K=(b)=> b+'::'+sc;
+      const out={ s: sc, c: parseInt(g(K('home_courses_completed_bonus'))||'0',10)||0, h: parseInt(g(K('home_hours_learned_bonus'))||'0',10)||0, comp:{}, a:{}, q:[] };
+      const ids=['ai_foundations','machine_learning','deep_learning','neural_networks','natural_language_processing','ai_ethics'];
+      ids.forEach(id=>{
+        const ck = K(id + '_completed_v1');
+        const tKey = K(id + '_quiz_total_v1');
+        const dKey = K(id + '_quiz_done_v1');
+        const ckVal = g(ck) === 'true';
+        const tVal = parseInt(g(tKey) || '0', 10) || 0;
+        const dVal = parseInt(g(dKey) || '0', 10) || 0;
+        out.comp[id] = ckVal || (tVal > 0 && dVal >= tVal);
+        const ak = K('home_activity_logged_'+id+'_v1');
+        const raw=g(ak);
+        if (raw){ try{ const p=JSON.parse(raw); if (p&&p.ts) out.a[id]=p.ts; }catch{} }
+      });
+      const qr = gj(K('quiz_attempts_v1'), []); if (Array.isArray(qr) && qr.length){ out.q = qr.slice(-8); }
+      return out;
+    }
+    function encode(obj){ try{ return encodeURIComponent(JSON.stringify(obj)); }catch{ return ''; } }
+    document.addEventListener('click', function(ev){
+      const a = ev.target.closest('a[href$="home.html"], a[href*="/home.html"]');
+      if (!a) return;
+      try{
+        const href = a.getAttribute('href'); if (!href) return;
+        const snap = dataSnapshot(); const hash = '#sync='+encode(snap);
+        // Preserve relative path
+        const clean = href.split('#')[0];
+        ev.preventDefault();
+        window.location.href = clean + hash;
+      }catch{}
+    }, true);
+  })();
 })();

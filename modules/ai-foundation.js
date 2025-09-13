@@ -268,6 +268,16 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
         try { window.sessionStorage.setItem(key, JSON.stringify(arr)); } catch(_){}
       } catch(_){}
     } catch (_) {}
+
+    // Always refresh recent activity timestamp when course is at 100%
+    try {
+      if (pct === 100) {
+        const actKey = K("home_activity_logged_ai_foundations_v1");
+        const payload = JSON.stringify({ ts: Date.now() });
+        localStorage.setItem(actKey, payload);
+        try { sessionStorage.setItem(actKey, payload); } catch(_) {}
+      }
+    } catch (_) {}
   }
 
   function renderQuizForLesson(lessonId, itemEl, index) {

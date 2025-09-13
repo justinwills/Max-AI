@@ -1214,25 +1214,21 @@ function finishQuiz() {
   try {
     function userScope() {
       try {
-        const u = JSON.parse(localStorage.getItem("currentUser") || "null");
-        const id = u?.id || u?.email || u?.username;
-        return id ? String(id) : "guest";
-      } catch (_) {
-        return "guest";
-      }
+        const S = window.StorageUtil;
+        const u = (S && S.getJSON('currentUser', null)) || JSON.parse(localStorage.getItem('currentUser') || 'null');
+        const id = u?.id || u?.email || u?.username; return id ? String(id) : 'guest';
+      } catch (_) { return 'guest'; }
     }
-    const key = "quiz_attempts_v1::" + userScope();
-    const raw = localStorage.getItem(key);
-    let arr = [];
-    try {
-      arr = raw ? JSON.parse(raw) : [];
-    } catch (_) {
-      arr = [];
+    const S = window.StorageUtil; const key = 'quiz_attempts_v1::' + userScope();
+    let arr = (S && S.getJSON(key, [])) || [];
+    if (!Array.isArray(arr)) {
+      try { const raw = localStorage.getItem(key) || sessionStorage.getItem(key) || '[]'; arr = JSON.parse(raw); } catch { arr = []; }
     }
     if (!Array.isArray(arr)) arr = [];
     arr.push({ ts: Date.now(), percent, source: 'quiz' });
     if (arr.length > 50) arr = arr.slice(arr.length - 50);
-    localStorage.setItem(key, JSON.stringify(arr));
+    if (S) S.setJSON(key, arr); else try { localStorage.setItem(key, JSON.stringify(arr)); } catch {}
+    try { sessionStorage.setItem(key, JSON.stringify(arr)); } catch {}
   } catch (_) {}
 }
 
