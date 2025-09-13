@@ -182,7 +182,7 @@
               <div class="objective-item">
                 <i class="fas fa-check-circle"></i>
                 <span
-                  >Prepare data end-to-end (clean â†’ encode/scale â†’ split)
+                  >Prepare data end-to-end (clean → encode/scale → split)
                   without leakage.</span
                 >
               </div>
@@ -290,7 +290,7 @@
                 <div class="lesson-content">
                   <h4>The ML Data Pipeline</h4>
                   <p>
-                    Walk through dataset â†’ preprocessing â†’ training â†’
+                    Walk through dataset → preprocessing → training →
                     prediction.
                   </p>
                 </div>
@@ -350,7 +350,7 @@
                   <p>
                     Linear regression models the relationship between a numeric
                     target and one or more features using a straight line.
-                    Training selects parametersâ€”slope and interceptâ€”that
+                    Training selects parameters: slope and intercept—that
                     minimize the mean squared error between true and predicted
                     values; solutions can use least squares or iterative
                     gradient descent. Once fitted, the line generalizes to
@@ -403,8 +403,7 @@
                 <div class="lesson-content">
                   <h4>Overfitting vs Underfitting</h4>
                   <p>
-                    Show underfit vs overfit curves and biasâ€“variance
-                    tradeoff.
+                    Show underfit vs overfit curves and bias–variance tradeoff.
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -432,8 +431,8 @@
                     leading to high errors on both training and test data.
                     Overfitting happens when the model memorizes noise, yielding
                     very low training error but poor test performance. The goal
-                    is a balanceâ€”often helped by regularization, simpler
-                    models, and proper validation.
+                    is a balance—often helped by regularization, simpler models,
+                    and proper validation.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> bias, variance, generalization
@@ -497,7 +496,7 @@
                   <img src="../img/ml-4.png" alt="Lesson 4 Preview" />
                   <p>
                     Different tasks require different metrics. For regression,
-                    common choices include MAE, MSE/RMSE, and RÂ² to summarize
+                    common choices include MAE, MSE/RMSE, and R² to summarize
                     error and explained variance. For classification, accuracy
                     can be misleading with class imbalance, so we track
                     precision, recall, and F1, and examine the confusion matrix;
@@ -566,11 +565,11 @@
                 <div class="lesson-preview">
                   <p>
                     Model selection chooses a configuration that performs best
-                    on validation data. Hyperparametersâ€”such as k in k-NN or
-                    tree depthâ€”are tuned via grid or random search combined
-                    with cross-validation. Learning and validation curves
-                    diagnose whether collecting more data, simplifying the
-                    model, or regularizing would likely improve generalization.
+                    on validation data. Hyperparameters—such as k in k-NN or
+                    tree depth—are tuned via grid or random search combined with
+                    cross-validation. Learning and validation curves diagnose
+                    whether collecting more data, simplifying the model, or
+                    regularizing would likely improve generalization.
                   </p>
 
                   <div class="callout neutral">
@@ -599,13 +598,15 @@
                 </div>
                 <div class="lesson-preview">
                   <img src="../img/ml-5.png" alt="Lesson 5 Preview" />
-                  Unsupervised exploration reveals structure without labels.
-                  K-means iteratively assigns points to the nearest centroids
-                  and updates those centroids to minimize within-cluster
-                  variance; the elbow or silhouette methods help choose k.
-                  Dimensionality reduction with PCA projects data onto
-                  directions of maximal variance to visualize or simplify
-                  downstream modeling.
+                  <p>
+                    Unsupervised exploration reveals structure without labels.
+                    K-means iteratively assigns points to the nearest centroids
+                    and updates those centroids to minimize within-cluster
+                    variance; the elbow or silhouette methods help choose k.
+                    Dimensionality reduction with PCA projects data onto
+                    directions of maximal variance to visualize or simplify
+                    downstream modeling.
+                  </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> k-means, PCA, clusters
                   </div>
@@ -657,8 +658,8 @@
                     This module covered the basics of machine learning:
                     supervised, unsupervised, and reinforcement learning, along
                     with the data pipeline from dataset to prediction. Learners
-                    practiced simple modelsâ€”linear regression and k-NN
-                    classificationâ€”and explored concepts of overfitting vs
+                    practiced simple models: linear regression and k-NN
+                    classification—and explored concepts of overfitting vs
                     underfitting, proper train/validation/test splits, and key
                     evaluation metrics. We also introduced feature engineering,
                     hyperparameter tuning, and unsupervised methods like k-means
