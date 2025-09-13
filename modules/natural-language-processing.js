@@ -130,6 +130,20 @@ $(document).on("click mousedown keydown", ".quiz, .quiz *", function (e) {
       };
     }
 
+    if (title.includes("nlp in action - chatbots and virtual assistants")) {
+      return {
+        type: "mcq",
+        prompt: "Which of these is a function of chatbots?",
+        options: [
+          ["a", "Image recognition"],
+          ["b", "Maintaining context in conversations", true],
+          ["c", "Predicting weather patterns"],
+          ["d", "Compressing file"],
+        ],
+        hint: "Think about averaging across more neighbors.",
+      };
+    }
+
     if (title.includes("nlp in action â€” chatbots and virtual assistants")) {
       return {
         type: "mcq",

@@ -233,7 +233,7 @@
             </div>
             <p>
               Curiosity about how AI affects people and society. No coding
-              requiredâ€”focus is on concepts, risks, and governance. Optional:
+              required—focus is on concepts, risks, and governance. Optional:
               familiarity with basic AI/ML ideas helps but is not necessary.
             </p>
             <div class="tags">
@@ -276,15 +276,15 @@
                     Bias creeps in through datasets (sampling, labeling),
                     features (proxies for protected attributes), and decision
                     thresholds (different error costs across groups). A
-                    practical workflow is: define harm and stakeholders â†’
-                    choose fairness metrics aligned to context â†’ run
-                    disaggregated evaluation (by subgroup) â†’ mitigate via data
+                    practical workflow is: define harm and stakeholders →
+                    choose fairness metrics aligned to context → run
+                    disaggregated evaluation (by subgroup) → mitigate via data
                     balancing/reweighting, algorithmic changes (e.g.,
                     constraints for equalized odds), or post-processing
-                    (group-aware thresholds) â†’ monitor drift over time.
+                    (group-aware thresholds) → monitor drift over time.
                     Remember that metrics trade off: demographic parity
                     equalizes positive rates, while equalized odds equalizes
-                    error ratesâ€”pick based on the real-world duty of care
+                    error rates—pick based on the real-world duty of care
                     (e.g., screening vs. adjudication). Document decisions and
                     residual risks
                   </p>
@@ -316,19 +316,19 @@
                   <p>
                     Build around data minimization (collect only what you need),
                     purpose limitation (no surprise uses), and secure lifecycle
-                    (ingestion â†’ storage â†’ access â†’ deletion). Technical
+                    (ingestion → storage → access → deletion). Technical
                     safeguards include differential privacy (adding calibrated
                     noise so single records have limited influence), federated
                     learning (train where data lives), and secure aggregation or
                     confidential computing to reduce exposure. Beware
-                    â€œanonymousâ€ dataâ€”linkage attacks can re-identify rows.
+                    “anonymous” data—linkage attacks can re-identify rows.
                     Track lineage and consent; log who accessed what and why.
-                    When generating synthetic data, validate that it doesnâ€™t
+                    When generating synthetic data, validate that it doesn’t
                     memorize individuals (membership inference tests). Make
                     privacy impact assessments routine, not exceptional.
                   </p>
                   <div class="callout neutral">
-                    <strong>Key terms:</strong> differential privacy (Îµ),
+                    <strong>Key terms:</strong> differential privacy (ε),
                     federated learning, secure aggregation, data minimization,
                     lineage
                   </div>
@@ -375,7 +375,7 @@
                     decision logs (inputs, versioned model, thresholds) for
                     auditability and incident response. Use explainability
                     responsibly: local methods (e.g., SHAP/LIME) can aid
-                    debugging, but donâ€™t over-promise causal truth; pair
+                    debugging, but don’t over-promise causal truth; pair
                     explanations with user education and uncertainty ranges.
                     Define escalation paths: who pauses a model, how rollbacks
                     work, and what remediation looks like for affected users
