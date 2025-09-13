@@ -584,7 +584,8 @@ nav {
 .features-grid {
   display: grid;
   gap: 32px;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  /* Reduce min width so cards fit on small phones */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .feature-card {
@@ -648,8 +649,17 @@ nav {
 .modules-grid {
   display: grid;
   gap: 32px;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  /* Reduce min width to prevent horizontal overflow on mobile */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   margin-bottom: 60px;
+}
+
+/* Extra safety: force single column for very narrow screens */
+@media (max-width: 360px) {
+  .features-grid,
+  .modules-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .module-card {

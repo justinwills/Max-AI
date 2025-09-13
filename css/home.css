@@ -8,7 +8,7 @@
   --side-card-height: 320px;
 }
 
-body {
+html, body {
   background-color: #1e293b;
   font-family: Inter, sans-serif;
   line-height: 1.6;
@@ -250,6 +250,9 @@ footer {
     minmax(0, 1fr)
   ); /* unified two-column card grid */
 }
+
+/* Prevent grid items from enforcing intrinsic min-content widths */
+.dashboard-grid > * { min-width: 0; }
 
 /* Stack dashboard cards on tablets/phones */
 @media (max-width: 1024px) {
