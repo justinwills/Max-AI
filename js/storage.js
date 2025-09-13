@@ -59,19 +59,9 @@
       const SSRef = getSS();
 
       function mirrorGuestKey(key, value) {
-        try {
-          if (typeof key !== 'string') return;
-          const idx = key.indexOf('::');
-          if (idx <= 0) return; // not a scoped key
-          const base = key.slice(0, idx);
-          const scope = key.slice(idx + 2);
-          if (!base || scope === 'guest') return;
-          const gKey = base + '::guest';
-          try { if (LSRef) _set.call(LSRef, gKey, value); } catch (_) {}
-          try { if (SSRef) _set.call(SSRef, gKey, value); } catch (_) {}
-          try { nameSet(gKey, value); } catch (_) {}
-          try { mem[gKey] = String(value); } catch (_) {}
-        } catch (_) {}
+        // Disabled: mirroring user-scoped keys into guest leaked progress
+        // across accounts. Keeping as no-op for backward compatibility.
+        return;
       }
 
       SP.getItem = function (key) {
@@ -97,19 +87,16 @@
           _set.call(this, key, value);
           // Mirror to window.name so other file:// pages in the same tab can read it
           nameSet(key, value);
-          mirrorGuestKey(key, value);
         } catch (_) {
           // If writing to localStorage fails, try sessionStorage before memory
           try {
             if (LSRef && this === LSRef && SSRef) {
               SSRef.setItem(key, value);
               nameSet(key, value);
-              mirrorGuestKey(key, value);
               return;
             }
           } catch (_) {}
           nameSet(key, value);
-          mirrorGuestKey(key, value);
           mem[key] = String(value);
         }
       };

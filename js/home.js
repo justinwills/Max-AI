@@ -88,6 +88,8 @@ function S_setJSON(key, value){
         const userKey = K(base);
         const vU = S_get(userKey);
         if (vU === "true") return true;
+        // Only fall back to guest when browsing as guest
+        if (userScope() !== "guest") return false;
         const guestKey = base + "::guest";
         const vG = S_get(guestKey);
         return vG === "true";
@@ -96,6 +98,8 @@ function S_setJSON(key, value){
         const userKey = K(base);
         const vU = S_get(userKey);
         if (vU != null) return vU;
+        // Only fall back to guest when browsing as guest
+        if (userScope() !== "guest") return null;
         const guestKey = base + "::guest";
         return S_get(guestKey);
       };
@@ -213,6 +217,7 @@ function S_setJSON(key, value){
       const userKey = K(base);
       const vU = S_get(userKey);
       if (vU === "true") return true;
+      if (userScope() !== "guest") return false;
       const guestKey = base + "::guest";
       const vG = S_get(guestKey);
       return vG === "true";
@@ -221,6 +226,7 @@ function S_setJSON(key, value){
       const userKey = K(base);
       const vU = S_get(userKey);
       if (vU != null) return vU;
+      if (userScope() !== "guest") return null;
       const guestKey = base + "::guest";
       return S_get(guestKey);
     };
@@ -315,7 +321,13 @@ function S_setJSON(key, value){
     "ai_ethics",
   ];
   function getInt(key, d = 0) { const n = parseInt(S_get(key) || "", 10); return Number.isFinite(n) ? n : d; }
-  function anyFlag(base) { const v = (S_get(K(base)) ?? S_get(base + "::guest")); return v === 'true'; }
+  function anyFlag(base) {
+    const vU = S_get(K(base));
+    if (vU != null) return vU === 'true';
+    if (userScope() !== 'guest') return false;
+    const vG = S_get(base + '::guest');
+    return vG === 'true';
+  }
   function isCompleted(prefix) {
     if (anyFlag(prefix + "_completed_v1")) return true;
     const total = getInt(K(prefix + "_quiz_total_v1"));
@@ -682,12 +694,16 @@ function S_setJSON(key, value){
     const userKey = K(base);
     const vU = S_get(userKey);
     if (vU != null) return vU;
+    if (userScope() !== 'guest') return null;
     const guestKey = base + "::guest";
     return S_get(guestKey);
   }
   function anyFlag(base) {
-    const v = anyRaw(base);
-    return v === "true";
+    const vU = S_get(K(base));
+    if (vU != null) return vU === 'true';
+    if (userScope() !== 'guest') return false;
+    const vG = S_get(base + '::guest');
+    return vG === 'true';
   }
   function moduleProgress(prefix) {
     const total = parseInt(anyRaw(prefix + "_quiz_total_v1") || "0", 10) || 0;
@@ -893,8 +909,12 @@ function S_setJSON(key, value){
   if (!ra) return;
   function isCourseCompletedFlag(keyWithScope) {
     const base = String(keyWithScope || "").split("::")[0];
-    const v = S_get(keyWithScope) ?? S_get(base + "::guest");
-    return v === "true";
+    const vU = S_get(keyWithScope);
+    if (vU != null) return vU === "true";
+    // Only consider guest fallback when browsing as guest
+    if (userScope() !== "guest") return false;
+    const vG = S_get(base + "::guest");
+    return vG === "true";
   }
   function areAllCompleted() {
     try {
@@ -905,7 +925,11 @@ function S_setJSON(key, value){
   }
   function getActivityDate(course) {
     const base = String(course.activityKey || "").split("::")[0];
-    const raw = S_get(course.activityKey) ?? S_get(base + "::guest");
+    const rawU = S_get(course.activityKey);
+    let raw = rawU;
+    if ((raw == null || raw === "") && userScope() === "guest") {
+      raw = S_get(base + "::guest");
+    }
     try { const parsed = JSON.parse(raw); if (parsed && parsed.ts) return new Date(parsed.ts); } catch (_) {}
     return new Date();
   }
@@ -914,7 +938,10 @@ function S_setJSON(key, value){
     try {
       COURSES.forEach((c) => {
         const base = String(c.activityKey || "").split("::")[0];
-        const raw = S_get(c.activityKey) ?? S_get(base + "::guest");
+        let raw = S_get(c.activityKey);
+        if ((raw == null || raw === "") && userScope() === "guest") {
+          raw = S_get(base + "::guest");
+        }
         if (!raw) return;
         try {
           const parsed = JSON.parse(raw);
@@ -959,7 +986,11 @@ function S_setJSON(key, value){
   }
   function upsertActivity(course) {
     const base = String(course.completedKey || "").split("::")[0];
-    const completed = (S_get(course.completedKey) ?? S_get(base + "::guest")) === 'true';
+    let cV = S_get(course.completedKey);
+    if ((cV == null || cV === "") && userScope() === "guest") {
+      cV = S_get(base + "::guest");
+    }
+    const completed = cV === 'true';
     let item = ra.querySelector(`.activity-item[data-course="${course.id}"]`);
     if (completed) {
       const whenText = formatDate(getActivityDate(course));
