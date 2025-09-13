@@ -32,6 +32,7 @@ function S_setJSON(key, value){
     const K = (b)=> b+'::'+sc;
     if (Number.isFinite(data.c)) S_set(K('home_courses_completed_bonus'), String(Math.max(0, data.c|0)));
     if (Number.isFinite(data.h)) S_set(K('home_hours_learned_bonus'), String(Math.max(0, data.h|0)));
+    if (Number.isFinite(data.qb)) S_set(K('home_quizzes_completed_bonus'), String(Math.max(0, data.qb|0)));
     if (data.comp && typeof data.comp === 'object') {
       Object.keys(data.comp).forEach(id=>{ if (data.comp[id]) S_set(K(id+'_completed_v1'), 'true'); });
     }
@@ -190,7 +191,8 @@ function S_setJSON(key, value){
       e.key.includes("_quiz_total_v1::") ||
       e.key.includes("_quiz_done_v1::") ||
       e.key.includes("home_courses_completed_bonus::") ||
-      e.key.includes("home_hours_learned_bonus::")
+      e.key.includes("home_hours_learned_bonus::") ||
+      e.key.includes("home_quizzes_completed_bonus::")
     ) {
       refreshDashboard();
     }
@@ -328,9 +330,13 @@ function S_setJSON(key, value){
   function computeXP() {
     const courses = getInt(K("home_courses_completed_bonus"), 0);
     const hours = getInt(K("home_hours_learned_bonus"), 0);
-    // Same scale used for leaderboard scoring
-    const xp = courses * 500 + hours * 50;
-    return { courses, hours, xp };
+    const quizzes = getInt(K("home_quizzes_completed_bonus"), 0);
+    // Scoring weights
+    // - Courses: 500 xp each
+    // - Hours: 50 xp per hour
+    // - Quizzes: 50 xp each
+    const xp = courses * 500 + hours * 50 + quizzes * 50;
+    return { courses, hours, quizzes, xp };
   }
   function levelFromXP(xp) {
     const stride = 1000; // xp per level
@@ -339,12 +345,21 @@ function S_setJSON(key, value){
     const pct = Math.max(0, Math.min(100, Math.round((into / stride) * 100)));
     return { level, stride, into, pct, next: stride };
   }
+  function modulesAllCompleted() {
+    try {
+      const everyDone = COURSE_PREFIXES.every((p) => isCompleted(p));
+      if (everyDone) return true;
+      const c = getInt(K("home_courses_completed_bonus"), 0);
+      const total = COURSE_PREFIXES.length;
+      return c >= total && total > 0;
+    } catch (_) { return false; }
+  }
   function renderXP() {
     const containers = document.querySelectorAll(".xp-card, .xp-section");
     if (!containers.length) return;
     const { xp } = computeXP();
     const L = levelFromXP(xp);
-    const allComplete = COURSE_PREFIXES.every((p) => isCompleted(p));
+    const allComplete = modulesAllCompleted();
     containers.forEach((root) => {
       const levelEl = root.querySelector(".xp-level");
       const currEl = root.querySelector(".xp-current");
@@ -1122,8 +1137,8 @@ function S_setJSON(key, value){
   function KForUser(base, u) {
     return base + "::" + scopeForUser(u);
   }
-  function toScore(c, h) {
-    return c * 500 + h * 50;
+  function toScore(c, h, q) {
+    return c * 500 + h * 50 + q * 50;
   }
   function getIntRaw(key) { const n = parseInt((S && S.get(key)) || S_get(key) || '0', 10); return Number.isFinite(n) ? n : 0; }
   function buildEntries() {
@@ -1133,8 +1148,9 @@ function S_setJSON(key, value){
     return users.map((u) => {
       const c = getIntRaw(KForUser("home_courses_completed_bonus", u));
       const h = getIntRaw(KForUser("home_hours_learned_bonus", u));
+      const q = getIntRaw(KForUser("home_quizzes_completed_bonus", u));
       const name = String(u?.username || u?.email || "User");
-      return { name, score: toScore(c, h) };
+      return { name, score: toScore(c, h, q) };
     });
   }
   function sync() {
@@ -1150,6 +1166,7 @@ function S_setJSON(key, value){
     if (
       e.key.includes("home_courses_completed_bonus::") ||
       e.key.includes("home_hours_learned_bonus::") ||
+      e.key.includes("home_quizzes_completed_bonus::") ||
       e.key === "users"
     )
       sync();

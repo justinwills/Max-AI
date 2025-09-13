@@ -173,7 +173,7 @@
     function dataSnapshot(){
       const sc = scope();
       const K=(b)=> b+'::'+sc;
-      const out={ s: sc, c: parseInt(g(K('home_courses_completed_bonus'))||'0',10)||0, h: parseInt(g(K('home_hours_learned_bonus'))||'0',10)||0, comp:{}, a:{}, q:[] };
+      const out={ s: sc, c: parseInt(g(K('home_courses_completed_bonus'))||'0',10)||0, h: parseInt(g(K('home_hours_learned_bonus'))||'0',10)||0, qb: parseInt(g(K('home_quizzes_completed_bonus'))||'0',10)||0, comp:{}, a:{}, q:[] };
       const ids=['ai_foundations','machine_learning','deep_learning','neural_networks','natural_language_processing','ai_ethics'];
       ids.forEach(id=>{
         const ck = K(id + '_completed_v1');

@@ -1229,6 +1229,19 @@ function finishQuiz() {
     if (arr.length > 50) arr = arr.slice(arr.length - 50);
     if (S) S.setJSON(key, arr); else try { localStorage.setItem(key, JSON.stringify(arr)); } catch {}
     try { sessionStorage.setItem(key, JSON.stringify(arr)); } catch {}
+
+    // Increment XP bonus for completed quizzes
+    try {
+      const qKey = 'home_quizzes_completed_bonus::' + userScope();
+      if (S && typeof S.incInt === 'function') S.incInt(qKey, 1);
+      else {
+        const rawQ = (localStorage.getItem(qKey) || sessionStorage.getItem(qKey) || '0');
+        const cur = parseInt(rawQ || '0', 10) || 0;
+        const next = String(cur + 1);
+        try { localStorage.setItem(qKey, next); } catch {}
+        try { sessionStorage.setItem(qKey, next); } catch {}
+      }
+    } catch {}
   } catch (_) {}
 }
 
