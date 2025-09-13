@@ -104,7 +104,7 @@
         <div class="controls" data-anim="up" data-anim-delay="160">
           <div class="control-group">
             <label for="topicSelect"><i class="fas fa-book"></i> Topic</label>
-            <select id="topicSelect">
+            <select id="topicSelect" class="sr-only" aria-label="Select topic">
               <option value="all">All Topics</option>
               <option value="ai-foundation">AI Foundations</option>
               <option value="machine-learning">Machine Learning</option>
@@ -113,6 +113,15 @@
               <option value="nlp">Natural Language Processing</option>
               <option value="ethics">AI Ethics</option>
             </select>
+            <div class="topics-bar" role="tablist" aria-label="Topics">
+              <button class="topic-chip active" aria-pressed="true" data-value="all"><i class="fas fa-layer-group"></i><span>All</span></button>
+              <button class="topic-chip" aria-pressed="false" data-value="ai-foundation"><i class="fas fa-book-open"></i><span>AI Foundations</span></button>
+              <button class="topic-chip" aria-pressed="false" data-value="machine-learning"><i class="fas fa-cogs"></i><span>Machine Learning</span></button>
+              <button class="topic-chip" aria-pressed="false" data-value="neural-networks"><i class="fas fa-brain"></i><span>Neural Networks</span></button>
+              <button class="topic-chip" aria-pressed="false" data-value="deep-learning"><i class="fas fa-robot"></i><span>Deep Learning</span></button>
+              <button class="topic-chip" aria-pressed="false" data-value="nlp"><i class="fas fa-language"></i><span>NLP</span></button>
+              <button class="topic-chip" aria-pressed="false" data-value="ethics"><i class="fas fa-balance-scale"></i><span>AI Ethics</span></button>
+            </div>
           </div>
           <div class="control-group grow">
             <label for="searchInput"

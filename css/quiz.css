@@ -232,7 +232,9 @@ h4 {
     position: static;
   }
   /* Stack header content */
-  .header-inner { grid-template-columns: 1fr; }
+  .header-inner {
+    grid-template-columns: 1fr;
+  }
 }
 
 .quiz-section {
@@ -247,6 +249,19 @@ h4 {
   margin-bottom: 20px;
 }
 
+/* Visually hidden (keep in DOM for a11y and JS) */
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .control-group {
   display: flex;
   flex-direction: column;
@@ -256,14 +271,78 @@ h4 {
 .control-group label {
   color: hsla(0, 0%, 100%, 0.75);
   font-size: 0.9rem;
+  margin-bottom: -10px;
 }
 
+/* Redesigned dropdowns: modern, high-contrast, with custom arrow */
+.control-group .select-wrap {
+  position: relative;
+  min-width: 220px;
+}
 .control-group select {
-  background: rgba(2, 6, 23, 0.3);
-  border: 1px solid rgba(140, 82, 255, 0.25);
-  border-radius: 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color-scheme: dark;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 6, 23, 0.55),
+    rgba(2, 6, 23, 0.35)
+  );
+  border: 1px solid rgba(140, 82, 255, 0.35);
+  border-radius: 14px;
   color: #fff;
-  padding: 12px 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding: 12px 42px 12px 14px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.06s ease;
+}
+.control-group select:hover {
+  box-shadow: 0 10px 24px rgba(140, 82, 255, 0.22);
+  border-color: rgba(203, 108, 230, 0.6);
+}
+.control-group select:focus {
+  outline: none;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25);
+}
+
+/* Question block redesign */
+.question-block {
+  background: radial-gradient(
+      120% 120% at 0% 0%,
+      rgba(140, 82, 255, 0.16),
+      transparent 60%
+    ),
+    linear-gradient(180deg, rgba(13, 18, 33, 0.65), rgba(13, 18, 33, 0.45));
+  border: 1px solid rgba(140, 82, 255, 0.35);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 14px 0 14px;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.24);
+}
+.question-tag {
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    rgba(140, 82, 255, 0.22),
+    rgba(203, 108, 230, 0.18)
+  );
+  border: 1px solid rgba(140, 82, 255, 0.5);
+  border-radius: 999px;
+  color: #e6e6ff;
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 700;
+  gap: 8px;
+  letter-spacing: 0.2px;
+  padding: 7px 12px;
+}
+.question-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.35;
+  margin-top: 12px;
 }
 
 .quiz-card,
@@ -548,4 +627,81 @@ footer {
 
 .footer-bottom a:hover {
   text-decoration: underline;
+}
+.control-group select option {
+  background: #0b1220; /* dark dropdown menu for Firefox */
+  color: #e5e7eb;
+}
+.control-group select option:hover,
+.control-group select option:checked,
+.control-group select option:focus {
+  background: #111a2e;
+  color: #ffffff;
+}
+
+/* Topics bar (chips) */
+.topics-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.topic-chip {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid rgba(140, 82, 255, 0.35);
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.6), rgba(2, 6, 23, 0.4));
+  color: #e5e7eb;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: transform 0.06s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.topic-chip:hover {
+  box-shadow: 0 10px 24px rgba(140, 82, 255, 0.18);
+  border-color: rgba(203, 108, 230, 0.55);
+}
+.topic-chip.active {
+  background: linear-gradient(
+    135deg,
+    rgba(140, 82, 255, 0.28),
+    rgba(203, 108, 230, 0.22)
+  );
+  border-color: #a78bfa;
+}
+.topic-chip i {
+  color: #cb6ce6;
+}
+
+/* Segmented control for question count */
+.segmented {
+  display: inline-flex;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.5);
+  padding: 4px;
+  gap: 6px;
+  margin-right: auto;
+  margin-top: 8px;
+  border: 1px solid rgba(140, 82, 255, 0.3);
+}
+.segmented .seg-btn {
+  border: 0;
+  background: transparent;
+  color: #e5e7eb;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.2px;
+}
+.segmented .seg-btn:hover {
+  background: rgba(140, 82, 255, 0.18);
+}
+.segmented .seg-btn.active {
+  background: linear-gradient(135deg, #8c52ff, #cb6ce6);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(140, 82, 255, 0.28);
 }

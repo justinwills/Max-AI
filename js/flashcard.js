@@ -656,4 +656,18 @@ shuffleBtn.addEventListener("click", () => {
   render();
 });
 
+// Optional: token chip controls (if present)
+try {
+  document.querySelectorAll('.topic-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.getAttribute('data-value');
+      if (!val) return;
+      topicSelect.value = val;
+      document.querySelectorAll('.topic-chip').forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+      render();
+    });
+  });
+} catch {}
+
 render();
