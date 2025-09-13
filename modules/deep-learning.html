@@ -45,7 +45,9 @@
               <a href="../userprofile.html"
                 ><i class="fas fa-user-circle"></i> Profile</a
               >
-              <a href="../feedback.html"><i class="fas fa-comment-dots"></i> Feedback</a>
+              <a href="../feedback.html"
+                ><i class="fas fa-comment-dots"></i> Feedback</a
+              >
               <a href="../login.html?logout=1"
                 ><i class="fas fa-right-from-bracket"></i> Logout</a
               >
@@ -267,8 +269,8 @@
                   <p>
                     When we interact with modern technologyâ€”whether it is
                     recognizing a face in photos, translating languages
-                    instantly, or recommending a movieâ€”we are often seeing deep
-                    learning at work. Deep learning is a branch of machine
+                    instantly, or recommending a movieâ€”we are often seeing
+                    deep learning at work. Deep learning is a branch of machine
                     learning that uses networks of layers, known as neural
                     networks, to recognize patterns in data. Think of deep
                     learning like teaching a student. At first, the student
@@ -306,31 +308,35 @@
               </div>
               <div class="lesson-details">
                 <div class="lesson-meta">
-                  <span><i class="fas fa-clock"></i> 8 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
+                  <span><i class="fas fa-clock"></i> 15 min</span>
+                  <span><i class="fas fa-image"></i> Image</span>
                 </div>
                 <div class="lesson-preview">
+                  <img src="../img/dl-1.png" alt="Lesson 1 Preview" />
                   <p>
-                    1. Data Preparation: Most of the effort goes here. Raw data
-                    is noisy, inconsistent, and incomplete. A well-prepared
-                    dataset often matters more than a fancy model. For example,
-                    in medical imaging, removing blurry scans and labeling them
-                    carefully is critical for accuracy. 2. Model Design:
-                    Choosing the right architecture is like choosing the right
-                    tool for the job. CNNs shine in vision, Transformers
-                    dominate in language, while hybrid models tackle multimodal
-                    tasks. 3. Training: This stage is about more than running
+                    1. <b>Data Preparation:</b> Most of the effort goes here.
+                    Raw data is noisy, inconsistent, and incomplete. A
+                    well-prepared dataset often matters more than a fancy model.
+                    For example, in medical imaging, removing blurry scans and
+                    labeling them carefully is critical for accuracy. <br />
+                    2. <b>Model Design:</b> Choosing the right architecture is
+                    like choosing the right tool for the job. CNNs shine in
+                    vision, Transformers dominate in language, while hybrid
+                    models tackle multimodal tasks. <br />
+                    3. <b>Training:</b> This stage is about more than running
                     code. Itâ€™s about setting learning rates, managing memory,
                     and monitoring metrics in real time. Mistuned training can
-                    waste hours on GPUs without progress. 4. Evaluation: A model
-                    that works in the lab may fail in the real world. Proper
-                    evaluation uses test data, cross-validation, and fairness
-                    checks to ensure robust performance. 5. Deployment:
-                    Integration is often the hardest part. A model that works on
-                    a server may need to be compressed for a smartphone or edge
-                    device. This workflow isnâ€™t rigid but iterative. Teams
-                    circle back when issues arise â€” data may need relabeling, or
-                    deployment might demand lighter architectures.
+                    waste hours on GPUs without progress. <br />
+                    4. <b>Evaluation:</b> A model that works in the lab may fail
+                    in the real world. Proper evaluation uses test data,
+                    cross-validation, and fairness checks to ensure robust
+                    performance. <br />
+                    5. <b>Deployment:</b> Integration is often the hardest part.
+                    A model that works on a server may need to be compressed for
+                    a smartphone or edge device. This workflow isnâ€™t rigid but
+                    iterative. Teams circle back when issues arise â€” data may
+                    need relabeling, or deployment might demand lighter
+                    architectures.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> DNN, activation, forward pass,
@@ -361,18 +367,51 @@
                   <span><i class="fas fa-file-text"></i> Notes</span>
                 </div>
                 <div class="lesson-preview">
+                  <img src="../img/dl-2.png" alt="Lesson 2 Preview" />
                   <p>
-                    The magic lies in their efficiency: instead of analyzing
-                    every pixel separately, CNNs slide filters across an image
-                    to detect edges, textures, and shapes. These small building
-                    blocks combine into recognition of complex objects like
-                    faces or traffic signs. Real-world impact is everywhere: â€¢
-                    Healthcare: Detecting tumors from X-rays more reliably than
-                    some specialists. â€¢ Transportation: Enabling cars to detect
-                    pedestrians, lanes, and obstacles. â€¢ Security: Powering
-                    facial recognition in airports and smartphones. CNNs made
-                    image recognition scalable, turning computer vision from
-                    theory into daily reality.
+                    <strong>Input Layer:</strong> The input is a 28x28 grayscale
+                    image (28 x 28 x 1), where '1' indicates one color channel
+                    (grayscale).<br /><br />
+
+                    <strong>Convolution Layer 1 (Conv_1):</strong> A convolution
+                    operation is applied using a 5x5 kernel with valid padding,
+                    which reduces the spatial dimensions (height and width) of
+                    the image. The output after this operation is a 24x24x1
+                    tensor (n1 channels). This step helps to extract low-level
+                    features like edges.<br /><br />
+
+                    <strong>Max-Pooling Layer 1:</strong> A 2x2 max-pooling
+                    operation is applied, which reduces the size of the feature
+                    map, making it 12x12x1. This layer reduces the complexity of
+                    the feature map while retaining the most important
+                    features.<br /><br />
+
+                    <strong>Convolution Layer 2 (Conv_2):</strong> A second
+                    convolution operation with another 5x5 kernel is applied to
+                    the result from the previous max-pooling layer, reducing the
+                    feature map size further to 8x8x2 (n2 channels). This layer
+                    helps to extract more complex features.<br /><br />
+
+                    <strong>Max-Pooling Layer 2:</strong> A second 2x2
+                    max-pooling operation is applied, reducing the size of the
+                    feature map to 4x4x2. This step further reduces the spatial
+                    dimensions, consolidating key information from the input
+                    image.<br /><br />
+
+                    <strong>Fully Connected Layers (fc_3 & fc_4):</strong> After
+                    flattening the image data, the features are passed through
+                    fully connected neural network layers. The first fully
+                    connected layer (fc_3) applies ReLU activation, followed by
+                    another fully connected layer (fc_4) with dropout to prevent
+                    overfitting.<br /><br />
+
+                    <strong>Output Layer:</strong> The final output is a set of
+                    10 units (0 to 9), corresponding to the predicted class for
+                    a digit recognition task, with one neuron for each possible
+                    digit.<br /><br />
+
+                    The overall architecture uses convolution and pooling to
+                    reduce the spatia
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> vanishing gradient, batch
@@ -413,8 +452,8 @@
                     ChatGPT & BERT: Understanding and generating human-like
                     text. â€¢ Stock Predictions: Identifying hidden patterns
                     across time. Sequence models show that deep learning isnâ€™t
-                    just about recognizing images â€” itâ€™s about capturing context
-                    over time.
+                    just about recognizing images â€” itâ€™s about capturing
+                    context over time.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> DNN, activation, forward pass,
@@ -430,8 +469,9 @@
                   <h4>Training and Optimization</h4>
                   <p>
                     Training deep models is where theory meets reality, and most
-                    failures happen here. Itâ€™s not enough to pick an algorithm â€”
-                    you need strategies to make learning efficient and reliable.
+                    failures happen here. Itâ€™s not enough to pick an algorithm
+                    â€” you need strategies to make learning efficient and
+                    reliable.
                   </p>
                 </div>
                 <div class="lesson-status">
@@ -445,21 +485,33 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    â€¢ Optimization: Algorithms like SGD with momentum or Adam
-                    arenâ€™t just math tricks â€” they determine whether your model
-                    converges in hours or weeks. â€¢ Regularization: Without
-                    methods like dropout, models memorize training data and fail
-                    in production. Imagine a student memorizing answers instead
-                    of learning concepts â€” thatâ€™s overfitting. â€¢ Normalization:
-                    Batch norm and layer norm keep values stable across layers,
-                    preventing the network from spiraling into instability. â€¢
-                    Hardware Acceleration: GPUs and TPUs arenâ€™t optional
-                    luxuries; theyâ€™re what make training billion-parameter
-                    models feasible. In practice, training is like piloting a
-                    plane: constant monitoring, mid-course corrections, and
-                    emergency responses when things go wrong. The right choices
-                    here separate toy models from production-grade AI.
+                    <strong>Optimization:</strong> Algorithms like SGD with
+                    momentum or Adam aren’t just mathematical tricks — they
+                    determine whether your model converges in hours or weeks.
+                    Choosing the right optimizer can significantly impact the
+                    efficiency of training and the quality of your results.<br /><br />
+
+                    <strong>Regularization:</strong> Without methods like
+                    dropout, models tend to memorize training data, resulting in
+                    poor generalization to new data. It’s similar to a student
+                    memorizing answers without understanding the underlying
+                    concepts — leading to overfitting.<br /><br />
+
+                    <strong>Normalization:</strong> Techniques like batch
+                    normalization and layer normalization help maintain stable
+                    activations across layers, preventing the network from
+                    spiraling into instability. These methods ensure smoother
+                    learning and better convergence.<br /><br />
+
+                    <strong>Hardware Acceleration:</strong> GPUs and TPUs aren’t
+                    optional luxuries; they’re essential for training large
+                    models with billions of parameters. In practice, training is
+                    like piloting a plane — it requires constant monitoring,
+                    mid-course corrections, and quick responses to unexpected
+                    issues. The right hardware is crucial for scaling your model
+                    from a toy to production-grade AI.
                   </p>
+
                   <div class="callout neutral">
                     <strong>Key terms:</strong> DNN, activation, forward pass,
                     backpropagation
@@ -488,9 +540,10 @@
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 8 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
+                  <span><i class="fas fa-image"></i> Image</span>
                 </div>
                 <div class="lesson-preview">
+                  <img src="../img/dl-3.png" alt="Lesson 3 Preview" />
                   <p>
                     You can imagine self-attention like reading a book while
                     highlighting key phrases. Instead of reading line by line
@@ -528,9 +581,10 @@
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 8 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
+                  <span><i class="fas fa-image"></i> Image</span>
                 </div>
                 <div class="lesson-preview">
+                  <img src="../img/dl-4.png" alt="Lesson 4 Preview" />
                   <p>
                     Two main types are GANs (Generative Adversarial Networks)
                     and VAEs (Variational Autoencoders). GANs work like an
@@ -611,15 +665,16 @@
                     - Start with Blobs + Linear â†’ observe a single straight
                     boundary. <br />
                     - Switch to XOR/Moons â†’ train an MLP with 1 hidden layer
-                    (8â€“12 units), try ReLU vs. tanh, and tune the learning rate
-                    (0.01â€“0.1) to see how nonlinear activations enable learning.
+                    (8â€“12 units), try ReLU vs. tanh, and tune the learning
+                    rate (0.01â€“0.1) to see how nonlinear activations enable
+                    learning.
                     <br />
                     - On Rings, compare shallow vs. deeper hidden layers (e.g.,
                     2â€“3 layers stacked). Notice how depth captures complex,
                     nested boundaries.
                     <br />
-                    - Add L2 regularization (Î»â‰ˆ0.001) to reduce overfitting when
-                    noise is high.
+                    - Add L2 regularization (Î»â‰ˆ0.001) to reduce overfitting
+                    when noise is high.
                     <br />
                     - Use the Train/Val split slider to observe generalization.
                     <br />
@@ -695,7 +750,9 @@
                   <i class="fas fa-laptop-code"></i>
                 </div>
                 <h4>Neural Networks and Deep Learning (Free Book)</h4>
-                <p>Michael Nielsenâ€™s classic beginner-friendly online book.</p>
+                <p>
+                  Michael Nielsenâ€™s classic beginner-friendly online book.
+                </p>
                 <a
                   href="http://neuralnetworksanddeeplearning.com/"
                   class="resource-link"
@@ -754,7 +811,7 @@
             <span>Estimated time: ~3 hours</span>
           </div>
         </div>
-                    </aside>
+      </aside>
     </section>
     <footer>
       <div class="footer-bottom">

@@ -45,7 +45,9 @@
               <a href="../userprofile.html"
                 ><i class="fas fa-user-circle"></i> Profile</a
               >
-              <a href="../feedback.html"><i class="fas fa-comment-dots"></i> Feedback</a>
+              <a href="../feedback.html"
+                ><i class="fas fa-comment-dots"></i> Feedback</a
+              >
               <a href="../login.html?logout=1"
                 ><i class="fas fa-right-from-bracket"></i> Logout</a
               >
@@ -245,7 +247,7 @@
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 20 min</span>
-                  <span><i class="fas fa-file-text"></i> Video</span>
+                  <span><i class="fas fa-video"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
                   <iframe
@@ -261,14 +263,15 @@
                     A neuron is the basic building block of neural networks: it
                     multiplies inputs by weights, adds a bias, and passes the
                     result through an activation function to decide whether it
-                    â€œfires.â€ The perceptron, the earliest version of this idea,
-                    can only solve linearly separable problems â€” like drawing a
-                    straight line to divide categories on a chart. You can think
-                    of it like a light switch with a dial: it only flips on when
-                    the combined input is strong enough. While limited, this
-                    simple mechanism is important because it laid the groundwork
-                    for all modern neural networks and gave us the first glimpse
-                    of how machines can make decisions from numbers.
+                    â€œfires.â€ The perceptron, the earliest version of this
+                    idea, can only solve linearly separable problems â€” like
+                    drawing a straight line to divide categories on a chart. You
+                    can think of it like a light switch with a dial: it only
+                    flips on when the combined input is strong enough. While
+                    limited, this simple mechanism is important because it laid
+                    the groundwork for all modern neural networks and gave us
+                    the first glimpse of how machines can make decisions from
+                    numbers.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> neuron, weight, bias,
@@ -296,9 +299,10 @@
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 15 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
+                  <span><i class="fas fa-image"></i> Image</span>
                 </div>
                 <div class="lesson-preview">
+                  <img src="../img/nn-1.png" alt="Lesson 1 Preview" />
                   <p>
                     Linear neural networks stack layers that perform only linear
                     operations, but no matter how many are added, the result is
@@ -307,8 +311,8 @@
                     curved or complex decision boundaries. Imagine stacking
                     magnifying glasses on top of each other: you can enlarge an
                     image, but you never fundamentally change it. Recognizing
-                    this limitation underscores why nonlinearity is essential â€”
-                    it is the key that allows neural networks to go beyond
+                    this limitation underscores why nonlinearity is essential
+                    â€” it is the key that allows neural networks to go beyond
                     traditional linear models and tackle real-world complexity.
                   </p>
                   <div class="callout neutral">
@@ -336,13 +340,14 @@
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 25 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
+                  <span><i class="fas fa-image"></i> Image</span>
                 </div>
                 <div class="lesson-preview">
+                  <img src="../img/nn-2.png" alt="Lesson 2 Preview" />
                   <p>
                     Multilayer perceptrons add hidden layers and nonlinear
                     activation functions like ReLU or Tanh, breaking the â€œjust
-                    one linear mapâ€ barrier. This unlocks the ability to
+                    one linear map barrier. This unlocks the ability to
                     approximate highly complex functions, as proven by the
                     universal approximation theorem. Think of it like a factory
                     assembly line: each stage makes small changes, but
@@ -377,7 +382,7 @@
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 30 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
+                  <span><i class="fas fa-video"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
                   <iframe
@@ -431,8 +436,8 @@
                 </div>
                 <div class="lesson-preview">
                   <p>
-                    Neural networks often overfit â€” memorizing training data but
-                    failing on new examples. Regularization solves this by
+                    Neural networks often overfit â€” memorizing training data
+                    but failing on new examples. Regularization solves this by
                     encouraging robustness. Weight decay discourages extreme
                     weights, dropout randomly silences neurons so others must
                     adapt, and data augmentation creates variations of inputs to
@@ -468,9 +473,10 @@
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 25 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
+                  <span><i class="fas fa-image"></i> Image</span>
                 </div>
                 <div class="lesson-preview">
+                  <img src="../img/nn-3.svg" alt="Lesson 3 Preview" />
                   <p>
                     Successful training depends on careful setup and tuning.
                     Poor weight initialization can cause gradients to vanish or
@@ -578,8 +584,8 @@
                     vanishing gradients. LSTMs and GRUs alleviate the problem,
                     yet still have limits. Transformers solved it by using
                     self-attention, allowing every element to directly relate to
-                    every other. Itâ€™s like the difference between reading a book
-                    word by word and scanning the whole page at once while
+                    every other. Itâ€™s like the difference between reading a
+                    book word by word and scanning the whole page at once while
                     highlighting important connections. This leap in capability
                     explains why Transformers now power everything from chatbots
                     to large-scale generative AI.
@@ -610,13 +616,14 @@
                     See linear limits: choose Linear dataset â†’ small noise â†’
                     watch the boundary form quickly with a few hidden units.
                     Solve XOR: switch to XOR, try tanh with 8â€“12 hidden units
-                    and lr â‰ˆ 0.03â€“0.1. Notice how nonlinearity + hidden units
-                    enable learning. Explore ReLU vs tanh: on Circles, compare
-                    ReLU vs tanh (ReLU often needs a bit more hidden units).
-                    Regularization: add small L2 (e.g., 0.001) and see smoother,
-                    less overfit boundaries at high noise. Reproducibility:
-                    tweak the seed; use Save/Load to keep a session; Export the
-                    trained model as JSON and Import it later.
+                    and lr â‰ˆ 0.03â€“0.1. Notice how nonlinearity + hidden
+                    units enable learning. Explore ReLU vs tanh: on Circles,
+                    compare ReLU vs tanh (ReLU often needs a bit more hidden
+                    units). Regularization: add small L2 (e.g., 0.001) and see
+                    smoother, less overfit boundaries at high noise.
+                    Reproducibility: tweak the seed; use Save/Load to keep a
+                    session; Export the trained model as JSON and Import it
+                    later.
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> linear limits, relu, tanh,
@@ -668,7 +675,9 @@
                   <i class="fas fa-book"></i>
                 </div>
                 <h4>Neural Networks and Deep Learning</h4>
-                <p>Michael Nielsenâ€™s classic free online book for beginners.</p>
+                <p>
+                  Michael Nielsenâ€™s classic free online book for beginners.
+                </p>
                 <a
                   href="http://neuralnetworksanddeeplearning.com/"
                   class="resource-link"
@@ -747,7 +756,7 @@
             <span>Estimated time: ~4 hours</span>
           </div>
         </div>
-                    </aside>
+      </aside>
     </section>
     <footer>
       <div class="footer-bottom">

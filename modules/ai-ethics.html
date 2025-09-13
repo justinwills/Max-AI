@@ -355,7 +355,7 @@
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 10 min</span>
-                  <span><i class="fas fa-file-text"></i> Video</span>
+                  <span><i class="fas fa-video"></i> Video</span>
                 </div>
                 <div class="lesson-preview">
                   <iframe
@@ -441,22 +441,30 @@
               <div class="lesson-details">
                 <div class="lesson-meta">
                   <span><i class="fas fa-clock"></i> 12 min</span>
-                  <span><i class="fas fa-file-text"></i> Notes</span>
+                  <span><i class="fas fa-image"></i> Image</span>
                 </div>
                 <div class="lesson-preview">
+                  <img src="../img/ethics-1.png" alt="Lesson 1 Preview" />
                   <p>
-                    Three impactful shifts: (1) Retrieval-Augmented Generation
-                    (RAG) to ground outputs in your sources, reducing
-                    hallucinations and enabling citations; invest in document
-                    chunking, metadata, and evaluation beyond string-match. (2)
-                    On-device/edge models for privacy, lower latency, and
-                    resilience; plan for model quantization and fallback paths.
-                    (3) Agentic workflows that chain tools and tasks; require
-                    guardrails, state inspection, and sandboxed execution.
-                    Expect stronger sustainability pressuresâ€” optimize with
-                    distillation, quantization, caching, and scheduled batch
-                    jobs. Evaluation must evolve: add task-specific checklists,
-                    human ratings, and safety benchmarks alongside accuracy.
+<p><strong>Three impactful shifts:</strong></p>
+
+<p><strong>1. Retrieval-Augmented Generation (RAG):</strong><br>
+Ground outputs in relevant sources, reducing hallucinations and enabling proper citations.<br>
+Invest in strategies like document chunking, metadata, and evaluation methods that go beyond simple string-matching.</p>
+
+<p><strong>2. On-device/Edge Models:</strong><br>
+Focus on privacy, lower latency, and resilience by deploying models on-device.<br>
+Plan for model quantization and implement fallback paths to ensure robustness in diverse environments.</p>
+
+<p><strong>3. Agentic Workflows:</strong><br>
+Chain together tools and tasks, requiring guardrails, state inspection, and sandboxed execution for safety and reliability.</p>
+
+<p><strong>Sustainability Considerations:</strong><br>
+Anticipate stronger sustainability pressures. Optimize models through techniques like distillation, quantization, caching, and scheduled batch jobs.</p>
+
+<p><strong>Evaluation Evolution:</strong><br>
+The evaluation process should evolve to include task-specific checklists, human ratings, and safety benchmarks alongside traditional accuracy measures.</p>
+
                   </p>
                   <div class="callout neutral">
                     <strong>Key terms:</strong> RAG, grounding, quantization,
@@ -473,19 +481,16 @@
                 <div class="lesson-content">
                   <h4>Module Summary</h4>
                   <p>
-                    You can now explain what AI is, how the Turing Test relates
-                    to intelligence, and how AI evolved from expert systems to
-                    modern deep learning. You can distinguish ANI vs. AGI vs.
-                    ASI, structure data into features and labels with proper
-                    splits, pick between supervised/unsupervised/RL, evaluate
-                    models with precision/recall/F1/ROCâ€‘AUC, mitigate
-                    overfitting, and reason about fairness, privacy and
-                    transparency.
-                  </p>
-                  <p>
-                    Next steps: explore the ML and Deep Learning modules, try a
-                    small project (e.g., a classifier on tabular data), and
-                    practice communicating model limitations responsibly.
+Ethical and future-ready AI hinges on disciplined practice. Start by defining harm and stakeholders, then
+measure fairness with subgroup-aware metrics aligned to your setting, acknowledging trade-offs
+between parity and error rates. Protect people through privacy-by-design—collect less, constrain
+purposes, and use differential privacy, federated learning, and secure aggregation where appropriate.
+Make systems legible with model cards, datasheets, audit trails, and honest uncertainty disclosures; pair
+explanations with clear escalation paths. Treat safety as continuous: red-team regularly, align models
+with policy, restrict privileges, and monitor incidents. Looking forward, ground generation with RAG,
+move sensitive inference to the edge when feasible, and sandbox agent actions. Evaluate beyond single
+metrics—combine task success, human feedback, and safety checks—so your systems remain robust as
+data, users, and contexts change.
                   </p>
                 </div>
               </div>
@@ -504,26 +509,15 @@
                 <div class="resource-icon">
                   <i class="fas fa-book"></i>
                 </div>
-                <h4>AI For Everyone</h4>
-                <p>Andrew Ng's comprehensive overview course</p>
+                <h4>AI Ethics and Governance</h4>
+                <p>NTU's Certificate in AI Ethics and Governance</p>
                 <a
-                  href="https://www.deeplearning.ai/courses/ai-for-everyone/"
+                  href="https://www.ntu.edu.sg/computing/admissions/cet-programmes/certificate-in-ai-ethics-and-governance"
                   class="resource-link"
                   >Learn More <i class="fas fa-arrow-right"></i
                 ></a>
               </div>
-              <div class="resource-card">
-                <div class="resource-icon">
-                  <i class="fas fa-code"></i>
-                </div>
-                <h4>scikit-learn</h4>
-                <p>Beginnerâ€‘friendly machine learning API</p>
-                <a
-                  href="https://scikit-learn.org/stable/index.html"
-                  class="resource-link"
-                  >Learn More <i class="fas fa-arrow-right"></i
-                ></a>
-              </div>
+            
             </div>
           </section>
         </div>
@@ -537,7 +531,7 @@
             <span>Summary notes (PDF)</span>
             <a
               class="download-btn download-notes"
-              href="../materials/ai-foundations-summary.pdf"
+              href="../materials/ai-ethics-summary.pdf"
               download
               aria-label="Download summary notes PDF"
               >Download</a

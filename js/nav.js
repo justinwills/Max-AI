@@ -169,7 +169,15 @@
     function normalizeMojibake(root){
       try{
         const pairs = [
-          ['â€™','’'], ['â€˜','‘'], ['â€œ','“'], ['â€”','—'], ['â€“','–'], ['â€¦','…'], ['Â ',' '], ['Â','']
+          // punctuation/quotes
+          ['â€™','’'], ['â€˜','‘'], ['â€œ','“'], ['â€�','”'],
+          ['â€”','—'], ['â€“','–'], ['â€¦','…'], ['Â ',' '], ['Â',''],
+          // arrows/bullets
+          ['â†’','→'], ['â†�','←'], ['â†“','↓'], ['â†‘','↑'], ['â€¢','•'],
+          // math symbols
+          ['â‰ˆ','≈'], ['â‰¤','≤'], ['â‰¥','≥'], ['âˆ’','−'], ['Ã—','×'], ['âˆš','√'], ['âˆ†','∆'], ['âˆ™','∙'],
+          // common Greek letters
+          ['Î±','α'], ['Î²','β'], ['Î³','γ'], ['Î´','δ'], ['Îµ','ε'], ['Î·','η'], ['Î¸','θ'], ['Î¹','ι'], ['Îº','κ'], ['Î»','λ'], ['Î¼','μ'], ['Î½','ν'], ['Î¾','ξ'], ['Î¿','ο'], ['Ï€','π'], ['Ï�','ρ'], ['Ïƒ','σ'], ['Ï„','τ'], ['Ï…','υ'], ['Ï†','φ'], ['Ï‡','χ'], ['Ïˆ','ψ'], ['Ï‰','ω']
         ];
         const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
         const nodes = [];
@@ -178,7 +186,11 @@
           let t = n.nodeValue; let changed = false;
           for(const [bad,good] of pairs){ if(t.includes(bad)){ t = t.split(bad).join(good); changed = true; } }
           // Targeted fixes
-          t = t.replace(/don.?T/g,'don’t').replace(/can.?T/g,'can’t').replace(/doesn.?T/g,'doesn’t').replace(/won.?T/g,'won’t').replace(/it.?s/gi,(m)=> m[0]==='I'?'It’s':'it’s');
+          t = t.replace(/don.?T/g,'don’t')
+               .replace(/can.?T/g,'can’t')
+               .replace(/doesn.?T/g,'doesn’t')
+               .replace(/won.?T/g,'won’t')
+               .replace(/it.?s/gi,(m)=> m[0]==='I'?'It’s':'it’s');
           if(changed || t!==n.nodeValue) n.nodeValue = t;
         });
       }catch{}
