@@ -165,6 +165,26 @@
 
   // Data handoff for file:// via URL hash when navigating to home
   (function(){
+    // Normalize common mojibake in text nodes (UTF-8 misread)
+    function normalizeMojibake(root){
+      try{
+        const pairs = [
+          ['â€™','’'], ['â€˜','‘'], ['â€œ','“'], ['â€”','—'], ['â€“','–'], ['â€¦','…'], ['Â ',' '], ['Â','']
+        ];
+        const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+        const nodes = [];
+        while(w.nextNode()) nodes.push(w.currentNode);
+        nodes.forEach(n=>{
+          let t = n.nodeValue; let changed = false;
+          for(const [bad,good] of pairs){ if(t.includes(bad)){ t = t.split(bad).join(good); changed = true; } }
+          // Targeted fixes
+          t = t.replace(/don.?T/g,'don’t').replace(/can.?T/g,'can’t').replace(/doesn.?T/g,'doesn’t').replace(/won.?T/g,'won’t').replace(/it.?s/gi,(m)=> m[0]==='I'?'It’s':'it’s');
+          if(changed || t!==n.nodeValue) n.nodeValue = t;
+        });
+      }catch{}
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ()=> normalizeMojibake(document.body)); else normalizeMojibake(document.body);
+
     function scope(){
       try{ const s = window.StorageUtil; const u = s?.getJSON?.('currentUser', null) || null; const id = u?.id || u?.email || u?.username; return id ? String(id) : 'guest'; }catch{ return 'guest'; }
     }

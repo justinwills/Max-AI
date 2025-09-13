@@ -262,8 +262,6 @@ p {
   max-width: 100%;
 }
 
-
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -793,6 +791,12 @@ body {
   padding: 20px;
 }
 
+.lesson-preview img {
+  width: 70%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
 .resources-grid {
   display: grid;
   gap: 20px;
@@ -1006,6 +1010,12 @@ footer {
     gap: 10px 14px;
     padding: 12px 24px;
   }
+
+  .lesson-preview img {
+    width: 90%;
+    height: auto;
+    border-radius: var(--radius-sm);
+  }
 }
 
 @media (max-width: 1200px) {
@@ -1015,6 +1025,12 @@ footer {
 
   .hero-visual {
     height: 340px;
+  }
+
+  .lesson-preview img {
+    width: 70%;
+    height: auto;
+    border-radius: var(--radius-sm);
   }
 }
 
@@ -1065,6 +1081,12 @@ footer {
     top: auto;
     width: 100%;
   }
+
+  .lesson-preview img {
+    width: 90%;
+    height: auto;
+    border-radius: var(--radius-sm);
+  }
 }
 
 @media (max-width: 768px) {
@@ -1103,6 +1125,12 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .lesson-preview img {
+    width: 90%;
+    height: auto;
+    border-radius: var(--radius-sm);
+  }
+
   /* Navigation link sizes moved to css/nav.css */
 }
 
@@ -1129,6 +1157,12 @@ footer {
   #course-inner {
     padding: 32px 5vw 4vw;
     min-height: auto;
+  }
+
+  .lesson-preview img {
+    width: 90%;
+    height: auto;
+    border-radius: var(--radius-sm);
   }
 }
 
@@ -1173,5 +1207,11 @@ footer {
     font-size: 1.2rem;
     height: 64px;
     width: 64px;
+  }
+
+  .lesson-preview img {
+    width: 90%;
+    height: auto;
+    border-radius: var(--radius-sm);
   }
 }
