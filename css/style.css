@@ -302,26 +302,58 @@ nav {
 
 /* Hero entrance animations */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes heroImageIn {
-  from { opacity: 0; transform: translateY(12px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* Staggered sequence for hero elements */
-.hero .hero-badge { animation: fadeUp 600ms ease-out both; animation-delay: 80ms; }
-.hero .hero-title { animation: fadeUp 700ms ease-out both; animation-delay: 180ms; }
-.hero .hero-subtitle { animation: fadeUp 700ms ease-out both; animation-delay: 320ms; }
-.hero .hero-stats { animation: fadeUp 700ms ease-out both; animation-delay: 460ms; }
-.hero .hero-actions { animation: fadeUp 700ms ease-out both; animation-delay: 600ms; }
-.hero .hero-image { animation: heroImageIn 800ms cubic-bezier(.2,.8,.2,1) both; animation-delay: 380ms; }
+.hero .hero-badge {
+  animation: fadeUp 600ms ease-out both;
+  animation-delay: 80ms;
+}
+.hero .hero-title {
+  animation: fadeUp 700ms ease-out both;
+  animation-delay: 180ms;
+}
+.hero .hero-subtitle {
+  animation: fadeUp 700ms ease-out both;
+  animation-delay: 320ms;
+}
+.hero .hero-stats {
+  animation: fadeUp 700ms ease-out both;
+  animation-delay: 460ms;
+}
+.hero .hero-actions {
+  animation: fadeUp 700ms ease-out both;
+  animation-delay: 600ms;
+}
+.hero .hero-image {
+  animation: heroImageIn 800ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: 380ms;
+}
 
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .hero * { animation: none !important; }
+  .hero * {
+    animation: none !important;
+  }
 }
 
 /* Responsive: Hero */
@@ -584,8 +616,7 @@ nav {
 .features-grid {
   display: grid;
   gap: 32px;
-  /* Reduce min width so cards fit on small phones */
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
 
 .feature-card {
@@ -649,12 +680,16 @@ nav {
 .modules-grid {
   display: grid;
   gap: 32px;
-  /* Reduce min width to prevent horizontal overflow on mobile */
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   margin-bottom: 60px;
 }
 
-/* Extra safety: force single column for very narrow screens */
+@media screen and (max-width: 768px) {
+  .modules-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 360px) {
   .features-grid,
   .modules-grid {
